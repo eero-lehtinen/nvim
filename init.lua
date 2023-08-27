@@ -144,56 +144,6 @@ require('lazy').setup({
   },
 
   {
-    'rebelot/kanagawa.nvim',
-    priority = 1000,
-    opts = {
-      background = {
-        dark = 'dragon',
-        light = 'lotus'
-      }
-    }
-  },
-
-  {
-    'folke/tokyonight.nvim',
-    lazy = false,
-    priority = 1000,
-    opts = {
-      style = 'night',
-    },
-  },
-
-  {
-    'catppuccin/nvim',
-    name = 'catppuccin',
-    priority = 1000,
-    opts = {
-      flavour = 'mocha',
-      color_overrides = {
-        -- mocha = {
-        --   base = '#232330',
-        --   mantle = '#1b1b22',
-        --   crust = '#111116'
-        -- }
-      },
-      integrations = {
-        cmp = true,
-        gitsigns = true,
-        nvimtree = true,
-        treesitter = true,
-        fidget = true,
-        leap = true,
-        mason = true,
-      },
-    },
-  },
-
-  {
-    'ellisonleao/gruvbox.nvim',
-    priority = 1000
-  },
-
-  {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
     -- See `:help lualine.txt`
@@ -250,6 +200,56 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-context',
     },
     build = ':TSUpdate',
+  },
+
+  {
+    'rebelot/kanagawa.nvim',
+    priority = 1000,
+    opts = {
+      background = {
+        dark = 'dragon',
+        light = 'lotus'
+      }
+    }
+  },
+
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {
+      style = 'night',
+    },
+  },
+
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+    opts = {
+      flavour = 'mocha',
+      color_overrides = {
+        -- mocha = {
+        --   base = '#232330',
+        --   mantle = '#1b1b22',
+        --   crust = '#111116'
+        -- }
+      },
+      integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        fidget = true,
+        leap = true,
+        mason = true,
+      },
+    },
+  },
+
+  {
+    'ellisonleao/gruvbox.nvim',
+    priority = 1000
   },
 
   {
