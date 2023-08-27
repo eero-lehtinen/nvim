@@ -100,6 +100,9 @@ require('lazy').setup({
       -- Snippet Engine & its associated nvim-cmp source
       'L3MON4D3/LuaSnip',
       'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
 
       -- Adds LSP completion capabilities
       'hrsh7th/cmp-nvim-lsp',
@@ -123,6 +126,14 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      preview_config = {
+        -- Options passed to nvim_open_win
+        border = 'single',
+        style = 'minimal',
+        relative = 'cursor',
+        row = 0,
+        col = 1
+      },
       on_attach = function(bufnr)
         vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk,
           { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
@@ -135,44 +146,46 @@ require('lazy').setup({
   {
     'rebelot/kanagawa.nvim',
     priority = 1000,
-    config = function()
-      require('kanagawa').setup({
-        background = {
-          dark = 'dragon',
-          light = 'lotus'
-        }
-      })
-    end
+    opts = {
+      background = {
+        dark = 'dragon',
+        light = 'lotus'
+      }
+    }
   },
 
   {
     'folke/tokyonight.nvim',
     lazy = false,
     priority = 1000,
-    opts = {},
-    config = function()
-      require('tokyonight').setup({
-        style = 'night'
-      })
-    end
+    opts = {
+      style = 'night',
+    },
   },
 
   {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
-    config = function()
-      require('catppuccin').setup({
-        flavour = 'mocha',
-        color_overrides = {
-          -- mocha = {
-          --   base = '#232330',
-          --   mantle = '#1b1b22',
-          --   crust = '#111116'
-          -- }
-        }
-      })
-    end,
+    opts = {
+      flavour = 'mocha',
+      color_overrides = {
+        -- mocha = {
+        --   base = '#232330',
+        --   mantle = '#1b1b22',
+        --   crust = '#111116'
+        -- }
+      },
+      integrations = {
+        cmp = true,
+        gitsigns = true,
+        nvimtree = true,
+        treesitter = true,
+        fidget = true,
+        leap = true,
+        mason = true,
+      },
+    },
   },
 
   {
@@ -253,15 +266,13 @@ require('lazy').setup({
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
-    config = function()
-      require("nvim-tree").setup {
-        actions = {
-          open_file = {
-            quit_on_open = true
-          }
+    opts = {
+      actions = {
+        open_file = {
+          quit_on_open = true
         }
       }
-    end,
+    }
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
