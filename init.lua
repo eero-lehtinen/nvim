@@ -245,6 +245,25 @@ require('lazy').setup({
       require('leap').add_default_mappings()
     end
   },
+
+  {
+    'nvim-tree/nvim-tree.lua',
+    version = '*',
+    lazy = false,
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("nvim-tree").setup {
+        actions = {
+          open_file = {
+            quit_on_open = true
+          }
+        }
+      }
+    end,
+  },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -306,6 +325,9 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 -- [[ Basic Keymaps ]]
 
