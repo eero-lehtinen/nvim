@@ -297,7 +297,7 @@ vim.cmd.colorscheme 'catppuccin'
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
-vim.o.scrolloff = 10
+vim.o.scrolloff = 8
 
 -- Set highlight on search
 vim.o.hlsearch = false
