@@ -320,6 +320,23 @@ require('lazy').setup({
 
   'brenoprata10/nvim-highlight-colors',
 
+  {
+    'tummetott/unimpaired.nvim',
+    opts = {
+      default_keymaps = false,
+      keymaps = {
+        lprevious = '[l',
+        lnext = ']l',
+        lfirst = '[L',
+        llast = ']L',
+        cprevious = '[q',
+        cnext = ']q',
+        cfirst = '[Q',
+        clast = ']Q'
+      },
+    },
+  },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -338,7 +355,8 @@ require('lazy').setup({
 
 vim.cmd.colorscheme 'catppuccin'
 vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Open Nvim [T]ree' })
-vim.keymap.set('n', '<Tab>', '<C-^>', { noremap = true })
+vim.keymap.set('n', '<Tab>', '<C-^>')
+
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
