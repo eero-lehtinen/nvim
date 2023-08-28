@@ -268,6 +268,29 @@ require('lazy').setup({
   },
 
   {
+    'kylechui/nvim-surround',
+    version = '*',
+    event = 'VeryLazy',
+    dependencies = {
+      'tpope/vim-repeat'
+    },
+    opts = {
+      keymaps = {
+        insert          = '<C-g>z',
+        insert_line     = 'gC-ggZ',
+        normal          = 'gz',
+        normal_cur      = 'gZ',
+        normal_line     = 'gzgz',
+        normal_cur_line = 'gZgZ',
+        visual          = 'gz',
+        visual_line     = 'gZ',
+        delete          = 'gzd',
+        change          = 'gzc',
+      },
+    },
+  },
+
+  {
     'nvim-tree/nvim-tree.lua',
     version = '*',
     lazy = false,
