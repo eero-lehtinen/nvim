@@ -305,6 +305,7 @@ require('lazy').setup({
 
 
 vim.cmd.colorscheme 'catppuccin'
+vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Open Nvim [T]ree' })
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
