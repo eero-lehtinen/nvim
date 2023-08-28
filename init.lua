@@ -249,7 +249,13 @@ require('lazy').setup({
         fidget = true,
         leap = true,
         mason = true,
+        which_key = true,
       },
+      custom_highlights = function(colors)
+        return {
+          SpellBad = { style = { 'underline' } }
+        }
+      end,
     },
   },
 
