@@ -315,6 +315,8 @@ require('lazy').setup({
       },
     },
   },
+  -- maybe later
+  -- 'sindrets/diffview.nvim',
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -333,8 +335,8 @@ require('lazy').setup({
 
 -- my settings and binds
 vim.cmd.colorscheme 'catppuccin'
-vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Open Nvim [T]ree' })
-vim.keymap.set('n', '<C-j>', '<C-^>')
+vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
+vim.keymap.set('n', '<C-j>', '<C-^>', { desc = 'Alternate toggle' })
 
 
 -- [[ Setting options ]]
