@@ -193,6 +193,7 @@ require('lazy').setup({
     build = ':TSUpdate',
   },
 
+  -- themes
   {
     'rebelot/kanagawa.nvim',
     priority = 1000,
@@ -203,7 +204,6 @@ require('lazy').setup({
       }
     }
   },
-
   {
     'folke/tokyonight.nvim',
     lazy = false,
@@ -212,7 +212,6 @@ require('lazy').setup({
       style = 'night',
     },
   },
-
   {
     'catppuccin/nvim',
     name = 'catppuccin',
@@ -236,19 +235,19 @@ require('lazy').setup({
         mason = true,
         which_key = true,
       },
-      custom_highlights = function(colors)
+      custom_highlights = function(_)
         return {
           SpellBad = { style = { 'underline' } }
         }
       end,
     },
   },
-
   {
     'ellisonleao/gruvbox.nvim',
     priority = 1000
   },
 
+  -- my plugins
   {
     'ggandor/leap.nvim',
     dependencies = {
@@ -258,7 +257,6 @@ require('lazy').setup({
       require('leap').add_default_mappings()
     end
   },
-
   {
     'kylechui/nvim-surround',
     version = '*',
@@ -281,7 +279,6 @@ require('lazy').setup({
       },
     },
   },
-
   {
     'nvim-tree/nvim-tree.lua',
     version = '*',
@@ -297,14 +294,11 @@ require('lazy').setup({
       }
     }
   },
-
   {
     'stevearc/dressing.nvim',
     opts = {},
   },
-
   'brenoprata10/nvim-highlight-colors',
-
   {
     'tummetott/unimpaired.nvim',
     opts = {
@@ -337,7 +331,7 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 }, {})
 
-
+-- my settings and binds
 vim.cmd.colorscheme 'catppuccin'
 vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Open Nvim [T]ree' })
 vim.keymap.set('n', '<C-j>', '<C-^>')
