@@ -120,8 +120,8 @@ require('lazy').setup({
     opts = {
       -- See `:help gitsigns.txt`
       on_attach = function(bufnr)
-        vim.keymap.set('n', ']c', require('gitsigns').prev_hunk, { buffer = bufnr, desc = 'Next Hunk' })
-        vim.keymap.set('n', '[c', require('gitsigns').next_hunk, { buffer = bufnr, desc = 'Previous Hunk' })
+        vim.keymap.set('n', ']c', require('gitsigns').prev_hunk, { buffer = bufnr, desc = 'Next [C]hange (Hunk)' })
+        vim.keymap.set('n', '[c', require('gitsigns').next_hunk, { buffer = bufnr, desc = 'Previous [C]hange (Hunk)' })
         vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[H]unk [P]review' })
         vim.keymap.set('n', '<leader>hr', require('gitsigns').reset_hunk, { buffer = bufnr, desc = '[H]unk [R]eset' })
       end,
