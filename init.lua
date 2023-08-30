@@ -328,8 +328,15 @@ require('lazy').setup({
 -- my settings and binds
 vim.cmd.colorscheme 'catppuccin'
 vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
-vim.keymap.set('n', '<C-j>', '<C-^>', { desc = 'Alternate toggle' })
-
+vim.keymap.set('n', '<C-j>', '<C-^>', { desc = 'Alternate buffer toggle' })
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+vim.g.nvim_tree_disable_netrw = 0
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = false
+vim.o.scrolloff = 8
+vim.o.listchars = "tab:» ,extends:›,precedes:‹,space:·,trail:·,eol:↲"
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
@@ -371,15 +378,6 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
-
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-vim.g.nvim_tree_disable_netrw = 0
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.expandtab = false
-vim.o.scrolloff = 8
-vim.o.listchars = "tab:» ,extends:›,precedes:‹,space:·,trail:·,eol:↲"
 
 -- [[ Basic Keymaps ]]
 
