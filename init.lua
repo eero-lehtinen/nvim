@@ -335,7 +335,7 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = false
 vim.o.scrolloff = 8
-vim.o.listchars = "tab:» ,extends:›,precedes:‹,space:·,trail:·,eol:↲"
+vim.o.listchars = "tab:» ,extends:›,precedes:‹,space:·,trail:~,nbsp:·,eol:↲"
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
