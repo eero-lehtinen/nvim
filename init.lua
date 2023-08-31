@@ -68,6 +68,10 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
+  -- Undocumented nice keymaps:
+  -- a: toggle stage
+  -- J: next hunk
+  -- K: previous hunk
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
