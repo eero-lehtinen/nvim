@@ -345,6 +345,8 @@ vim.cmd.colorscheme 'catppuccin'
 vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
 vim.keymap.set('n', '<C-j>', '<C-^>', { desc = 'Alternate buffer toggle' })
 vim.keymap.set('n', '<leader>gs', ':Git | only<CR>', { desc = '[G]it [S]tatus Fugitive Fullscreen', silent = true })
+vim.keymap.set('n', '0', '-', { desc = 'Stage Toggle Git Fugitive Ergonomic', remap = true })
+
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 vim.g.nvim_tree_disable_netrw = 0
