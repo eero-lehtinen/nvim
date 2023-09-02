@@ -324,6 +324,17 @@ require('lazy').setup({
       },
     },
   },
+  -- {
+  --   'okuuva/auto-save.nvim',
+  --   opts = {
+  --     trigger_events = {                              -- See :h events
+  --       immediate_save = { "BufLeave", "FocusLost" }, -- vim events that trigger an immediate save
+  --       defer_save = nil,                             -- vim events that trigger a deferred save (saves after `debounce_delay`)
+  --       cancel_defered_save = nil,                    -- vim events that cancel a pending deferred save
+  --     },
+  --   },
+  -- },
+  -- 'windwp/nvim-autopairs',
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
@@ -346,6 +357,11 @@ vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 
 vim.keymap.set('n', '<C-j>', '<C-^>', { desc = 'Alternate buffer toggle' })
 vim.keymap.set('n', '<leader>gs', ':Git | only<CR>', { desc = '[G]it [S]tatus Fugitive Fullscreen', silent = true })
 vim.keymap.set('n', '0', '-', { desc = 'Stage Toggle Git Fugitive Ergonomic', remap = true })
+vim.api.nvim_create_autocmd({ 'BufLeave' }, {
+  pattern = { '*' },
+  command = 'silent! update',
+  desc = 'Autosave on switching suffers'
+})
 
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
