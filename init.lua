@@ -360,8 +360,10 @@ require('lazy').setup({
 vim.cmd.colorscheme 'catppuccin'
 vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
 vim.keymap.set('n', '<C-j>', '<C-^>', { desc = 'Alternate buffer toggle' })
+vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
 vim.keymap.set('n', '<leader>gs', ':Git | only<CR>', { desc = '[G]it [S]tatus Fugitive Fullscreen', silent = true })
 vim.keymap.set('n', '0', '-', { desc = 'Stage Toggle Git Fugitive Ergonomic', remap = true })
+vim.keymap.set('n', 'Q', '@q', { desc = 'Run marco named "q"' })
 vim.api.nvim_create_autocmd({ 'BufLeave' }, {
   pattern = { '*' },
   command = 'silent! update',
