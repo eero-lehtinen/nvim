@@ -329,16 +329,6 @@ require('lazy').setup({
       },
     },
   },
-  -- {
-  --   'okuuva/auto-save.nvim',
-  --   opts = {
-  --     trigger_events = {                              -- See :h events
-  --       immediate_save = { "BufLeave", "FocusLost" }, -- vim events that trigger an immediate save
-  --       defer_save = nil,                             -- vim events that trigger a deferred save (saves after `debounce_delay`)
-  --       cancel_defered_save = nil,                    -- vim events that cancel a pending deferred save
-  --     },
-  --   },
-  -- },
   -- 'windwp/nvim-autopairs',
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
