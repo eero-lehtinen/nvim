@@ -477,10 +477,7 @@ require('nvim-treesitter.configs').setup {
   ignore_install = {},
   modules = {},
 
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
+  highlight = { enable = true },
   indent = { enable = true },
   incremental_selection = {
     enable = true,
