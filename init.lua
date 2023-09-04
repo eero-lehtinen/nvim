@@ -199,12 +199,14 @@ require('lazy').setup({
     },
   },
 
+  -- Highlight, edit, and navigate code
   {
-    -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
-      'HiPhish/rainbow-delimiters.nvim',
+      -- Way too much lag to be usable with Rust.
+      -- Somewhat lags with other languages like Lua too.
+      -- 'HiPhish/rainbow-delimiters.nvim',
       {
         'nvim-treesitter/nvim-treesitter-context',
         opts = {
