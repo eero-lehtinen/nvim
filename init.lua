@@ -257,9 +257,11 @@ require('lazy').setup({
         mason = true,
         which_key = true,
       },
-      custom_highlights = function(_)
+      custom_highlights = function(c)
+        U = require('catppuccin.utils.colors')
         return {
-          SpellBad = { style = { 'underline' } }
+          SpellBad = { style = { 'underline' } },
+          LspInlayHint = { fg = c.overlay1, bg = U.darken(c.surface0, 0.35, c.base) },
         }
       end,
     },
