@@ -373,6 +373,8 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = false
 vim.o.scrolloff = 8
 vim.o.listchars = "tab:» ,extends:›,precedes:‹,space:·,trail:~,nbsp:·,eol:↲"
+vim.o.cursorline = true
+vim.o.cursorlineopt = "number"
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
