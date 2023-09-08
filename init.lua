@@ -605,7 +605,8 @@ local servers = {
   rust_analyzer = {
     ['rust-analyzer'] = {
       checkOnSave = { command = 'clippy' },
-    }
+      cargo = { features = 'all' },
+    },
   },
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
