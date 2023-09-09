@@ -265,6 +265,8 @@ require('lazy').setup({
         return {
           SpellBad = { style = { 'underline' } },
           LspInlayHint = { fg = c.overlay1, bg = U.darken(c.surface0, 0.35, c.base) },
+          HighlightUndo = { bg = U.darken(c.teal, 0.25, c.base) },
+          LocalHighlight = { style = { 'underline' } },
         }
       end,
     },
@@ -334,6 +336,8 @@ require('lazy').setup({
       },
     },
   },
+  { 'tzachar/highlight-undo.nvim',  opts = {} },
+  { 'tzachar/local-highlight.nvim', opts = {} },
   -- 'windwp/nvim-autopairs',
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
