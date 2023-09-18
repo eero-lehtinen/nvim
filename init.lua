@@ -255,6 +255,9 @@ require('lazy').setup({
           LspInlayHint = { fg = c.overlay1, bg = U.darken(c.surface0, 0.35, c.base) },
           HighlightUndo = { bg = U.darken(c.teal, 0.25, c.base) },
           LocalHighlight = { style = { 'underline' } },
+          IlluminatedWordText = { bg = U.darken(C.surface1, 0.4, C.base) },
+          IlluminatedWordRead = { bg = U.darken(C.surface1, 0.4, C.base) },
+          IlluminatedWordWrite = { bg = U.darken(C.surface1, 0.4, C.base) },
         }
       end,
     },
@@ -324,8 +327,8 @@ require('lazy').setup({
       },
     },
   },
-  { 'tzachar/highlight-undo.nvim',  opts = {} },
-  { 'tzachar/local-highlight.nvim', opts = {} },
+  { 'tzachar/highlight-undo.nvim', opts = {} },
+  'RRethy/vim-illuminate',
   -- 'windwp/nvim-autopairs',
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
