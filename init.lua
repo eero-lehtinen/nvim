@@ -363,11 +363,13 @@ vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' 
 vim.keymap.set('n', '<leader>gs', ':Git | only<CR>', { desc = '[G]it [S]tatus Fugitive Fullscreen', silent = true })
 vim.keymap.set('n', '0', '-', { desc = 'Stage Toggle Git Fugitive Ergonomic', remap = true })
 vim.keymap.set('n', 'Q', '@q', { desc = 'Run marco named "q"' })
+vim.keymap.set('n', '<C-s>', '<cmd>:w<cr>', { desc = 'Save' })
 vim.api.nvim_create_autocmd({ 'BufLeave' }, {
   pattern = { '*' },
   command = 'silent! update',
   desc = 'Autosave on switching suffers'
 })
+
 
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
