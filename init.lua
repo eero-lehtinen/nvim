@@ -340,7 +340,18 @@ require('lazy').setup({
       --Config goes here
     },
   },
-  -- 'windwp/nvim-autopairs',
+  {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    event = "InsertEnter",
+    opts = {
+      suggestion = {
+        keymap = {
+          accept = "<M-a>",
+        },
+      },
+    },
+  },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
