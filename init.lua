@@ -329,6 +329,14 @@ require('lazy').setup({
   },
   { 'tzachar/highlight-undo.nvim', opts = {} },
   'RRethy/vim-illuminate',
+  {
+    'altermo/ultimate-autopair.nvim',
+    event = { 'InsertEnter', 'CmdlineEnter' },
+    branch = 'v0.6',
+    opts = {
+      --Config goes here
+    },
+  },
   -- 'windwp/nvim-autopairs',
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
