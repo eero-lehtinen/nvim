@@ -312,7 +312,7 @@ require('lazy').setup({
     'stevearc/dressing.nvim',
     opts = {},
   },
-  'brenoprata10/nvim-highlight-colors',
+  { 'brenoprata10/nvim-highlight-colors', opts = {} },
   {
     'tummetott/unimpaired.nvim',
     opts = {
@@ -354,27 +354,8 @@ require('lazy').setup({
       },
     },
   },
-  {
-    'stevearc/conform.nvim',
-    config = function()
-      local formatters_by_ft = {
-        lua = { 'stylua' },
-        python = { 'isort', { 'yapf', 'black' } },
-        rust = { 'rustfmt' },
-      }
-      local prettierd_filetypes = { 'javascript', 'typescript', 'svelte', 'json', 'html', 'css', 'markdown' }
-      for _, ft in ipairs(prettierd_filetypes) do
-        formatters_by_ft[ft] = { 'prettierd' }
-      end
-      require('conform').setup {
-        formatters_by_ft = formatters_by_ft,
-        format_on_save = {
-          timeout_ms = 500,
-          lsp_fallback = true,
-        },
-      }
-    end,
-  },
+  require 'custom.plugins.formatting',
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -628,11 +609,6 @@ local on_attach = function(_, bufnr)
   end, '[W]orkspace [L]ist Folders')
 
   vim.lsp.inlay_hint(bufnr, true)
-
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
 end
 
 -- Enable the following language servers
