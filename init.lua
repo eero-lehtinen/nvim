@@ -279,7 +279,6 @@ require('lazy').setup({
   {
     'kylechui/nvim-surround',
     version = '*',
-    event = 'VeryLazy',
     dependencies = {
       'tpope/vim-repeat',
     },
