@@ -90,7 +90,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -114,11 +114,11 @@ require('lazy').setup({
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
     },
-    opts = {}
+    opts = {},
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim',  opts = {} },
+  { 'folke/which-key.nvim', opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -163,7 +163,6 @@ require('lazy').setup({
       use_treesitter = true,
     },
   },
-
 
   { 'numToStr/Comment.nvim', opts = {} },
 
@@ -213,9 +212,9 @@ require('lazy').setup({
     opts = {
       background = {
         dark = 'dragon',
-        light = 'lotus'
-      }
-    }
+        light = 'lotus',
+      },
+    },
   },
   {
     'folke/tokyonight.nvim',
@@ -249,7 +248,7 @@ require('lazy').setup({
         which_key = true,
       },
       custom_highlights = function(c)
-        U = require('catppuccin.utils.colors')
+        U = require 'catppuccin.utils.colors'
         return {
           SpellBad = { style = { 'underline' } },
           LspInlayHint = { fg = c.overlay1, bg = U.darken(c.surface0, 0.35, c.base) },
@@ -264,29 +263,29 @@ require('lazy').setup({
   },
   {
     'ellisonleao/gruvbox.nvim',
-    priority = 1000
+    priority = 1000,
   },
 
   -- my plugins
   {
     'ggandor/leap.nvim',
     dependencies = {
-      'tpope/vim-repeat'
+      'tpope/vim-repeat',
     },
     config = function()
       require('leap').add_default_mappings()
-    end
+    end,
   },
   {
     'kylechui/nvim-surround',
     version = '*',
     event = 'VeryLazy',
     dependencies = {
-      'tpope/vim-repeat'
+      'tpope/vim-repeat',
     },
     opts = {
       keymaps = {
-        visual      = 'gs', -- was S
+        visual = 'gs', -- was S
         visual_line = 'gS', -- was gS
       },
     },
@@ -296,18 +295,18 @@ require('lazy').setup({
     version = '*',
     lazy = false,
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
+      'nvim-tree/nvim-web-devicons',
     },
     opts = {
       actions = {
         open_file = {
-          quit_on_open = true
-        }
+          quit_on_open = true,
+        },
       },
       filters = {
         git_ignored = false,
       },
-    }
+    },
   },
   {
     'stevearc/dressing.nvim',
@@ -326,7 +325,7 @@ require('lazy').setup({
         cprevious = '[q',
         cnext = ']q',
         cfirst = '[Q',
-        clast = ']Q'
+        clast = ']Q',
       },
     },
   },
@@ -334,29 +333,52 @@ require('lazy').setup({
   'RRethy/vim-illuminate',
   {
     'altermo/ultimate-autopair.nvim',
-    event = { 'InsertEnter', 'CmdlineEnter' },
+    event = { 'insertenter', 'cmdlineenter' },
     branch = 'v0.6',
-    opts = {
-      --Config goes here
-    },
+    opts = {},
   },
   {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
+    'abecodes/tabout.nvim',
+    dependencies = { 'nvim-treesitter', 'nvim-cmp' },
+    opts = {},
+  },
+  {
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    event = 'InsertEnter',
     opts = {
       suggestion = {
         keymap = {
-          accept = "<M-a>",
+          accept = '<M-a>',
         },
       },
     },
   },
-
+  {
+    'stevearc/conform.nvim',
+    config = function()
+      local formatters_by_ft = {
+        lua = { 'stylua' },
+        python = { 'isort', { 'yapf', 'black' } },
+        rust = { 'rustfmt' },
+      }
+      local prettierd_filetypes = { 'javascript', 'typescript', 'svelte', 'json', 'html', 'css', 'markdown' }
+      for _, ft in ipairs(prettierd_filetypes) do
+        formatters_by_ft[ft] = { 'prettierd' }
+      end
+      require('conform').setup {
+        formatters_by_ft = formatters_by_ft,
+        format_on_save = {
+          timeout_ms = 500,
+          lsp_fallback = true,
+        },
+      }
+    end,
+  },
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  require 'kickstart.plugins.autoformat',
+  -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -380,9 +402,8 @@ vim.keymap.set('n', '<C-s>', '<cmd>:w<cr>', { desc = 'Save' })
 vim.api.nvim_create_autocmd({ 'BufLeave' }, {
   pattern = { '*' },
   command = 'silent! update',
-  desc = 'Autosave on switching suffers'
+  desc = 'Autosave on switching suffers',
 })
-
 
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
@@ -391,16 +412,16 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = false
 vim.o.scrolloff = 8
-vim.o.listchars = "tab:» ,extends:›,precedes:‹,space:·,trail:~,nbsp:·,eol:↲"
+vim.o.listchars = 'tab:» ,extends:›,precedes:‹,space:·,trail:~,nbsp:·,eol:↲'
 vim.o.cursorline = true
-vim.o.cursorlineopt = "number"
+vim.o.cursorlineopt = 'number';
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
-vim.o.hlsearch = false
+(vim.o).hlsearch = false
 
 -- Make line numbers default
 vim.o.number = true
@@ -481,8 +502,7 @@ pcall(require('telescope').load_extension, 'fzf')
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>/',
-  require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
+vim.keymap.set('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
@@ -666,7 +686,7 @@ mason_lspconfig.setup_handlers {
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
     }
-  end
+  end,
 }
 
 -- [[ Configure nvim-cmp ]]
@@ -723,7 +743,7 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'path' },
   }, {
-    { name = 'buffer' },
+    -- { name = 'buffer' },
   }),
 }
 
