@@ -104,7 +104,7 @@ require('lazy').setup({
       -- Snippet Engine & its associated nvim-cmp source
       { 'L3MON4D3/LuaSnip', build = 'make install_jsregexp' },
       'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-buffer',
+      -- 'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
 
@@ -205,14 +205,31 @@ require('lazy').setup({
   },
 
   -- themes
+  'sainnhe/gruvbox-material',
   {
     'rebelot/kanagawa.nvim',
     priority = 1000,
     opts = {
-      background = {
-        dark = 'dragon',
-        light = 'lotus',
+      undercurl = false,
+      statementStyle = {},
+      colors = {
+        theme = {
+          all = {
+            ui = {
+              bg_gutter = 'none',
+            },
+          },
+        },
       },
+      overrides = function(colors)
+        return {
+          Boolean = { bold = false },
+          --SpellBad = { style = { 'underline' } },
+          IlluminatedWordText = { bg = colors.theme.ui.bg_p1 },
+          IlluminatedWordRead = { bg = colors.theme.ui.bg_p1 },
+          IlluminatedWordWrite = { bg = colors.theme.ui.bg_p1 },
+        }
+      end,
     },
   },
   {
@@ -233,7 +250,7 @@ require('lazy').setup({
         -- mocha = {
         --   base = '#232330',
         --   mantle = '#1b1b22',
-        --   crust = '#111116'
+        --   crust = '#111116',
         -- }
       },
       integrations = {
@@ -253,9 +270,9 @@ require('lazy').setup({
           LspInlayHint = { fg = c.overlay1, bg = U.darken(c.surface0, 0.35, c.base) },
           HighlightUndo = { bg = U.darken(c.teal, 0.25, c.base) },
           LocalHighlight = { style = { 'underline' } },
-          IlluminatedWordText = { bg = U.darken(C.surface1, 0.4, C.base) },
-          IlluminatedWordRead = { bg = U.darken(C.surface1, 0.4, C.base) },
-          IlluminatedWordWrite = { bg = U.darken(C.surface1, 0.4, C.base) },
+          IlluminatedWordText = { bg = U.darken(c.surface1, 0.4, c.base) },
+          IlluminatedWordRead = { bg = U.darken(c.surface1, 0.4, c.base) },
+          IlluminatedWordWrite = { bg = U.darken(c.surface1, 0.4, c.base) },
         }
       end,
     },
@@ -289,27 +306,51 @@ require('lazy').setup({
     },
   },
   {
-    'nvim-tree/nvim-tree.lua',
-    version = '*',
-    lazy = false,
+    'nvim-neo-tree/neo-tree.nvim',
+    branch = 'v3.x',
     dependencies = {
+      'nvim-lua/plenary.nvim',
       'nvim-tree/nvim-web-devicons',
+      'MunifTanjim/nui.nvim',
     },
     opts = {
-      actions = {
-        open_file = {
-          quit_on_open = true,
+      close_if_last_window = true,
+      filesystem = {
+        filtered_items = {
+          visible = true,
         },
+        use_libuv_file_watcher = true,
+        hijack_netrw_behavior = 'open_current',
       },
-      filters = {
-        git_ignored = false,
+      event_handlers = {
+        {
+          event = 'file_opened',
+          handler = function(_)
+            require('neo-tree.command').execute { action = 'close' }
+          end,
+        },
       },
     },
   },
-  {
-    'stevearc/dressing.nvim',
-    opts = {},
-  },
+  -- {
+  --   'nvim-tree/nvim-tree.lua',
+  --   version = '*',
+  --   lazy = false,
+  --   dependencies = {
+  --     'nvim-tree/nvim-web-devicons',
+  --   },
+  --   opts = {
+  --     actions = {
+  --       open_file = {
+  --         quit_on_open = true,
+  --       },
+  --     },
+  --     filters = {
+  --       git_ignored = false,
+  --     },
+  --   },
+  -- },
+  { 'stevearc/dressing.nvim', opts = {} },
   { 'brenoprata10/nvim-highlight-colors', opts = {} },
   {
     'tummetott/unimpaired.nvim',
@@ -370,11 +411,13 @@ require('lazy').setup({
 }, {})
 
 -- my settings and binds
-vim.cmd.colorscheme 'catppuccin'
-vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
+vim.cmd.colorscheme 'kanagawa'
+vim.keymap.set('n', '<leader>t', function()
+  require('neo-tree.command').execute { toggle = true }
+end, { desc = 'Neo [T]ree Toggle' })
 vim.keymap.set('n', '<C-j>', '<C-^>', { desc = 'Alternate buffer toggle' })
 vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
-vim.keymap.set('n', '<leader>gs', ':Git | only<CR>', { desc = '[G]it [S]tatus Fugitive Fullscreen', silent = true })
+vim.keymap.set('n', '<leader>gs', '<cmd>Git | only<CR>', { desc = '[G]it [S]tatus Fugitive Fullscreen', silent = true })
 vim.keymap.set('n', '0', '-', { desc = 'Stage Toggle Git Fugitive Ergonomic', remap = true })
 vim.keymap.set('n', 'Q', '@q', { desc = 'Run marco named "q"' })
 vim.keymap.set('n', '<C-s>', '<cmd>:w<cr>', { desc = 'Save' })
@@ -386,7 +429,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave' }, {
 
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
-vim.g.nvim_tree_disable_netrw = 0
+-- vim.g.nvim_tree_disable_netrw = 0
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = false
@@ -451,7 +494,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
-    vim.highlight.on_yank()
+    vim.highlight.on_yank { priority = 1001 }
   end,
   group = highlight_group,
   pattern = '*',
