@@ -305,51 +305,57 @@ require('lazy').setup({
       },
     },
   },
-  {
-    'nvim-neo-tree/neo-tree.nvim',
-    branch = 'v3.x',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-web-devicons',
-      'MunifTanjim/nui.nvim',
-    },
-    opts = {
-      close_if_last_window = true,
-      filesystem = {
-        filtered_items = {
-          visible = true,
-        },
-        use_libuv_file_watcher = true,
-        hijack_netrw_behavior = 'open_current',
-      },
-      event_handlers = {
-        {
-          event = 'file_opened',
-          handler = function(_)
-            require('neo-tree.command').execute { action = 'close' }
-          end,
-        },
-      },
-    },
-  },
   -- {
-  --   'nvim-tree/nvim-tree.lua',
-  --   version = '*',
-  --   lazy = false,
+  --   'nvim-neo-tree/neo-tree.nvim',
+  --   branch = 'v3.x',
   --   dependencies = {
+  --     'nvim-lua/plenary.nvim',
   --     'nvim-tree/nvim-web-devicons',
+  --     'MunifTanjim/nui.nvim',
   --   },
   --   opts = {
-  --     actions = {
-  --       open_file = {
-  --         quit_on_open = true,
-  --       },
+  --     close_if_last_window = true,
+  --     window = {
+  --       position = 'current',
   --     },
-  --     filters = {
-  --       git_ignored = false,
+  --     filesystem = {
+  --       filtered_items = {
+  --         visible = true,
+  --       },
+  --       use_libuv_file_watcher = true,
+  --       hijack_netrw_behavior = 'open_current',
+  --     },
+  --     event_handlers = {
+  --       {
+  --         event = 'file_opened',
+  --         handler = function(_)
+  --           require('neo-tree.command').execute { action = 'close' }
+  --         end,
+  --       },
   --     },
   --   },
   -- },
+  {
+    'nvim-tree/nvim-tree.lua',
+    version = '*',
+    lazy = false,
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    opts = {
+      actions = {
+        open_file = {
+          quit_on_open = true,
+        },
+      },
+      filters = {
+        git_ignored = false,
+      },
+      view = {
+        width = 40,
+      },
+    },
+  },
   { 'stevearc/dressing.nvim', opts = {} },
   { 'brenoprata10/nvim-highlight-colors', opts = {} },
   {
@@ -407,14 +413,12 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  -- { import = 'custom.plugins' :},
 }, {})
 
 -- my settings and binds
 vim.cmd.colorscheme 'kanagawa'
-vim.keymap.set('n', '<leader>t', function()
-  require('neo-tree.command').execute { toggle = true }
-end, { desc = 'Neo [T]ree Toggle' })
+vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Neo [T]ree Toggle' })
 vim.keymap.set('n', '<C-j>', '<C-^>', { desc = 'Alternate buffer toggle' })
 vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
 vim.keymap.set('n', '<leader>gs', '<cmd>Git | only<CR>', { desc = '[G]it [S]tatus Fugitive Fullscreen', silent = true })
@@ -427,9 +431,9 @@ vim.api.nvim_create_autocmd({ 'BufLeave' }, {
   desc = 'Autosave on switching suffers',
 })
 
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
--- vim.g.nvim_tree_disable_netrw = 0
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.nvim_tree_disable_netrw = 0
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = false
