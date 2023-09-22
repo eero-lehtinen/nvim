@@ -153,15 +153,14 @@ require('lazy').setup({
   },
 
   {
-    -- Add indentation guides even on blank lines
+    -- add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    -- Enable `lukas-reineke/indent-blankline.nvim`
-    -- See `:help indent_blankline.txt`
-    opts = {
-      char = '│',
-      show_trailing_blankline_indent = false,
-      use_treesitter = true,
-    },
+    branch = 'v3',
+    init = function()
+      require('ibl').setup {
+        indent = { char = '│' },
+      }
+    end,
   },
 
   { 'numToStr/Comment.nvim', opts = {} },
