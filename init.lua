@@ -377,9 +377,8 @@ require('lazy').setup({
   { 'tzachar/highlight-undo.nvim', opts = {} },
   'RRethy/vim-illuminate',
   {
-    'altermo/ultimate-autopair.nvim',
-    event = { 'insertenter', 'cmdlineenter' },
-    branch = 'v0.6',
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
     opts = {},
   },
   {
@@ -771,6 +770,8 @@ cmp.setup {
     -- { name = 'buffer' },
   }),
 }
+
+cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
