@@ -159,6 +159,7 @@ require('lazy').setup({
     init = function()
       require('ibl').setup {
         indent = { char = '│' },
+        viewport_buffer = { min = 200, max = 600 },
       }
     end,
   },
