@@ -403,16 +403,8 @@ require('lazy').setup({
       },
     },
   },
-  {
-    'ray-x/lsp_signature.nvim',
-    opts = {
-      doc_lines = 0,
-      hint_enable = false,
-      handler_opts = {
-        border = 'none',
-      },
-    },
-  },
+  { 'ray-x/lsp_signature.nvim', event = 'VeryLazy' },
+  'onsails/lspkind.nvim',
   require 'custom.plugins.formatting',
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -560,7 +552,7 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
-vim.keymap.set('n', '<leader>u', require('telescope').extensions.undo, { desc = '[U]ndo tree' })
+vim.keymap.set('n', '<leader>u', require('telescope').extensions.undo.undo, { desc = '[U]ndo tree' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -678,6 +670,14 @@ local on_attach = function(_, bufnr)
   end, '[W]orkspace [L]ist Folders')
 
   vim.lsp.inlay_hint(bufnr, true)
+
+  require('lsp_signature').on_attach({
+    doc_lines = 0,
+    hint_enable = false,
+    handler_opts = {
+      border = 'none',
+    },
+  }, bufnr)
 end
 
 -- Enable the following language servers
@@ -742,6 +742,7 @@ mason_lspconfig.setup_handlers {
 -- See `:help cmp`
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
+local lspkind = require 'lspkind'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
@@ -751,6 +752,19 @@ cmp.setup {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
+  },
+  formatting = {
+    format = lspkind.cmp_format {
+      mode = 'symbol_text',
+      maxwidth = 50,
+      ellipsis_char = '...',
+      menu = {
+        buffer = '[Buf]',
+        nvim_lsp = '[LSP]',
+        luasnip = '[Snip]',
+        path = '[Path]',
+      },
+    },
   },
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -792,7 +806,7 @@ cmp.setup {
     { name = 'luasnip' },
     { name = 'path' },
   }, {
-    -- { name = 'buffer' },
+    { name = 'buffer' },
   }),
 }
 
