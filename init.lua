@@ -453,14 +453,14 @@ vim.o.expandtab = false
 vim.o.scrolloff = 8
 vim.o.listchars = 'tab:» ,extends:›,precedes:‹,space:·,trail:~,nbsp:·,eol:↲'
 vim.o.cursorline = true
-vim.o.cursorlineopt = 'number';
+vim.o.cursorlineopt = 'number'
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
-(vim.o).hlsearch = false
+vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.o.number = true
