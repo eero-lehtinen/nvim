@@ -399,6 +399,16 @@ require('lazy').setup({
       },
     },
   },
+  {
+    'ray-x/lsp_signature.nvim',
+    opts = {
+      doc_lines = 0,
+      hint_enable = false,
+      handler_opts = {
+        border = 'none',
+      },
+    },
+  },
   require 'custom.plugins.formatting',
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
