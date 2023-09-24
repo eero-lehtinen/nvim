@@ -160,6 +160,11 @@ require('lazy').setup({
       require('ibl').setup {
         indent = { char = '│' },
         viewport_buffer = { min = 200, max = 600 },
+        scope = {
+          show_start = false,
+          show_end = false,
+          highlight = 'IndentBlanklineContextChar',
+        },
       }
     end,
   },
