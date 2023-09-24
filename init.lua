@@ -711,6 +711,7 @@ local servers = {
   tailwindcss = {},
   cssls = {},
   html = {},
+  emmet_language_server = {},
 }
 
 -- Setup neovim lua configuration
