@@ -4,7 +4,7 @@ return {
     local formatters_by_ft = {
       lua = { 'stylua' },
       python = { 'isort', { 'yapf', 'black' } },
-      rust = { 'rustfmt' },
+      rust = {}, -- rust just use the lsp fallback
     }
 
     local prettierd_filetypes = { 'javascript', 'typescript', 'svelte', 'json', 'html', 'css', 'markdown' }
