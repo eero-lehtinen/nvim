@@ -413,6 +413,8 @@ require('lazy').setup({
   },
   { 'ray-x/lsp_signature.nvim', event = 'VeryLazy' },
   'onsails/lspkind.nvim',
+
+  -- Import my stuffs
   require 'custom.plugins.formatting',
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -435,7 +437,7 @@ vim.cmd.colorscheme 'kanagawa'
 vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Neo [T]ree Toggle' })
 vim.keymap.set('n', '<C-j>', '<C-^>', { desc = 'Alternate buffer toggle' })
 vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
-vim.keymap.set('n', '<leader>gs', '<cmd>Git | only<CR>', { desc = '[G]it [S]tatus Fugitive Fullscreen', silent = true })
+vim.keymap.set('n', '<leader>gs', '<cmd>Git<cr><C-w>_', { desc = '[G]it [S]tatus Fugitive Fullscreen', silent = true })
 vim.keymap.set('n', '0', '-', { desc = 'Stage Toggle Git Fugitive Ergonomic', remap = true })
 vim.keymap.set('n', 'Q', '@q', { desc = 'Run marco named "q"' })
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<cr>', { desc = 'Save' })
