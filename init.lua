@@ -305,8 +305,16 @@ require('lazy').setup({
     },
     opts = {
       keymaps = {
-        visual = 'gs', -- was S
-        visual_line = 'gS', -- was gS
+        insert = '<C-g>z',
+        insert_line = '<C-g>Z',
+        normal = 'yz',
+        normal_cur = 'yzz',
+        normal_line = 'yZ',
+        normal_cur_line = 'yZZ',
+        visual = 'z',
+        visual_line = 'Z',
+        delete = 'dz',
+        change = 'cz',
       },
     },
   },
