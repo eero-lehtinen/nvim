@@ -392,7 +392,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave' }, {
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.g.nvim_tree_disable_netrw = 0
+vim.g.nvim_tree_disable_netrw = 1
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = false
