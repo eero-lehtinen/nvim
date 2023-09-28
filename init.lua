@@ -311,6 +311,9 @@ require('lazy').setup({
       view = {
         width = 40,
       },
+      live_filter = {
+        always_show_folders = false,
+      },
     },
   },
   { 'stevearc/dressing.nvim', opts = {} },
