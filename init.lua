@@ -211,9 +211,11 @@ require('lazy').setup({
       overrides = function(colors)
         return {
           Boolean = { bold = false },
-          IlluminatedWordText = { bg = colors.theme.ui.bg_p1 },
-          IlluminatedWordRead = { bg = colors.theme.ui.bg_p1 },
-          IlluminatedWordWrite = { bg = colors.theme.ui.bg_p1 },
+          IlluminatedWordText = { bg = colors.theme.ui.bg_p2 },
+          IlluminatedWordRead = { bg = colors.theme.ui.bg_p2 },
+          IlluminatedWordWrite = { bg = colors.theme.ui.bg_p2 },
+          IndentBlanklineChar = { fg = colors.theme.ui.bg_p2 },
+          IndentBlanklineContextChar = { fg = colors.theme.ui.whitespace },
         }
       end,
     },
