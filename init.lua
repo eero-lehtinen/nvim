@@ -134,8 +134,9 @@ require('lazy').setup({
     branch = 'v3',
     init = function()
       require('ibl').setup {
-        indent = { char = '│' },
+        -- indent = { char = '│' },
         viewport_buffer = { min = 200, max = 600 },
+        indent = { highlight = 'IndentBlanklineChar' },
         scope = {
           show_start = false,
           show_end = false,
