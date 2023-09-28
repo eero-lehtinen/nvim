@@ -335,7 +335,14 @@ require('lazy').setup({
     },
   },
   { 'tzachar/highlight-undo.nvim', opts = {} },
-  'RRethy/vim-illuminate',
+  {
+    'RRethy/vim-illuminate',
+    config = function()
+      require('illuminate').configure {
+        min_count_to_highlight = 2,
+      }
+    end,
+  },
   {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
