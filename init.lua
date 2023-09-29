@@ -131,20 +131,31 @@ require('lazy').setup({
   {
     -- add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
-    branch = 'v3',
-    init = function()
+    config = function()
       require('ibl').setup {
         -- indent = { char = '│' },
-        viewport_buffer = { min = 200, max = 600 },
-        indent = { highlight = 'IndentBlanklineChar' },
+        -- viewport_buffer = { min = 200, max = 600 },
+        -- indent = { highlight = 'IndentBlanklineChar' },
         scope = {
           show_start = false,
           show_end = false,
-          highlight = 'IndentBlanklineContextChar',
+          -- highlight = 'IndentBlanklineContextChar',
         },
       }
     end,
   },
+
+  -- {
+  --   'lukas-reineke/indent-blankline.nvim',
+  --   tag = 'v2.20.8',
+  --   opts = {
+  --     char = '▎',
+  --     context_char = '▎',
+  --     show_current_context = true,
+  --     show_trailing_blankline_indent = false,
+  --     -- use_treesitter = true,
+  --   },
+  -- },
 
   { 'numToStr/Comment.nvim', opts = {} },
 
@@ -209,6 +220,8 @@ require('lazy').setup({
           IlluminatedWordWrite = { bg = colors.theme.ui.bg_p2 },
           IndentBlanklineChar = { fg = colors.theme.ui.bg_p2 },
           IndentBlanklineContextChar = { fg = colors.theme.ui.whitespace },
+          IblIndent = { fg = colors.theme.ui.bg_p2 },
+          IblScope = { fg = colors.theme.ui.whitespace },
         }
       end,
     },
@@ -317,7 +330,7 @@ require('lazy').setup({
     },
   },
   { 'stevearc/dressing.nvim', opts = {} },
-  { 'brenoprata10/nvim-highlight-colors', opts = {} },
+  -- { 'brenoprata10/nvim-highlight-colors', opts = {} },
   {
     'tummetott/unimpaired.nvim',
     opts = {
@@ -396,7 +409,7 @@ vim.g.nvim_tree_disable_netrw = 1
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = false
-vim.o.scrolloff = 8
+vim.o.scrolloff = 7
 vim.o.listchars = 'tab:» ,extends:›,precedes:‹,space:·,trail:~,nbsp:·,eol:↲'
 vim.o.cursorline = true
 vim.o.cursorlineopt = 'number'
