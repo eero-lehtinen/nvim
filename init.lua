@@ -510,6 +510,10 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
+    layout_config = {
+      width = 0.9,
+      height = 0.9,
+    },
   },
   pickers = {
     find_files = {
