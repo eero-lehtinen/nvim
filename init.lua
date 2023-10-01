@@ -329,7 +329,7 @@ require('lazy').setup({
     },
   },
   { 'stevearc/dressing.nvim', opts = {} },
-  -- { 'brenoprata10/nvim-highlight-colors', opts = {} },
+  { 'NvChad/nvim-colorizer.lua', opts = {} },
   {
     'tummetott/unimpaired.nvim',
     opts = {
