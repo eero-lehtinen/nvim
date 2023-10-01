@@ -145,18 +145,6 @@ require('lazy').setup({
     end,
   },
 
-  -- {
-  --   'lukas-reineke/indent-blankline.nvim',
-  --   tag = 'v2.20.8',
-  --   opts = {
-  --     char = '▎',
-  --     context_char = '▎',
-  --     show_current_context = true,
-  --     show_trailing_blankline_indent = false,
-  --     -- use_treesitter = true,
-  --   },
-  -- },
-
   { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
