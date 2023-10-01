@@ -301,6 +301,9 @@ require('lazy').setup({
       'nvim-tree/nvim-web-devicons',
     },
     opts = {
+      disable_netrw = true,
+      hijack_netrw = true,
+      hijack_cursor = true,
       actions = {
         open_file = {
           quit_on_open = true,
