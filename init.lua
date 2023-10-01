@@ -402,6 +402,7 @@ require('lazy').setup({
   },
   { 'ray-x/lsp_signature.nvim', event = 'VeryLazy' },
   'onsails/lspkind.nvim',
+  'sudormrfbin/cheatsheet.nvim',
 
   -- Import my stuffs
   require 'custom.plugins.formatting',
@@ -546,6 +547,7 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
+vim.keymap.set('n', '<leader>sc', '<cmd>Cheatsheet<cr>', { desc = '[S]earch [C]heatsheet' })
 vim.keymap.set('n', '<leader>u', require('telescope').extensions.undo.undo, { desc = '[U]ndo tree' })
 
 -- [[ Configure Treesitter ]]
