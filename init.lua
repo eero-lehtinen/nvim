@@ -425,6 +425,8 @@ vim.api.nvim_create_autocmd({ 'BufLeave' }, {
   desc = 'Autosave on switching suffers',
 })
 
+vim.keymap.set({ 'i' }, '<C-BS>', '<C-w>', { desc = 'Ctrl Backspace' })
+
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.nvim_tree_disable_netrw = 1
