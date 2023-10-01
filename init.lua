@@ -803,7 +803,7 @@ cmp.setup {
   }),
 }
 
-cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
+-- cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
