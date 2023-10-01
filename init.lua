@@ -370,10 +370,33 @@ require('lazy').setup({
     cmd = 'Copilot',
     event = 'InsertEnter',
     opts = {
-      suggestion = {
+      panel = {
+        enabled = true,
+        auto_refresh = true,
         keymap = {
-          accept = '<M-a>',
+          jump_prev = '[[',
+          jump_next = ']]',
+          accept = '<CR>',
+          refresh = 'gr',
+          open = '<A-p>', -- run Co[P]ilot
         },
+        layout = {
+          position = 'bottom', -- | top | left | right
+          ratio = 0.4,
+        },
+      },
+      suggestion = {
+        auto_trigger = true,
+        keymap = {
+          next = '<C-¨>', -- actually <C-]>
+          prev = '<C-å>', -- actually <C-[>
+          dismiss = "<C-'>", -- below ]
+          accept = '<C-p>', -- run Co[P]ilot
+        },
+      },
+      filetypes = {
+        check = { allTargets = true },
+        ['*'] = true,
       },
     },
   },
