@@ -679,7 +679,12 @@ local servers = {
   rust_analyzer = {
     ['rust-analyzer'] = {
       checkOnSave = { command = 'clippy' },
-      cargo = { features = 'all' },
+      completion = {
+        callable = {
+          snippets = 'none',
+        },
+      },
+      -- cargo = { features = 'all' },
     },
   },
 
