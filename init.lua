@@ -273,6 +273,14 @@ require('lazy').setup({
     end,
   },
   {
+    'ggandor/flit.nvim',
+    dependencies = {
+      'ggandor/leap.nvim',
+      'tpope/vim-repeat',
+    },
+    opts = {},
+  },
+  {
     'kylechui/nvim-surround',
     version = '*',
     dependencies = {
