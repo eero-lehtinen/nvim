@@ -717,7 +717,7 @@ end
 local servers = {
   rust_analyzer = {
     ['rust-analyzer'] = {
-      checkOnSave = { command = 'clippy' },
+      checkOnSave = { command = 'clippy', extraArgs = { '--target-dir', 'target/check' } },
       completion = {
         callable = {
           snippets = 'none',
