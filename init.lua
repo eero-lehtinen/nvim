@@ -137,12 +137,40 @@ require('lazy').setup({
         -- viewport_buffer = { min = 200, max = 600 },
         -- indent = { highlight = 'IndentBlanklineChar' },
         scope = {
-          show_start = false,
-          show_end = false,
+          enabled = false,
           -- highlight = 'IndentBlanklineContextChar',
         },
       }
     end,
+  },
+
+  -- {
+  --   'nvimdev/indentmini.nvim',
+  --   event = 'BufEnter',
+  --   opts = {
+  --     char = '▎',
+  --   },
+  -- },
+
+  {
+    'shellRaining/hlchunk.nvim',
+    enabled = false,
+    event = { 'UIEnter' },
+    opts = {
+      chunk = {
+        enable = false,
+      },
+      indent = {
+        chars = { '▎' },
+        style = { '#363646' },
+      },
+      line_num = {
+        enable = false,
+      },
+      blank = {
+        enable = false,
+      },
+    },
   },
 
   { 'numToStr/Comment.nvim', opts = {} },
@@ -210,6 +238,8 @@ require('lazy').setup({
           IndentBlanklineContextChar = { fg = colors.theme.ui.whitespace },
           IblIndent = { fg = colors.theme.ui.bg_p2 },
           IblScope = { fg = colors.theme.ui.whitespace },
+          IndentLine = { fg = colors.theme.ui.bg_p2 },
+          HLIndent1 = { fg = colors.theme.ui.bg_p2 },
         }
       end,
     },
