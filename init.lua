@@ -434,6 +434,13 @@ require('lazy').setup({
   'onsails/lspkind.nvim',
   'sudormrfbin/cheatsheet.nvim',
 
+  -- Ideas:
+  -- - Neogit
+  -- - diffview
+  -- - project.nvim
+  -- - nvim-lastplace
+  -- - trouble.nvim:llä näkisi koko workspacesta virheet
+
   -- Import my stuffs
   require 'custom.plugins.formatting',
 
