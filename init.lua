@@ -408,7 +408,7 @@ require('lazy').setup({
           jump_next = ']]',
           accept = '<CR>',
           refresh = 'gr',
-          open = '<A-p>', -- run Co[P]ilot
+          open = '<A-ö>',
         },
         layout = {
           position = 'bottom', -- | top | left | right
@@ -416,12 +416,12 @@ require('lazy').setup({
         },
       },
       suggestion = {
-        auto_trigger = true,
+        auto_trigger = false,
         keymap = {
           next = '<C-¨>', -- actually <C-]>
           prev = '<C-å>', -- actually <C-[>
-          dismiss = "<C-'>", -- below ]
-          accept = '<C-p>', -- run Co[P]ilot
+          dismiss = '<C-ä>', -- below [
+          accept = '<C-ö>', -- run C[ö]yPailot
         },
       },
       filetypes = {
