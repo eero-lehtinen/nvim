@@ -278,7 +278,12 @@ require('lazy').setup({
     },
   },
   { 'stevearc/dressing.nvim', opts = {} },
-  { 'NvChad/nvim-colorizer.lua', opts = {} },
+  { 'NvChad/nvim-colorizer.lua', opts = {
+    user_default_options = {
+      RRGGBBAA = true,
+      css = true,
+    },
+  } },
   {
     'tummetott/unimpaired.nvim',
     opts = {
@@ -360,10 +365,13 @@ require('lazy').setup({
   -- - project.nvim
   -- - nvim-lastplace
   -- - trouble.nvim:llä näkisi koko workspacesta virheet
+  -- - vim-matchup, highlighttaa kursorin ympärillä
 
   -- Import my stuffs
   require 'custom.plugins.formatting',
   require 'custom.plugins.themes',
+
+  -- Possibly import not my stuff
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 }, {})
