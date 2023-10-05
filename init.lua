@@ -352,6 +352,7 @@ require('lazy').setup({
   { 'ray-x/lsp_signature.nvim', event = 'VeryLazy' },
   'onsails/lspkind.nvim',
   'sudormrfbin/cheatsheet.nvim',
+  { 'IndianBoy42/tree-sitter-just', opts = {} },
 
   -- Ideas:
   -- - Neogit
@@ -761,7 +762,7 @@ cmp.setup {
   }),
 }
 
--- cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
+cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
