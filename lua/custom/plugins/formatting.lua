@@ -4,10 +4,11 @@ return {
     local formatters_by_ft = {
       lua = { 'stylua' },
       python = { 'isort', { 'yapf', 'black' } },
-      rust = {}, -- rust just use the lsp fallback
+      rust = {}, -- just use the lsp fallback
+      toml = { 'taplo' },
     }
 
-    local prettierd_filetypes = { 'javascript', 'typescript', 'svelte', 'json', 'html', 'css', 'markdown' }
+    local prettierd_filetypes = { 'javascript', 'typescript', 'svelte', 'json', 'html', 'css', 'markdown', 'yaml' }
     for _, ft in ipairs(prettierd_filetypes) do
       formatters_by_ft[ft] = { 'prettierd' }
     end
