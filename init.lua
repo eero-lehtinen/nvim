@@ -281,7 +281,6 @@ require('lazy').setup({
   { 'NvChad/nvim-colorizer.lua', opts = {
     user_default_options = {
       RRGGBBAA = true,
-      css = true,
     },
   } },
   {
