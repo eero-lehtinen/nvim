@@ -380,7 +380,7 @@ vim.cmd.colorscheme 'kanagawa'
 vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Neo [T]ree Toggle' })
 vim.keymap.set('n', '<C-j>', '<C-^>', { desc = 'Alternate buffer toggle' })
 vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
-vim.keymap.set('n', '<leader>gs', '<cmd>tab Git<cr>', { desc = '[G]it [S]tatus Fugitive in a tab', silent = true })
+vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
 vim.keymap.set('n', '0', '-', { desc = 'Stage Toggle Git Fugitive Ergonomic', remap = true })
 vim.keymap.set('n', 'Q', '@q', { desc = 'Run marco named "q"' })
 vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<cr>', { desc = 'Save' })
