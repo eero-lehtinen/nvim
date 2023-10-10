@@ -281,6 +281,7 @@ require('lazy').setup({
   { 'NvChad/nvim-colorizer.lua', opts = {
     user_default_options = {
       RRGGBBAA = true,
+      names = false,
     },
   } },
   {
@@ -652,7 +653,7 @@ local servers = {
           snippets = 'none',
         },
       },
-      -- cargo = { features = 'all' },
+      -- cargo = { target = 'aarch64-linux-android' },
     },
   },
 
