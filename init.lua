@@ -278,12 +278,15 @@ require('lazy').setup({
     },
   },
   { 'stevearc/dressing.nvim', opts = {} },
-  { 'NvChad/nvim-colorizer.lua', opts = {
-    user_default_options = {
-      RRGGBBAA = true,
-      names = false,
+  {
+    'NvChad/nvim-colorizer.lua',
+    opts = {
+      user_default_options = {
+        RRGGBBAA = true,
+        names = false,
+      },
     },
-  } },
+  },
   {
     'tummetott/unimpaired.nvim',
     opts = {
