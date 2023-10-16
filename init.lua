@@ -719,8 +719,72 @@ local lspkind = require 'lspkind'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
+local compare = require 'cmp.config.compare'
+local types = require 'cmp.types'
+
+local K = types.lsp.CompletionItemKind
+local kind_order = {
+  K.EnumMember,
+  K.Field,
+  K.Property,
+  K.Constant,
+  K.Method,
+  K.Variable,
+  K.Snippet,
+  K.Enum,
+  K.Function,
+  K.Struct,
+  K.Constructor,
+  K.Class,
+  K.Interface,
+  K.Module,
+  K.Unit,
+  K.Value,
+  K.Keyword,
+  K.Color,
+  K.Reference,
+  K.Event,
+  K.Operator,
+  K.TypeParameter,
+  K.File,
+  K.Folder,
+  K.Text,
+}
+local kind_order_map = {}
+for i, k in ipairs(kind_order) do
+  kind_order_map[k] = i
+end
+
+local function my_compare_kind(entry1, entry2)
+  local kind1 = kind_order_map[entry1:get_kind()] or 100
+  local kind2 = kind_order_map[entry2:get_kind()] or 100
+  if kind1 ~= kind2 then
+    local diff = kind1 - kind2
+    if diff < 0 then
+      return true
+    elseif diff > 0 then
+      return false
+    end
+  end
+  return nil
+end
+
 ---@diagnostic disable: missing-fields
 cmp.setup {
+  sorting = {
+    comparators = {
+      compare.offset,
+      compare.exact,
+      -- compare.scopes,
+      compare.score,
+      compare.recently_used,
+      compare.locality,
+      my_compare_kind,
+      -- compare.sort_text,
+      compare.length,
+      compare.order,
+    },
+  },
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
