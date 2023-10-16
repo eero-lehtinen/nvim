@@ -361,6 +361,14 @@ require('lazy').setup({
   'onsails/lspkind.nvim',
   'sudormrfbin/cheatsheet.nvim',
   { 'IndianBoy42/tree-sitter-just', opts = {} },
+  {
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    ft = { 'markdown' },
+    build = function()
+      vim.fn['mkdp#util#install']()
+    end,
+  },
 
   -- Ideas:
   -- - Neogit
