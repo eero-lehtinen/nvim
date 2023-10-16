@@ -357,6 +357,7 @@ require('lazy').setup({
   },
   { 'ray-x/lsp_signature.nvim', event = 'VeryLazy' },
   'onsails/lspkind.nvim',
+  { 'smjonas/inc-rename.nvim', opts = {} },
   'sudormrfbin/cheatsheet.nvim',
   { 'IndianBoy42/tree-sitter-just', opts = {} },
   {
@@ -644,7 +645,7 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+  nmap('<leader>rn', ':IncRename ', '[R]e[n]ame')
   nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
