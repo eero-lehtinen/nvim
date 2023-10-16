@@ -426,7 +426,7 @@ vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' 
 vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
 vim.keymap.set('n', '0', '-', { desc = 'Stage Toggle Git Fugitive Ergonomic', remap = true })
 vim.keymap.set('n', 'Q', '@q', { desc = 'Run marco named "q"' })
-vim.keymap.set({ 'n', 'i', 'v' }, '<C-s>', '<cmd>w<cr>', { desc = 'Save' })
+vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
 vim.api.nvim_create_autocmd({ 'BufLeave' }, {
   pattern = { '*' },
   command = 'silent! update',
