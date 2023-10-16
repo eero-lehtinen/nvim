@@ -173,8 +173,6 @@ require('lazy').setup({
     },
   },
 
-  { 'numToStr/Comment.nvim', opts = {} },
-
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
@@ -369,12 +367,44 @@ require('lazy').setup({
       vim.fn['mkdp#util#install']()
     end,
   },
+  {
+    'nvim-pack/nvim-spectre',
+    cmd = 'Spectre',
+    opts = { open_cmd = 'noswapfile vnew' },
+    keys = {
+      {
+        '<leader>sr',
+        function()
+          require('spectre').open()
+        end,
+        desc = '[S]earch and [R]eplace in Project (Spectre)',
+      },
+    },
+  },
+  {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    lazy = true,
+    opts = {
+      enable_autocmd = false,
+    },
+  },
+  {
+    'echasnovski/mini.comment',
+    event = 'VeryLazy',
+    opts = {
+      options = {
+        custom_commentstring = function()
+          return require('ts_context_commentstring.internal').calculate_commentstring() or vim.bo.commentstring
+        end,
+      },
+    },
+  },
+  { 'ethanholz/nvim-lastplace', opts = {} },
 
   -- Ideas:
   -- - Neogit
   -- - diffview
   -- - project.nvim
-  -- - nvim-lastplace
   -- - trouble.nvim:llä näkisi koko workspacesta virheet
   -- - vim-matchup, highlighttaa kursorin ympärillä
 
