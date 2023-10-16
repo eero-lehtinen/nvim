@@ -445,6 +445,7 @@ vim.o.scrolloff = 7
 vim.o.listchars = 'tab:» ,extends:›,precedes:‹,space:·,trail:~,nbsp:·,eol:↲'
 vim.o.cursorline = true
 vim.o.cursorlineopt = 'number'
+vim.o.undolevels = 10000
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
