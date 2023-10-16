@@ -863,9 +863,12 @@ cmp.setup {
       end
     end),
     ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
+    ['<C-CR>'] = function(fallback)
+      cmp.abort()
+      fallback()
+    end,
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
