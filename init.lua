@@ -640,6 +640,16 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
+vim.diagnostic.config {
+  underline = true,
+  update_in_insert = false,
+  virtual_text = {
+    spacing = 4,
+    source = 'if_many',
+    prefix = '●',
+  },
+  severity_sort = true,
+}
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
