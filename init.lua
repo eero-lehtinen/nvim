@@ -323,42 +323,42 @@ require('lazy').setup({
     dependencies = { 'nvim-treesitter/nvim-treesitter', 'hrsh7th/nvim-cmp' },
     opts = {},
   },
-  {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    opts = {
-      panel = {
-        enabled = true,
-        auto_refresh = true,
-        keymap = {
-          jump_prev = '[[',
-          jump_next = ']]',
-          accept = '<CR>',
-          refresh = 'gr',
-          open = '<A-ö>',
-        },
-        layout = {
-          position = 'bottom', -- | top | left | right
-          ratio = 0.4,
-        },
-      },
-      suggestion = {
-        auto_trigger = false,
-        keymap = {
-          next = '<C-¨>', -- actually <C-]>
-          prev = '<C-å>', -- actually <C-[>
-          dismiss = '<C-ä>', -- below [
-          accept = '<C-ö>', -- run C[ö]yPailot
-        },
-      },
-      filetypes = {
-        check = { allTargets = true },
-        ['*'] = true,
-      },
-    },
-  },
-  { 'ray-x/lsp_signature.nvim', event = 'VeryLazy' },
+  -- {
+  --   'zbirenbaum/copilot.lua',
+  --   cmd = 'Copilot',
+  --   event = 'InsertEnter',
+  --   opts = {
+  --     panel = {
+  --       enabled = true,
+  --       auto_refresh = true,
+  --       keymap = {
+  --         jump_prev = '[[',
+  --         jump_next = ']]',
+  --         accept = '<CR>',
+  --         refresh = 'gr',
+  --         open = '<A-ö>',
+  --       },
+  --       layout = {
+  --         position = 'bottom', -- | top | left | right
+  --         ratio = 0.4,
+  --       },
+  --     },
+  --     suggestion = {
+  --       auto_trigger = false,
+  --       keymap = {
+  --         next = '<C-¨>', -- actually <C-]>
+  --         prev = '<C-å>', -- actually <C-[>
+  --         dismiss = '<C-ä>', -- below [
+  --         accept = '<C-ö>', -- run C[ö]yPailot
+  --       },
+  --     },
+  --     filetypes = {
+  --       check = { allTargets = true },
+  --       ['*'] = true,
+  --     },
+  --   },
+  -- },
+  { 'ray-x/lsp_signature.nvim', event = 'VeryLazy', opts = {} },
   'onsails/lspkind.nvim',
   { 'smjonas/inc-rename.nvim', opts = {} },
   'sudormrfbin/cheatsheet.nvim',
