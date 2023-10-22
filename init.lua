@@ -47,6 +47,7 @@ require('lazy').setup({
       -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
@@ -758,6 +759,14 @@ mason_lspconfig.setup_handlers {
       filetypes = (servers[server_name] or {}).filetypes,
     }
   end,
+}
+
+require('mason-tool-installer').setup {
+  ensure_installed = {
+    'stylua',
+    'prettierd',
+    'isort',
+  },
 }
 
 -- [[ Configure nvim-cmp ]]
