@@ -411,6 +411,7 @@ require('lazy').setup({
     },
   },
   { 'ethanholz/nvim-lastplace', opts = {} },
+  { 'vxpm/ferris.nvim', opts = {} },
 
   -- Ideas:
   -- - Neogit
