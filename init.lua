@@ -315,14 +315,21 @@ require('lazy').setup({
   },
   {
     'windwp/nvim-autopairs',
-    event = 'InsertEnter',
-    opts = {},
+    config = function()
+      local npairs = require 'nvim-autopairs'
+      npairs.setup {}
+      local conds = require 'nvim-autopairs.conds'
+      local rule = require 'nvim-autopairs.rule'
+      npairs.add_rules {
+        rule('<', '>', { 'rust', 'cpp' }):with_pair(conds.before_regex '%w'):with_move(conds.done()),
+      }
+    end,
   },
-  {
-    'abecodes/tabout.nvim',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', 'hrsh7th/nvim-cmp' },
-    opts = {},
-  },
+  -- {
+  --   'abecodes/tabout.nvim',
+  --   dependencies = { 'nvim-treesitter/nvim-treesitter', 'hrsh7th/nvim-cmp' },
+  --   opts = {},
+  -- },
   -- {
   --   'zbirenbaum/copilot.lua',
   --   cmd = 'Copilot',
