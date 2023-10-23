@@ -432,7 +432,7 @@ require('lazy').setup({
 -- my settings and binds
 vim.cmd.colorscheme 'kanagawa'
 vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Neo [T]ree Toggle' })
-vim.keymap.set('n', '<C-j>', '<C-^>', { desc = 'Alternate buffer toggle' })
+vim.keymap.set('n', '<C-9>', '<C-^>', { desc = 'Alternate buffer toggle' })
 vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
 vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
 vim.keymap.set('n', '0', '-', { desc = 'Stage Toggle Git Fugitive Ergonomic', remap = true })
@@ -443,13 +443,33 @@ vim.api.nvim_create_autocmd({ 'BufLeave' }, {
   command = 'silent! update',
   desc = 'Autosave on switching suffers',
 })
+vim.keymap.set('i', '<C-i>', '<esc>i', { desc = 'Control as esc + i' })
+vim.keymap.set('i', '<C-BS>', '<C-w>', { desc = 'Ctrl Backspace' })
 
-vim.keymap.set({ 'i' }, '<C-BS>', '<C-w>', { desc = 'Ctrl Backspace' })
+-- toggling
+vim.keymap.set('n', '<leader>tw', '<cmd>set wrap!<cr>', { desc = '[T]oggle [W]rap' })
+if vim.lsp.inlay_hint then
+  vim.keymap.set('n', '<leader>th', function()
+    vim.lsp.inlay_hint(0, nil)
+  end, { desc = '[T]oggle Inlay [H]ints' })
+end
+vim.keymap.set('n', '<leader>tt', function()
+  if vim.b.ts_highlight then
+    vim.treesitter.stop()
+  else
+    vim.treesitter.start()
+  end
+end, { desc = '[T]oggle [T]reesitter Highlight' })
 
 -- Add undo break-points
 vim.keymap.set('i', ',', ',<c-g>u')
 vim.keymap.set('i', '.', '.<c-g>u')
 vim.keymap.set('i', ';', ';<c-g>u')
+
+vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
+  group = vim.api.nvim_create_augroup('checktime', { clear = true }),
+  command = 'checktime',
+})
 
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -462,6 +482,9 @@ vim.o.listchars = 'tab:» ,extends:›,precedes:‹,space:·,trail:~,nbsp:·,eol
 vim.o.cursorline = true
 vim.o.cursorlineopt = 'number'
 vim.o.undolevels = 10000
+if vim.fn.has 'nvim-0.10' == 1 then
+  vim.o.smoothscroll = true
+end
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
