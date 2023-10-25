@@ -412,6 +412,11 @@ require('lazy').setup({
   },
   { 'ethanholz/nvim-lastplace', opts = {} },
   { 'vxpm/ferris.nvim', opts = {} },
+  {
+    'mrcjkb/rustaceanvim',
+    version = '^3', -- Recommended
+    ft = { 'rust' },
+  },
 
   -- Ideas:
   -- - Neogit
@@ -423,15 +428,16 @@ require('lazy').setup({
   -- Import my stuffs
   require 'custom.plugins.formatting',
   require 'custom.plugins.themes',
+  require 'custom.plugins.debug',
 
   -- Possibly import not my stuff
   -- require 'kickstart.plugins.autoformat',
-  -- require 'kickstart.plugins.debug',
+  require 'kickstart.plugins.debug',
 }, {})
 
 -- my settings and binds
 vim.cmd.colorscheme 'kanagawa'
-vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Neo [T]ree Toggle' })
+vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
 vim.keymap.set('n', '<C-9>', '<C-^>', { desc = 'Alternate buffer toggle' })
 vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
 vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
@@ -447,19 +453,19 @@ vim.keymap.set('i', '<C-i>', '<esc>i', { desc = 'Control as esc + i' })
 vim.keymap.set('i', '<C-BS>', '<C-w>', { desc = 'Ctrl Backspace' })
 
 -- toggling
-vim.keymap.set('n', '<leader>tw', '<cmd>set wrap!<cr>', { desc = '[T]oggle [W]rap' })
+vim.keymap.set('n', '<leader>uw', '<cmd>set wrap!<cr>', { desc = '[U]nset (Toggle) [W]rap' })
 if vim.lsp.inlay_hint then
-  vim.keymap.set('n', '<leader>th', function()
+  vim.keymap.set('n', '<leader>uh', function()
     vim.lsp.inlay_hint(0, nil)
-  end, { desc = '[T]oggle Inlay [H]ints' })
+  end, { desc = '[U]nset (Toggle) Inlay [H]ints' })
 end
-vim.keymap.set('n', '<leader>tt', function()
+vim.keymap.set('n', '<leader>ut', function()
   if vim.b.ts_highlight then
     vim.treesitter.stop()
   else
     vim.treesitter.start()
   end
-end, { desc = '[T]oggle [T]reesitter Highlight' })
+end, { desc = '[U]nset (Toggle) [T]reesitter Highlight' })
 
 -- Add undo break-points
 vim.keymap.set('i', ',', ',<c-g>u')
@@ -728,16 +734,18 @@ local on_attach = function(_, bufnr)
   }, bufnr)
 end
 
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
---
---  If you want to override the default filetypes that your language server will attach to you can
---  define the property 'filetypes' to the map in question.
-local servers = {
-  rust_analyzer = {
+vim.g.rustaceanvim = {
+  tools = {
+    hover_actions = {
+      replace_builtin_hover = false,
+      -- border = 'none',
+      auto_focus = true,
+    },
+  },
+  server = {
+    on_attach = function(client, bufnr)
+      on_attach(client, bufnr)
+    end,
     ['rust-analyzer'] = {
       checkOnSave = { command = 'clippy', extraArgs = { '--target-dir', 'target/check' } },
       completion = {
@@ -750,7 +758,18 @@ local servers = {
       },
     },
   },
+}
 
+-- Enable the following language servers
+--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+--
+--  Add any additional override configuration in the following tables. They will be passed to
+--  the `settings` field of the server config. You must look up that documentation yourself.
+--
+--  If you want to override the default filetypes that your language server will attach to you can
+--  define the property 'filetypes' to the map in question.
+local servers = {
+  rust_analyzer = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
@@ -809,6 +828,7 @@ mason_lspconfig.setup_handlers {
       },
     }
   end,
+  ['rust_analyzer'] = function() end,
 }
 
 require('mason-tool-installer').setup {
