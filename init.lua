@@ -147,35 +147,6 @@ require('lazy').setup({
     end,
   },
 
-  -- {
-  --   'nvimdev/indentmini.nvim',
-  --   event = 'BufEnter',
-  --   opts = {
-  --     char = '▎',
-  --   },
-  -- },
-
-  {
-    'shellRaining/hlchunk.nvim',
-    enabled = false,
-    event = { 'UIEnter' },
-    opts = {
-      chunk = {
-        enable = false,
-      },
-      indent = {
-        chars = { '▎' },
-        style = { '#363646' },
-      },
-      line_num = {
-        enable = false,
-      },
-      blank = {
-        enable = false,
-      },
-    },
-  },
-
   -- Fuzzy Finder (files, lsp, etc)
   {
     'nvim-telescope/telescope.nvim',
