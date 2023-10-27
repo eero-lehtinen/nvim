@@ -536,9 +536,11 @@ require('telescope').setup {
       },
     },
     layout_config = {
-      width = 0.9,
-      height = 0.9,
+      width = 0.85,
+      height = 0.85,
+      prompt_position = 'top',
     },
+    sorting_strategy = 'ascending',
   },
   pickers = {
     find_files = {
