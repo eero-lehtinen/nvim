@@ -128,6 +128,14 @@ require('lazy').setup({
           { 'filename', path = 1 },
         },
       },
+      extensions = {
+        'fugitive',
+        'lazy',
+        'mason',
+        'nvim-dap-ui',
+        'nvim-tree',
+        'quickfix',
+      },
     },
   },
 
