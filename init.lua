@@ -161,6 +161,7 @@ require('lazy').setup({
           return vim.fn.executable 'make' == 1
         end,
       },
+      'nvim-telescope/telescope-media-files.nvim',
     },
   },
 
@@ -555,12 +556,16 @@ require('telescope').setup {
         preview_height = 0.7,
       },
     },
+    media_files = {
+      find_cmd = 'rg',
+    },
   },
 }
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 require('telescope').load_extension 'undo'
+require('telescope').load_extension 'media_files'
 
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
@@ -575,6 +580,7 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
+vim.keymap.set('n', '<leader>sm', require('telescope').extensions.media_files.media_files, { desc = '[S]earch [M]edia' })
 vim.keymap.set('n', '<leader>sc', '<cmd>Cheatsheet<cr>', { desc = '[S]earch [C]heatsheet' })
 vim.keymap.set('n', '<leader>u', require('telescope').extensions.undo.undo, { desc = '[U]ndo tree' })
 
