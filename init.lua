@@ -728,6 +728,7 @@ vim.g.rustaceanvim = {
       -- border = 'none',
       auto_focus = true,
     },
+    reload_workspace_from_cargo_toml = false,
   },
   server = {
     on_attach = function(client, bufnr)
