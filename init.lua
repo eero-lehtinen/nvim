@@ -734,7 +734,7 @@ vim.g.rustaceanvim = {
       on_attach(client, bufnr)
     end,
     ['rust-analyzer'] = {
-      checkOnSave = { command = 'clippy', extraArgs = { '--target-dir', 'target/check' } },
+      checkOnSave = { command = 'clippy' },
       completion = {
         callable = {
           snippets = 'none',
@@ -742,6 +742,9 @@ vim.g.rustaceanvim = {
       },
       cargo = {
         allFeatures = true,
+      },
+      rust = {
+        analyzerTargetDir = true,
       },
     },
   },
