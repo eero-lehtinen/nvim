@@ -827,6 +827,7 @@ require('mason-tool-installer').setup {
     'stylua',
     'prettierd',
     'isort',
+    'taplo',
   },
 }
 
