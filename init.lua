@@ -397,6 +397,7 @@ require('lazy').setup({
     version = '^3', -- Recommended
     ft = { 'rust' },
   },
+  'sindrets/diffview.nvim',
 
   -- Ideas:
   -- - Neogit
@@ -421,6 +422,7 @@ vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 
 vim.keymap.set('n', '<C-9>', '<C-^>', { desc = 'Alternate buffer toggle' })
 vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
 vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
+vim.keymap.set('n', '<leader>dv', '<cmd>DiffviewOpen<cr>', { desc = '[D]iff [V]iew', silent = true })
 vim.keymap.set('n', '0', '-', { desc = 'Stage Toggle Git Fugitive Ergonomic', remap = true })
 vim.keymap.set('n', 'Q', '@q', { desc = 'Run marco named "q"' })
 vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
@@ -471,6 +473,7 @@ vim.o.undolevels = 10000
 if vim.fn.has 'nvim-0.10' == 1 then
   vim.o.smoothscroll = true
 end
+vim.opt.fillchars:append { diff = '╱' }
 
 -- [[ Setting options ]]
 -- See `:help vim.o`

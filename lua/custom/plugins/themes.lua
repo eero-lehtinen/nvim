@@ -27,6 +27,7 @@ return {
           IblScope = { fg = colors.theme.ui.whitespace },
           IndentLine = { fg = colors.theme.ui.bg_p2 },
           HLIndent1 = { fg = colors.theme.ui.bg_p2 },
+          DiffDelete = { bg = colors.theme.ui.bg },
         }
       end,
     },
