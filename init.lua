@@ -396,6 +396,7 @@ require('lazy').setup({
   { 'vxpm/ferris.nvim', opts = {} },
   {
     'mrcjkb/rustaceanvim',
+    -- dir = '~/repos/rustaceanvim',
     version = '^3', -- Recommended
     ft = { 'rust' },
   },
@@ -729,6 +730,9 @@ local on_attach = function(_, bufnr)
   }, bufnr)
 end
 
+local rust_target = nil
+-- local rust_target = 'wasm32-unknown-unknown'
+
 vim.g.rustaceanvim = {
   tools = {
     hover_actions = {
@@ -736,24 +740,28 @@ vim.g.rustaceanvim = {
       -- border = 'none',
       auto_focus = true,
     },
-    reload_workspace_from_cargo_toml = false,
+    -- reload_workspace_from_cargo_toml = false,
   },
   server = {
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
     end,
-    ['rust-analyzer'] = {
-      checkOnSave = { command = 'clippy' },
-      completion = {
-        callable = {
-          snippets = 'none',
+    settings = {
+      ['rust-analyzer'] = {
+        completion = {
+          -- callable = {
+          --   snippets = 'none',
+          -- },
         },
-      },
-      cargo = {
-        allFeatures = true,
-      },
-      rust = {
-        analyzerTargetDir = true,
+        cargo = {
+          target = rust_target,
+        },
+        rust = {
+          analyzerTargetDir = true,
+        },
+        check = {
+          command = 'clippy',
+        },
       },
     },
   },
