@@ -16,18 +16,23 @@ return {
         },
       },
       overrides = function(colors)
+        local theme = colors.theme
         return {
           Boolean = { bold = false },
-          IlluminatedWordText = { bg = colors.theme.ui.bg_p2 },
-          IlluminatedWordRead = { bg = colors.theme.ui.bg_p2 },
-          IlluminatedWordWrite = { bg = colors.theme.ui.bg_p2 },
-          IndentBlanklineChar = { fg = colors.theme.ui.bg_p2 },
-          IndentBlanklineContextChar = { fg = colors.theme.ui.whitespace },
-          IblIndent = { fg = colors.theme.ui.bg_p2 },
-          IblScope = { fg = colors.theme.ui.whitespace },
-          IndentLine = { fg = colors.theme.ui.bg_p2 },
-          HLIndent1 = { fg = colors.theme.ui.bg_p2 },
-          DiffDelete = { bg = colors.theme.ui.bg },
+          IlluminatedWordText = { bg = theme.ui.bg_p2 },
+          IlluminatedWordRead = { bg = theme.ui.bg_p2 },
+          IlluminatedWordWrite = { bg = theme.ui.bg_p2 },
+          IndentBlanklineChar = { fg = theme.ui.bg_p2 },
+          IndentBlanklineContextChar = { fg = theme.ui.whitespace },
+          IblIndent = { fg = theme.ui.bg_p2 },
+          IblScope = { fg = theme.ui.whitespace },
+          IndentLine = { fg = theme.ui.bg_p2 },
+          HLIndent1 = { fg = theme.ui.bg_p2 },
+          DiffDelete = { bg = theme.ui.bg },
+          Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 }, -- add `blend = vim.o.pumblend` to enable transparency
+          PmenuSel = { fg = 'NONE', bg = theme.ui.bg_p2 },
+          PmenuSbar = { bg = theme.ui.bg_m1 },
+          PmenuThumb = { bg = theme.ui.bg_p2 },
         }
       end,
     },
