@@ -422,7 +422,7 @@ require('lazy').setup({
 vim.cmd.colorscheme 'kanagawa'
 vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
 vim.keymap.set('n', '<C-9>', '<C-^>', { desc = 'Alternate buffer toggle' })
-vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
+
 vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
 vim.keymap.set('n', '<leader>dv', '<cmd>DiffviewOpen<cr>', { desc = '[D]iff [V]iew', silent = true })
 vim.keymap.set('n', '0', '-', { desc = 'Stage Toggle Git Fugitive Ergonomic', remap = true })
@@ -435,6 +435,9 @@ vim.api.nvim_create_autocmd({ 'BufLeave' }, {
 })
 vim.keymap.set('i', '<C-i>', '<esc>i', { desc = 'Control as esc + i' })
 vim.keymap.set('i', '<C-BS>', '<C-w>', { desc = 'Ctrl Backspace' })
+
+-- This is actually how visual mode P (not p) already works
+-- vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
 
 -- toggling
 vim.keymap.set('n', '<leader>uw', '<cmd>set wrap!<cr>', { desc = '[U]nset (Toggle) [W]rap' })
