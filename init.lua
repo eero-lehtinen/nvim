@@ -295,13 +295,15 @@ require('lazy').setup({
   },
   {
     'windwp/nvim-autopairs',
+    opts = {},
     config = function()
       local npairs = require 'nvim-autopairs'
       npairs.setup {}
       local conds = require 'nvim-autopairs.conds'
       local rule = require 'nvim-autopairs.rule'
+      -- doesn't actually work when completing, but at least allows moving out of brackets
       npairs.add_rules {
-        rule('<', '>', { 'rust', 'cpp' }):with_pair(conds.before_regex '%w'):with_move(conds.done()),
+        rule('<', '>'):with_pair(conds.none()):with_move(conds.done()):use_key '>',
       }
     end,
   },
