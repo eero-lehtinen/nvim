@@ -312,41 +312,40 @@ require('lazy').setup({
   --   dependencies = { 'nvim-treesitter/nvim-treesitter', 'hrsh7th/nvim-cmp' },
   --   opts = {},
   -- },
-  -- {
-  --   'zbirenbaum/copilot.lua',
-  --   cmd = 'Copilot',
-  --   event = 'InsertEnter',
-  --   opts = {
-  --     panel = {
-  --       enabled = true,
-  --       auto_refresh = true,
-  --       keymap = {
-  --         jump_prev = '[[',
-  --         jump_next = ']]',
-  --         accept = '<CR>',
-  --         refresh = 'gr',
-  --         open = '<A-ö>',
-  --       },
-  --       layout = {
-  --         position = 'bottom', -- | top | left | right
-  --         ratio = 0.4,
-  --       },
-  --     },
-  --     suggestion = {
-  --       auto_trigger = false,
-  --       keymap = {
-  --         next = '<C-¨>', -- actually <C-]>
-  --         prev = '<C-å>', -- actually <C-[>
-  --         dismiss = '<C-ä>', -- below [
-  --         accept = '<C-ö>', -- run C[ö]yPailot
-  --       },
-  --     },
-  --     filetypes = {
-  --       check = { allTargets = true },
-  --       ['*'] = true,
-  --     },
-  --   },
-  -- },
+  {
+    'zbirenbaum/copilot.lua',
+    cmd = 'Copilot',
+    opts = {
+      panel = {
+        enabled = true,
+        auto_refresh = true,
+        keymap = {
+          jump_prev = '[[',
+          jump_next = ']]',
+          accept = '<CR>',
+          refresh = 'gr',
+          open = '<A-ö>',
+        },
+        layout = {
+          position = 'bottom', -- | top | left | right
+          ratio = 0.4,
+        },
+      },
+      suggestion = {
+        auto_trigger = true,
+        keymap = {
+          next = '<C-¨>', -- actually <C-]>
+          prev = '<C-å>', -- actually <C-[>
+          dismiss = '<C-ä>', -- below [
+          accept = '<C-ö>', -- accept C[ö]pailot
+        },
+      },
+      filetypes = {
+        check = { allTargets = true },
+        ['*'] = true,
+      },
+    },
+  },
   { 'ray-x/lsp_signature.nvim', event = 'VeryLazy', opts = {} },
   'onsails/lspkind.nvim',
   { 'smjonas/inc-rename.nvim', opts = {} },
@@ -441,11 +440,14 @@ vim.keymap.set('i', '<C-BS>', '<C-w>', { desc = 'Ctrl Backspace' })
 -- vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
 
 -- toggling
-vim.keymap.set('n', '<leader>uw', '<cmd>set wrap!<cr>', { desc = '[U]nset (Toggle) [W]rap' })
+vim.keymap.set('n', '<leader>uw', '<cmd>set wrap!<cr>', { desc = 'Toggle ([U]nset) [W]rap' })
+vim.keymap.set('n', '<leader>up', function()
+  require('copilot.suggestion').toggle_auto_trigger()
+end, { desc = 'Toggle ([U]nset) Co[P]ilot' })
 if vim.lsp.inlay_hint then
   vim.keymap.set('n', '<leader>uh', function()
     vim.lsp.inlay_hint(0, nil)
-  end, { desc = '[U]nset (Toggle) Inlay [H]ints' })
+  end, { desc = 'Toggle ([U]nset) Inlay [H]ints' })
 end
 vim.keymap.set('n', '<leader>ut', function()
   if vim.b.ts_highlight then
@@ -453,7 +455,7 @@ vim.keymap.set('n', '<leader>ut', function()
   else
     vim.treesitter.start()
   end
-end, { desc = '[U]nset (Toggle) [T]reesitter Highlight' })
+end, { desc = 'Toggle ([U]nset) [T]reesitter Highlight' })
 
 -- Add undo break-points
 vim.keymap.set('i', ',', ',<c-g>u')
@@ -730,9 +732,6 @@ local on_attach = function(_, bufnr)
   }, bufnr)
 end
 
-local rust_target = nil
--- local rust_target = 'wasm32-unknown-unknown'
-
 vim.g.rustaceanvim = {
   tools = {
     hover_actions = {
@@ -754,7 +753,7 @@ vim.g.rustaceanvim = {
           -- },
         },
         cargo = {
-          target = rust_target,
+          target = require 'rust_target',
         },
         rust = {
           analyzerTargetDir = true,
@@ -997,6 +996,16 @@ cmp.setup.cmdline(':', {
     { name = 'cmdline' },
   }),
 })
+
+cmp.event:on('menu_opened', function()
+  vim.b.copilot_suggestion_hidden = true
+  require('copilot.suggestion').dismiss()
+end)
+
+cmp.event:on('menu_closed', function()
+  vim.b.copilot_suggestion_hidden = false
+  require('copilot.suggestion').next()
+end)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
