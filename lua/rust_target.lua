@@ -27,19 +27,26 @@ local function save_target_variable(target)
   file:close()
 end
 
-local function set_rust_target(opts)
+local function get_or_set_rust_target(opts)
   local target = opts.args
+
+  if target == '' then
+    print('Current Rust target: ' .. load_target_variable())
+    return
+  end
+
   if rust_targets[target] == nil then
     print('Invalid target: ' .. (target or 'nil'))
     return
   end
+
   save_target_variable(target)
-  print('Rust target set to ' .. target)
+  print('Rust target set to: ' .. target)
 end
 
-vim.api.nvim_create_user_command('RustTargetSet', set_rust_target, {
-  nargs = 1,
-  desc = 'Set Rust target',
+vim.api.nvim_create_user_command('RustTarget', get_or_set_rust_target, {
+  nargs = '?',
+  desc = 'Get/Set Rust target',
   complete = function(arg_lead, _, _)
     local matches = {}
     for k, _ in pairs(rust_targets) do
@@ -49,13 +56,6 @@ vim.api.nvim_create_user_command('RustTargetSet', set_rust_target, {
     end
     return matches
   end,
-})
-
-vim.api.nvim_create_user_command('RustTargetGet', function()
-  print('Rust target: ' .. load_target_variable())
-end, {
-  nargs = 0,
-  desc = 'Get Rust target',
 })
 
 local key = load_target_variable()
