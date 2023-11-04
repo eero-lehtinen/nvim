@@ -605,7 +605,7 @@ end, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
 vim.keymap.set('n', '<leader>sm', require('telescope').extensions.media_files.media_files, { desc = '[S]earch [M]edia' })
 vim.keymap.set('n', '<leader>sc', '<cmd>Cheatsheet<cr>', { desc = '[S]earch [C]heatsheet' })
-vim.keymap.set('n', '<leader>u', require('telescope').extensions.undo.undo, { desc = '[U]ndo tree' })
+vim.keymap.set('n', '<leader>su', require('telescope').extensions.undo.undo, { desc = '[S]earch [U]ndo tree' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
