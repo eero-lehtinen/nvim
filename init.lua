@@ -772,6 +772,7 @@ vim.g.rustaceanvim = {
         },
         cargo = {
           target = require 'rust_target',
+          -- features = { 'native-activity' },
         },
         rust = {
           analyzerTargetDir = true,
