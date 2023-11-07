@@ -400,13 +400,15 @@ require('lazy').setup({
     ft = { 'rust' },
   },
   'sindrets/diffview.nvim',
+  'lewis6991/satellite.nvim',
+  -- 'dstein64/nvim-scrollview',
 
   -- Ideas:
   -- - Neogit
-  -- - diffview
   -- - project.nvim
   -- - trouble.nvim:llä näkisi koko workspacesta virheet
   -- - vim-matchup, highlighttaa kursorin ympärillä
+  -- - actions-preview.nvim
 
   -- Import my stuffs
   require 'custom.plugins.formatting',
