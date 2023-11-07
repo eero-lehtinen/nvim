@@ -3,6 +3,8 @@ local rust_targets = {
   win = 'x86_64-pc-windows-msvc',
   mac = 'x86_64-apple-darwin',
   linux = 'x86_64-unknown-linux-gnu',
+  android = 'aarch64-linux-android',
+  ios = 'aarch64-apple-ios',
   auto = 'auto',
 }
 
