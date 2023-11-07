@@ -577,6 +577,9 @@ require('telescope').setup {
     find_files = {
       find_command = { 'rg', '--files', '--hidden', '-g', '!.git' },
     },
+    buffers = {
+      sort_lastused = true,
+    },
   },
   extensions = {
     undo = {
