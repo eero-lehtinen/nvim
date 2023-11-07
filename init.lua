@@ -438,11 +438,20 @@ vim.api.nvim_create_autocmd({ 'BufLeave' }, {
 vim.keymap.set('i', '<C-i>', '<esc>i', { desc = 'Control as esc + i' })
 vim.keymap.set('i', '<C-BS>', '<C-w>', { desc = 'Ctrl Backspace' })
 
+vim.keymap.set('n', 'i', function()
+  if #vim.fn.getline '.' == 0 then
+    return [["_cc]]
+  else
+    return 'i'
+  end
+end, { expr = true, desc = 'Properly indent on empty line when insert' })
+
 -- This is actually how visual mode P (not p) already works
 -- vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
 
 -- toggling
 vim.keymap.set('n', '<leader>uw', '<cmd>set wrap!<cr>', { desc = 'Toggle ([U]nset) [W]rap' })
+vim.keymap.set('n', '<leader>ul', '<cmd>set list!<cr>', { desc = 'Toggle ([U]nset) [L]ist (Whitespace Characters)' })
 vim.keymap.set('n', '<leader>up', function()
   require('copilot.suggestion').toggle_auto_trigger()
 end, { desc = 'Toggle ([U]nset) Co[P]ilot' })
