@@ -136,7 +136,7 @@ return {
               },
             },
             win_options = {
-              winhighlight = 'Normal:Normal',
+              winhighlight = 'Normal:Normal,FloatBorder:TelescopeBorder,FloatTitle:TelescopeResultsTitle',
             },
           }
 
@@ -150,7 +150,7 @@ return {
               },
             },
             win_options = {
-              winhighlight = 'Normal:Normal',
+              winhighlight = 'Normal:Normal,FloatBorder:TelescopeBorder,FloatTitle:TelescopePromptTitle',
             },
           }
 
@@ -162,6 +162,9 @@ return {
                 top = picker.preview_title,
                 top_align = 'center',
               },
+            },
+            win_options = {
+              winhighlight = 'Normal:Normal,FloatBorder:TelescopeBorder,FloatTitle:TelescopePreviewTitle',
             },
           }
 
