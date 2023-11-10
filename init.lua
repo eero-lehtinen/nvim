@@ -942,6 +942,7 @@ end)
 cmp.event:on('menu_closed', function()
   vim.b.copilot_suggestion_hidden = false
   require('copilot.suggestion').next()
+  require('copilot.suggestion').prev()
 end)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
