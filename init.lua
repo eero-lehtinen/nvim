@@ -331,7 +331,6 @@ require('lazy').setup({
   { 'ray-x/lsp_signature.nvim', event = 'VeryLazy', opts = {} },
   'onsails/lspkind.nvim',
   { 'smjonas/inc-rename.nvim', opts = {} },
-  'sudormrfbin/cheatsheet.nvim',
   { 'IndianBoy42/tree-sitter-just', opts = {} },
   {
     'iamcco/markdown-preview.nvim',
