@@ -344,15 +344,6 @@ require('lazy').setup({
     'nvim-pack/nvim-spectre',
     cmd = 'Spectre',
     opts = { open_cmd = 'noswapfile vnew' },
-    keys = {
-      {
-        '<leader>sr',
-        function()
-          require('spectre').open()
-        end,
-        desc = '[S]earch and [R]eplace in Project (Spectre)',
-      },
-    },
   },
   {
     'JoosepAlviste/nvim-ts-context-commentstring',
