@@ -11,7 +11,6 @@ return {
         return vim.fn.executable 'make' == 1
       end,
     },
-    'nvim-telescope/telescope-media-files.nvim',
     'MunifTanjim/nui.nvim',
   },
   config = function()
@@ -286,7 +285,6 @@ return {
 
     pcall(telescope.load_extension, 'fzf')
     telescope.load_extension 'undo'
-    telescope.load_extension 'media_files'
 
     local builtin = require 'telescope.builtin'
 
@@ -307,7 +305,6 @@ return {
     end, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-    vim.keymap.set('n', '<leader>sm', telescope.extensions.media_files.media_files, { desc = '[S]earch [M]edia' })
     vim.keymap.set('n', '<leader>su', telescope.extensions.undo.undo, { desc = '[S]earch [U]ndo tree' })
   end,
 }
