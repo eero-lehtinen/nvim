@@ -26,6 +26,7 @@ return {
     -- Add your own debuggers here
     -- 'leoluz/nvim-dap-go',
   },
+  event = 'VeryLazy',
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
@@ -49,7 +50,7 @@ return {
     vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
-    end, { desc = 'Debug: Set Breakpoint' })
+    end, { desc = 'Debug: Set Breakpoint with condition' })
 
     -- For more information, see |:help nvim-dap-ui|
     ---@diagnostic disable: missing-fields
