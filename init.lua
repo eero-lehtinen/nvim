@@ -551,6 +551,11 @@ require('nvim-treesitter.configs').setup {
   ignore_install = {},
   modules = {},
 
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
+  },
+
   highlight = { enable = true, additional_vim_regex_highlighting = false },
   indent = { enable = true },
   incremental_selection = {
