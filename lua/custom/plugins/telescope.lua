@@ -194,12 +194,17 @@ return {
 
             local height, width = vim.o.lines, vim.o.columns
             local box_kind = 'horizontal'
-            if width < 100 then
+            if width < 120 then
               box_kind = 'vertical'
               if height < 40 then
                 box_kind = 'minimal'
               end
             end
+
+            if picker.prompt_title == 'Current Buffer Fuzzy' then
+              box_kind = 'minimal'
+            end
+
             return box_by_kind[box_kind], box_kind
           end
 
@@ -222,6 +227,12 @@ return {
           end
 
           local function get_layout_size(box_kind)
+            if picker.prompt_title == 'Current Buffer Fuzzy' then
+              return {
+                width = '90%',
+                height = '60%',
+              }
+            end
             return picker.layout_config[box_kind == 'minimal' and 'vertical' or box_kind].size
           end
 
