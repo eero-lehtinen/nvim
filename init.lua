@@ -855,6 +855,9 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
+  completion = {
+    completeopt = 'menu,menuone,noinsert',
+  },
   formatting = {
     format = lspkind.cmp_format {
       mode = 'symbol_text',
