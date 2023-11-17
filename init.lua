@@ -326,7 +326,9 @@ require('lazy').setup({
       },
     },
   },
-  { 'ray-x/lsp_signature.nvim', event = 'VeryLazy', opts = {} },
+  { 'ray-x/lsp_signature.nvim', opts = {
+    toggle_key = '<A-k>',
+  } },
   'onsails/lspkind.nvim',
   { 'smjonas/inc-rename.nvim', opts = {} },
   { 'IndianBoy42/tree-sitter-just', opts = {} },
