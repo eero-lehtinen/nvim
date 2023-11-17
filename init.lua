@@ -395,7 +395,7 @@ require('lazy').setup({
 
 -- my settings and binds
 vim.cmd.colorscheme 'kanagawa'
-vim.keymap.set('n', '<leader>t', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
+vim.keymap.set('n', '<leader>T', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
 vim.keymap.set('n', '<C-9>', '<C-^>', { desc = 'Alternate buffer toggle' })
 
 vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
@@ -410,6 +410,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave' }, {
 })
 vim.keymap.set('i', '<C-i>', '<esc>i', { desc = 'Control as esc + i' })
 vim.keymap.set('i', '<C-BS>', '<C-w>', { desc = 'Ctrl Backspace' })
+vim.keymap.set({ 'n', 'v' }, 'q:', '<Nop>', { silent = true })
 
 vim.keymap.set('n', 'i', function()
   if #vim.fn.getline '.' == 0 then
@@ -422,16 +423,18 @@ end, { expr = true, desc = 'Properly indent on empty line when insert' })
 -- This is actually how visual mode P (not p) already works
 -- vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
 
+vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<cr>', { desc = '[T]ab [C]lose' })
+
 -- toggling
-vim.keymap.set('n', '<leader>uw', '<cmd>set wrap!<cr>', { desc = 'Toggle ([U]nset) [W]rap' })
-vim.keymap.set('n', '<leader>ul', '<cmd>set list!<cr>', { desc = 'Toggle ([U]nset) [L]ist (Whitespace Characters)' })
-vim.keymap.set('n', '<leader>up', function()
+vim.keymap.set('n', '<leader>tw', '<cmd>set wrap!<cr>', { desc = '[T]oggle [W]rap' })
+vim.keymap.set('n', '<leader>tl', '<cmd>set list!<cr>', { desc = '[T]oggle [L]ist (Whitespace Characters)' })
+vim.keymap.set('n', '<leader>tp', function()
   require('copilot.suggestion').toggle_auto_trigger()
-end, { desc = 'Toggle ([U]nset) Co[P]ilot' })
+end, { desc = '[T]oggle Co[P]ilot' })
 if vim.lsp.inlay_hint then
-  vim.keymap.set('n', '<leader>uh', function()
+  vim.keymap.set('n', '<leader>th', function()
     vim.lsp.inlay_hint(0, nil)
-  end, { desc = 'Toggle ([U]nset) Inlay [H]ints' })
+  end, { desc = '[T]oggle Inlay [H]ints' })
 end
 vim.keymap.set('n', '<leader>ut', function()
   if vim.b.ts_highlight then
@@ -439,7 +442,10 @@ vim.keymap.set('n', '<leader>ut', function()
   else
     vim.treesitter.start()
   end
-end, { desc = 'Toggle ([U]nset) [T]reesitter Highlight' })
+end, { desc = '[T]oggle [T]reesitter Highlight' })
+vim.keymap.set('n', '<leader>ts', function()
+  require('lsp_signature').toggle_float_win()
+end, { desc = '[T]oggle [S]ignature' })
 
 -- Add undo break-points
 vim.keymap.set('i', ',', ',<c-g>u')
