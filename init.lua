@@ -52,8 +52,10 @@ require('lazy').setup({
       {
         'j-hui/fidget.nvim',
         opts = {
-          lsp = {
-            progress_ringbug_size = 5000,
+          progress = {
+            lsp = {
+              progress_ringbuf_size = 5000,
+            },
           },
         },
       },
@@ -438,9 +440,10 @@ vim.keymap.set('n', '<leader>tl', '<cmd>set list!<cr>', { desc = '[T]oggle [L]is
 vim.keymap.set('n', '<leader>tp', function()
   require('copilot.suggestion').toggle_auto_trigger()
 end, { desc = '[T]oggle Co[P]ilot' })
-if vim.lsp.inlay_hint then
+
+if vim.fn.has 'nvim-0.10' == 1 then
   vim.keymap.set('n', '<leader>th', function()
-    vim.lsp.inlay_hint(0, nil)
+    vim.lsp.inlay_hint.enable(0, nil)
   end, { desc = '[T]oggle Inlay [H]ints' })
 end
 vim.keymap.set('n', '<leader>ut', function()
@@ -665,7 +668,7 @@ local on_attach = function(_, bufnr)
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
 
-  vim.lsp.inlay_hint(bufnr, true)
+  vim.lsp.inlay_hint.enable(bufnr, true)
 
   require('lsp_signature').on_attach({
     doc_lines = 0,
