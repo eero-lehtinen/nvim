@@ -49,7 +49,14 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
-      { 'j-hui/fidget.nvim', opts = {} },
+      {
+        'j-hui/fidget.nvim',
+        opts = {
+          lsp = {
+            progress_ringbug_size = 5000,
+          },
+        },
+      },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -372,7 +379,7 @@ require('lazy').setup({
     ft = { 'rust' },
   },
   'sindrets/diffview.nvim',
-  'lewis6991/satellite.nvim',
+  -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
 
   -- Ideas:
