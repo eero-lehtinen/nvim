@@ -443,10 +443,14 @@ end, { desc = '[T]oggle Co[P]ilot' })
 
 if vim.fn.has 'nvim-0.10' == 1 then
   vim.keymap.set('n', '<leader>th', function()
-    vim.lsp.inlay_hint.enable(0, nil)
+    if vim.lsp.inlay_hint.is_enabled(0) then
+      vim.lsp.inlay_hint.enable(0, false)
+    else
+      vim.lsp.inlay_hint.enable(0, true)
+    end
   end, { desc = '[T]oggle Inlay [H]ints' })
 end
-vim.keymap.set('n', '<leader>ut', function()
+vim.keymap.set('n', '<leader>tt', function()
   if vim.b.ts_highlight then
     vim.treesitter.stop()
   else
