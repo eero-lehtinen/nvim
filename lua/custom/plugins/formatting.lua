@@ -5,7 +5,7 @@ return {
       lua = { 'stylua' },
       python = { 'isort', { 'yapf', 'black' } },
       rust = {}, -- just use the lsp fallback
-      toml = { 'taplo' },
+      -- toml = { 'taplo' },
     }
 
     local prettierd_filetypes = { 'javascript', 'typescript', 'svelte', 'json', 'html', 'css', 'markdown', 'yaml' }
