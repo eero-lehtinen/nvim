@@ -330,7 +330,6 @@ require('lazy').setup({
         },
       },
       filetypes = {
-        check = { allTargets = true },
         ['*'] = true,
       },
     },
@@ -465,6 +464,8 @@ end, { desc = '[T]oggle [S]ignature' })
 vim.keymap.set('i', ',', ',<c-g>u')
 vim.keymap.set('i', '.', '.<c-g>u')
 vim.keymap.set('i', ';', ';<c-g>u')
+
+vim.g.skip_ts_context_commentstring_module = true
 
 vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
   group = vim.api.nvim_create_augroup('checktime', { clear = true }),
