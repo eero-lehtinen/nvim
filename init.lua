@@ -380,6 +380,7 @@ require('lazy').setup({
     ft = { 'rust' },
   },
   'sindrets/diffview.nvim',
+  { 'linrongbin16/gitlinker.nvim', opts = {} },
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
 
