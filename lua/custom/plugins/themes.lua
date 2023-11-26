@@ -19,6 +19,7 @@ return {
         local theme = colors.theme
         return {
           Boolean = { bold = false },
+          ['@lsp.typemod.function.readonly'] = { bold = false },
           IlluminatedWordText = { bg = theme.ui.bg_p2 },
           IlluminatedWordRead = { bg = theme.ui.bg_p2 },
           IlluminatedWordWrite = { bg = theme.ui.bg_p2 },
