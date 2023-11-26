@@ -327,6 +327,12 @@ require('lazy').setup({
           prev = '<C-å>', -- actually <C-[>
           dismiss = '<C-ä>', -- below [
           accept = '<C-ö>', -- accept C[ö]pailot
+
+          -- these work in wezterm, above ones in kitty
+          -- next = '<C-]>', -- actually <C-]>
+          -- prev = '<C-[>', -- actually <C-[>
+          -- dismiss = [[<C-'>]], -- below [, actually ä
+          -- accept = '<C-;>', -- accept C[ö]pailot, actually ö
         },
       },
       filetypes = {
