@@ -753,6 +753,28 @@ local servers = {
   cssls = {},
   html = {},
   emmet_language_server = {},
+  -- typos_lsp = {},
+  texlab = {
+    texlab = {
+      build = {
+        onSave = true,
+        -- args = { '-pv' },
+      },
+      diagnostics = {
+        ignoredPatterns = {
+          'Overfull \\\\hbox.*',
+          'Package glossaries Warning: No language module.*',
+          'Package hyperref Warning: Option .*',
+        },
+      },
+    },
+    forwardSearch = {
+      executable = 'evince-synctex',
+      args = { '-f', '%l', '%p', '"code -g %f:%l"' },
+    },
+  },
+
+  taplo = {},
 }
 
 local function ends_with(str, suffix)
