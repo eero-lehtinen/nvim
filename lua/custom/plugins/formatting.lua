@@ -6,6 +6,7 @@ return {
       python = { 'isort', { 'yapf', 'black' } },
       rust = {}, -- just use the lsp fallback
       toml = {},
+      go = {},
     }
 
     local prettierd_filetypes = { 'javascript', 'typescript', 'svelte', 'json', 'html', 'css', 'markdown', 'yaml' }
