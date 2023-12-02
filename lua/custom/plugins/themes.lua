@@ -35,6 +35,7 @@ return {
           PmenuSbar = { bg = theme.ui.bg_m1 },
           PmenuThumb = { bg = theme.ui.bg_p2 },
           CopilotSuggestion = { fg = '#739296' },
+          CmpGhostText = { fg = theme.syn.comment },
         }
       end,
     },
