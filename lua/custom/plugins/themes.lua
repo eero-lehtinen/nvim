@@ -36,6 +36,7 @@ return {
           PmenuThumb = { bg = theme.ui.bg_p2 },
           CopilotSuggestion = { fg = '#739296' },
           CmpGhostText = { fg = theme.syn.comment },
+          -- LspInlayHint = { link = 'LineNr' },
         }
       end,
     },

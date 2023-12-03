@@ -24,7 +24,7 @@ return {
     },
 
     -- Add your own debuggers here
-    -- 'leoluz/nvim-dap-go',
+    'leoluz/nvim-dap-go',
   },
   event = 'VeryLazy',
   config = function()
@@ -34,7 +34,7 @@ return {
     require('mason-nvim-dap').setup {
       automatic_installation = false,
       ensure_installed = {
-        -- 'delve',
+        'delve',
         'codelldb',
       },
       handlers = {
@@ -64,9 +64,6 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    -- Install golang specific config
-    -- require('dap-go').setup()
-
     -- Rust / CPP / C config
     dap.configurations.cpp = {
       {
@@ -84,5 +81,8 @@ return {
       },
     }
     dap.configurations.c = dap.configurations.cpp
+
+    -- Install golang specific config
+    require('dap-go').setup()
   end,
 }

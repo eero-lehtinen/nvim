@@ -722,6 +722,7 @@ vim.g.rustaceanvim = {
           -- },
         },
         cargo = {
+          allFeatures = true,
           target = require 'rust_target',
           -- features = { 'native-activity' },
         },
@@ -785,6 +786,30 @@ local servers = {
   },
 
   taplo = {},
+
+  gopls = {
+    gopls = {
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        compositeLiteralTypes = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
+      },
+      analyses = {
+        fieldalignment = true,
+        nilness = true,
+        unusedparams = true,
+        unusedwrite = true,
+        useany = true,
+      },
+      usePlaceholders = true,
+      staticcheck = true,
+      semanticTokens = true,
+    },
+  },
 }
 
 local function ends_with(str, suffix)
