@@ -426,7 +426,7 @@ vim.keymap.set('n', '<C-9>', '<C-^>', { desc = 'Alternate buffer toggle' })
 vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
 vim.keymap.set('n', '<leader>dv', '<cmd>DiffviewOpen<cr>', { desc = '[D]iff [V]iew', silent = true })
 vim.keymap.set('n', '0', '-', { desc = 'Stage Toggle Git Fugitive Ergonomic', remap = true })
-vim.keymap.set('n', 'Q', '@q', { desc = 'Run marco named "q"' })
+vim.keymap.set('n', 'Q', '@q', { desc = 'Run macro named "q"' })
 vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
 vim.api.nvim_create_autocmd({ 'BufLeave' }, {
   pattern = { '*' },
