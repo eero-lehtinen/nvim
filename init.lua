@@ -434,7 +434,7 @@ vim.api.nvim_create_autocmd({ 'BufLeave' }, {
   desc = 'Autosave on switching suffers',
 })
 vim.keymap.set('i', '<C-i>', '<esc>i', { desc = 'Control as esc + i' })
-vim.keymap.set('i', '<C-BS>', '<C-w>', { desc = 'Ctrl Backspace' })
+vim.keymap.set({ 'i', 'c' }, '<C-BS>', '<C-w>', { desc = 'Ctrl Backspace' })
 vim.keymap.set({ 'n', 'v' }, 'q:', '<Nop>', { silent = true })
 
 vim.keymap.set('n', 'i', function()
