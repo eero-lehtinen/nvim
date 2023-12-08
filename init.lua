@@ -812,20 +812,6 @@ local servers = {
   },
 }
 
-local function ends_with(str, suffix)
-  return string.sub(str, -string.len(suffix)) == suffix
-end
-
-if ends_with(vim.fn.getcwd(), 'matopeli') then
-  -- local target = 'aarch64-linux-android'
-  -- local ra = servers.rust_analyzer['rust-analyzer']
-  -- ra.cargo = { target = target }
-  -- vim.list_extend(ra.checkOnSave.extraArgs, {
-  --   '--target',
-  --   target,
-  -- })
-end
-
 -- Setup neovim lua configuration
 require('neodev').setup()
 
