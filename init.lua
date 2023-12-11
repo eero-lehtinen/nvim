@@ -417,7 +417,11 @@ require('lazy').setup({
   -- Possibly import not my stuff
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
-}, {})
+}, {
+  checker = {
+    enabled = true,
+  },
+})
 
 -- my settings and binds
 vim.cmd.colorscheme 'kanagawa'
