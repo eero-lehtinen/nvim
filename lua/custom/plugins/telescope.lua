@@ -269,7 +269,7 @@ return {
       },
       pickers = {
         find_files = {
-          find_command = { 'rg', '--files', '--hidden', '-g', '!.git' },
+          find_command = { 'rg', '--files', '-L', '--hidden', '-g', '!.git' },
         },
         buffers = {
           sort_lastused = true,
@@ -301,7 +301,7 @@ return {
 
     local function find_all_files()
       builtin.find_files {
-        find_command = { 'rg', '--files', '--hidden', '-g', '!.git', '--no-ignore' },
+        find_command = { 'rg', '--files', '-L', '--hidden', '-g', '!.git', '--no-ignore' },
       }
     end
 
