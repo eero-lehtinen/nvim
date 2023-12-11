@@ -397,6 +397,7 @@ require('lazy').setup({
   },
   'sindrets/diffview.nvim',
   { 'linrongbin16/gitlinker.nvim', opts = {} },
+  'jesseleite/nvim-macroni',
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
 
@@ -425,8 +426,8 @@ vim.keymap.set('n', '<C-9>', '<C-^>', { desc = 'Alternate buffer toggle' })
 
 vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
 vim.keymap.set('n', '<leader>dv', '<cmd>DiffviewOpen<cr>', { desc = '[D]iff [V]iew', silent = true })
-vim.keymap.set('n', '0', '-', { desc = 'Stage Toggle Git Fugitive Ergonomic', remap = true })
 vim.keymap.set('n', 'Q', '@q', { desc = 'Run macro named "q"' })
+vim.keymap.set('x', 'Q', ':norm @q<CR>', { desc = 'Run macro named "q" in selected lines' })
 vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save file' })
 vim.api.nvim_create_autocmd({ 'BufLeave' }, {
   pattern = { '*' },
