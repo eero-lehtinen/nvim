@@ -24,7 +24,7 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 --
 ---@diagnostic disable: missing-fields
-require('lazy').setup({
+require('lazy').setup {
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
@@ -417,11 +417,7 @@ require('lazy').setup({
   -- Possibly import not my stuff
   -- require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
-}, {
-  checker = {
-    enabled = true,
-  },
-})
+}
 
 -- my settings and binds
 vim.cmd.colorscheme 'kanagawa'
