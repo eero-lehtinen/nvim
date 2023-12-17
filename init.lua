@@ -398,6 +398,10 @@ require('lazy').setup {
   'sindrets/diffview.nvim',
   { 'linrongbin16/gitlinker.nvim', opts = {} },
   'jesseleite/nvim-macroni',
+  {
+    'andymass/vim-matchup',
+    setup = function() end,
+  },
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
 
@@ -405,7 +409,6 @@ require('lazy').setup {
   -- - Neogit
   -- - project.nvim
   -- - trouble.nvim:llä näkisi koko workspacesta virheet
-  -- - vim-matchup, highlighttaa kursorin ympärillä
   -- - actions-preview.nvim
 
   -- Import my stuffs
@@ -584,6 +587,10 @@ require('nvim-treesitter.configs').setup {
   context_commentstring = {
     enable = true,
     enable_autocmd = false,
+  },
+
+  matchup = {
+    enable = true,
   },
 
   highlight = { enable = true, additional_vim_regex_highlighting = false },
