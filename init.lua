@@ -314,6 +314,7 @@ require('lazy').setup {
   {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
+    event = 'InsertEnter',
     opts = {
       panel = {
         enabled = true,
