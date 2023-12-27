@@ -842,9 +842,6 @@ mason_lspconfig.setup_handlers {
       on_attach = on_attach,
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
-      flags = {
-        debounce_text_changes = 150,
-      },
     }
   end,
   ['rust_analyzer'] = function() end,
@@ -969,6 +966,7 @@ cmp.setup {
     end),
     ['<CR>'] = cmp.mapping.confirm {
       select = true,
+      -- behavior = cmp.ConfirmBehavior.Replace,
     },
     ['<C-CR>'] = function(fallback)
       cmp.abort()
