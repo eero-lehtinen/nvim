@@ -1014,13 +1014,13 @@ cmp.setup.cmdline(':', {
 
 cmp.event:on('menu_opened', function()
   vim.b.copilot_suggestion_hidden = true
-  require('copilot.suggestion').dismiss()
+  -- require('copilot.suggestion').dismiss()
 end)
 
 cmp.event:on('menu_closed', function()
   vim.b.copilot_suggestion_hidden = false
-  require('copilot.suggestion').next()
-  require('copilot.suggestion').prev()
+  -- require('copilot.suggestion').next()
+  -- require('copilot.suggestion').prev()
 end)
 
 -- The line beneath this is called `modeline`. See `:help modeline`
