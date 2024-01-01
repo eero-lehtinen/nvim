@@ -601,7 +601,7 @@ require('nvim-treesitter.configs').setup {
     keymaps = {
       node_incremental = 'v',
       node_decremental = 'V',
-      scope_incremental = '<c-v>',
+      scope_incremental = '<A-v>',
     },
   },
   textobjects = {
