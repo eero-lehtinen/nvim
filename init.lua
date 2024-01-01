@@ -726,9 +726,9 @@ vim.g.rustaceanvim = {
     settings = {
       ['rust-analyzer'] = {
         completion = {
-          -- callable = {
-          --   snippets = 'none',
-          -- },
+          callable = {
+            snippets = 'none',
+          },
         },
         cargo = {
           allFeatures = true,
