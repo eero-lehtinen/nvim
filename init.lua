@@ -356,7 +356,7 @@ require('lazy').setup {
   } },
   'onsails/lspkind.nvim',
   { 'smjonas/inc-rename.nvim', opts = {} },
-  { 'IndianBoy42/tree-sitter-just', opts = {} },
+  -- { 'IndianBoy42/tree-sitter-just', opts = {} },
   {
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
@@ -1027,6 +1027,13 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'fugitive',
   callback = function()
     vim.keymap.set('n', '<leader>p', '<cmd>Git push<cr>', { buffer = true, noremap = true })
+  end,
+})
+
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = 'justfile',
+  callback = function()
+    vim.bo.syntax = 'sh'
   end,
 })
 
