@@ -184,9 +184,9 @@ return {
           end
         end
 
-        if picker.prompt_title == 'Current Buffer Fuzzy' then
-          box_kind = 'minimal'
-        end
+        -- if picker.prompt_title == 'Current Buffer Fuzzy' then
+        --   box_kind = 'minimal'
+        -- end
 
         return box_by_kind[box_kind], box_kind
       end
