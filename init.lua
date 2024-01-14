@@ -403,6 +403,14 @@ require('lazy').setup {
     'andymass/vim-matchup',
     setup = function() end,
   },
+  {
+    'Wansmer/treesj',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
+    config = function()
+      require('treesj').setup { use_default_keymaps = false }
+      vim.keymap.set('n', '<leader>j', require('treesj').toggle, { desc = 'Toggle [J]oin Node' })
+    end,
+  },
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
 
