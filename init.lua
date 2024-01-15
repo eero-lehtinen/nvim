@@ -617,9 +617,9 @@ require('nvim-treesitter.configs').setup {
   incremental_selection = {
     enable = true,
     keymaps = {
-      node_incremental = 'v',
-      node_decremental = 'V',
-      scope_incremental = '<A-v>',
+      node_incremental = '<C-k>',
+      node_decremental = '<C-j>',
+      -- scope_incremental = '<A-v>',
     },
   },
   textobjects = {
@@ -695,8 +695,8 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>rn', ':IncRename ', '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<leader>r', ':IncRename ', '[R]e[n]ame')
+  nmap('<leader>c', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
