@@ -3,7 +3,6 @@ return {
   -- branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
-    'debugloop/telescope-undo.nvim',
     {
       'nvim-telescope/telescope-fzf-native.nvim',
       build = 'make',
@@ -283,13 +282,6 @@ return {
         },
       },
       extensions = {
-        undo = {
-          -- side_by_side = true,
-          layout_strategy = 'vertical',
-          layout_config = {
-            preview_height = 0.7,
-          },
-        },
         media_files = {
           find_cmd = 'rg',
         },
@@ -297,7 +289,6 @@ return {
     }
 
     pcall(telescope.load_extension, 'fzf')
-    telescope.load_extension 'undo'
 
     local builtin = require 'telescope.builtin'
 
@@ -325,6 +316,5 @@ return {
     end, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
-    vim.keymap.set('n', '<leader>su', telescope.extensions.undo.undo, { desc = '[S]earch [U]ndo tree' })
   end,
 }
