@@ -411,6 +411,16 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>j', require('treesj').toggle, { desc = 'Toggle [J]oin Node' })
     end,
   },
+  {
+    'mbbill/undotree',
+    config = function()
+      vim.g.undotree_WindowLayout = 1
+      vim.g.undotree_SplitWidth = 48
+      vim.g.undotree_DiffpanelHeight = 15
+      vim.g.undotree_SetFocusWhenToggle = 1
+      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[D]iff [V]iew', silent = true })
+    end,
+  },
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
 
