@@ -2,17 +2,17 @@ local nmap = function(keys, func, desc)
   vim.keymap.set('n', keys, func, { desc = '(RUST) ' .. desc })
 end
 
-nmap('<leader>rd', function()
+nmap('<leader>Rd', function()
   vim.cmd.RustLsp { 'debuggables' }
 end, 'Debug: Rust Debuggables')
 
-nmap('<leader>ra', function()
+nmap('<leader>Ra', function()
   vim.cmd.RustLsp { 'hover', 'actions' }
 end, 'Hover [A]ctions')
 
-nmap('<leader>re', function()
+nmap('<leader>Re', function()
   vim.cmd.RustLsp 'expandMacro'
 end, '[E]xpand Macro')
 
-nmap('<leader>ro', require 'ferris.methods.open_documentation', '[O]pen Documentation')
-nmap('<leader>rm', require 'ferris.methods.view_memory_layout', 'View [M]emory Layout')
+nmap('<leader>Ro', require 'ferris.methods.open_documentation', '[O]pen Documentation')
+nmap('<leader>Rm', require 'ferris.methods.view_memory_layout', 'View [M]emory Layout')
