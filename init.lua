@@ -260,6 +260,7 @@ require('lazy').setup {
   { 'stevearc/dressing.nvim', opts = {} },
   {
     'NvChad/nvim-colorizer.lua',
+    event = { 'BufReadPost', 'BufNewFile' },
     opts = {
       user_default_options = {
         RRGGBBAA = true,
