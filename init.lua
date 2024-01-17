@@ -240,7 +240,7 @@ require('lazy').setup {
         git_ignored = false,
       },
       view = {
-        width = 40,
+        width = 45,
       },
       live_filter = {
         always_show_folders = false,
