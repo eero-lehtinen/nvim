@@ -296,22 +296,29 @@ require('lazy').setup {
   {
     'windwp/nvim-autopairs',
     opts = {},
-    config = function()
-      local npairs = require 'nvim-autopairs'
-      npairs.setup {}
-      local conds = require 'nvim-autopairs.conds'
-      local rule = require 'nvim-autopairs.rule'
-      -- doesn't actually work when completing, but at least allows moving out of brackets
-      npairs.add_rules {
-        rule('<', '>'):with_pair(conds.none()):with_move(conds.done()):use_key '>',
-      }
-    end,
+    -- config = function()
+    -- local npairs = require 'nvim-autopairs'
+    -- npairs.setup {}
+    -- local conds = require 'nvim-autopairs.conds'
+    -- local rule = require 'nvim-autopairs.rule'
+    -- -- doesn't actually work when completing, but at least allows moving out of brackets
+    -- npairs.add_rules {
+    --   rule('<', '>'):with_pair(conds.none()):with_move(conds.done()):use_key '>',
+    -- }
+    -- end,
   },
   -- {
   --   'abecodes/tabout.nvim',
   --   dependencies = { 'nvim-treesitter/nvim-treesitter', 'hrsh7th/nvim-cmp' },
   --   opts = {},
   -- },
+  {
+    'kawre/neotab.nvim',
+    opts = {
+      tabkey = '',
+      act_as_tab = false,
+    },
+  },
   {
     'zbirenbaum/copilot.lua',
     cmd = 'Copilot',
@@ -468,6 +475,21 @@ vim.keymap.set('n', 'i', function()
     return 'i'
   end
 end, { expr = true, desc = 'Properly indent on empty line when insert' })
+
+local function left_is_whitespace_or_empty()
+  local line = vim.fn.getline '.'
+  local col = vim.fn.col '.'
+  local left_side = string.sub(line, 1, col - 1)
+  return left_side:match '^%s*$' ~= nil
+end
+
+vim.keymap.set('i', '<TAB>', function()
+  if left_is_whitespace_or_empty() then
+    vim.fn.feedkeys('\t', 'n')
+  else
+    require('neotab').tabout()
+  end
+end, { noremap = true, silent = true })
 
 -- This is actually how visual mode P (not p) already works
 -- vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
@@ -954,10 +976,10 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
-  completion = {
-    completeopt = 'menu,menuone,noinsert',
-  },
-  preselect = cmp.PreselectMode.None,
+  -- completion = {
+  --   completeopt = 'menu,menuone,noinsert',
+  -- },
+  -- preselect = cmp.PreselectMode.None,
   formatting = {
     format = lspkind.cmp_format {
       mode = 'symbol_text',
