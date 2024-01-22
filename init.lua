@@ -544,7 +544,7 @@ vim.o.expandtab = false
 vim.o.scrolloff = 7
 vim.o.listchars = 'tab:» ,extends:›,precedes:‹,space:·,trail:~,nbsp:·,eol:↲'
 vim.o.cursorline = true
-vim.o.cursorlineopt = 'number'
+vim.o.cursorlineopt = 'line,number'
 vim.o.undolevels = 10000
 if vim.fn.has 'nvim-0.10' == 1 then
   vim.o.smoothscroll = true
