@@ -270,7 +270,7 @@ return {
       },
       pickers = {
         find_files = {
-          find_command = { 'rg', '--files', '-L', '--hidden', '-g', '!.git' },
+          find_command = { 'fd', '--type', 'f', '--follow', '--hidden' },
         },
         buffers = {
           -- sort_lastused = true,
@@ -283,7 +283,7 @@ return {
       },
       extensions = {
         media_files = {
-          find_cmd = 'rg',
+          find_cmd = 'fd',
         },
       },
     }
@@ -294,7 +294,7 @@ return {
 
     local function find_all_files()
       builtin.find_files {
-        find_command = { 'rg', '--files', '-L', '--hidden', '-g', '!.git', '--no-ignore' },
+        find_command = { 'fd', '--type', 'f', '--follow', '--hidden', '--no-ignore', '--exclude', '.git' },
       }
     end
 
