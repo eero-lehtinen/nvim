@@ -819,6 +819,7 @@ local servers = {
     texlab = {
       build = {
         onSave = true,
+        forwardSearchAfter = true,
         -- args = { '-pv' },
       },
       diagnostics = {
@@ -830,8 +831,8 @@ local servers = {
       },
     },
     forwardSearch = {
-      executable = 'evince-synctex',
-      args = { '-f', '%l', '%p', '"code -g %f:%l"' },
+      executable = 'okular',
+      args = { '--unique', 'file:%p#src:%l%f' },
     },
   },
 
