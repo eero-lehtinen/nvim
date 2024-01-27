@@ -429,6 +429,7 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[D]iff [V]iew', silent = true })
     end,
   },
+  { 'laytan/cloak.nvim', opts = {} },
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
 
@@ -522,6 +523,7 @@ end, { desc = '[T]oggle [T]reesitter Highlight' })
 vim.keymap.set('n', '<leader>ts', function()
   require('lsp_signature').toggle_float_win()
 end, { desc = '[T]oggle [S]ignature' })
+vim.keymap.set('n', '<leader>tk', '<cmd>CloakToggle<cr>', { desc = '[T]oggle [K]loak' })
 
 -- Add undo break-points
 vim.keymap.set('i', ',', ',<c-g>u')
