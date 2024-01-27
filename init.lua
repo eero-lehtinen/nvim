@@ -430,6 +430,14 @@ require('lazy').setup {
     end,
   },
   { 'laytan/cloak.nvim', opts = {} },
+  {
+    'KabbAmine/vCoolor.vim',
+    init = function()
+      vim.g.vcoolor_disable_mappings = 1
+      vim.g.vcoolor_map = '<A-c>'
+    end,
+  },
+
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
 
