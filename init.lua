@@ -768,13 +768,14 @@ vim.g.rustaceanvim = {
       -- border = 'none',
       auto_focus = true,
     },
+    enable_clippy = false,
     -- reload_workspace_from_cargo_toml = false,
   },
   server = {
     on_attach = function(client, bufnr)
       on_attach(client, bufnr)
     end,
-    settings = {
+    default_settings = {
       ['rust-analyzer'] = {
         completion = {
           callable = {
@@ -789,8 +790,10 @@ vim.g.rustaceanvim = {
         rust = {
           analyzerTargetDir = true,
         },
-        check = {
+        checkOnSave = {
+          allFeatures = true,
           command = 'clippy',
+          extraArgs = { '--no-deps' },
         },
       },
     },
