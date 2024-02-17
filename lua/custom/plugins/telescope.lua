@@ -244,6 +244,7 @@ return {
 
     telescope.setup {
       defaults = {
+        path_display = { 'truncate' },
         layout_strategy = 'flex',
         layout_config = {
           horizontal = {
