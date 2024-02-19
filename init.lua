@@ -790,10 +790,8 @@ vim.g.rustaceanvim = {
         rust = {
           analyzerTargetDir = true,
         },
-        checkOnSave = {
-          allFeatures = true,
+        check = {
           command = 'clippy',
-          extraArgs = { '--no-deps' },
         },
       },
     },
