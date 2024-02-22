@@ -729,7 +729,7 @@ local on_attach = function(_, bufnr)
   end
 
   nmap('<leader>r', ':IncRename ', '[R]e[n]ame')
-  nmap('<leader>c', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'LSP: [C]ode [A]ction' })
 
   nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
