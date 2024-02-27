@@ -134,6 +134,7 @@ require('lazy').setup {
         lualine_c = {
           { 'filename', path = 1 },
         },
+        lualine_x = { 'encoding', 'fileformat', 'filetype', 'filesize' },
       },
       extensions = {
         'fugitive',
