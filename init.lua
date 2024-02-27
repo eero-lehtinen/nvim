@@ -332,7 +332,7 @@ require('lazy').setup {
           jump_next = ']]',
           accept = '<CR>',
           refresh = 'gr',
-          open = '<A-ö>',
+          open = '<C-ö>', -- Cöpailot
         },
         layout = {
           position = 'bottom', -- | top | left | right
@@ -345,7 +345,7 @@ require('lazy').setup {
           next = '<C-¨>', -- actually <C-]>
           prev = '<C-å>', -- actually <C-[>
           dismiss = '<C-ä>', -- below [
-          accept = '<C-ö>', -- accept C[ö]pailot
+          accept = '<C-u>', -- Next to C-y which is normal complete
 
           -- these work in wezterm, above ones in kitty
           -- next = '<C-]>', -- actually <C-]>
@@ -1017,7 +1017,7 @@ cmp.setup {
         cmp.complete {}
       end
     end),
-    ['<CR>'] = cmp.mapping.confirm {
+    ['<C-y>'] = cmp.mapping.confirm {
       select = true,
       -- behavior = cmp.ConfirmBehavior.Replace,
     },
