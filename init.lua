@@ -872,6 +872,8 @@ local servers = {
       semanticTokens = true,
     },
   },
+
+  -- wgsl_analyzer = {},
 }
 
 -- Setup neovim lua configuration
@@ -1087,6 +1089,14 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = 'justfile',
   callback = function()
     vim.bo.syntax = 'sh'
+  end,
+})
+
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  pattern = '*.wgsl',
+  callback = function()
+    vim.bo.filetype = 'wgsl'
+    vim.bo.commentstring = '// %s'
   end,
 })
 
