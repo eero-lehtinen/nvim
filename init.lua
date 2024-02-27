@@ -445,7 +445,6 @@ require('lazy').setup {
   -- Ideas:
   -- - Neogit
   -- - project.nvim
-  -- - trouble.nvim:llä näkisi koko workspacesta virheet
   -- - actions-preview.nvim
 
   -- Import my stuffs
