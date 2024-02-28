@@ -583,6 +583,10 @@ if vim.fn.has 'nvim-0.10' == 1 then
   vim.o.smoothscroll = true
 end
 vim.opt.fillchars:append { diff = '╱' }
+vim.o.showmode = false
+vim.o.splitright = true
+vim.o.splitbelow = true
+vim.o.inccommand = 'split'
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
