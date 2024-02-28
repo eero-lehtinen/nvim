@@ -1040,7 +1040,7 @@ cmp.setup {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping(function(_)
+    ['<C-Space>'] = cmp.mapping(function(_) -- C-e works by default
       if cmp.visible() then
         cmp.abort()
       else
@@ -1087,7 +1087,18 @@ cmp.setup {
 }
 
 cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
+  mapping = cmp.mapping.preset.cmdline {
+    ['<C-Space>'] = cmp.mapping(function(_)
+      if cmp.visible() then
+        cmp.abort()
+      else
+        cmp.complete {}
+      end
+    end),
+    ['<C-y>'] = cmp.mapping.confirm {
+      select = true,
+    },
+  },
   sources = cmp.config.sources({
     { name = 'path' },
   }, {
