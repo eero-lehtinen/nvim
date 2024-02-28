@@ -355,7 +355,8 @@ require('lazy').setup {
           jump_next = ']]',
           accept = '<CR>',
           refresh = 'gr',
-          open = '<leader>ö', -- Cöpailot
+          open = false,
+          -- open = 'C-ö', -- Cöpailot
         },
         layout = {
           position = 'bottom', -- | top | left | right
