@@ -38,31 +38,166 @@ require('lazy').setup {
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
   {
-    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs to stdpath for neovim
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-      {
-        'j-hui/fidget.nvim',
-        opts = {
-          progress = {
-            lsp = {
-              progress_ringbuf_size = 5000,
-            },
-          },
-        },
-      },
-
-      -- Additional lua configuration, makes nvim stuff amazing!
+      { 'j-hui/fidget.nvim', opts = {} },
       'folke/neodev.nvim',
     },
+    config = function()
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
+        callback = function(event)
+          local nmap = function(keys, func, desc)
+            if desc then
+              desc = 'LSP: ' .. desc
+            end
+
+            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc })
+          end
+
+          local client = vim.lsp.get_client_by_id(event.data.client_id)
+          if client == nil or client.name == 'copilot' then
+            return
+          end
+
+          nmap('<leader>r', ':IncRename ', '[R]ename')
+          vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.lsp.buf.code_action, { buffer = event.buf, desc = 'LSP: [C]ode [A]ction' })
+
+          nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          nmap('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          nmap('gD', require('telescope.builtin').lsp_type_definitions, '[G]oto Type [D]efinition')
+          nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+          nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+
+          nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
+          nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+
+          -- Lesser used LSP functionality
+          nmap('<leader>gd', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+          nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+          nmap('<leader>wl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+          end, '[W]orkspace [L]ist Folders')
+
+          vim.lsp.inlay_hint.enable(event.buf, true)
+
+          require('lsp_signature').on_attach({
+            doc_lines = 0,
+            hint_enable = false,
+            handler_opts = {
+              border = 'none',
+            },
+          }, event.buf)
+        end,
+      })
+
+      require('neodev').setup()
+
+      local servers = {
+        rust_analyzer = {},
+
+        lua_ls = {
+          Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+          },
+        },
+
+        pyright = {},
+
+        tsserver = {},
+        eslint = {},
+        svelte = {},
+        tailwindcss = {},
+        cssls = {},
+        html = {},
+        emmet_language_server = {},
+        -- typos_lsp = {},
+        texlab = {
+          texlab = {
+            build = {
+              onSave = true,
+              forwardSearchAfter = true,
+              -- args = { '-pv' },
+            },
+            diagnostics = {
+              ignoredPatterns = {
+                'Overfull \\\\hbox.*',
+                'Package glossaries Warning: No language module.*',
+                'Package hyperref Warning: Option .*',
+              },
+            },
+          },
+          forwardSearch = {
+            executable = 'okular',
+            args = { '--unique', 'file:%p#src:%l%f' },
+          },
+        },
+
+        taplo = {},
+
+        gopls = {
+          gopls = {
+            hints = {
+              assignVariableTypes = true,
+              compositeLiteralFields = true,
+              compositeLiteralTypes = true,
+              constantValues = true,
+              functionTypeParameters = true,
+              parameterNames = true,
+              rangeVariableTypes = true,
+            },
+            analyses = {
+              fieldalignment = true,
+              nilness = true,
+              unusedparams = true,
+              unusedwrite = true,
+              useany = true,
+            },
+            usePlaceholders = true,
+            staticcheck = true,
+            semanticTokens = true,
+          },
+        },
+
+        -- wgsl_analyzer = {},
+      }
+
+      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+
+      local mason_lspconfig = require 'mason-lspconfig'
+
+      mason_lspconfig.setup {
+        ensure_installed = vim.tbl_keys(servers),
+      }
+
+      mason_lspconfig.setup_handlers {
+        function(server_name)
+          require('lspconfig')[server_name].setup {
+            capabilities = capabilities,
+            settings = servers[server_name],
+            filetypes = (servers[server_name] or {}).filetypes,
+          }
+        end,
+        ['rust_analyzer'] = function() end,
+      }
+
+      require('mason-tool-installer').setup {
+        ensure_installed = {
+          'stylua',
+          'prettierd',
+          'isort',
+          'taplo',
+        },
+      }
+    end,
   },
 
   -- Autocompletion
@@ -202,6 +337,84 @@ require('lazy').setup {
       },
     },
     build = ':TSUpdate',
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        -- Add languages to be installed here that you want installed for treesitter
+        ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'html', 'javascript', 'css' },
+
+        -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+        auto_install = true,
+
+        sync_install = false,
+        ignore_install = {},
+        modules = {},
+
+        context_commentstring = {
+          enable = true,
+          enable_autocmd = false,
+        },
+
+        matchup = {
+          enable = true,
+        },
+
+        highlight = { enable = true, additional_vim_regex_highlighting = false },
+        indent = { enable = true },
+        incremental_selection = {
+          enable = true,
+          keymaps = {
+            init_selection = '<C-n>',
+            node_incremental = '<C-n>',
+            node_decremental = '<C-m>',
+            -- scope_incremental = '<A-v>',
+          },
+        },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+            keymaps = {
+              -- You can use the capture groups defined in textobjects.scm
+              ['aa'] = '@parameter.outer',
+              ['ia'] = '@parameter.inner',
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+              ['ac'] = '@class.outer',
+              ['ic'] = '@class.inner',
+            },
+          },
+          move = {
+            enable = true,
+            set_jumps = true, -- whether to set jumps in the jumplist
+            goto_next_start = {
+              [']m'] = '@function.outer',
+              [']]'] = '@class.outer',
+            },
+            goto_next_end = {
+              [']M'] = '@function.outer',
+              [']['] = '@class.outer',
+            },
+            goto_previous_start = {
+              ['[m'] = '@function.outer',
+              ['[['] = '@class.outer',
+            },
+            goto_previous_end = {
+              ['[M'] = '@function.outer',
+              ['[]'] = '@class.outer',
+            },
+          },
+          swap = {
+            enable = true,
+            swap_next = {
+              ['<leader>a'] = '@parameter.inner',
+            },
+            swap_previous = {
+              ['<leader>A'] = '@parameter.inner',
+            },
+          },
+        },
+      }
+    end,
   },
 
   -- my plugins
@@ -427,6 +640,41 @@ require('lazy').setup {
     -- dir = '~/repos/rustaceanvim',
     version = '^4', -- Recommended
     ft = { 'rust' },
+    init = function()
+      vim.g.rustaceanvim = {
+        tools = {
+          hover_actions = {
+            replace_builtin_hover = false,
+            -- border = 'none',
+            auto_focus = true,
+          },
+          enable_clippy = false,
+          -- reload_workspace_from_cargo_toml = false,
+        },
+        server = {
+          default_settings = {
+            ['rust-analyzer'] = {
+              completion = {
+                callable = {
+                  snippets = 'none',
+                },
+              },
+              cargo = {
+                allFeatures = true,
+                target = require 'rust_target',
+                -- features = { 'native-activity' },
+              },
+              rust = {
+                analyzerTargetDir = true,
+              },
+              check = {
+                command = 'clippy',
+              },
+            },
+          },
+        },
+      }
+    end,
   },
   'sindrets/diffview.nvim',
   { 'linrongbin16/gitlinker.nvim', opts = {} },
@@ -544,6 +792,7 @@ if vim.fn.has 'nvim-0.10' == 1 then
     end
   end, { desc = '[T]oggle Inlay [H]ints' })
 end
+
 vim.keymap.set('n', '<leader>tt', function()
   if vim.b.ts_highlight then
     vim.treesitter.stop()
@@ -551,9 +800,10 @@ vim.keymap.set('n', '<leader>tt', function()
     vim.treesitter.start()
   end
 end, { desc = '[T]oggle [T]reesitter Highlight' })
+
 vim.keymap.set('n', '<leader>ts', function()
   require('lsp_signature').toggle_float_win()
-end, { desc = '[T]oggle [S]ignature' })
+end, { desc = '[T]oggle [S]ignature Popup (i_ALT-k also works)' })
 vim.keymap.set('n', '<leader>tk', '<cmd>CloakToggle<cr>', { desc = '[T]oggle [K]loak' })
 
 -- Add undo break-points
@@ -650,85 +900,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- [[ Configure Treesitter ]]
--- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup {
-  -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'html', 'javascript', 'css' },
-
-  -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-  auto_install = true,
-
-  sync_install = false,
-  ignore_install = {},
-  modules = {},
-
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
-  },
-
-  matchup = {
-    enable = true,
-  },
-
-  highlight = { enable = true, additional_vim_regex_highlighting = false },
-  indent = { enable = true },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<C-n>',
-      node_incremental = '<C-n>',
-      node_decremental = '<C-m>',
-      -- scope_incremental = '<A-v>',
-    },
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
-      },
-      goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
-      },
-      goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
-      },
-      goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = {
-        ['<leader>a'] = '@parameter.inner',
-      },
-      swap_previous = {
-        ['<leader>A'] = '@parameter.inner',
-      },
-    },
-  },
-}
-
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
@@ -745,202 +916,7 @@ vim.diagnostic.config {
   },
   severity_sort = true,
 }
--- [[ Configure LSP ]]
---  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
 
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-  end
-
-  nmap('<leader>r', ':IncRename ', '[R]e[n]ame')
-  vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.lsp.buf.code_action, { buffer = bufnr, desc = 'LSP: [C]ode [A]ction' })
-
-  nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-  nmap('gD', require('telescope.builtin').lsp_type_definitions, '[G]oto Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-
-  -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
-
-  -- Lesser used LSP functionality
-  nmap('<leader>gd', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
-
-  vim.lsp.inlay_hint.enable(bufnr, true)
-
-  require('lsp_signature').on_attach({
-    doc_lines = 0,
-    hint_enable = false,
-    handler_opts = {
-      border = 'none',
-    },
-  }, bufnr)
-end
-
-vim.g.rustaceanvim = {
-  tools = {
-    hover_actions = {
-      replace_builtin_hover = false,
-      -- border = 'none',
-      auto_focus = true,
-    },
-    enable_clippy = false,
-    -- reload_workspace_from_cargo_toml = false,
-  },
-  server = {
-    on_attach = function(client, bufnr)
-      on_attach(client, bufnr)
-    end,
-    default_settings = {
-      ['rust-analyzer'] = {
-        completion = {
-          callable = {
-            snippets = 'none',
-          },
-        },
-        cargo = {
-          allFeatures = true,
-          target = require 'rust_target',
-          -- features = { 'native-activity' },
-        },
-        rust = {
-          analyzerTargetDir = true,
-        },
-        check = {
-          command = 'clippy',
-        },
-      },
-    },
-  },
-}
-
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
---
---  If you want to override the default filetypes that your language server will attach to you can
---  define the property 'filetypes' to the map in question.
-local servers = {
-  rust_analyzer = {},
-
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
-
-  pyright = {},
-
-  tsserver = {},
-  eslint = {},
-  svelte = {},
-  tailwindcss = {},
-  cssls = {},
-  html = {},
-  emmet_language_server = {},
-  -- typos_lsp = {},
-  texlab = {
-    texlab = {
-      build = {
-        onSave = true,
-        forwardSearchAfter = true,
-        -- args = { '-pv' },
-      },
-      diagnostics = {
-        ignoredPatterns = {
-          'Overfull \\\\hbox.*',
-          'Package glossaries Warning: No language module.*',
-          'Package hyperref Warning: Option .*',
-        },
-      },
-    },
-    forwardSearch = {
-      executable = 'okular',
-      args = { '--unique', 'file:%p#src:%l%f' },
-    },
-  },
-
-  taplo = {},
-
-  gopls = {
-    gopls = {
-      hints = {
-        assignVariableTypes = true,
-        compositeLiteralFields = true,
-        compositeLiteralTypes = true,
-        constantValues = true,
-        functionTypeParameters = true,
-        parameterNames = true,
-        rangeVariableTypes = true,
-      },
-      analyses = {
-        fieldalignment = true,
-        nilness = true,
-        unusedparams = true,
-        unusedwrite = true,
-        useany = true,
-      },
-      usePlaceholders = true,
-      staticcheck = true,
-      semanticTokens = true,
-    },
-  },
-
-  -- wgsl_analyzer = {},
-}
-
--- Setup neovim lua configuration
-require('neodev').setup()
-
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-
--- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
-
-mason_lspconfig.setup {
-  ensure_installed = vim.tbl_keys(servers),
-}
-
-mason_lspconfig.setup_handlers {
-  function(server_name)
-    require('lspconfig')[server_name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    }
-  end,
-  ['rust_analyzer'] = function() end,
-}
-
-require('mason-tool-installer').setup {
-  ensure_installed = {
-    'stylua',
-    'prettierd',
-    'isort',
-    'taplo',
-  },
-}
-
--- [[ Configure nvim-cmp ]]
--- See `:help cmp`
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 local lspkind = require 'lspkind'
