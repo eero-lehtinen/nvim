@@ -545,7 +545,7 @@ require('lazy').setup {
   -- - actions-preview.nvim
 
   -- Import my stuff
-  { import = 'custom.plugins' },
+  { import = 'plugins' },
 }
 
 -- my settings and binds
