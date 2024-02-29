@@ -221,7 +221,22 @@ require('lazy').setup {
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  {
+    'folke/which-key.nvim',
+    event = 'VeryLazy',
+    config = function()
+      require('which-key').setup()
+
+      require('which-key').register {
+        ['<leader>'] = {
+          ['s'] = { name = '+search', _ = 'which_key_ignore' },
+          ['h'] = { name = '+hunk (git)', _ = 'which_key_ignore' },
+          ['t'] = { name = '+toggle/tab ', _ = 'which_key_ignore' },
+          ['w'] = { name = '+workspace (lsp) ', _ = 'which_key_ignore' },
+        },
+      }
+    end,
+  },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -698,7 +713,7 @@ require('lazy').setup {
       vim.g.undotree_SplitWidth = 48
       vim.g.undotree_DiffpanelHeight = 15
       vim.g.undotree_SetFocusWhenToggle = 1
-      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[D]iff [V]iew', silent = true })
+      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[U]ndotree', silent = true })
     end,
   },
   { 'laytan/cloak.nvim', opts = {} },
