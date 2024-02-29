@@ -20,12 +20,8 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
---
 ---@diagnostic disable: missing-fields
 require('lazy').setup {
-  -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
   -- Undocumented nice keymaps:
@@ -200,7 +196,6 @@ require('lazy').setup {
     end,
   },
 
-  -- Useful plugin to show you pending keybinds.
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
@@ -218,10 +213,8 @@ require('lazy').setup {
     end,
   },
   {
-    -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
-      -- See `:help gitsigns.txt`
       on_attach = function(bufnr)
         vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[H]unk [P]review' })
         vim.keymap.set('n', '<leader>hr', require('gitsigns').reset_hunk, { buffer = bufnr, desc = '[H]unk [R]eset' })
@@ -678,6 +671,7 @@ require('lazy').setup {
   },
   {
     'Wansmer/treesj',
+    keys = { '<leader>j' },
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
     config = function()
       require('treesj').setup { use_default_keymaps = false }
