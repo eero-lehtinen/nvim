@@ -207,6 +207,10 @@ require('lazy').setup {
               ['if'] = '@function.inner',
               ['ac'] = '@class.outer',
               ['ic'] = '@class.inner',
+              ['ai'] = '@conditional.outer', -- [a]round [i]f
+              ['ii'] = '@conditional.inner',
+              ['al'] = '@loop.outer',
+              ['il'] = '@loop.inner',
             },
           },
           move = {
