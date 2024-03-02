@@ -38,6 +38,7 @@ return {
           CmpGhostText = { fg = theme.syn.comment },
           CursorLine = { bg = theme.ui.bg_p1 },
           -- LspInlayHint = { link = 'LineNr' },
+          HighlightUndo = { fg = theme.ui.fg, bg = colors.palette.waveBlue2 },
         }
       end,
     },
