@@ -34,7 +34,7 @@ return {
           PmenuSel = { fg = 'NONE', bg = theme.ui.bg_p2 },
           PmenuSbar = { bg = theme.ui.bg_m1 },
           PmenuThumb = { bg = theme.ui.bg_p2 },
-          CopilotSuggestion = { fg = '#739296' },
+          CopilotSuggestion = { fg = '#74A6AD' },
           CmpGhostText = { fg = theme.syn.comment },
           CursorLine = { bg = theme.ui.bg_p1 },
           -- LspInlayHint = { link = 'LineNr' },
