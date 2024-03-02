@@ -1,14 +1,32 @@
 return {
-  { 'ray-x/lsp_signature.nvim', opts = {
-    toggle_key = '<A-k>',
-  } },
+  {
+    'ray-x/lsp_signature.nvim',
+    opts = {
+      toggle_key = '<A-k>',
+    },
+    init = function()
+      vim.keymap.set('n', '<leader>ts', function()
+        require('lsp_signature').toggle_float_win()
+      end, { desc = '[T]oggle [S]ignature Popup (i_ALT-k also works)' })
+    end,
+  },
+  { 'smjonas/inc-rename.nvim', opts = {} },
   {
     'neovim/nvim-lspconfig',
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'j-hui/fidget.nvim', opts = {} },
+      {
+        'j-hui/fidget.nvim',
+        opts = {
+          progress = {
+            lsp = {
+              progress_ringbuf_size = 5000,
+            },
+          },
+        },
+      },
       'folke/neodev.nvim',
     },
     config = function()
@@ -161,6 +179,16 @@ return {
           'taplo',
         },
       }
+    end,
+  },
+  {
+    'antosha417/nvim-lsp-file-operations',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'nvim-tree/nvim-tree.lua',
+    },
+    config = function()
+      require('lsp-file-operations').setup()
     end,
   },
 }

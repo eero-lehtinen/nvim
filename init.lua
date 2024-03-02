@@ -23,14 +23,6 @@ vim.opt.rtp:prepend(lazypath)
 ---@diagnostic disable: missing-fields
 require('lazy').setup {
 
-  -- Git related plugins
-  -- Undocumented nice keymaps:
-  -- a: toggle stage
-  -- J: next hunk
-  -- K: previous hunk
-  'tpope/vim-fugitive',
-  'tpope/vim-rhubarb',
-
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
@@ -50,85 +42,6 @@ require('lazy').setup {
       }
     end,
   },
-  {
-    'lewis6991/gitsigns.nvim',
-    opts = {
-      on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[H]unk [P]review' })
-        vim.keymap.set('n', '<leader>hr', require('gitsigns').reset_hunk, { buffer = bufnr, desc = '[H]unk [R]eset' })
-
-        local gs = package.loaded.gitsigns
-        vim.keymap.set({ 'n', 'v' }, ']c', function()
-          if vim.wo.diff then
-            return ']c'
-          end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
-        vim.keymap.set({ 'n', 'v' }, '[c', function()
-          if vim.wo.diff then
-            return '[c'
-          end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
-      end,
-    },
-  },
-
-  {
-    -- Set lualine as statusline
-    'nvim-lualine/lualine.nvim',
-    -- See `:help lualine.txt`
-
-    config = function()
-      local function win_larger_than(n)
-        return function()
-          return vim.fn.winwidth(0) > n
-        end
-      end
-      require('lualine').setup {
-        options = {
-          icons_enabled = true,
-          theme = 'auto',
-          component_separators = '',
-          section_separators = '',
-        },
-        sections = {
-          lualine_c = {
-            { 'filename', path = 1 },
-          },
-          lualine_x = {
-            {
-              'encoding',
-              cond = win_larger_than(90),
-            },
-            {
-              'fileformat',
-              cond = win_larger_than(90),
-            },
-            { 'filetype' },
-            {
-              'filesize',
-              cond = win_larger_than(110),
-            },
-          },
-        },
-        extensions = {
-          'fugitive',
-          'lazy',
-          'mason',
-          'nvim-dap-ui',
-          'nvim-tree',
-          'quickfix',
-        },
-      }
-    end,
-  },
 
   {
     -- add indentation guides even on blank lines
@@ -141,107 +54,6 @@ require('lazy').setup {
         scope = {
           enabled = false,
           -- highlight = 'IndentBlanklineContextChar',
-        },
-      }
-    end,
-  },
-
-  -- Highlight, edit, and navigate code
-  {
-    'nvim-treesitter/nvim-treesitter',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      -- Way too much lag to be usable with Rust.
-      -- Somewhat lags with other languages like Lua too.
-      -- 'HiPhish/rainbow-delimiters.nvim',
-      {
-        'nvim-treesitter/nvim-treesitter-context',
-        opts = {
-          max_lines = 5,
-          multiline_threshold = 1,
-        },
-      },
-    },
-    build = ':TSUpdate',
-    config = function()
-      require('nvim-treesitter.configs').setup {
-        -- Add languages to be installed here that you want installed for treesitter
-        ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim', 'html', 'javascript', 'css' },
-
-        -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-        auto_install = true,
-
-        sync_install = false,
-        ignore_install = {},
-        modules = {},
-
-        context_commentstring = {
-          enable = true,
-          enable_autocmd = false,
-        },
-
-        matchup = {
-          enable = true,
-        },
-
-        highlight = { enable = true, additional_vim_regex_highlighting = false },
-        indent = { enable = true },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = '<C-n>',
-            node_incremental = '<C-n>',
-            node_decremental = '<C-m>',
-            -- scope_incremental = '<A-v>',
-          },
-        },
-        textobjects = {
-          select = {
-            enable = true,
-            lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-            keymaps = {
-              -- You can use the capture groups defined in textobjects.scm
-              ['aa'] = '@parameter.outer',
-              ['ia'] = '@parameter.inner',
-              ['af'] = '@function.outer',
-              ['if'] = '@function.inner',
-              ['ac'] = '@class.outer',
-              ['ic'] = '@class.inner',
-              ['ai'] = '@conditional.outer', -- [a]round [i]f
-              ['ii'] = '@conditional.inner',
-              ['al'] = '@loop.outer',
-              ['il'] = '@loop.inner',
-            },
-          },
-          move = {
-            enable = true,
-            set_jumps = true, -- whether to set jumps in the jumplist
-            goto_next_start = {
-              [']m'] = '@function.outer',
-              [']]'] = '@class.outer',
-            },
-            goto_next_end = {
-              [']M'] = '@function.outer',
-              [']['] = '@class.outer',
-            },
-            goto_previous_start = {
-              ['[m'] = '@function.outer',
-              ['[['] = '@class.outer',
-            },
-            goto_previous_end = {
-              ['[M'] = '@function.outer',
-              ['[]'] = '@class.outer',
-            },
-          },
-          swap = {
-            enable = true,
-            swap_next = {
-              ['<leader>a'] = '@parameter.inner',
-            },
-            swap_previous = {
-              ['<leader>A'] = '@parameter.inner',
-            },
-          },
         },
       }
     end,
@@ -312,16 +124,6 @@ require('lazy').setup {
       },
     },
   },
-  {
-    'antosha417/nvim-lsp-file-operations',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'nvim-tree/nvim-tree.lua',
-    },
-    config = function()
-      require('lsp-file-operations').setup()
-    end,
-  },
   { 'stevearc/dressing.nvim', opts = {} },
   {
     'NvChad/nvim-colorizer.lua',
@@ -384,49 +186,6 @@ require('lazy').setup {
       act_as_tab = false,
     },
   },
-  {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    opts = {
-      panel = {
-        enabled = true,
-        auto_refresh = true,
-        keymap = {
-          jump_prev = '[[',
-          jump_next = ']]',
-          accept = '<CR>',
-          refresh = 'gr',
-          open = false,
-          -- open = 'C-ö', -- Cöpailot
-        },
-        layout = {
-          position = 'bottom', -- | top | left | right
-          ratio = 0.4,
-        },
-      },
-      suggestion = {
-        auto_trigger = true,
-        keymap = {
-          next = '<C-¨>', -- actually <C-]>
-          prev = '<C-å>', -- actually <C-[>
-          dismiss = '<C-ä>', -- below [
-          accept = '<C-u>', -- Next to C-y which is normal complete
-
-          -- these work in wezterm, above ones in kitty
-          -- next = '<C-]>', -- actually <C-]>
-          -- prev = '<C-[>', -- actually <C-[>
-          -- dismiss = [[<C-'>]], -- below [, actually ä
-          -- accept = '<C-;>', -- accept C[ö]pailot, actually ö
-        },
-      },
-      filetypes = {
-        ['*'] = true,
-      },
-    },
-  },
-  { 'smjonas/inc-rename.nvim', opts = {} },
-  -- { 'IndianBoy42/tree-sitter-just', opts = {} },
   {
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
@@ -501,8 +260,6 @@ require('lazy').setup {
       }
     end,
   },
-  'sindrets/diffview.nvim',
-  { 'linrongbin16/gitlinker.nvim', opts = {} },
   'jesseleite/nvim-macroni',
   {
     'andymass/vim-matchup',
@@ -553,8 +310,6 @@ vim.cmd.colorscheme 'kanagawa'
 vim.keymap.set('n', '<leader>T', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
 vim.keymap.set('n', '<C-9>', '<C-^>', { desc = 'Alternate buffer toggle' })
 
-vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
-vim.keymap.set('n', '<leader>dv', '<cmd>DiffviewOpen<cr>', { desc = '[D]iff [V]iew', silent = true })
 vim.keymap.set('n', 'Q', '@qj', { desc = 'Run macro named "q"' })
 vim.keymap.set('x', 'Q', ':norm @q<CR>', { desc = 'Run macro named "q" in selected lines' })
 vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>update<cr><esc>', { desc = 'Save file' })
@@ -620,9 +375,6 @@ vim.keymap.set('n', '<leader>tt', function()
   end
 end, { desc = '[T]oggle [T]reesitter Highlight' })
 
-vim.keymap.set('n', '<leader>ts', function()
-  require('lsp_signature').toggle_float_win()
-end, { desc = '[T]oggle [S]ignature Popup (i_ALT-k also works)' })
 vim.keymap.set('n', '<leader>tk', '<cmd>CloakToggle<cr>', { desc = '[T]oggle [K]loak' })
 
 -- Add undo break-points
@@ -640,6 +392,7 @@ vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.nvim_tree_disable_netrw = 1
+
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = false
@@ -655,7 +408,7 @@ vim.opt.fillchars:append { diff = '╱' }
 vim.o.showmode = false
 vim.o.splitright = true
 vim.o.splitbelow = true
-vim.o.inccommand = 'split'
+-- vim.o.inccommand = 'split'
 
 vim.o.hlsearch = false
 
@@ -711,13 +464,6 @@ vim.diagnostic.config {
   },
   severity_sort = true,
 }
-
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = 'fugitive',
-  callback = function()
-    vim.keymap.set('n', '<leader>p', '<cmd>Git push<cr>', { buffer = true, noremap = true })
-  end,
-})
 
 -- Setup justfile syntax
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
