@@ -464,6 +464,7 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = 'justfile',
   callback = function()
     vim.bo.syntax = 'sh'
+    vim.bo.commentstring = '# %s'
   end,
 })
 
