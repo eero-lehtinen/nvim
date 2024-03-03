@@ -264,6 +264,7 @@ return {
         sorting_strategy = 'ascending',
         mappings = {
           i = {
+            ['<C-+>'] = actions.which_key,
             ['<C-u>'] = false,
             ['<C-d>'] = false,
           },
