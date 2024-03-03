@@ -286,7 +286,7 @@ require('lazy').setup({
       }
     end,
   },
-  'jesseleite/nvim-macroni',
+  'jesseleite/nvim-macroni', -- Adds `:YankMacro [register]`
   {
     'andymass/vim-matchup',
     setup = function() end,
