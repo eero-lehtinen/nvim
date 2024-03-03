@@ -125,6 +125,11 @@ require('lazy').setup {
         always_show_folders = false,
       },
     },
+    init = function()
+      vim.g.loaded_netrw = 1
+      vim.g.loaded_netrwPlugin = 1
+      vim.g.nvim_tree_disable_netrw = 1
+    end,
   },
   { 'stevearc/dressing.nvim', opts = {} },
   {
@@ -187,6 +192,22 @@ require('lazy').setup {
       tabkey = '',
       act_as_tab = false,
     },
+    init = function()
+      local function left_is_whitespace_or_empty()
+        local line = vim.fn.getline '.'
+        local col = vim.fn.col '.'
+        local left_side = string.sub(line, 1, col - 1)
+        return left_side:match '^%s*$' ~= nil
+      end
+
+      vim.keymap.set('i', '<TAB>', function()
+        if left_is_whitespace_or_empty() then
+          vim.fn.feedkeys('\t', 'n')
+        else
+          require('neotab').tabout()
+        end
+      end, { noremap = true, silent = true })
+    end,
   },
   {
     'iamcco/markdown-preview.nvim',
@@ -207,6 +228,9 @@ require('lazy').setup {
     opts = {
       enable_autocmd = false,
     },
+    init = function()
+      vim.g.skip_ts_context_commentstring_module = true
+    end,
   },
   {
     'echasnovski/mini.comment',
@@ -332,21 +356,6 @@ vim.keymap.set('n', 'i', function()
   end
 end, { expr = true, desc = 'Properly indent on empty line when insert' })
 
-local function left_is_whitespace_or_empty()
-  local line = vim.fn.getline '.'
-  local col = vim.fn.col '.'
-  local left_side = string.sub(line, 1, col - 1)
-  return left_side:match '^%s*$' ~= nil
-end
-
-vim.keymap.set('i', '<TAB>', function()
-  if left_is_whitespace_or_empty() then
-    vim.fn.feedkeys('\t', 'n')
-  else
-    require('neotab').tabout()
-  end
-end, { noremap = true, silent = true })
-
 -- This is actually how visual mode P (not p) already works
 -- vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
 
@@ -384,16 +393,10 @@ vim.keymap.set('i', ',', ',<c-g>u')
 vim.keymap.set('i', '.', '.<c-g>u')
 vim.keymap.set('i', ';', ';<c-g>u')
 
-vim.g.skip_ts_context_commentstring_module = true
-
 vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
   group = vim.api.nvim_create_augroup('checktime', { clear = true }),
   command = 'checktime',
 })
-
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.nvim_tree_disable_netrw = 1
 
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
