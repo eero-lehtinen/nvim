@@ -47,7 +47,7 @@ return {
           end
 
           nmap('<leader>r', ':IncRename ', '[R]ename')
-          vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.lsp.buf.code_action, { buffer = event.buf, desc = 'LSP: [C]ode [A]ction' })
+          vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.lsp.buf.code_action, { buffer = event.buf, desc = 'LSP: [C]ode Action' })
 
           nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
           nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
@@ -60,7 +60,7 @@ return {
           nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
           -- Lesser used LSP functionality
-          nmap('<leader>gd', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          nmap('<leader>D', vim.lsp.buf.declaration, 'Goto [D]eclaration')
           nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
           nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
           nmap('<leader>wl', function()
