@@ -119,7 +119,7 @@ require('lazy').setup({
         git_ignored = false,
       },
       view = {
-        width = 45,
+        width = 50,
       },
       live_filter = {
         always_show_folders = false,
