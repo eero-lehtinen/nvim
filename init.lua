@@ -447,8 +447,6 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 vim.diagnostic.config {
-  underline = true,
-  update_in_insert = false,
   virtual_text = {
     spacing = 4,
     source = 'if_many',
