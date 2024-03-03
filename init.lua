@@ -36,7 +36,9 @@ require('lazy').setup {
         ['<leader>'] = {
           ['s'] = { name = '+search', _ = 'which_key_ignore' },
           ['h'] = { name = '+hunk (git)', _ = 'which_key_ignore' },
+          ['g'] = { name = '+gitfiles', _ = 'which_key_ignore' },
           ['t'] = { name = '+toggle/tab ', _ = 'which_key_ignore' },
+          ['d'] = { name = '+debug/docsymbols/diffview', _ = 'which_key_ignore' },
           ['w'] = { name = '+workspace (lsp) ', _ = 'which_key_ignore' },
         },
       }
