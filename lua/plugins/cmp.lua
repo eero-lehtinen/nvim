@@ -158,7 +158,7 @@ return {
           ['<C-p>'] = cmp.mapping.select_prev_item(),
           ['<C-d>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-Space>'] = cmp.mapping(function(_) -- C-e works by default
+          ['<C-Space>'] = cmp.mapping(function(_) -- C-e works by default to close
             if cmp.visible() then
               cmp.abort()
             else
@@ -174,18 +174,20 @@ return {
             fallback()
           end,
           ['<Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_next_item()
-            elseif luasnip.expand_or_locally_jumpable() then
+            -- if cmp.visible() then
+            --   cmp.select_next_item()
+            -- else
+            if luasnip.expand_or_locally_jumpable() then
               luasnip.expand_or_jump()
             else
               fallback()
             end
           end, { 'i', 's' }),
           ['<S-Tab>'] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-              cmp.select_prev_item()
-            elseif luasnip.locally_jumpable(-1) then
+            -- if cmp.visible() then
+            --   cmp.select_prev_item()
+            -- else
+            if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             else
               fallback()
@@ -200,7 +202,7 @@ return {
           { name = 'buffer' },
         }),
         experimental = {
-          ghost_text = { hl_group = 'CmpGhostText' },
+          -- ghost_text = { hl_group = 'CmpGhostText' },
         },
       }
 
