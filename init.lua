@@ -21,7 +21,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 ---@diagnostic disable: missing-fields
-require('lazy').setup {
+require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -329,7 +329,11 @@ require('lazy').setup {
 
   -- Import my stuff
   { import = 'plugins' },
-}
+}, {
+  change_detection = {
+    notify = false,
+  },
+})
 
 -- my settings and binds
 vim.cmd.colorscheme 'kanagawa'
