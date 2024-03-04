@@ -129,6 +129,8 @@ require('lazy').setup({
       vim.g.loaded_netrw = 1
       vim.g.loaded_netrwPlugin = 1
       vim.g.nvim_tree_disable_netrw = 1
+
+      vim.keymap.set('n', '<leader>T', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
     end,
   },
   { 'stevearc/dressing.nvim', opts = {} },
@@ -337,11 +339,10 @@ require('lazy').setup({
 
 -- my settings and binds
 vim.cmd.colorscheme 'kanagawa'
-vim.keymap.set('n', '<leader>T', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
-vim.keymap.set('n', '<C-9>', '<C-^>', { desc = 'Alternate buffer toggle' })
 
 vim.keymap.set('n', 'Q', '@qj', { desc = 'Run macro named "q"' })
 vim.keymap.set('x', 'Q', ':norm @q<CR>', { desc = 'Run macro named "q" in selected lines' })
+
 vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>update<cr><esc>', { desc = 'Save file' })
 vim.api.nvim_create_autocmd({ 'BufLeave' }, {
   pattern = { '*' },
@@ -360,8 +361,7 @@ vim.keymap.set('n', 'i', function()
   end
 end, { expr = true, desc = 'Properly indent on empty line when insert' })
 
--- This is actually how visual mode P (not p) already works
--- vim.keymap.set('x', '<C-p>', '"_dP', { desc = 'Paste without changing register' })
+vim.keymap.set('n', '<C-9>', '<C-^>', { desc = 'Alternate buffer toggle' })
 
 vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<cr>', { desc = '[T]ab [C]lose' })
 
