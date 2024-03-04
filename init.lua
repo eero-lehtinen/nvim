@@ -134,14 +134,21 @@ require('lazy').setup({
     end,
   },
   { 'stevearc/dressing.nvim', opts = {} },
+  -- {
+  --   'NvChad/nvim-colorizer.lua',
+  --   event = { 'BufReadPost', 'BufNewFile' },
+  --   opts = {
+  --     user_default_options = {
+  --       RRGGBBAA = true,
+  --       names = false,
+  --     },
+  --   },
+  -- },
   {
-    'NvChad/nvim-colorizer.lua',
-    event = { 'BufReadPost', 'BufNewFile' },
+    'brenoprata10/nvim-highlight-colors',
     opts = {
-      user_default_options = {
-        RRGGBBAA = true,
-        names = false,
-      },
+      enable_named_colors = false,
+      enable_tailwind_colors = true,
     },
   },
   {
