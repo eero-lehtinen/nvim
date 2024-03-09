@@ -4,22 +4,16 @@ return {
     local formatters_by_ft = {
       lua = { 'stylua' },
       python = { 'isort', { 'yapf', 'black' } },
-      rust = {}, -- just use the lsp fallback
-      toml = {},
-      go = {},
     }
 
-    local prettierd_filetypes = { 'javascript', 'typescript', 'svelte', 'json', 'html', 'css', 'markdown', 'yaml' }
+    local prettierd_filetypes = { 'javascript', 'typescript', 'json', 'html', 'css', 'markdown', 'yaml' }
     for _, ft in ipairs(prettierd_filetypes) do
-      formatters_by_ft[ft] = { 'prettierd' }
+      formatters_by_ft[ft] = { 'prettier' }
     end
 
     require('conform').setup {
       formatters_by_ft = formatters_by_ft,
       format_on_save = function(bufnr)
-        if formatters_by_ft[vim.bo[bufnr].filetype] == nil then
-          return { timeout_ms = 1000, lsp_fallback = false }
-        end
         -- Disable with a global or buffer-local variable
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return
