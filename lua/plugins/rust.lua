@@ -46,7 +46,7 @@ return {
   {
     'mrcjkb/rustaceanvim',
     -- dir = '~/repos/rustaceanvim',
-    version = '^4', -- Recommended
+    version = '*',
     ft = { 'rust' },
     init = function()
       vim.g.rustaceanvim = {
