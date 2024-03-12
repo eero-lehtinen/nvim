@@ -285,6 +285,7 @@ require('lazy').setup({
       vim.g.vcoolor_map = '<A-c>'
     end,
   },
+  'LunarVim/bigfile.nvim',
 
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
