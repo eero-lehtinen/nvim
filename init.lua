@@ -178,7 +178,9 @@ require('lazy').setup({
   },
   {
     'windwp/nvim-autopairs',
-    opts = {},
+    opts = {
+      -- enable_moveright = false -- could be nice but idk
+    },
     -- config = function()
     -- local npairs = require 'nvim-autopairs'
     -- npairs.setup {}
