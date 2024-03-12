@@ -157,14 +157,46 @@ require('lazy').setup({
     opts = {
       default_keymaps = false,
       keymaps = {
-        lprevious = '[l',
-        lnext = ']l',
-        lfirst = '[L',
-        llast = ']L',
-        cprevious = '[q',
-        cnext = ']q',
-        cfirst = '[Q',
-        clast = ']Q',
+        lprevious = {
+          mapping = '[l',
+          description = 'Jump to [count] previous entry in loclist',
+          dot_repeat = true,
+        },
+        lnext = {
+          mapping = ']l',
+          description = 'Jump to [count] next entry in loclist',
+          dot_repeat = true,
+        },
+        lfirst = {
+          mapping = '[L',
+          description = 'Jump to first entry in loclist',
+          dot_repeat = false,
+        },
+        llast = {
+          mapping = ']L',
+          description = 'Jump to last entry in loclist',
+          dot_repeat = false,
+        },
+        cprevious = {
+          mapping = '[q',
+          description = 'Jump to [count] previous entry in qflist',
+          dot_repeat = true,
+        },
+        cnext = {
+          mapping = ']q',
+          description = 'Jump to [count] next entry in qflist',
+          dot_repeat = true,
+        },
+        cfirst = {
+          mapping = '[Q',
+          description = 'Jump to first entry in qflist',
+          dot_repeat = false,
+        },
+        clast = {
+          mapping = ']Q',
+          description = 'Jump to last entry in qflist',
+          dot_repeat = false,
+        },
       },
     },
   },
