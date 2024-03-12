@@ -18,11 +18,11 @@ return {
   },
 
   'tpope/vim-rhubarb',
-
   {
     'sindrets/diffview.nvim',
     init = function()
-      vim.keymap.set('n', '<leader>dv', '<cmd>DiffviewOpen<cr>', { desc = '[D]iff [V]iew', silent = true })
+      vim.cmd 'cnoreabbrev D DiffviewOpen'
+      vim.cmd 'cnoreabbrev Df DiffviewFileHistory'
     end,
   },
   { 'linrongbin16/gitlinker.nvim', opts = {} },
