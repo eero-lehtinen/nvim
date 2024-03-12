@@ -22,6 +22,7 @@ return {
     'sindrets/diffview.nvim',
     init = function()
       vim.cmd 'cnoreabbrev D DiffviewOpen'
+      vim.cmd 'cnoreabbrev Dc DiffviewClose'
       vim.cmd 'cnoreabbrev Df DiffviewFileHistory'
     end,
   },
