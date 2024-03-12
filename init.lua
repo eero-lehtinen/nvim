@@ -253,48 +253,6 @@ require('lazy').setup({
     },
   },
   { 'ethanholz/nvim-lastplace', opts = {} },
-  { 'vxpm/ferris.nvim', opts = {} },
-  {
-    'mrcjkb/rustaceanvim',
-    -- dir = '~/repos/rustaceanvim',
-    version = '^4', -- Recommended
-    ft = { 'rust' },
-    init = function()
-      vim.g.rustaceanvim = {
-        tools = {
-          hover_actions = {
-            replace_builtin_hover = false,
-            -- border = 'none',
-            auto_focus = true,
-          },
-          enable_clippy = false,
-          -- reload_workspace_from_cargo_toml = false,
-        },
-        server = {
-          default_settings = {
-            ['rust-analyzer'] = {
-              completion = {
-                callable = {
-                  snippets = 'none',
-                },
-              },
-              cargo = {
-                allFeatures = true,
-                target = require 'rust_target',
-                -- features = { 'native-activity' },
-              },
-              rust = {
-                analyzerTargetDir = true,
-              },
-              check = {
-                command = 'clippy',
-              },
-            },
-          },
-        },
-      }
-    end,
-  },
   'jesseleite/nvim-macroni', -- Adds `:YankMacro [register]`
   {
     'andymass/vim-matchup',
