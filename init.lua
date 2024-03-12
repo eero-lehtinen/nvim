@@ -153,6 +153,7 @@ require('lazy').setup({
   },
   {
     'tummetott/unimpaired.nvim',
+    lazy = false,
     opts = {
       default_keymaps = false,
       keymaps = {
