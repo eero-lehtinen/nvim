@@ -37,7 +37,7 @@ require('lazy').setup({
           ['s'] = { name = '+search', _ = 'which_key_ignore' },
           ['h'] = { name = '+hunk (git)', _ = 'which_key_ignore' },
           ['g'] = { name = '+gitfiles', _ = 'which_key_ignore' },
-          ['t'] = { name = '+toggle/tab ', _ = 'which_key_ignore' },
+          ['t'] = { name = '+toggle ', _ = 'which_key_ignore' },
           ['d'] = { name = '+debug/docsymbols/diffview', _ = 'which_key_ignore' },
           ['w'] = { name = '+workspace (lsp) ', _ = 'which_key_ignore' },
         },
@@ -332,7 +332,7 @@ end, { expr = true, desc = 'Properly indent on empty line when insert' })
 
 vim.keymap.set('n', '<C-9>', '<C-^>', { desc = 'Alternate buffer toggle' })
 
-vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<cr>', { desc = '[T]ab [C]lose' })
+-- vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<cr>', { desc = '[T]ab [C]lose' })
 
 -- toggling
 vim.keymap.set('n', '<leader>tw', '<cmd>set wrap!<cr>', { desc = '[T]oggle [W]rap' })
