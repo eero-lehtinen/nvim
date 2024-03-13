@@ -168,6 +168,11 @@ return {
         }, { dir = 'col' }),
       }
 
+      local minimal_pickers = {
+        ['Key Maps'] = true,
+        ['Commands'] = true,
+      }
+
       local function get_box()
         local strategy = picker.layout_strategy
         if strategy == 'vertical' or strategy == 'horizontal' then
@@ -183,9 +188,9 @@ return {
           end
         end
 
-        -- if picker.prompt_title == 'Current Buffer Fuzzy' then
-        --   box_kind = 'minimal'
-        -- end
+        if minimal_pickers[picker.prompt_title] then
+          box_kind = 'minimal'
+        end
 
         return box_by_kind[box_kind], box_kind
       end
@@ -317,6 +322,7 @@ return {
       }
     end, { desc = '[S]earch [D]iagnostics' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+    vim.keymap.set('n', '<leader>sc', builtin.commands, { desc = '[S]earch [C]ommands' })
     vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
 
     vim.keymap.set('n', '<leader>sn', function()
