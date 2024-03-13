@@ -321,6 +321,16 @@ require('lazy').setup({
     end,
   },
   'LunarVim/bigfile.nvim',
+  {
+    'folke/todo-comments.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    opts = {
+      signs = false,
+    },
+    init = function()
+      vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<cr>', { desc = '[S]earch [T]odo Comments' })
+    end,
+  },
 
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
