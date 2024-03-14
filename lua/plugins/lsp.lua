@@ -49,18 +49,25 @@ return {
           nmap('<leader>r', ':IncRename ', '[R]ename')
           vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.lsp.buf.code_action, { buffer = event.buf, desc = 'LSP: [C]ode Action' })
 
-          nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
-          nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-          nmap('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-          nmap('gD', require('telescope.builtin').lsp_type_definitions, '[G]oto Type [D]efinition')
-          nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-          nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+          -- nmap('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          -- nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          -- nmap('gi', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          -- nmap('gD', require('telescope.builtin').lsp_type_definitions, '[G]oto Type [D]efinition')
+          -- nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+          -- nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+          nmap('gd', require('fzf-lua').lsp_definitions, '[G]oto [D]efinition')
+          nmap('gr', require('fzf-lua').lsp_references, '[G]oto [R]eferences')
+          nmap('gi', require('fzf-lua').lsp_implementations, '[G]oto [I]mplementation')
+          nmap('gD', require('fzf-lua').lsp_typedefs, '[G]oto Type [D]efinition')
+          nmap('<leader>ds', require('fzf-lua').lsp_document_symbols, '[D]ocument [S]ymbols')
+          nmap('<leader>ws', require('fzf-lua').lsp_workspace_symbols, '[W]orkspace [S]ymbols')
 
           nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
           nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
           -- Lesser used LSP functionality
-          nmap('<leader>D', vim.lsp.buf.declaration, 'Goto [D]eclaration')
+
+          nmap('<leader>D', require('fzf-lua').lsp_declarations, 'Goto [D]eclaration')
           nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
           nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
           nmap('<leader>wl', function()

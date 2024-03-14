@@ -15,6 +15,7 @@
   "ferris.nvim": { "branch": "main", "commit": "52e39c017f511e8cf9a024022d48164bfbfe52ee" },
   "fidget.nvim": { "branch": "main", "commit": "60404ba67044c6ab01894dd5bf77bd64ea5e09aa" },
   "flit.nvim": { "branch": "main", "commit": "94419242ba07170b0009514d745e617b120964f4" },
+  "fzf-lua": { "branch": "main", "commit": "ff21680ddfd2ba434ea7061b9042f7e18966597d" },
   "gitlinker.nvim": { "branch": "master", "commit": "0ff97f4c61c99a694ea192924c42f5d580ba3a96" },
   "gitsigns.nvim": { "branch": "main", "commit": "41dc075ef67b556b0752ad3967649371bd95cb95" },
   "gruvbox-material": { "branch": "master", "commit": "b17fe51688b76e2ccf118e5f76f3978b9a8c503e" },
