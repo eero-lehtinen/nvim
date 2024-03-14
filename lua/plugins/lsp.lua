@@ -59,6 +59,7 @@ return {
           nmap('gr', require('fzf-lua').lsp_references, '[G]oto [R]eferences')
           nmap('gi', require('fzf-lua').lsp_implementations, '[G]oto [I]mplementation')
           nmap('gD', require('fzf-lua').lsp_typedefs, '[G]oto Type [D]efinition')
+          nmap('<leader>D', require('fzf-lua').lsp_declarations, 'Goto [D]eclaration')
           nmap('<leader>ds', require('fzf-lua').lsp_document_symbols, '[D]ocument [S]ymbols')
           nmap('<leader>ws', require('fzf-lua').lsp_workspace_symbols, '[W]orkspace [S]ymbols')
 
@@ -66,13 +67,6 @@ return {
           nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
           -- Lesser used LSP functionality
-
-          nmap('<leader>D', require('fzf-lua').lsp_declarations, 'Goto [D]eclaration')
-          nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-          nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-          nmap('<leader>wl', function()
-            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-          end, '[W]orkspace [L]ist Folders')
 
           vim.lsp.inlay_hint.enable(event.buf, true)
 
