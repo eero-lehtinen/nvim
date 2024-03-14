@@ -21,10 +21,25 @@ return {
   'tpope/vim-rhubarb',
   {
     'sindrets/diffview.nvim',
-    init = function()
+    config = function()
       vim.cmd 'cnoreabbrev D DiffviewOpen'
       vim.cmd 'cnoreabbrev Dc DiffviewClose'
       vim.cmd 'cnoreabbrev Df DiffviewFileHistory'
+
+      local actions = require 'diffview.actions'
+
+      require('diffview').setup {
+        keymaps = {
+          file_panel = {
+            { 'n', 'cc', '<Cmd>Git commit <bar> wincmd J<CR>', { desc = 'Commit staged changes' } },
+            { 'n', 'ca', '<Cmd>Git commit --amend <bar> wincmd J<CR>', { desc = 'Amend the last commit' } },
+            { 'n', 'ce', '<Cmd>Git commit --amend --no-edit <bar> wincmd J<CR>', { desc = 'Amend the last commit' } },
+            { 'n', 'J', actions.select_next_entry, { desc = 'Open the diff for the next file' } },
+            { 'n', 'K', actions.select_prev_entry, { desc = 'Open the diff for the previous file' } },
+            { 'n', 'a', actions.toggle_stage_entry, { desc = 'Stage / unstage the selected entry' } },
+          },
+        },
+      }
     end,
   },
   { 'linrongbin16/gitlinker.nvim', opts = {} },
