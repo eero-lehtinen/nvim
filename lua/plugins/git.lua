@@ -30,6 +30,10 @@ return {
 
       require('diffview').setup {
         keymaps = {
+          view = {
+            { 'n', 'J', actions.select_next_entry, { desc = 'Open the diff for the next file' } },
+            { 'n', 'K', actions.select_prev_entry, { desc = 'Open the diff for the previous file' } },
+          },
           file_panel = {
             { 'n', 'cc', '<Cmd>Git commit <bar> wincmd J<CR>', { desc = 'Commit staged changes' } },
             { 'n', 'ca', '<Cmd>Git commit --amend <bar> wincmd J<CR>', { desc = 'Amend the last commit' } },
@@ -37,6 +41,10 @@ return {
             { 'n', 'J', actions.select_next_entry, { desc = 'Open the diff for the next file' } },
             { 'n', 'K', actions.select_prev_entry, { desc = 'Open the diff for the previous file' } },
             { 'n', 'a', actions.toggle_stage_entry, { desc = 'Stage / unstage the selected entry' } },
+          },
+          file_history_panel = {
+            { 'n', 'J', actions.select_next_entry, { desc = 'Open the diff for the next file' } },
+            { 'n', 'K', actions.select_prev_entry, { desc = 'Open the diff for the previous file' } },
           },
         },
       }
