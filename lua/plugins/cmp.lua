@@ -208,13 +208,7 @@ return {
 
       cmp.setup.cmdline(':', {
         mapping = cmp.mapping.preset.cmdline {
-          ['<C-Space>'] = cmp.mapping(function(_)
-            if cmp.visible() then
-              cmp.abort()
-            else
-              cmp.complete {}
-            end
-          end),
+          -- <C-z> toggles the completion menu
           ['<C-y>'] = cmp.mapping.confirm {
             select = true,
           },
