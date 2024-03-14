@@ -139,7 +139,7 @@ return {
         -- completion = {
         --   completeopt = 'menu,menuone,noinsert',
         -- },
-        -- preselect = cmp.PreselectMode.None,
+        preselect = cmp.PreselectMode.None,
         formatting = {
           format = lspkind.cmp_format {
             mode = 'symbol_text',
