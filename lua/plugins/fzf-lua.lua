@@ -17,6 +17,8 @@ return {
       },
     }
 
+    vim.cmd [[highlight TermCursor gui=underline]]
+
     vim.keymap.set('n', '<leader>ss', fzf_lua.builtin, { desc = '[S]earch [S]earcher (Telescope builtins)' })
 
     vim.keymap.set('n', '<leader>/', fzf_lua.blines, { desc = '[/] Fuzzily search in current buffer' })
