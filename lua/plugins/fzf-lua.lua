@@ -5,6 +5,13 @@ return {
   config = function()
     local fzf_lua = require 'fzf-lua'
     fzf_lua.setup {
+      winopts = {
+        width = 0.9,
+        preview = {
+          horizontal = 'right:55%',
+          flip_columns = 130,
+        },
+      },
       lsp = {
         jump_to_single_result = true,
       },
