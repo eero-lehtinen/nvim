@@ -376,32 +376,56 @@ vim.keymap.set('n', '<C-9>', '<C-^>', { desc = 'Alternate buffer toggle' })
 
 -- vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<cr>', { desc = '[T]ab [C]lose' })
 
--- toggling
-vim.keymap.set('n', '<leader>tw', '<cmd>set wrap!<cr>', { desc = '[T]oggle [W]rap' })
-vim.keymap.set('n', '<leader>tl', '<cmd>set list!<cr>', { desc = '[T]oggle [L]ist (Whitespace Characters)' })
-vim.keymap.set('n', '<leader>tp', function()
-  require('copilot.suggestion').toggle_auto_trigger()
-end, { desc = '[T]oggle Co[P]ilot' })
-
-if vim.fn.has 'nvim-0.10' == 1 then
-  vim.keymap.set('n', '<leader>th', function()
-    if vim.lsp.inlay_hint.is_enabled(0) then
-      vim.lsp.inlay_hint.enable(0, false)
+local toggle_keymap = function(key, name, option_or_toggle)
+  local no_bracket_name = name:gsub('%[', ''):gsub('%]', '')
+  local f = function()
+    local result
+    if type(option_or_toggle) == 'string' then
+      vim.o[option_or_toggle] = not vim.o[option_or_toggle]
+      result = vim.o[option_or_toggle]
     else
-      vim.lsp.inlay_hint.enable(0, true)
+      result = option_or_toggle()
     end
-  end, { desc = '[T]oggle Inlay [H]ints' })
+
+    if result then
+      vim.notify('Enabled ' .. no_bracket_name, 'info', { title = 'Option' })
+    else
+      vim.notify('Disabled ' .. no_bracket_name, 'info', { title = 'Option' })
+    end
+  end
+  vim.keymap.set('n', '<leader>t' .. key, f, { desc = '[T]oggle ' .. name })
 end
 
-vim.keymap.set('n', '<leader>tt', function()
-  if vim.b.ts_highlight then
+-- toggling
+toggle_keymap('w', '[W]rap', 'wrap')
+toggle_keymap('l', '[L]ist (Whitespace Characters)', 'list')
+toggle_keymap('p', 'Co[P]ilot', function()
+  require('copilot.suggestion').toggle_auto_trigger()
+  return vim.b.copilot_suggestion_auto_trigger
+end)
+
+if vim.fn.has 'nvim-0.10' == 1 then
+  toggle_keymap('h', 'Inlay [H]ints', function()
+    local enabled = vim.lsp.inlay_hint.is_enabled(0)
+    vim.lsp.inlay_hint.enable(0, not enabled)
+    return not enabled
+  end)
+end
+
+toggle_keymap('t', '[T]reesitter Highlight', function()
+  local enabled = vim.b.ts_highlight
+  if enabled then
     vim.treesitter.stop()
   else
     vim.treesitter.start()
   end
-end, { desc = '[T]oggle [T]reesitter Highlight' })
+  return not enabled
+end)
 
-vim.keymap.set('n', '<leader>tk', '<cmd>CloakToggle<cr>', { desc = '[T]oggle [K]loak' })
+toggle_keymap('k', '[K]loak', function()
+  require('cloak').toggle()
+  return vim.b.cloak_enabled
+end)
 
 -- Add undo break-points
 vim.keymap.set('i', ',', ',<c-g>u')
