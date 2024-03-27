@@ -13,6 +13,7 @@ return {
         pattern = 'fugitive',
         callback = function()
           vim.keymap.set('n', '<leader>p', '<cmd>Git push<cr>', { buffer = true, noremap = true })
+          vim.keymap.set('n', '<leader>f', '<cmd>Git push --force-with-lease<cr>', { buffer = true, noremap = true })
         end,
       })
     end,
