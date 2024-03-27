@@ -30,6 +30,24 @@ return {
       'folke/neodev.nvim',
     },
     config = function()
+      -- Make these nop when not in use, otherwise they will do unexpected commands
+      local nops = {
+        '<leader>r',
+        '<leader>c',
+        'gd',
+        'gr',
+        'gi',
+        'gD',
+        '<leader>D',
+        '<leader>ds',
+        '<leader>ws',
+      }
+      for _, key in ipairs(nops) do
+        vim.keymap.set('n', key, function()
+          vim.notify("'" .. key .. "' ignored, no LSP attached", 'info')
+        end, { silent = true })
+      end
+
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
