@@ -38,14 +38,14 @@ return {
         'gr',
         'gi',
         'gD',
-        '<leader>D',
+        -- '<leader>D',
         '<leader>ds',
         '<leader>ws',
       }
       for _, key in ipairs(nops) do
         vim.keymap.set('n', key, function()
           vim.notify("'" .. key .. "' ignored, no LSP attached", 'info')
-        end, { silent = true })
+        end, { silent = true, desc = 'LSP nop' })
       end
 
       vim.api.nvim_create_autocmd('LspAttach', {
