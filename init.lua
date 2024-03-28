@@ -328,6 +328,7 @@ require('lazy').setup({
       signs = false,
     },
     init = function()
+      -- vim.keymap.set('n', '<leader>st', '<cmd>TodoQuickFix<cr>', { desc = '[S]earch [T]odo Comments' })
       vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<cr>', { desc = '[S]earch [T]odo Comments' })
     end,
   },

@@ -1,6 +1,7 @@
 return {
   'ibhagwan/fzf-lua',
   lazy = false,
+  enabled = false,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
     local fzf_lua = require 'fzf-lua'
@@ -38,11 +39,11 @@ return {
     vim.keymap.set('n', '<leader>sk', fzf_lua.keymaps, { desc = '[S]earch [K]eymaps' })
     vim.keymap.set('n', '<leader>sc', fzf_lua.commands, { desc = '[S]earch [C]ommands' })
     vim.keymap.set('n', '<leader>sr', fzf_lua.resume, { desc = '[S]earch [R]esume' })
+    vim.keymap.set('n', '<leader>sq', fzf_lua.quickfix, { desc = '[S]earch [Q]uickfix' })
+    vim.keymap.set('n', '<leader>sl', fzf_lua.loclist, { desc = '[S]earch [L]oclist' })
 
     vim.keymap.set('n', '<leader>sn', function()
       fzf_lua.files { cwd = vim.fn.stdpath 'config' }
     end, { desc = '[S]earch [N]eovim files' })
-
-    vim.keymap.set('n', '<leader>sr', fzf_lua.resume, { desc = '[S]earch [R]esume' })
   end,
 }
