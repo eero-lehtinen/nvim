@@ -33,7 +33,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
-vim.api.nvim_create_user_command('Messages', ":new | setlocal buftype=nofile bufhidden=hide noswapfile | file messages | put = execute('messages')", {
+vim.api.nvim_create_user_command('Messages', ":new | setlocal buftype=nofile bufhidden=delete noswapfile | silent! put = execute('messages')", {
   nargs = 0,
   desc = 'Show messages in a new window',
 })
