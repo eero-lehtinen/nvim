@@ -182,7 +182,7 @@ return {
 
         local height, width = vim.o.lines, vim.o.columns
         local box_kind = 'horizontal'
-        if width < 120 then
+        if width < 110 then
           box_kind = 'vertical'
           if height < 40 then
             box_kind = 'minimal'
