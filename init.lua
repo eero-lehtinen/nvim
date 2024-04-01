@@ -290,7 +290,9 @@ require('lazy').setup({
   {
     'nvim-pack/nvim-spectre',
     cmd = 'Spectre',
-    opts = { open_cmd = 'noswapfile vnew' },
+    opts = {
+      open_cmd = 'noswapfile vnew',
+    },
   },
   {
     'JoosepAlviste/nvim-ts-context-commentstring',

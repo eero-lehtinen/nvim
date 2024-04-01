@@ -32,15 +32,20 @@ local rust_lsp_target = function()
 end
 
 local nmap = function(keys, func, desc)
-  vim.keymap.set('n', keys, func, { desc = '(RUST) ' .. desc })
+  vim.keymap.set('n', keys, func, { buffer = true, desc = '(RUST) ' .. desc })
 end
 
 return {
   {
     'vxpm/ferris.nvim',
     config = function()
-      nmap('<leader>Ro', require 'ferris.methods.open_documentation', '[O]pen Documentation')
-      nmap('<leader>Rm', require 'ferris.methods.view_memory_layout', 'View [M]emory Layout')
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'rust',
+        callback = function()
+          nmap('<leader>Ro', require 'ferris.methods.open_documentation', '[O]pen Documentation')
+          nmap('<leader>Rm', require 'ferris.methods.view_memory_layout', 'View [M]emory Layout')
+        end,
+      })
     end,
   },
   {
@@ -83,17 +88,22 @@ return {
         },
       }
 
-      nmap('<leader>Rd', function()
-        vim.cmd.RustLsp { 'debuggables' }
-      end, 'Debug: Rust Debuggables')
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'rust',
+        callback = function()
+          nmap('<leader>Rd', function()
+            vim.cmd.RustLsp { 'debuggables' }
+          end, 'Debug: Rust Debuggables')
 
-      nmap('<leader>Ra', function()
-        vim.cmd.RustLsp { 'hover', 'actions' }
-      end, 'Hover [A]ctions')
+          nmap('<leader>Ra', function()
+            vim.cmd.RustLsp { 'hover', 'actions' }
+          end, 'Hover [A]ctions')
 
-      nmap('<leader>Re', function()
-        vim.cmd.RustLsp 'expandMacro'
-      end, '[E]xpand Macro')
+          nmap('<leader>Re', function()
+            vim.cmd.RustLsp 'expandMacro'
+          end, '[E]xpand Macro')
+        end,
+      })
     end,
   },
 }
