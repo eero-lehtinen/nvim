@@ -18,6 +18,7 @@ return {
       overrides = function(colors)
         local theme = colors.theme
         return {
+          ['@keyword.operator'] = { link = 'KeyWord' },
           Boolean = { bold = false },
           ['@lsp.typemod.function.readonly'] = { bold = false },
           IlluminatedWordText = { bg = theme.ui.bg_p2 },
