@@ -323,7 +323,16 @@ require('lazy').setup({
   },
   {
     'Wansmer/treesj',
-    dependencies = { 'nvim-treesitter/nvim-treesitter', { 'echasnovski/mini.splitjoin', version = false } },
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      {
+        'echasnovski/mini.splitjoin',
+        version = false,
+        opts = {
+          mappings = { toggle = '' },
+        },
+      },
+    },
     config = function()
       require('treesj').setup { use_default_keymaps = false }
 
