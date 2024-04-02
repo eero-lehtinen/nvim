@@ -12,8 +12,8 @@ return {
       vim.api.nvim_create_autocmd('FileType', {
         pattern = 'fugitive',
         callback = function()
-          vim.keymap.set('n', '<leader>p', '<cmd>echo "Git push" | Git push<cr>', { buffer = true, noremap = true })
-          vim.keymap.set('n', '<leader>f', '<cmd>echo "Git push --force-with-lease" | Git push --force-with-lease<cr>', { buffer = true, noremap = true })
+          vim.keymap.set('n', '<leader>p', '<cmd>echo ":Git push" | Git push<cr>', { buffer = true, noremap = true })
+          vim.keymap.set('n', '<leader>f', '<cmd>echo ":Git push --force-with-lease" | Git push --force-with-lease<cr>', { buffer = true, noremap = true })
         end,
       })
     end,
