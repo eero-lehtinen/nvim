@@ -61,10 +61,11 @@ return {
             -- border = 'none',
             auto_focus = true,
           },
-          enable_clippy = false,
+          -- enable_clippy = false,
           -- reload_workspace_from_cargo_toml = false,
         },
         server = {
+          standalone = false,
           default_settings = {
             ['rust-analyzer'] = {
               completion = {
@@ -73,16 +74,17 @@ return {
                 },
               },
               cargo = {
-                allFeatures = true,
+                -- allFeatures = true,
                 target = rust_lsp_target(),
                 -- features = { 'native-activity' },
               },
               rust = {
                 analyzerTargetDir = true,
               },
-              check = {
-                command = 'clippy',
-              },
+              -- check = {
+              --   command = 'clippy',
+              --   extraArgs = { '--no-deps' },
+              -- },
             },
           },
         },
