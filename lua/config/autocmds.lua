@@ -42,3 +42,10 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
     vim.bo.commentstring = '// %s'
   end,
 })
+
+-- Set formatoptions
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  callback = function()
+    vim.opt.formatoptions:remove 'o'
+  end,
+})
