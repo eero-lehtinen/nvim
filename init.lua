@@ -174,7 +174,7 @@ require('lazy').setup({
     'brenoprata10/nvim-highlight-colors',
     opts = {
       enable_named_colors = false,
-      enable_tailwind_colors = true,
+      enable_tailwind = true,
     },
   },
   {
