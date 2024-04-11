@@ -73,6 +73,16 @@ return {
                   snippets = 'none',
                 },
               },
+              typing = {
+                autoClosingAngleBrackets = {
+                  enable = true,
+                },
+              },
+              diagnostics = {
+                experimental = {
+                  enable = true,
+                },
+              },
               cargo = {
                 -- allFeatures = true,
                 target = rust_lsp_target(),
