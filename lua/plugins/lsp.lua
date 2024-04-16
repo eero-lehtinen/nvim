@@ -116,7 +116,7 @@ return {
           },
         },
 
-        rust_analyzer = {},
+        -- rust_analyzer = {},
 
         pyright = {},
 
@@ -195,7 +195,6 @@ return {
             filetypes = (servers[server_name] or {}).filetypes,
           }
         end,
-        ['rust_analyzer'] = function() end,
       }
 
       require('mason-tool-installer').setup {
