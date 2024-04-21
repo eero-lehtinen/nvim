@@ -88,7 +88,7 @@ return {
 
           -- Lesser used LSP functionality
 
-          vim.lsp.inlay_hint.enable(event.buf, true)
+          vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
 
           require('lsp_signature').on_attach({
             doc_lines = 0,
