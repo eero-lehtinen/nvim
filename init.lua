@@ -119,10 +119,13 @@ require('lazy').setup({
         git_ignored = false,
       },
       view = {
-        width = 50,
+        width = 70,
       },
       live_filter = {
         always_show_folders = false,
+      },
+      diagnostics = {
+        enable = true,
       },
     },
     init = function()
@@ -133,6 +136,14 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>T', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
     end,
   },
+  -- {
+  --   'stevearc/oil.nvim',
+  --   opts = {},
+  --   dependencies = { 'nvim-tree/nvim-web-devicons' },
+  --   init = function()
+  --     vim.keymap.set('n', '<leader>T', '<cmd>Oil<cr>', { desc = 'File [T]ree' })
+  --   end,
+  -- },
   { 'stevearc/dressing.nvim', opts = {} },
   {
     'folke/noice.nvim',
