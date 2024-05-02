@@ -8,7 +8,7 @@ local rust_lsp_target = function()
     ios = 'aarch64-apple-ios',
   }
 
-  local target_key = vim.env.RUST_LSP_TARGET
+  local target_key = vim.env.RUST_TARGET
 
   local function get_rust_target(_)
     print('Current Rust target: ' .. (target_key or 'auto'))
@@ -16,7 +16,7 @@ local rust_lsp_target = function()
 
   vim.api.nvim_create_user_command('RustTarget', get_rust_target, {
     nargs = 0,
-    desc = 'Get Rust target [Set with $RUST_LSP_TARGET]',
+    desc = 'Get Rust target [Set with $RUST_TARGET]',
   })
 
   if target_key == nil then
@@ -25,7 +25,7 @@ local rust_lsp_target = function()
 
   local target = rust_targets[target_key]
   if target == nil then
-    vim.notify('Invalid $RUST_LSP_TARGET: ' .. target_key, vim.log.levels.ERROR)
+    vim.notify('Invalid $RUST_TARGET: ' .. target_key, vim.log.levels.ERROR)
   end
 
   return target
@@ -33,6 +33,11 @@ end
 
 local nmap = function(keys, func, desc)
   vim.keymap.set('n', keys, func, { buffer = true, desc = '(RUST) ' .. desc })
+end
+
+local features = vim.env.RUST_FEATURES
+if features ~= nil then
+  features = vim.split(features, ',')
 end
 
 return {
@@ -84,9 +89,9 @@ return {
                 },
               },
               cargo = {
-                -- allFeatures = true,
                 target = rust_lsp_target(),
-                -- features = { 'native-activity' },
+                allFeatures = features == nil,
+                features = features,
               },
               rust = {
                 analyzerTargetDir = true,
