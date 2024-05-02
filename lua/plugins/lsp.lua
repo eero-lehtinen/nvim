@@ -90,6 +90,11 @@ return {
 
           vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
 
+          nmap('<leader>wf', function()
+            local f = vim.lsp.buf.list_workspace_folders()
+            vim.notify('Workspace folders: ' .. vim.inspect(f), 'info')
+          end, '[W]orkspace [F]olders')
+
           require('lsp_signature').on_attach({
             doc_lines = 0,
             hint_enable = false,
