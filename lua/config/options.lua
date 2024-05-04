@@ -70,8 +70,8 @@ end)
 
 if vim.fn.has 'nvim-0.10' == 1 then
   toggle_keymap('h', 'Inlay [H]ints', function()
-    local enabled = vim.lsp.inlay_hint.is_enabled(0)
-    vim.lsp.inlay_hint.enable(0, not enabled)
+    local enabled = vim.lsp.inlay_hint.is_enabled { bufnr = 0 }
+    vim.lsp.inlay_hint.enable(not enabled, { bufnr = 0 })
     return not enabled
   end)
 end
