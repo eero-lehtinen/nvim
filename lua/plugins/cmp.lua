@@ -1,44 +1,59 @@
 return {
+  -- {
+  --   'zbirenbaum/copilot.lua',
+  --   cmd = 'Copilot',
+  --   event = 'InsertEnter',
+  --   opts = {
+  --     panel = {
+  --       enabled = true,
+  --       auto_refresh = true,
+  --       keymap = {
+  --         jump_prev = '[[',
+  --         jump_next = ']]',
+  --         accept = '<CR>',
+  --         refresh = 'gr',
+  --         open = false,
+  --         -- open = 'C-ö', -- Cöpailot
+  --       },
+  --       layout = {
+  --         position = 'bottom', -- | top | left | right
+  --         ratio = 0.4,
+  --       },
+  --     },
+  --     suggestion = {
+  --       auto_trigger = true,
+  --       keymap = {
+  --         next = '<C-¨>', -- actually <C-]>
+  --         prev = '<C-å>', -- actually <C-[>
+  --         dismiss = '<C-ä>', -- below [
+  --         accept = '<C-u>', -- Next to C-y which is normal complete
+  --
+  --         -- these work in wezterm, above ones in kitty
+  --         -- next = '<C-]>', -- actually <C-]>
+  --         -- prev = '<C-[>', -- actually <C-[>
+  --         -- dismiss = [[<C-'>]], -- below [, actually ä
+  --         -- accept = '<C-;>', -- accept C[ö]pailot, actually ö
+  --       },
+  --     },
+  --     filetypes = {
+  --       ['*'] = true,
+  --     },
+  --   },
+  -- },
   {
-    'zbirenbaum/copilot.lua',
-    cmd = 'Copilot',
-    event = 'InsertEnter',
-    opts = {
-      panel = {
-        enabled = true,
-        auto_refresh = true,
-        keymap = {
-          jump_prev = '[[',
-          jump_next = ']]',
-          accept = '<CR>',
-          refresh = 'gr',
-          open = false,
-          -- open = 'C-ö', -- Cöpailot
-        },
-        layout = {
-          position = 'bottom', -- | top | left | right
-          ratio = 0.4,
-        },
-      },
-      suggestion = {
-        auto_trigger = true,
-        keymap = {
-          next = '<C-¨>', -- actually <C-]>
-          prev = '<C-å>', -- actually <C-[>
-          dismiss = '<C-ä>', -- below [
-          accept = '<C-u>', -- Next to C-y which is normal complete
-
-          -- these work in wezterm, above ones in kitty
-          -- next = '<C-]>', -- actually <C-]>
-          -- prev = '<C-[>', -- actually <C-[>
-          -- dismiss = [[<C-'>]], -- below [, actually ä
-          -- accept = '<C-;>', -- accept C[ö]pailot, actually ö
-        },
-      },
-      filetypes = {
-        ['*'] = true,
-      },
-    },
+    'Exafunction/codeium.vim',
+    event = 'BufEnter',
+    config = function()
+      vim.g.codeium_disable_bindings = 1
+      vim.keymap.set('i', '<C-u>', vim.fn['codeium#Accept'], { expr = true, silent = true })
+      vim.keymap.set('i', '<C-¨>', function() -- actually <C-]>
+        vim.fn['codeium#CycleCompletions'](1)
+      end, { expr = true, silent = true })
+      vim.keymap.set('i', '<C-å>', function() -- actually <C-[>
+        vim.fn['codeium#CycleCompletions'](-1)
+      end, { expr = true, silent = true })
+      vim.keymap.set('i', '<C-ä>', vim.fn['codeium#Dismiss'], { expr = true, silent = true }) -- below [
+    end,
   },
   {
     'hrsh7th/nvim-cmp',
