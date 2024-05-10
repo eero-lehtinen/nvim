@@ -300,11 +300,14 @@ require('lazy').setup({
     end,
   },
   {
-    'nvim-pack/nvim-spectre',
-    cmd = 'Spectre',
-    opts = {
-      open_cmd = 'noswapfile vnew',
-    },
+    'MagicDuck/grug-far.nvim',
+    config = function()
+      require('grug-far').setup {}
+      vim.api.nvim_create_user_command('SearchAndReplace', 'GrugFar', {
+        nargs = 0,
+        desc = 'Poject wide search and replace',
+      })
+    end,
   },
   {
     'JoosepAlviste/nvim-ts-context-commentstring',
