@@ -339,20 +339,16 @@ require('lazy').setup({
   },
   {
     'Wansmer/treesj',
-    keys = '<leader>j',
+    event = 'VeryLazy',
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
       {
         'echasnovski/mini.splitjoin',
         version = false,
-        opts = {
-          mappings = { toggle = '' },
-        },
+        opts = { mappings = { toggle = '' } },
       },
     },
-    config = function()
-      require('treesj').setup { use_default_keymaps = false }
-
+    init = function()
       local function get_pos_lang()
         local c = vim.api.nvim_win_get_cursor(0)
         local range = { c[1] - 1, c[2], c[1] - 1, c[2] }
@@ -374,6 +370,9 @@ require('lazy').setup({
           require('mini.splitjoin').toggle()
         end
       end, { desc = 'Toggle [J]oin Node' })
+    end,
+    config = function()
+      require('treesj').setup { use_default_keymaps = false }
     end,
   },
   {
