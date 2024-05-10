@@ -338,6 +338,7 @@ require('lazy').setup({
   },
   {
     'Wansmer/treesj',
+    keys = '<leader>j',
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
       {
