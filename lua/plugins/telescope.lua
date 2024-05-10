@@ -275,6 +275,7 @@ return {
             ['<C-+>'] = actions.which_key,
             ['<C-u>'] = false,
             ['<C-d>'] = false,
+            ['<C-h>'] = actions.select_horizontal,
           },
         },
       },
