@@ -288,6 +288,9 @@ return {
             i = {
               ['<C-d>'] = actions.delete_buffer + actions.move_to_top,
             },
+            n = {
+              ['<C-d>'] = actions.delete_buffer + actions.move_to_top,
+            },
           },
         },
       },
