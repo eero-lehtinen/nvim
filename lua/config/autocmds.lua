@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- Copied from lazyvim, don't know what it does
+-- Copied from lazyvim, don't know what it does, I guess checks if the file is changed from the outside
 vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
   group = vim.api.nvim_create_augroup('checktime', { clear = true }),
   command = 'checktime',
