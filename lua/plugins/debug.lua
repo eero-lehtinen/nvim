@@ -60,13 +60,13 @@ return {
 
     -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
     vim.keymap.set('n', '<leader>dt', dapui.toggle, { desc = 'Debug: Toggle' })
-    vim.keymap.set({ 'n', 'v' }, '<leader>de', dapui.eval, { desc = 'Debug: Eval' })
+    vim.keymap.set({ 'n', 'v' }, '<leader>de', dapui.eval, { desc = 'Debug: Eval (View data of the selected variable)' })
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    -- Rust / CPP / C config
+    --  CPP / C config
     dap.configurations.cpp = {
       {
         name = 'Launch',
