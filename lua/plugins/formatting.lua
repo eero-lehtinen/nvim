@@ -3,7 +3,7 @@ return {
   config = function()
     local formatters_by_ft = {
       lua = { 'stylua' },
-      python = { 'isort', { 'yapf', 'black' } },
+      python = { 'isort', 'black' }, --yapf
     }
 
     local prettierd_filetypes = { 'javascript', 'typescript', 'json', 'html', 'css', 'markdown', 'yaml' }
