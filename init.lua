@@ -401,6 +401,19 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<cr>', { desc = '[S]earch [T]odo Comments' })
     end,
   },
+  {
+    'rachartier/tiny-devicons-auto-colors.nvim',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    event = 'VeryLazy',
+    config = function()
+      local colors = require('kanagawa.colors').setup()
+      require('tiny-devicons-auto-colors').setup {
+        colors = colors.palette,
+      }
+    end,
+  },
 
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
