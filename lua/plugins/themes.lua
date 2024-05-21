@@ -1,5 +1,8 @@
 return {
-  'sainnhe/gruvbox-material',
+  {
+    'sainnhe/gruvbox-material',
+    enabled = false,
+  },
   {
     'rebelot/kanagawa.nvim',
     priority = 1000,
@@ -47,6 +50,7 @@ return {
   },
   {
     'folke/tokyonight.nvim',
+    enabled = false,
     lazy = false,
     priority = 1000,
     opts = {
@@ -55,6 +59,7 @@ return {
   },
   {
     'catppuccin/nvim',
+    enabled = false,
     name = 'catppuccin',
     priority = 1000,
     opts = {
@@ -90,6 +95,7 @@ return {
   },
   {
     'ellisonleao/gruvbox.nvim',
+    enabled = false,
     priority = 1000,
   },
 }
