@@ -184,8 +184,8 @@ return {
           },
         },
         mapping = cmp.mapping.preset.insert {
-          ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
-          ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
+          ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
+          ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
           ['<C-Space>'] = cmp.mapping(function(_) -- C-e works by default to close
             if cmp.visible() then
               cmp.abort()
@@ -195,7 +195,7 @@ return {
           end),
           ['<C-y>'] = cmp.mapping.confirm {
             select = true,
-            behavior = cmp.ConfirmBehavior.Replace,
+            behavior = cmp.ConfirmBehavior.Insert,
           },
           ['<C-CR>'] = function(fallback)
             cmp.abort()
