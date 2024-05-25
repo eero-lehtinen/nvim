@@ -41,8 +41,8 @@ return {
           CopilotSuggestion = { fg = '#739296' },
           CodeiumSuggestion = { fg = '#739296' },
           CmpGhostText = { fg = theme.syn.comment },
+          LspInlayHint = { fg = theme.ui.nontext, bg = theme.ui.bg_m1 },
           CursorLine = { bg = theme.ui.bg_p1 },
-          -- LspInlayHint = { link = 'LineNr' },
           HighlightUndo = { fg = theme.ui.fg, bg = colors.palette.waveBlue2 },
         }
       end,
