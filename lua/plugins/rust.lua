@@ -83,11 +83,11 @@ return {
                   enable = true,
                 },
               },
-              -- diagnostics = {
-              --   experimental = {
-              --     enable = true,
-              --   },
-              -- },
+              diagnostics = {
+                experimental = {
+                  enable = true,
+                },
+              },
               cargo = {
                 target = rust_lsp_target(),
                 allFeatures = features == nil,
