@@ -18,6 +18,15 @@ return {
     local actions = require 'telescope.actions'
     local telescope = require 'telescope'
 
+    local ignore_filetypes = { 'png', 'jpg', 'jpeg', 'webp', 'xcf', 'ogg', 'mp3', 'ttf' }
+
+    local find_command = { 'fd', '--type', 'f', '--follow', '--hidden', '-E', '.git' }
+
+    for _, ext in ipairs(ignore_filetypes) do
+      table.insert(find_command, '-E')
+      table.insert(find_command, '*.' .. ext)
+    end
+
     telescope.setup {
       defaults = {
         path_display = { 'truncate' },
@@ -48,7 +57,7 @@ return {
       },
       pickers = {
         find_files = {
-          find_command = { 'fd', '--type', 'f', '--follow', '--hidden', '--exclude', '.git' },
+          find_command = find_command,
         },
         buffers = {
           mappings = {
