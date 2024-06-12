@@ -128,6 +128,9 @@ require('lazy').setup({
       diagnostics = {
         enable = true,
       },
+      update_focused_file = {
+        enable = true,
+      },
     },
     init = function()
       vim.g.loaded_netrw = 1
