@@ -129,7 +129,14 @@ return {
         eslint = {},
         svelte = {},
         tailwindcss = {},
-        cssls = {},
+        cssls = {
+          css = {
+            validate = true,
+            lint = {
+              unknownAtRules = 'ignore',
+            },
+          },
+        },
         html = {},
         emmet_language_server = {},
         -- typos_lsp = {},
