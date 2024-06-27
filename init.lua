@@ -418,6 +418,8 @@ require('lazy').setup({
     end,
   },
 
+  'mechatroner/rainbow_csv',
+
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
 
