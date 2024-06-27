@@ -4,6 +4,16 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- from https://notebook.kulchenko.com/algorithms/alphanumeric-natural-sorting-for-humans-in-lua
+local function natural_sort(nodes)
+  local function padnum(d)
+    return ('%03d%s'):format(#d, d)
+  end
+  table.sort(nodes, function(a, b)
+    return tostring(a.name):gsub('%d+', padnum) < tostring(b.name):gsub('%d+', padnum)
+  end)
+end
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -130,6 +140,9 @@ require('lazy').setup({
       },
       update_focused_file = {
         enable = true,
+      },
+      sort = {
+        sorter = natural_sort,
       },
     },
     init = function()
@@ -439,5 +452,3 @@ require('lazy').setup({
 require 'config.options'
 require 'config.keymaps'
 require 'config.autocmds'
-
--- vim: ts=2 sts=2 sw=2 et
