@@ -90,7 +90,6 @@ return {
               },
               cargo = {
                 target = rust_lsp_target(),
-                allFeatures = features == nil,
                 features = features,
               },
               rust = {
