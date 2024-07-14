@@ -50,16 +50,23 @@ require('lazy').setup({
     'folke/which-key.nvim',
     event = 'VeryLazy',
     config = function()
-      require('which-key').setup()
-
-      require('which-key').register {
-        ['<leader>'] = {
-          ['s'] = { name = '+search', _ = 'which_key_ignore' },
-          ['h'] = { name = '+hunk (git)', _ = 'which_key_ignore' },
-          ['t'] = { name = '+toggle ', _ = 'which_key_ignore' },
-          ['d'] = { name = '+debug / document symbols', _ = 'which_key_ignore' },
-          ['w'] = { name = '+workspace symbols ', _ = 'which_key_ignore' },
+      require('which-key').setup {
+        icons = {
+          rules = false,
         },
+      }
+
+      require('which-key').add {
+        { '<leader>d', group = 'debug / document symbols' },
+        { '<leader>d_', hidden = true },
+        { '<leader>h', group = 'hunk (git)' },
+        { '<leader>h_', hidden = true },
+        { '<leader>s', group = 'search' },
+        { '<leader>s_', hidden = true },
+        { '<leader>t', group = 'toggle ' },
+        { '<leader>t_', hidden = true },
+        { '<leader>w', group = 'workspace symbols ' },
+        { '<leader>w_', hidden = true },
       }
     end,
   },
