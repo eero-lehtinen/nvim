@@ -1,7 +1,6 @@
 return {
   {
     'nvim-treesitter/nvim-treesitter',
-    commit = 'c1d1b4084ef5239e2671f64d35962d184251aea4', -- downgrade for now
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
       -- Way too much lag to be usable with Rust.
