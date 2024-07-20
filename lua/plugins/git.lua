@@ -19,7 +19,6 @@ return {
     end,
   },
 
-  'tpope/vim-rhubarb',
   {
     'sindrets/diffview.nvim',
     config = function()
@@ -84,6 +83,7 @@ return {
   },
 
   {
+    enabled = false,
     'NeogitOrg/neogit',
     branch = 'master',
     dependencies = {

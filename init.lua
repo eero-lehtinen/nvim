@@ -103,7 +103,9 @@ require('lazy').setup({
       'ggandor/leap.nvim',
       'tpope/vim-repeat',
     },
-    opts = {},
+    opts = {
+      labeled_modes = '',
+    },
   },
   {
     'kylechui/nvim-surround',
@@ -174,7 +176,10 @@ require('lazy').setup({
     opts = {},
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
-  { 'stevearc/dressing.nvim', opts = {} },
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
+  },
   {
     'folke/noice.nvim',
     enabled = false,
@@ -268,7 +273,10 @@ require('lazy').setup({
       },
     },
   },
-  { 'tzachar/highlight-undo.nvim', opts = {} },
+  {
+    'tzachar/highlight-undo.nvim',
+    opts = {},
+  },
   {
     'RRethy/vim-illuminate',
     config = function()
@@ -277,50 +285,50 @@ require('lazy').setup({
       }
     end,
   },
-  {
-    'windwp/nvim-autopairs',
-    opts = {
-      -- enable_moveright = false -- could be nice but idk
-    },
-    -- config = function()
-    -- local npairs = require 'nvim-autopairs'
-    -- npairs.setup {}
-    -- local conds = require 'nvim-autopairs.conds'
-    -- local rule = require 'nvim-autopairs.rule'
-    -- -- doesn't actually work when completing, but at least allows moving out of brackets
-    -- npairs.add_rules {
-    --   rule('<', '>'):with_pair(conds.none()):with_move(conds.done()):use_key '>',
-    -- }
-    -- end,
-  },
+  -- {
+  --   'windwp/nvim-autopairs',
+  --   opts = {
+  --     -- enable_moveright = false -- could be nice but idk
+  --   },
+  --   -- config = function()
+  --   -- local npairs = require 'nvim-autopairs'
+  --   -- npairs.setup {}
+  --   -- local conds = require 'nvim-autopairs.conds'
+  --   -- local rule = require 'nvim-autopairs.rule'
+  --   -- -- doesn't actually work when completing, but at least allows moving out of brackets
+  --   -- npairs.add_rules {
+  --   --   rule('<', '>'):with_pair(conds.none()):with_move(conds.done()):use_key '>',
+  --   -- }
+  --   -- end,
+  -- },
   -- {
   --   'abecodes/tabout.nvim',
   --   dependencies = { 'nvim-treesitter/nvim-treesitter', 'hrsh7th/nvim-cmp' },
   --   opts = {},
   -- },
-  {
-    'kawre/neotab.nvim',
-    opts = {
-      tabkey = '',
-      act_as_tab = false,
-    },
-    init = function()
-      local function left_is_whitespace_or_empty()
-        local line = vim.fn.getline '.'
-        local col = vim.fn.col '.'
-        local left_side = string.sub(line, 1, col - 1)
-        return left_side:match '^%s*$' ~= nil
-      end
-
-      vim.keymap.set('i', '<TAB>', function()
-        if left_is_whitespace_or_empty() then
-          vim.fn.feedkeys('\t', 'n')
-        else
-          require('neotab').tabout()
-        end
-      end, { noremap = true, silent = true })
-    end,
-  },
+  -- {
+  --   'kawre/neotab.nvim',
+  --   opts = {
+  --     tabkey = '',
+  --     act_as_tab = false,
+  --   },
+  --   init = function()
+  --     local function left_is_whitespace_or_empty()
+  --       local line = vim.fn.getline '.'
+  --       local col = vim.fn.col '.'
+  --       local left_side = string.sub(line, 1, col - 1)
+  --       return left_side:match '^%s*$' ~= nil
+  --     end
+  --
+  --     vim.keymap.set('i', '<TAB>', function()
+  --       if left_is_whitespace_or_empty() then
+  --         vim.fn.feedkeys('\t', 'n')
+  --       else
+  --         require('neotab').tabout()
+  --       end
+  --     end, { noremap = true, silent = true })
+  --   end,
+  -- },
   {
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
@@ -334,6 +342,10 @@ require('lazy').setup({
     config = function()
       require('grug-far').setup {}
       vim.api.nvim_create_user_command('SearchAndReplace', 'GrugFar', {
+        nargs = 0,
+        desc = 'Poject wide search and replace',
+      })
+      vim.api.nvim_create_user_command('FindAndReplace', 'GrugFar', {
         nargs = 0,
         desc = 'Poject wide search and replace',
       })
@@ -360,7 +372,10 @@ require('lazy').setup({
       },
     },
   },
-  { 'ethanholz/nvim-lastplace', opts = {} },
+  {
+    'ethanholz/nvim-lastplace',
+    opts = {},
+  },
   'jesseleite/nvim-macroni', -- Adds `:YankMacro [register]`
   {
     'andymass/vim-matchup',
@@ -418,7 +433,10 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[U]ndotree', silent = true })
     end,
   },
-  { 'laytan/cloak.nvim', opts = {} },
+  {
+    'laytan/cloak.nvim',
+    opts = {},
+  },
   {
     'KabbAmine/vCoolor.vim',
     init = function()

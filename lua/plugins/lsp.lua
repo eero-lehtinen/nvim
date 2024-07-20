@@ -41,6 +41,7 @@ return {
         -- '<leader>D',
         '<leader>ds',
         '<leader>ws',
+        '<leader>wf',
       }
       for _, key in ipairs(nops) do
         vim.keymap.set('n', key, function()
