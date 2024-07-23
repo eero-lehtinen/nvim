@@ -68,21 +68,20 @@ return {
           nmap('<leader>r', ':IncRename ', '[R]ename')
           vim.keymap.set({ 'n', 'v' }, '<leader>c', vim.lsp.buf.code_action, { buffer = event.buf, desc = 'LSP: [C]ode Action' })
 
-          local builtin = require 'telescope.builtin'
-          nmap('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
-          nmap('gr', builtin.lsp_references, '[G]oto [R]eferences')
-          nmap('gi', builtin.lsp_implementations, '[G]oto [I]mplementation')
-          nmap('gD', builtin.lsp_type_definitions, '[G]oto Type [D]efinition')
-          nmap('<leader>ds', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
-          nmap('<leader>ws', builtin.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-          -- local fzf_lua = require 'fzf-lua'
-          -- nmap('gd', fzf_lua.lsp_definitions, '[G]oto [D]efinition')
-          -- nmap('gr', fzf_lua.lsp_references, '[G]oto [R]eferences')
-          -- nmap('gi', fzf_lua.lsp_implementations, '[G]oto [I]mplementation')
-          -- nmap('gD', fzf_lua.lsp_typedefs, '[G]oto Type [D]efinition')
-          -- nmap('<leader>D', fzf_lua.lsp_declarations, 'Goto [D]eclaration')
-          -- nmap('<leader>ds', fzf_lua.lsp_document_symbols, '[D]ocument [S]ymbols')
-          -- nmap('<leader>ws', fzf_lua.lsp_workspace_symbols, '[W]orkspace [S]ymbols')
+          -- local builtin = require 'telescope.builtin'
+          -- nmap('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
+          -- nmap('gr', builtin.lsp_references, '[G]oto [R]eferences')
+          -- nmap('gi', builtin.lsp_implementations, '[G]oto [I]mplementation')
+          -- nmap('gD', builtin.lsp_type_definitions, '[G]oto Type [D]efinition')
+          -- nmap('<leader>ds', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
+          -- nmap('<leader>ws', builtin.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+          local fzf_lua = require 'fzf-lua'
+          nmap('gd', fzf_lua.lsp_definitions, '[G]oto [D]efinition')
+          nmap('gr', fzf_lua.lsp_references, '[G]oto [R]eferences')
+          nmap('gi', fzf_lua.lsp_implementations, '[G]oto [I]mplementation')
+          nmap('gD', fzf_lua.lsp_typedefs, '[G]oto Type [D]efinition')
+          nmap('<leader>ds', fzf_lua.lsp_document_symbols, '[D]ocument [S]ymbols')
+          nmap('<leader>ws', fzf_lua.lsp_workspace_symbols, '[W]orkspace [S]ymbols')
 
           nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
           nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
