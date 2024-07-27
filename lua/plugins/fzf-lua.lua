@@ -15,7 +15,7 @@ return {
       },
       lsp = {
         jump_to_single_result = true,
-        async_or_timeout = 500,
+        -- async_or_timeout = true,
       },
     }
 
