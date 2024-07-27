@@ -47,8 +47,8 @@ return {
       vim.api.nvim_create_autocmd('FileType', {
         pattern = 'rust',
         callback = function()
-          nmap('<leader>Ro', require 'ferris.methods.open_documentation', '[O]pen Documentation')
-          nmap('<leader>Rm', require 'ferris.methods.view_memory_layout', 'View [M]emory Layout')
+          nmap('<leader>lo', require 'ferris.methods.open_documentation', '[O]pen Documentation')
+          nmap('<leader>lm', require 'ferris.methods.view_memory_layout', 'View [M]emory Layout')
         end,
       })
     end,
@@ -107,15 +107,15 @@ return {
       vim.api.nvim_create_autocmd('FileType', {
         pattern = 'rust',
         callback = function()
-          nmap('<leader>Rd', function()
+          nmap('<leader>ld', function()
             vim.cmd.RustLsp { 'debuggables' }
           end, 'Debug: Rust Debuggables')
 
-          nmap('<leader>Ra', function()
+          nmap('<leader>la', function()
             vim.cmd.RustLsp { 'hover', 'actions' }
           end, 'Hover [A]ctions')
 
-          nmap('<leader>Re', function()
+          nmap('<leader>le', function()
             vim.cmd.RustLsp 'expandMacro'
           end, '[E]xpand Macro')
         end,

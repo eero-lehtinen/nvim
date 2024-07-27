@@ -67,6 +67,8 @@ require('lazy').setup({
         { '<leader>t_', hidden = true },
         { '<leader>w', group = 'workspace symbols ' },
         { '<leader>w_', hidden = true },
+        { '<leader>l', group = 'language specific' },
+        { '<leader>l_', hidden = true },
       }
     end,
   },
@@ -168,7 +170,7 @@ require('lazy').setup({
       vim.g.loaded_netrwPlugin = 1
       vim.g.nvim_tree_disable_netrw = 1
 
-      vim.keymap.set('n', '<leader>T', require('nvim-tree.api').tree.toggle, { desc = 'Nvim [T]ree Toggle' })
+      vim.keymap.set('n', '<leader>f', require('nvim-tree.api').tree.toggle, { desc = '[F]ile Tree Toggle' })
     end,
   },
   {
