@@ -4,6 +4,8 @@ return {
     local formatters_by_ft = {
       lua = { 'stylua' },
       python = { 'isort', 'black' }, --yapf
+      rust = {},
+      toml = {},
     }
 
     local prettierd_filetypes = { 'javascript', 'typescript', 'json', 'html', 'css', 'markdown', 'yaml', 'typescriptreact', 'javascriptreact' }
@@ -18,7 +20,17 @@ return {
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return
         end
-        return { timeout_ms = 1000, lsp_fallback = true }
+
+        local fmtrs = formatters_by_ft[vim.bo[bufnr].filetype]
+        if not fmtrs then
+          return
+        end
+
+        if #fmtrs == 0 then
+          return { timeout_ms = 1000, lsp_format = 'prefer' }
+        end
+
+        return { timeout_ms = 1000 }
       end,
     }
 
