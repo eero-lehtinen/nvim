@@ -2,7 +2,7 @@ return {
   'nvim-telescope/telescope.nvim',
   -- lazy = false,
   rev = '0.1.6',
-  -- enabled = false,
+  enabled = false,
   dependencies = {
     'nvim-lua/plenary.nvim',
     {

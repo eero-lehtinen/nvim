@@ -454,7 +454,10 @@ require('lazy').setup({
       signs = false,
     },
     init = function()
-      vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<cr>', { desc = '[S]earch [T]odo Comments' })
+      -- vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<cr>', { desc = '[S]earch [T]odo Comments' })
+      vim.keymap.set('n', '<leader>st', function()
+        require('todo-comments.fzf').todo()
+      end, { desc = '[S]earch [T]odo Comments' })
     end,
   },
   {
