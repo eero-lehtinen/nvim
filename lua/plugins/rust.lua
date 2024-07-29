@@ -40,6 +40,21 @@ if features ~= nil then
   features = vim.split(features, ',')
 end
 
+local check_on_save = true
+local no_check_on_save_dirs = {
+  'matopeli$',
+  'matopeli-main-thing$',
+  'bevy$',
+  'bevy-fork$',
+}
+local pwd = vim.fn.getcwd()
+for _, dir in ipairs(no_check_on_save_dirs) do
+  if pwd:match(dir) then
+    check_on_save = false
+    vim.notify('Check on save disabled for ' .. dir, vim.log.levels.INFO)
+  end
+end
+
 return {
   {
     'vxpm/ferris.nvim',
@@ -99,6 +114,7 @@ return {
                 command = 'clippy',
                 extraArgs = { '--no-deps' },
               },
+              checkOnSave = check_on_save,
             },
           },
         },
@@ -118,6 +134,10 @@ return {
           nmap('<leader>le', function()
             vim.cmd.RustLsp 'expandMacro'
           end, '[E]xpand Macro')
+
+          nmap('<leader>lf', function()
+            vim.cmd.RustLsp 'flyCheck'
+          end, '[F]lyCheck')
         end,
       })
     end,
