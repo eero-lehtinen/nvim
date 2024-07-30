@@ -7,7 +7,7 @@ return {
   {
     'tpope/vim-fugitive',
     init = function()
-      vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
+      vim.keymap.set('n', '<leader>g', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
       vim.api.nvim_create_user_command('Glogo', 'G log --oneline', {})
       vim.api.nvim_create_autocmd('FileType', {
         pattern = 'fugitive',

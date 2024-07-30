@@ -42,10 +42,10 @@ end
 
 local check_on_save = true
 local no_check_on_save_dirs = {
-  'matopeli$',
-  'matopeli%-main%-thing$',
-  'bevy$',
-  'bevy%-fork$',
+  -- 'matopeli$',
+  -- 'matopeli%-main%-thing$',
+  -- 'bevy$',
+  -- 'bevy%-fork$',
 }
 local pwd = vim.fn.getcwd()
 for _, dir in ipairs(no_check_on_save_dirs) do
@@ -135,9 +135,9 @@ return {
             vim.cmd.RustLsp 'expandMacro'
           end, '[E]xpand Macro')
 
-          nmap('<leader>lf', function()
+          nmap('<leader>k', function()
             vim.cmd.RustLsp 'flyCheck'
-          end, '[F]lyCheck')
+          end, 'flycheck [k]')
         end,
       })
     end,
