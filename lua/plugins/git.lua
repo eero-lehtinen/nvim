@@ -7,13 +7,13 @@ return {
   {
     'tpope/vim-fugitive',
     init = function()
-      vim.keymap.set('n', '<leader>g', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
+      vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
       vim.api.nvim_create_user_command('Glogo', 'G log --oneline', {})
       vim.api.nvim_create_autocmd('FileType', {
         pattern = 'fugitive',
         callback = function()
-          vim.keymap.set('n', '<leader>p', '<cmd>echo ":Git push" | Git push<cr>', { buffer = true, noremap = true })
-          vim.keymap.set('n', '<leader>f', '<cmd>echo ":Git push --force-with-lease" | Git push --force-with-lease<cr>', { buffer = true, noremap = true })
+          vim.keymap.set('n', '<leader>gp', '<cmd>echo ":Git push" | Git push<cr>', { buffer = true, noremap = true })
+          vim.keymap.set('n', '<leader>gf', '<cmd>echo ":Git push --force-with-lease" | Git push --force-with-lease<cr>', { buffer = true, noremap = true })
         end,
       })
     end,
