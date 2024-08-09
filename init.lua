@@ -91,7 +91,6 @@ require('lazy').setup({
 
   {
     'ggandor/leap.nvim',
-    commit = '89d878f',
     dependencies = {
       'tpope/vim-repeat',
     },
