@@ -475,6 +475,31 @@ require('lazy').setup({
 
   'mechatroner/rainbow_csv',
 
+  {
+    'stevearc/quicker.nvim',
+    ---@module "quicker"
+    ---@type quicker.SetupOptions
+    opts = {
+      highlight = {
+        lsp = false,
+        load_buffer = false,
+      },
+    },
+    config = function(_, opts)
+      require('quicker').setup(opts)
+      vim.keymap.set('n', '<leader>qq', function()
+        require('quicker').toggle()
+      end, {
+        desc = 'Toggle quickfix',
+      })
+      vim.keymap.set('n', '<leader>ql', function()
+        require('quicker').toggle { loclist = true }
+      end, {
+        desc = 'Toggle loclist',
+      })
+    end,
+  },
+
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
 

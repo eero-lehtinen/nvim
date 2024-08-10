@@ -8,6 +8,7 @@ vim.keymap.set({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>update<cr><esc>', { desc =
 vim.keymap.set('i', '<C-i>', '<esc>i', { desc = 'Control as esc + i' })
 vim.keymap.set({ 'n' }, '<c-.>', '<Nop>', { silent = true })
 vim.keymap.set({ 'i', 'c' }, '<C-BS>', '<C-w>', { desc = 'Ctrl Backspace' })
+-- vim.keymap.set({ 'i', 'c' }, '<C-h>', '<C-w>', { desc = 'Ctrl Backspace' }) -- needed on some terminals, not kitty
 vim.keymap.set({ 'n', 'v' }, 'q:', '<Nop>', { silent = true })
 
 vim.keymap.set('n', 'i', function()
@@ -32,7 +33,7 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '<leader>E', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 vim.api.nvim_create_user_command('Messages', ":new | setlocal buftype=nofile bufhidden=delete noswapfile | silent! put = execute('messages')", {
   nargs = 0,
