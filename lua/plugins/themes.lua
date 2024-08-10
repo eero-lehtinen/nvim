@@ -9,6 +9,7 @@ return {
     opts = {
       keywordStyle = { italic = false },
       statementStyle = { bold = false },
+      commentStyle = { italic = false },
       colors = {
         theme = {
           all = {
