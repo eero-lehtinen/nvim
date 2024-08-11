@@ -65,10 +65,12 @@ require('lazy').setup({
         { '<leader>s_', hidden = true },
         { '<leader>t', group = 'toggle ' },
         { '<leader>t_', hidden = true },
-        { '<leader>w', group = 'workspace symbols ' },
+        { '<leader>w', group = 'workspace symbols' },
         { '<leader>w_', hidden = true },
         { '<leader>l', group = 'language specific' },
         { '<leader>l_', hidden = true },
+        { '<leader>q', group = 'qflist/loclist' },
+        { '<leader>q_', hidden = true },
       }
     end,
   },
