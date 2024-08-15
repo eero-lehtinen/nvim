@@ -6,6 +6,7 @@ return {
       python = { 'isort', 'black' }, --yapf
       rust = {},
       toml = {},
+      sql = { 'sqlfmt' },
     }
 
     local prettierd_filetypes = { 'javascript', 'typescript', 'json', 'html', 'css', 'markdown', 'yaml', 'typescriptreact', 'javascriptreact' }
