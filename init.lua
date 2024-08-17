@@ -479,12 +479,12 @@ require('lazy').setup({
     opts = {
       highlight = {
         lsp = false,
-        load_buffer = false,
+        load_buffers = false,
       },
     },
     config = function(_, opts)
       require('quicker').setup(opts)
-      vim.keymap.set('n', '<leader>qq', function()
+      vim.keymap.set('n', '<leader>qc', function()
         require('quicker').toggle()
       end, {
         desc = 'Toggle quickfix',
