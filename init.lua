@@ -71,6 +71,10 @@ require('lazy').setup({
         { '<leader>l_', hidden = true },
         { '<leader>q', group = 'qflist/loclist' },
         { '<leader>q_', hidden = true },
+        { '<leader>g', group = 'git' },
+        { '<leader>g_', hidden = true },
+        { '<leader>m', group = 'surround' },
+        { '<leader>m_', hidden = true },
       }
     end,
   },
