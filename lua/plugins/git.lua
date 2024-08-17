@@ -8,6 +8,8 @@ return {
     'tpope/vim-fugitive',
     init = function()
       vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
+      vim.keymap.set('n', '<leader>gd', '<cmd>Gvdiffsplit<cr>', { desc = '[G]it [D]iff' })
+
       vim.api.nvim_create_user_command('Glogo', 'G log --oneline', {})
       vim.api.nvim_create_autocmd('FileType', {
         pattern = 'fugitive',
@@ -56,28 +58,36 @@ return {
     'lewis6991/gitsigns.nvim',
     opts = {
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[H]unk [P]review' })
-        vim.keymap.set('n', '<leader>hr', require('gitsigns').reset_hunk, { buffer = bufnr, desc = '[H]unk [R]eset' })
+        local gitsigns = require 'gitsigns'
 
-        local gs = package.loaded.gitsigns
-        vim.keymap.set({ 'n', 'v' }, ']c', function()
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
+
+        map('n', ']c', function()
           if vim.wo.diff then
-            return ']c'
+            vim.cmd.normal { ']c', bang = true }
+          else
+            gitsigns.nav_hunk 'next'
           end
-          vim.schedule(function()
-            gs.next_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
-        vim.keymap.set({ 'n', 'v' }, '[c', function()
+        end, { desc = 'Jump to next hunk' })
+
+        map('n', '[c', function()
           if vim.wo.diff then
-            return '[c'
+            vim.cmd.normal { '[c', bang = true }
+          else
+            gitsigns.nav_hunk 'prev'
           end
-          vim.schedule(function()
-            gs.prev_hunk()
-          end)
-          return '<Ignore>'
-        end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
+        end, { desc = 'Jump to previous hunk' })
+
+        map('n', '<leader>gp', gitsigns.preview_hunk_inline, { desc = '[G]it [P]review Hunk' })
+        map('n', '<leader>gr', gitsigns.reset_hunk, { desc = '[G]it [R]eset Hunk' })
+        map('n', '<leader>gb', gitsigns.blame, { desc = '[G]it [B]lame' })
+        map('n', '<leader>gl', function()
+          gitsigns.blame_line { full = true }
+        end, { desc = '[G]it Blame [L]ine' })
       end,
     },
   },
