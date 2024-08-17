@@ -111,24 +111,19 @@ require('lazy').setup({
     },
   },
   {
-    'kylechui/nvim-surround',
+    'echasnovski/mini.surround',
     version = '*',
-    dependencies = {
-      'tpope/vim-repeat',
-    },
     opts = {
-      keymaps = {
-        insert = '<C-g>z',
-        insert_line = '<C-g>Z',
-        normal = 'yz',
-        normal_cur = 'yzz',
-        normal_line = 'yZ',
-        normal_cur_line = 'yZZ',
-        visual = 'z',
-        visual_line = 'Z',
-        delete = 'dz',
-        change = 'cz',
+      mappings = {
+        add = '<leader>ma', -- Add surrounding in Normal and Visual modes
+        delete = '<leader>md', -- Delete surrounding
+        find = '<leader>mf', -- Find surrounding (to the right)
+        find_left = '<leader>mF', -- Find surrounding (to the left)
+        highlight = '<leader>mh', -- Highlight surrounding
+        replace = '<leader>mr', -- Replace surrounding
+        update_n_lines = '<leader>mn', -- Update `n_lines`
       },
+      n_lines = 200,
     },
   },
   {
