@@ -41,6 +41,7 @@ return {
           'mason',
           'nvim-dap-ui',
           'nvim-tree',
+          'oil',
           'quickfix',
         },
       }
