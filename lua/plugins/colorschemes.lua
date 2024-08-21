@@ -103,5 +103,17 @@ return {
     'dgox16/oldworld.nvim',
     lazy = false,
     priority = 1000,
+    config = function()
+      local p = require 'oldworld.palette'
+      require('oldworld').setup {
+        highlight_overrides = {
+          HighlightUndo = { bg = '#3F4E7C' },
+          DiagnosticUnderlineError = { fg = p.red, underline = false, undercurl = true },
+          DiagnosticUnderlineWarn = { fg = p.yellow, underline = false, undercurl = true },
+          DiagnosticUnderlineInfo = { fg = p.purple, underline = false, undercurl = true },
+          DiagnosticUnderlineHint = { underline = false },
+        },
+      }
+    end,
   },
 }
