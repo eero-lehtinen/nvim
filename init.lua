@@ -467,10 +467,16 @@ require('lazy').setup({
     },
     event = 'VeryLazy',
     config = function()
-      local colors = require('kanagawa.colors').setup()
-      require('tiny-devicons-auto-colors').setup {
-        colors = colors.palette,
-      }
+      if vim.g.colors_name == 'kanagawa' then
+        local colors = require('kanagawa.colors').setup()
+        require('tiny-devicons-auto-colors').setup {
+          colors = colors.palette,
+        }
+      elseif vim.g.colors_name == 'oldworld' then
+        require('tiny-devicons-auto-colors').setup {
+          colors = require('oldworld').palette,
+        }
+      end
     end,
   },
 
