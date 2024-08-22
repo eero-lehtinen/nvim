@@ -112,6 +112,9 @@ return {
           DiagnosticUnderlineWarn = { sp = p.yellow, underline = false, undercurl = true },
           DiagnosticUnderlineInfo = { sp = p.purple, underline = false, undercurl = true },
           DiagnosticUnderlineHint = { underline = false },
+          LspReferenceWrite = { fg = p.purple, underline = true },
+          LspReferenceText = { fg = p.purple },
+          LspReferenceRead = { fg = p.purple },
         },
       }
     end,
