@@ -82,7 +82,7 @@ return {
           end
         end, { desc = 'Jump to previous hunk' })
 
-        map('n', '<leader>gp', gitsigns.preview_hunk_inline, { desc = '[G]it [P]review Hunk' })
+        map('n', '<leader>gp', gitsigns.preview_hunk, { desc = '[G]it [P]review Hunk' })
         map('n', '<leader>gr', gitsigns.reset_hunk, { desc = '[G]it [R]eset Hunk' })
         map('n', '<leader>gb', gitsigns.blame, { desc = '[G]it [B]lame' })
         map('n', '<leader>gl', function()
