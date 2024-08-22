@@ -126,7 +126,7 @@ return {
         pyright = {},
 
         tsserver = {},
-        eslint = {},
+        -- eslint = {},
         svelte = {},
         tailwindcss = {},
         cssls = {
