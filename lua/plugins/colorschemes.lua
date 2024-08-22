@@ -108,9 +108,9 @@ return {
       require('oldworld').setup {
         highlight_overrides = {
           HighlightUndo = { bg = '#3F4E7C' },
-          DiagnosticUnderlineError = { fg = p.red, underline = false, undercurl = true },
-          DiagnosticUnderlineWarn = { fg = p.yellow, underline = false, undercurl = true },
-          DiagnosticUnderlineInfo = { fg = p.purple, underline = false, undercurl = true },
+          DiagnosticUnderlineError = { sp = p.red, underline = false, undercurl = true },
+          DiagnosticUnderlineWarn = { sp = p.yellow, underline = false, undercurl = true },
+          DiagnosticUnderlineInfo = { sp = p.purple, underline = false, undercurl = true },
           DiagnosticUnderlineHint = { underline = false },
         },
       }
