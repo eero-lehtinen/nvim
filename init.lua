@@ -44,7 +44,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  { 'nmac427/guess-indent.nvim', opts = {} },
 
   {
     'folke/which-key.nvim',
