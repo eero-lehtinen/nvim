@@ -383,6 +383,7 @@ require('lazy').setup({
     'andymass/vim-matchup',
     init = function()
       -- Makes matchup not bind z and Z, which conflicts with nvim-surround
+      vim.g.matchup_matchparen_enabled = 0 -- Disables annoying highlighting
       vim.keymap.set({ 'o', 'n', 'x' }, '<F24>z%', '<plug>(matchup-z%)', { noremap = true, silent = true })
       vim.keymap.set({ 'o', 'n', 'x' }, '<F24>Z%', '<plug>(matchup-Z%)', { noremap = true, silent = true })
     end,
