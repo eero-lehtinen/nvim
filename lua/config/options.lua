@@ -1,4 +1,4 @@
-vim.cmd.colorscheme 'oldworld'
+vim.cmd.colorscheme 'kanagawa'
 
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
