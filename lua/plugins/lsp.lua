@@ -210,6 +210,8 @@ return {
         -- ['rust_analyzer'] = function() end,
       }
 
+      require('lspconfig').glasgow.setup {}
+
       require('mason-tool-installer').setup {
         ensure_installed = {
           'stylua',
