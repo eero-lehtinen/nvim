@@ -381,6 +381,7 @@ require('lazy').setup({
   'jesseleite/nvim-macroni', -- Adds `:YankMacro [register]`
   {
     'andymass/vim-matchup',
+    enabled = false,
     init = function()
       vim.g.matchup_matchparen_enabled = 0 -- Disables annoying highlighting
       -- Makes matchup not bind z and Z, which conflicts with nvim-surround
