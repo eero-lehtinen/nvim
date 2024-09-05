@@ -533,6 +533,15 @@ require('lazy').setup({
     },
   },
 
+  {
+    'eero-lehtinen/oklch-picker',
+    build = 'npm install && npm run build',
+    config = function()
+      require('oklch-picker').setup {}
+      vim.keymap.set('n', '<leader>p', require('oklch-picker').pick_color_under_cursor, { desc = 'Oklch [P]icker' })
+    end,
+  },
+
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
 
