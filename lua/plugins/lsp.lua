@@ -125,7 +125,7 @@ return {
 
         pyright = {},
 
-        tsserver = {},
+        ts_ls = {},
         -- eslint = {},
         svelte = {},
         tailwindcss = {},
@@ -201,10 +201,6 @@ return {
 
       mason_lspconfig.setup_handlers {
         function(server_name)
-          if server_name == 'tsserver' then
-            server_name = 'ts_ls'
-          end
-
           require('lspconfig')[server_name].setup {
             capabilities = capabilities,
             settings = servers[server_name],
