@@ -31,6 +31,11 @@ return {
       local actions = require 'diffview.actions'
 
       require('diffview').setup {
+        hooks = {
+          diff_buf_read = function(bufnr)
+            vim.opt_local.wrap = false
+          end,
+        },
         keymaps = {
           view = {
             { 'n', 'J', actions.select_next_entry, { desc = 'Open the diff for the next file' } },
