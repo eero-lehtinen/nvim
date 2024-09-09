@@ -39,10 +39,11 @@ return {
           file_panel = {
             { 'n', 'cc', '<Cmd>Git commit <bar> wincmd J<CR>', { desc = 'Commit staged changes' } },
             { 'n', 'ca', '<Cmd>Git commit --amend <bar> wincmd J<CR>', { desc = 'Amend the last commit' } },
-            { 'n', 'ce', '<Cmd>Git commit --amend --no-edit <bar> wincmd J<CR>', { desc = 'Amend the last commit' } },
+            { 'n', 'ce', '<Cmd>Git commit --amend --no-edit <bar> wincmd J<CR>', { desc = 'Amend (no edit) the last commit' } },
             { 'n', 'J', actions.select_next_entry, { desc = 'Open the diff for the next file' } },
             { 'n', 'K', actions.select_prev_entry, { desc = 'Open the diff for the previous file' } },
-            { 'n', 'a', actions.toggle_stage_entry, { desc = 'Stage / unstage the selected entry' } },
+            { 'n', '<C-u>', actions.scroll_view(-0.25), { desc = 'Scroll the view up' } },
+            { 'n', '<C-d>', actions.scroll_view(0.25), { desc = 'Scroll the view down' } },
           },
           file_history_panel = {
             { 'n', 'J', actions.select_next_entry, { desc = 'Open the diff for the next file' } },
