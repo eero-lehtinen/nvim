@@ -39,3 +39,56 @@ vim.api.nvim_create_user_command('Messages', ":new | setlocal buftype=nofile buf
   nargs = 0,
   desc = 'Show messages in a new window',
 })
+
+vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<cr>', { desc = 'Tab close' })
+
+local toggle_keymap = function(key, name, option_or_toggle)
+  local no_bracket_name = name:gsub('%[', ''):gsub('%]', '')
+  local f = function()
+    local result
+    if type(option_or_toggle) == 'string' then
+      vim.opt[option_or_toggle] = not vim.opt[option_or_toggle]
+      result = vim.opt[option_or_toggle]
+    else
+      result = option_or_toggle()
+    end
+
+    if result then
+      vim.notify('Enabled ' .. no_bracket_name, 'info', { title = 'Option' })
+    else
+      vim.notify('Disabled ' .. no_bracket_name, 'info', { title = 'Option' })
+    end
+  end
+  vim.keymap.set('n', '<leader>t' .. key, f, { desc = '[T]oggle ' .. name })
+end
+
+-- toggling
+toggle_keymap('w', '[W]rap', 'wrap')
+toggle_keymap('l', '[L]ist (Whitespace Characters)', 'list')
+toggle_keymap('p', 'Co[P]ilot', function()
+  require('copilot.suggestion').toggle_auto_trigger()
+  return vim.b.copilot_suggestion_auto_trigger
+end)
+
+if vim.fn.has 'nvim-0.10' == 1 then
+  toggle_keymap('h', 'Inlay [H]ints', function()
+    local enabled = vim.lsp.inlay_hint.is_enabled { bufnr = 0 }
+    vim.lsp.inlay_hint.enable(not enabled, { bufnr = 0 })
+    return not enabled
+  end)
+end
+
+toggle_keymap('t', '[T]reesitter Highlight', function()
+  local enabled = vim.b.ts_highlight
+  if enabled then
+    vim.treesitter.stop()
+  else
+    vim.treesitter.start()
+  end
+  return not enabled
+end)
+
+toggle_keymap('k', '[K]loak', function()
+  require('cloak').toggle()
+  return vim.b.cloak_enabled
+end)
