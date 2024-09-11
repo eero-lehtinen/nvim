@@ -32,9 +32,7 @@ return {
 
       require('diffview').setup {
         hooks = {
-          diff_buf_read = function(bufnr)
-            vim.opt_local.wrap = false
-          end,
+          diff_buf_read = function(_) end,
         },
         keymaps = {
           view = {
