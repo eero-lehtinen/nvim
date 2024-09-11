@@ -125,7 +125,7 @@ require('lazy').setup({
         find = '<leader>mf', -- Find surrounding (to the right)
         find_left = '<leader>mF', -- Find surrounding (to the left)
         highlight = '<leader>mh', -- Highlight surrounding
-        replace = '<leader>mr', -- Replace surrounding
+        replace = '<leader>mc', -- Change surrounding
         update_n_lines = '<leader>mn', -- Update `n_lines`
       },
       n_lines = 200,
