@@ -145,13 +145,30 @@ require('lazy').setup({
       actions = {
         open_file = {
           quit_on_open = true,
+          window_picker = {
+            enable = false,
+          },
         },
       },
       filters = {
         git_ignored = false,
       },
       view = {
-        width = 70,
+        -- width = 70,
+        float = {
+          enable = true,
+          open_win_config = function()
+            local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
+            return {
+              border = 'rounded',
+              relative = 'editor',
+              width = 100,
+              height = screen_h - 2,
+              row = 1,
+              col = 1,
+            }
+          end,
+        },
       },
       live_filter = {
         always_show_folders = false,
