@@ -81,8 +81,8 @@ require('lazy').setup({
   },
 
   {
-    -- add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
+    enabled = false,
     config = function()
       require('ibl').setup {
         -- indent = { char = '│' },
@@ -91,6 +91,28 @@ require('lazy').setup({
         scope = {
           enabled = false,
           -- highlight = 'IndentBlanklineContextChar',
+        },
+      }
+    end,
+  },
+
+  {
+    'shellRaining/hlchunk.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function()
+      require('hlchunk').setup {
+        indent = {
+          enable = true,
+          style = { vim.api.nvim_get_hl(0, { name = 'IndentBlanklineChar' }) },
+          chars = { '▎' },
+          ahead_lines = 100,
+          delay = 10,
+        },
+        chunk = {
+          enable = true,
+          use_treesitter = true,
+          duration = 0,
+          delay = 80,
         },
       }
     end,
