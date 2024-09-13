@@ -574,11 +574,17 @@ require('lazy').setup({
   },
 
   {
-    'eero-lehtinen/oklch-picker',
-    build = 'npm install && npm run build',
+    'eero-lehtinen/oklch-color-picker.nvim',
+    -- dir = '~/repos/oklch-color-picker.nvim',
+    build = function()
+      require('oklch-color-picker').download_picker_app()
+    end,
     config = function()
-      require('oklch-picker').setup {}
-      vim.keymap.set('n', '<leader>p', require('oklch-picker').pick_color_under_cursor, { desc = 'Oklch [P]icker' })
+      require('oklch-color-picker').setup {
+        -- log_level = vim.log.levels.DEBUG,
+      }
+      -- (1.0, 0.599, 1.0)
+      vim.keymap.set('n', '<leader>p', require('oklch-color-picker').pick_color_under_cursor)
     end,
   },
 
