@@ -35,19 +35,22 @@ return {
       end,
     }
 
-    vim.api.nvim_create_user_command('FormatDisable', function(args)
-      if args.bang then
-        -- FormatDisable! will disable formatting just for this buffer
+    vim.keymap.set('n', '<leader>tf', function()
+      if vim.b.disable_autoformat == nil or vim.b.disable_autoformat == false then
         vim.b.disable_autoformat = true
+        vim.notify('Autoformat disabled for buffer', vim.log.levels.INFO)
       else
-        vim.g.disable_autoformat = true
+        vim.b.disable_autoformat = false
+        vim.notify('Autoformat enabled for buffer', vim.log.levels.INFO)
       end
+    end, { desc = '[T]oggle [F]ormat on Save' })
+
+    vim.api.nvim_create_user_command('FormatDisable', function()
+      vim.g.disable_autoformat = true
     end, {
       desc = 'Disable autoformat-on-save',
-      bang = true,
     })
     vim.api.nvim_create_user_command('FormatEnable', function()
-      vim.b.disable_autoformat = false
       vim.g.disable_autoformat = false
     end, {
       desc = 'Re-enable autoformat-on-save',
