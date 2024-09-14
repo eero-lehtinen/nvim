@@ -563,19 +563,6 @@ require('lazy').setup({
     },
   },
 
-  {
-    'eero-lehtinen/oklch-color-picker.nvim',
-    -- dir = '~/repos/oklch-color-picker.nvim',
-    build = 'download.lua',
-    config = function()
-      require('oklch-color-picker').setup {
-        -- log_level = vim.log.levels.DEBUG,
-      }
-      -- (1.0, 0.599, 1.0)
-      vim.keymap.set('n', '<leader>p', require('oklch-color-picker').pick_color_under_cursor)
-    end,
-  },
-
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
 
