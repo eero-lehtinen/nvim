@@ -577,7 +577,7 @@ require('lazy').setup({
     'eero-lehtinen/oklch-color-picker.nvim',
     -- dir = '~/repos/oklch-color-picker.nvim',
     build = function()
-      require('oklch-color-picker').download_picker_app()
+      require('oklch-color-picker').download_picker_program()
     end,
     config = function()
       require('oklch-color-picker').setup {
