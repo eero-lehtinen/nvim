@@ -17,7 +17,8 @@ vim.o.showmode = false
 vim.o.splitright = true
 vim.o.splitbelow = true
 -- vim.o.inccommand = 'split'
-vim.o.hlsearch = false
+-- vim.o.hlsearch = false
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.o.number = true
 vim.o.mouse = 'a'
 vim.o.clipboard = 'unnamedplus'
