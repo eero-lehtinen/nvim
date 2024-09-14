@@ -21,6 +21,8 @@ return {
     end,
   },
 
+  'tpope/vim-rhubarb',
+
   {
     'sindrets/diffview.nvim',
     config = function()
