@@ -55,27 +55,17 @@ require('lazy').setup({
         icons = {
           rules = false,
         },
-      }
-
-      require('which-key').add {
-        { '<leader>d', group = 'debug / document symbols' },
-        { '<leader>d_', hidden = true },
-        { '<leader>h', group = 'hunk (git)' },
-        { '<leader>h_', hidden = true },
-        { '<leader>s', group = 'search' },
-        { '<leader>s_', hidden = true },
-        { '<leader>t', group = 'toggle ' },
-        { '<leader>t_', hidden = true },
-        { '<leader>w', group = 'workspace symbols' },
-        { '<leader>w_', hidden = true },
-        { '<leader>l', group = 'language specific' },
-        { '<leader>l_', hidden = true },
-        { '<leader>q', group = 'qflist/loclist' },
-        { '<leader>q_', hidden = true },
-        { '<leader>g', group = 'git' },
-        { '<leader>g_', hidden = true },
-        { '<leader>m', group = 'surround' },
-        { '<leader>m_', hidden = true },
+        spec = {
+          { '<leader>d', group = 'debug / document symbols' },
+          { '<leader>h', group = 'hunk (git)' },
+          { '<leader>s', group = 'search' },
+          { '<leader>t', group = 'toggle ' },
+          { '<leader>w', group = 'workspace symbols' },
+          { '<leader>l', group = 'language specific' },
+          { '<leader>q', group = 'qflist/loclist' },
+          { '<leader>g', group = 'git' },
+          { '<leader>m', group = 'surround' },
+        },
       }
     end,
   },
