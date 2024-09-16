@@ -1,7 +1,7 @@
 return {
   {
     'eero-lehtinen/oklch-color-picker.nvim',
-    dev = false,
+    -- dev = true,
     build = 'download.lua',
     keys = {
       {
