@@ -13,7 +13,21 @@ return {
           cterm = 244,
         },
         log_level = 'off',
+        condition = function()
+          return true
+        end,
       }
+
+      vim.keymap.set('n', '<leader>ta', function()
+        local api = require 'supermaven-nvim.api'
+        if api.is_running() then
+          vim.notify 'Supermaven disabled'
+        else
+          vim.notify 'Supermaven enabled'
+        end
+
+        api.toggle()
+      end, { desc = '[T]oggle [A]I SuperMaven' })
     end,
   },
   {
