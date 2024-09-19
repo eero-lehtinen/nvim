@@ -471,13 +471,6 @@ require('lazy').setup({
     'laytan/cloak.nvim',
     opts = {},
   },
-  {
-    'KabbAmine/vCoolor.vim',
-    init = function()
-      vim.g.vcoolor_disable_mappings = 1
-      vim.g.vcoolor_map = '<A-c>'
-    end,
-  },
   'LunarVim/bigfile.nvim',
   {
     'folke/todo-comments.nvim',
