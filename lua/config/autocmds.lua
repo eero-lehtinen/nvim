@@ -49,3 +49,15 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
     vim.opt.formatoptions:remove 'o'
   end,
 })
+
+vim.api.nvim_create_augroup('vimrc_incsearch_highlight', { clear = true })
+vim.api.nvim_create_autocmd('CmdlineEnter', {
+  group = 'vimrc_incsearch_highlight',
+  pattern = { '/', '\\?' },
+  command = 'set hlsearch',
+})
+vim.api.nvim_create_autocmd('CmdlineLeave', {
+  group = 'vimrc_incsearch_highlight',
+  pattern = { '/', '\\?' },
+  command = 'set nohlsearch',
+})
