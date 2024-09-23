@@ -91,7 +91,7 @@ return {
   {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
-    enabled = false,
+    -- enabled = false,
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       { 'L3MON4D3/LuaSnip', build = 'make install_jsregexp' },
@@ -242,11 +242,10 @@ return {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
-        }, {
           { name = 'buffer' },
-        }),
+        }, {}),
         experimental = {
-          -- ghost_text = { hl_group = 'CmpGhostText' },
+          ghost_text = { hl_group = 'CmpGhostText' },
         },
       }
 
@@ -278,7 +277,7 @@ return {
   },
   {
     'ms-jpq/coq_nvim',
-    -- enabled = false,
+    enabled = false,
     branch = 'coq',
     init = function()
       vim.g.coq_settings = {
