@@ -5,7 +5,7 @@ return {
     build = 'download.lua',
     keys = {
       {
-        '<leader>p',
+        '<leader>v',
         function()
           require('oklch-color-picker').pick_under_cursor()
         end,
