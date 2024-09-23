@@ -13,6 +13,7 @@ return {
   { 'smjonas/inc-rename.nvim', opts = {} },
   {
     'neovim/nvim-lspconfig',
+    lazy = false,
     dependencies = {
       { 'williamboman/mason.nvim', config = true },
       'williamboman/mason-lspconfig.nvim',
@@ -191,7 +192,7 @@ return {
       }
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+      -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
       local mason_lspconfig = require 'mason-lspconfig'
 
@@ -220,6 +221,8 @@ return {
           'taplo',
         },
       }
+
+      require('coq').lsp_ensure_capabilities(capabilities)
     end,
   },
   {

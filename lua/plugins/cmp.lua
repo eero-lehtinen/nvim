@@ -91,6 +91,7 @@ return {
   {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
+    enabled = false,
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       { 'L3MON4D3/LuaSnip', build = 'make install_jsregexp' },
@@ -275,4 +276,49 @@ return {
       end)
     end,
   },
+  {
+    'ms-jpq/coq_nvim',
+    -- enabled = false,
+    branch = 'coq',
+    init = function()
+      vim.g.coq_settings = {
+        auto_start = true,
+        display = {
+          pum = {
+            fast_close = false,
+          },
+          preview = {
+            border = {
+              { '', 'NormalFloat' },
+              { '', 'NormalFloat' },
+              { '', 'NormalFloat' },
+              { ' ', 'NormalFloat' },
+              { '', 'NormalFloat' },
+              { '', 'NormalFloat' },
+              { '', 'NormalFloat' },
+              { ' ', 'NormalFloat' },
+            },
+            positions = {
+              north = 2,
+              south = 4,
+              west = 3,
+              east = 1,
+            },
+          },
+          statusline = {
+            helo = false,
+          },
+        },
+        clients = {
+          tags = {
+            enabled = false,
+          },
+          tmux = {
+            enabled = false,
+          },
+        },
+      }
+    end,
+  },
+  { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
 }
