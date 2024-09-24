@@ -9,7 +9,7 @@ return {
         function()
           require('oklch-color-picker').pick_under_cursor()
         end,
-        desc = '[P]ick color',
+        desc = 'Pick color',
       },
     },
     cmd = 'ColorPickOklch',
