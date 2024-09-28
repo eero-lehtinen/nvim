@@ -175,8 +175,8 @@ require('lazy').setup({
               border = 'rounded',
               relative = 'editor',
               width = 100,
-              height = screen_h - 2,
-              row = 1,
+              height = screen_h - 3,
+              row = 0,
               col = 1,
             }
           end,
