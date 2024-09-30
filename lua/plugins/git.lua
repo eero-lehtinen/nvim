@@ -10,14 +10,16 @@ return {
       vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
       vim.keymap.set('n', '<leader>gd', '<cmd>Gvdiffsplit<cr>', { desc = '[G]it [D]iff' })
 
-      vim.api.nvim_create_user_command('Glogo', 'G log --oneline', {})
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'fugitive',
-        callback = function()
-          vim.keymap.set('n', '<leader>gp', '<cmd>echo ":Git push" | Git push<cr>', { buffer = true, noremap = true })
-          vim.keymap.set('n', '<leader>gf', '<cmd>echo ":Git push --force-with-lease" | Git push --force-with-lease<cr>', { buffer = true, noremap = true })
-        end,
-      })
+      vim.api.nvim_create_user_command('Gp', 'Git push', {})
+      vim.api.nvim_create_user_command('Gpf', 'Git push --force-with-lease', {})
+
+      -- vim.api.nvim_create_autocmd('FileType', {
+      --   pattern = 'fugitive',
+      --   callback = function()
+      --     vim.keymap.set('n', '<leader>gp', '<cmd>echo ":Git push" | Git push<cr>', { buffer = true, noremap = true })
+      --     vim.keymap.set('n', '<leader>gf', '<cmd>echo ":Git push --force-with-lease" | Git push --force-with-lease<cr>', { buffer = true, noremap = true })
+      --   end,
+      -- })
     end,
   },
 
