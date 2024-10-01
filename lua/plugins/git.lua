@@ -34,6 +34,7 @@ return {
 
   {
     'sindrets/diffview.nvim',
+    event = 'VeryLazy',
     config = function()
       vim.cmd 'cnoreabbrev D DiffviewOpen'
       vim.cmd 'cnoreabbrev Dc DiffviewClose'
@@ -67,7 +68,7 @@ return {
       }
     end,
   },
-  { 'linrongbin16/gitlinker.nvim', opts = {} },
+  { 'linrongbin16/gitlinker.nvim', event = 'VeryLazy', opts = {} },
 
   {
     'lewis6991/gitsigns.nvim',
