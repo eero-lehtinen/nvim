@@ -7,7 +7,7 @@ vim.g.maplocalleader = ' '
 -- from https://notebook.kulchenko.com/algorithms/alphanumeric-natural-sorting-for-humans-in-lua
 local function natural_sort(nodes)
   local function padnum(d)
-    return ('%03d%s'):format(#d, d)
+    return ('%09d%s'):format(#d, d)
   end
   table.sort(nodes, function(a, b)
     local a_dir = a.type == 'directory'
