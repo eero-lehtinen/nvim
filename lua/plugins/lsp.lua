@@ -2,12 +2,12 @@ return {
   {
     'ray-x/lsp_signature.nvim',
     opts = {
-      toggle_key = '<A-k>',
+      toggle_key = '<C-k>',
     },
     init = function()
       vim.keymap.set('n', '<leader>ts', function()
         require('lsp_signature').toggle_float_win()
-      end, { desc = '[T]oggle [S]ignature Popup (i_ALT-k also works)' })
+      end, { desc = '[T]oggle [S]ignature Popup (i_CTRL-k also works)' })
     end,
   },
   { 'smjonas/inc-rename.nvim', opts = {} },
@@ -85,7 +85,7 @@ return {
           nmap('<leader>ws', fzf_lua.lsp_workspace_symbols, '[W]orkspace [S]ymbols')
 
           nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-          nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+          -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
           -- Lesser used LSP functionality
 
@@ -98,7 +98,8 @@ return {
 
           require('lsp_signature').on_attach({
             doc_lines = 0,
-            hint_enable = false,
+            floating_window = false,
+            hint_enable = true,
             handler_opts = {
               border = 'none',
             },
