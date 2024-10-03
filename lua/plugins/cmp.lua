@@ -221,8 +221,9 @@ return {
             -- if cmp.visible() then
             --   cmp.select_next_item()
             -- else
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
+
+            if luasnip.locally_jumpable() then
+              luasnip.jump()
             else
               fallback()
             end
@@ -319,5 +320,9 @@ return {
       }
     end,
   },
-  { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
+  {
+    enabled = false,
+    'ms-jpq/coq.artifacts',
+    branch = 'artifacts',
+  },
 }
