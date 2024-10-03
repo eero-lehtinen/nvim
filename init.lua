@@ -317,50 +317,7 @@ require('lazy').setup({
       }
     end,
   },
-  -- {
-  --   'windwp/nvim-autopairs',
-  --   opts = {
-  --     -- enable_moveright = false -- could be nice but idk
-  --   },
-  --   -- config = function()
-  --   -- local npairs = require 'nvim-autopairs'
-  --   -- npairs.setup {}
-  --   -- local conds = require 'nvim-autopairs.conds'
-  --   -- local rule = require 'nvim-autopairs.rule'
-  --   -- -- doesn't actually work when completing, but at least allows moving out of brackets
-  --   -- npairs.add_rules {
-  --   --   rule('<', '>'):with_pair(conds.none()):with_move(conds.done()):use_key '>',
-  --   -- }
-  --   -- end,
-  -- },
-  -- {
-  --   'abecodes/tabout.nvim',
-  --   dependencies = { 'nvim-treesitter/nvim-treesitter', 'hrsh7th/nvim-cmp' },
-  --   opts = {},
-  -- },
-  -- {
-  --   'kawre/neotab.nvim',
-  --   opts = {
-  --     tabkey = '',
-  --     act_as_tab = false,
-  --   },
-  --   init = function()
-  --     local function left_is_whitespace_or_empty()
-  --       local line = vim.fn.getline '.'
-  --       local col = vim.fn.col '.'
-  --       local left_side = string.sub(line, 1, col - 1)
-  --       return left_side:match '^%s*$' ~= nil
-  --     end
-  --
-  --     vim.keymap.set('i', '<TAB>', function()
-  --       if left_is_whitespace_or_empty() then
-  --         vim.fn.feedkeys('\t', 'n')
-  --       else
-  --         require('neotab').tabout()
-  --       end
-  --     end, { noremap = true, silent = true })
-  --   end,
-  -- },
+
   {
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
@@ -585,6 +542,16 @@ require('lazy').setup({
       end
       vim.keymap.set('', '<F9>', toggle_profile)
     end,
+  },
+
+  { 'windwp/nvim-ts-autotag', opts = {} },
+  {
+    'echasnovski/mini.pairs',
+    opts = {
+      mappings = {
+        ['|'] = { action = 'closeopen', pair = '||', neigh_pattern = '[^\\].' },
+      },
+    },
   },
 
   -- 'lewis6991/satellite.nvim',

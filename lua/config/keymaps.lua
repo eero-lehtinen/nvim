@@ -41,3 +41,29 @@ vim.api.nvim_create_user_command('Messages', ":new | setlocal buftype=nofile buf
 })
 
 vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<cr>', { desc = 'Tab close' })
+
+-- My tabout
+local function left_is_whitespace_or_empty()
+  local line = vim.fn.getline '.'
+  local col = vim.fn.col '.'
+  local left_side = string.sub(line, 1, col - 1)
+  return left_side:match '^%s*$' ~= nil
+end
+
+local function tabout()
+  local pos = vim.api.nvim_win_get_cursor(0)
+  local line = vim.api.nvim_get_current_line()
+  local line_end = line:sub(pos[2] + 1)
+  local jump_pos = line_end:find '["\'`%)%]}>|]'
+  if jump_pos then
+    vim.api.nvim_win_set_cursor(0, { pos[1], pos[2] + jump_pos })
+  end
+end
+
+vim.keymap.set('i', '<TAB>', function()
+  if left_is_whitespace_or_empty() then
+    vim.fn.feedkeys('\t', 'n')
+  else
+    tabout()
+  end
+end, { noremap = true, silent = true })
