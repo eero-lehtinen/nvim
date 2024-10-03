@@ -1,4 +1,5 @@
 return {
+  'RRethy/nvim-treesitter-endwise',
   {
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
@@ -45,6 +46,10 @@ return {
         sync_install = false,
         ignore_install = {},
         modules = {},
+
+        endwise = {
+          enable = true,
+        },
 
         highlight = { enable = true, additional_vim_regex_highlighting = false, disable = { 'csv' } },
         -- indent = { enable = true }, -- this overrides indent autoselect plugins and is often wrong
