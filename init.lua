@@ -93,12 +93,21 @@ require('lazy').setup({
       require('hlchunk').setup {
         indent = {
           enable = true,
-          style = { vim.api.nvim_get_hl(0, { name = 'IndentBlanklineChar' }) },
+          style = {
+            ---@diagnostic disable-next-line: assign-type-mismatch
+            vim.api.nvim_get_hl(0, { name = 'IndentBlanklineChar' }),
+          },
           chars = { '▎' },
           ahead_lines = 100,
           delay = 10,
         },
         chunk = {
+          style = {
+            ---@diagnostic disable-next-line: assign-type-mismatch
+            vim.api.nvim_get_hl(0, { name = 'DiagnosticHint' }),
+            ---@diagnostic disable-next-line: assign-type-mismatch
+            vim.api.nvim_get_hl(0, { name = 'DiagnosticError' }),
+          },
           enable = true,
           use_treesitter = true,
           duration = 0,

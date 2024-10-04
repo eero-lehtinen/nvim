@@ -44,10 +44,10 @@ vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<cr>', { desc = 'Tab close' })
 
 -- My tabout
 local function left_is_whitespace_or_empty()
+  local pos = vim.api.nvim_win_get_cursor(0)
   local line = vim.api.nvim_get_current_line()
-  local col = vim.api.nvim_win_get_cursor(0)[2]
-  local left_side = string.sub(line, 1, col)
-  return left_side:match '^%s*$' ~= nil
+  local left_side = line:sub(1, pos[2])
+  return left_side:find '^%s*$' ~= nil
 end
 
 local function tabout()
