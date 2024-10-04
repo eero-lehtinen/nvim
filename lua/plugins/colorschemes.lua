@@ -11,6 +11,16 @@ return {
       statementStyle = { bold = false },
       commentStyle = { italic = true },
       colors = {
+        palette = {
+          -- Rotate all dark colors to be one step darker and
+          -- come up with new even dareker sumiInk0
+          sumiInk0 = '#111116',
+          sumiInk1 = '#16161D',
+          sumiInk2 = '#181820',
+          sumiInk3 = '#1a1a22',
+          sumiInk4 = '#1F1F28',
+          sumiInk5 = '#2A2A37',
+        },
         theme = {
           all = {
             ui = {
