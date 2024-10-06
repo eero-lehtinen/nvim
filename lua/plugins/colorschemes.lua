@@ -14,11 +14,11 @@ return {
         palette = {
           -- Rotate all dark colors to be one step darker and
           -- come up with new even dareker sumiInk0
-          sumiInk0 = '#111116',
-          sumiInk1 = '#16161D',
-          sumiInk2 = '#181820',
+          sumiInk0 = '#0E0E12',
+          sumiInk1 = '#14141B',
+          sumiInk2 = '#17171E',
           sumiInk3 = '#1a1a22',
-          sumiInk4 = '#1F1F28',
+          sumiInk4 = '#21212B',
           sumiInk5 = '#2A2A37',
         },
         theme = {
@@ -55,6 +55,16 @@ return {
           LspInlayHint = { fg = theme.ui.nontext, bg = theme.ui.bg_m1 },
           CursorLine = { bg = theme.ui.bg_p1 },
           HighlightUndo = { fg = theme.ui.fg, bg = colors.palette.waveBlue2 },
+          MarkviewHeading1 = { bg = theme.ui.bg_m2 },
+          MarkviewHeading2 = { bg = theme.ui.bg_m2 },
+          MarkviewHeading3 = { bg = theme.ui.bg_m2 },
+          MarkviewHeading4 = { bg = theme.ui.bg_m2 },
+          MarkviewHeading5 = { bg = theme.ui.bg_m2 },
+          MarkviewHeading6 = { bg = theme.ui.bg_m2 },
+          MarkviewListItemMinus = { fg = colors.palette.oniViolet },
+          MarkviewListItemPlus = { fg = colors.palette.oniViolet },
+          MarkviewListItemStar = { fg = colors.palette.oniViolet },
+          MarkviewCode = { bg = theme.ui.bg_p1 },
         }
       end,
     },

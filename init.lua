@@ -563,6 +563,37 @@ require('lazy').setup({
     },
   },
 
+  {
+    'OXY2DEV/markview.nvim',
+    ft = 'markdown',
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
+    },
+    opts = {
+      headings = {
+        heading_1 = {
+          style = 'simple',
+        },
+        heading_2 = {
+          style = 'simple',
+        },
+        heading_3 = {
+          style = 'simple',
+        },
+        heading_4 = {
+          style = 'simple',
+        },
+        heading_5 = {
+          style = 'simple',
+        },
+        heading_6 = {
+          style = 'simple',
+        },
+      },
+    },
+  },
+
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
 
