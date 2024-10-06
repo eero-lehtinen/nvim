@@ -592,6 +592,14 @@ require('lazy').setup({
         },
       },
     },
+    init = function()
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'markdown',
+        callback = function()
+          vim.keymap.set('n', '<leader>lt', '<cmd>Markview toggle<cr>', { buffer = true, desc = '(MARKDOWN) Toggle markview' })
+        end,
+      })
+    end,
   },
 
   -- 'lewis6991/satellite.nvim',
