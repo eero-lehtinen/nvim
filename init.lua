@@ -553,7 +553,7 @@ require('lazy').setup({
     end,
   },
 
-  { 'windwp/nvim-ts-autotag', opts = {} },
+  { 'windwp/nvim-ts-autotag', event = 'VeryLazy', opts = {} },
   {
     'echasnovski/mini.pairs',
     opts = {
