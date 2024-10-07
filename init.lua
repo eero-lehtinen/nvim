@@ -437,7 +437,6 @@ require('lazy').setup({
     'laytan/cloak.nvim',
     opts = {},
   },
-  'LunarVim/bigfile.nvim',
   {
     'folke/todo-comments.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -600,6 +599,16 @@ require('lazy').setup({
         end,
       })
     end,
+  },
+  {
+    'pteroctopus/faster.nvim',
+    opts = {
+      behaviours = {
+        bigfile = {
+          features_disabled = { 'illuminate', 'matchparen', 'lsp', 'treesitter' },
+        },
+      },
+    },
   },
 
   -- 'lewis6991/satellite.nvim',
