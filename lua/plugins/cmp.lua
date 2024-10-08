@@ -91,8 +91,8 @@ return {
   },
   {
     'hrsh7th/nvim-cmp',
+    enabled = false,
     event = 'InsertEnter',
-    -- enabled = false,
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       { 'L3MON4D3/LuaSnip', build = 'make install_jsregexp' },
@@ -314,5 +314,34 @@ return {
     enabled = false,
     'ms-jpq/coq.artifacts',
     branch = 'artifacts',
+  },
+  {
+    'saghen/blink.cmp',
+    lazy = false,
+    version = 'v0.*',
+    opts = {
+      keymap = {
+        show = '<C-space>',
+        hide = '<C-e>',
+        accept = '<C-y>',
+        select_prev = { '<Up>', '<C-p>' },
+        select_next = { '<Down>', '<C-n>' },
+
+        show_documentation = {},
+        hide_documentation = {},
+        scroll_documentation_up = {},
+        scroll_documentation_down = '<C-f>',
+
+        snippet_forward = {},
+        snippet_backward = {},
+      },
+      highlight = {
+        use_nvim_cmp_as_default = true,
+      },
+    },
+    init = function()
+      local b = require 'blink.cmp'
+      vim.keymap.set({ 'i', 's' }, '<C-l>', b.snippet_forward, { desc = 'Snippet forward' })
+    end,
   },
 }
