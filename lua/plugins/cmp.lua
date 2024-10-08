@@ -341,6 +341,8 @@ return {
     },
     init = function()
       local b = require 'blink.cmp'
+      vim.keymap.set('i', '<C-n>', '<Nop>')
+      vim.keymap.set('i', '<C-p>', '<Nop>')
       vim.keymap.set({ 'i', 's' }, '<C-l>', b.snippet_forward, { desc = 'Snippet forward' })
     end,
   },
