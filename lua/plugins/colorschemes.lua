@@ -14,7 +14,7 @@ return {
         palette = {
           -- Rotate all dark colors to be one step darker and
           -- come up with new even dareker sumiInk0
-          sumiInk0 = '#0E0E12',
+          sumiInk0 = '#111117',
           sumiInk1 = '#14141B',
           sumiInk2 = '#17171E',
           sumiInk3 = '#1a1a22',
