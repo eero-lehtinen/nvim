@@ -338,6 +338,11 @@ return {
       highlight = {
         use_nvim_cmp_as_default = true,
       },
+      windows = {
+        autocomplete = {
+          draw = 'reversed',
+        },
+      },
     },
     init = function()
       local b = require 'blink.cmp'
