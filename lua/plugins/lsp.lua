@@ -4,6 +4,7 @@ return {
     opts = {
       toggle_key = '<C-k>',
     },
+    event = 'VeryLazy',
     init = function()
       vim.keymap.set('n', '<leader>ts', function()
         require('lsp_signature').toggle_float_win()

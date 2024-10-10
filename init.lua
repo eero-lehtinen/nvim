@@ -320,13 +320,13 @@ require('lazy').setup({
   },
   {
     'RRethy/vim-illuminate',
+    event = 'VeryLazy',
     config = function()
       require('illuminate').configure {
         min_count_to_highlight = 2,
       }
     end,
   },
-
   {
     'iamcco/markdown-preview.nvim',
     cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
@@ -610,6 +610,7 @@ require('lazy').setup({
       },
     },
   },
+  'tpope/vim-endwise',
 
   -- 'lewis6991/satellite.nvim',
   -- 'dstein64/nvim-scrollview',
