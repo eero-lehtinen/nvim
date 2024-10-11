@@ -318,7 +318,6 @@ return {
   {
     'saghen/blink.cmp',
     lazy = false,
-    version = 'v0.*',
     opts = {
       keymap = {
         show = '<C-space>',
