@@ -99,8 +99,10 @@ return {
 
           require('lsp_signature').on_attach({
             doc_lines = 0,
-            floating_window = false,
-            hint_enable = true,
+            floating_window = true,
+            wrap = false,
+            max_width = 120,
+            hint_enable = false,
             handler_opts = {
               border = 'none',
             },
