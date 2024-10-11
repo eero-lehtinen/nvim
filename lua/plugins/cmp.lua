@@ -341,12 +341,16 @@ return {
         autocomplete = {
           draw = 'reversed',
         },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 300,
+        },
       },
     },
     init = function()
       local b = require 'blink.cmp'
-      vim.keymap.set('i', '<C-n>', '<Nop>')
-      vim.keymap.set('i', '<C-p>', '<Nop>')
+      vim.keymap.set('i', '<C-n>', b.show)
+      vim.keymap.set('i', '<C-p>', b.show)
       vim.keymap.set({ 'i', 's' }, '<C-l>', b.snippet_forward, { desc = 'Snippet forward' })
     end,
   },
