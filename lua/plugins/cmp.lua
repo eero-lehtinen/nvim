@@ -320,7 +320,7 @@ return {
     lazy = false,
     opts = {
       keymap = {
-        show = '<C-space>',
+        show = { '<C-n>', '<C-p>' },
         hide = '<C-e>',
         accept = '<C-y>',
         select_prev = { '<Up>', '<C-p>' },
@@ -331,7 +331,7 @@ return {
         scroll_documentation_up = {},
         scroll_documentation_down = '<C-f>',
 
-        snippet_forward = {},
+        snippet_forward = '<C-l>',
         snippet_backward = {},
       },
       highlight = {
@@ -342,16 +342,10 @@ return {
           draw = 'reversed',
         },
         documentation = {
-          auto_show = true,
+          auto_show = false, -- for now, because it's really slow
           auto_show_delay_ms = 300,
         },
       },
     },
-    init = function()
-      local b = require 'blink.cmp'
-      vim.keymap.set('i', '<C-n>', b.show)
-      vim.keymap.set('i', '<C-p>', b.show)
-      vim.keymap.set({ 'i', 's' }, '<C-l>', b.snippet_forward, { desc = 'Snippet forward' })
-    end,
   },
 }

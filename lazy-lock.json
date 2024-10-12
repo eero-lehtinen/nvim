@@ -1,5 +1,5 @@
 {
-  "blink.cmp": { "branch": "main", "commit": "27903bef41bc745c4d5419e86ca5bf09ed538f2b" },
+  "blink.cmp": { "branch": "main", "commit": "340370d526996b99ff75c1858294f15502af0179" },
   "cloak.nvim": { "branch": "main", "commit": "648aca6d33ec011dc3166e7af3b38820d01a71e4" },
   "conform.nvim": { "branch": "master", "commit": "40d4e98fcc3e6f485f0e8924c63734bc7e305967" },
   "coq.artifacts": { "branch": "artifacts", "commit": "a1ffcee295905171d87b40ee456001d45b10329b" },

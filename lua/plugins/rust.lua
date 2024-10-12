@@ -70,7 +70,7 @@ return {
   },
   {
     'mrcjkb/rustaceanvim',
-    -- dir = '~/repos/rustaceanvim',
+    dev = false,
     version = '*',
     ft = { 'rust' },
     init = function()

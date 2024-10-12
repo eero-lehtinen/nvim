@@ -212,7 +212,7 @@ return {
             filetypes = (servers[server_name] or {}).filetypes,
           }
         end,
-        -- ['rust_analyzer'] = function() end,
+        ['rust_analyzer'] = function() end,
       }
 
       -- require('lspconfig').glasgow.setup {}
