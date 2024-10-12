@@ -317,6 +317,7 @@ return {
   },
   {
     'saghen/blink.cmp',
+    -- dev = true,
     lazy = false,
     opts = {
       keymap = {
