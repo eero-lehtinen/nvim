@@ -90,7 +90,7 @@ return {
     end,
   },
   {
-    'hrsh7th/nvim-cmp',
+    'iguanacucumber/magazine.nvim',
     enabled = false,
     event = 'InsertEnter',
     dependencies = {
@@ -112,7 +112,7 @@ return {
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       local lspkind = require 'lspkind'
-      require('luasnip.loaders.from_vscode').lazy_load { paths = { './my-friendly-snippets' } }
+      require('luasnip.loaders.from_vscode').lazy_load { paths = { './snippets' } }
       luasnip.config.setup {}
 
       local compare = require 'cmp.config.compare'
@@ -317,8 +317,9 @@ return {
   },
   {
     'saghen/blink.cmp',
-    -- dev = true,
+    dev = true,
     lazy = false,
+    enabled = true,
     opts = {
       keymap = {
         show = { '<C-n>', '<C-p>' },
@@ -343,8 +344,8 @@ return {
           draw = 'reversed',
         },
         documentation = {
-          auto_show = false, -- for now, because it's really slow
-          auto_show_delay_ms = 300,
+          auto_show = true, -- for now, because it's really slow
+          auto_show_delay_ms = 200,
         },
       },
     },
