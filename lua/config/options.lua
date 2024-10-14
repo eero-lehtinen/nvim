@@ -21,6 +21,7 @@ vim.o.hlsearch = false
 
 vim.o.number = true
 vim.o.mouse = 'a'
+vim.o.mousescroll = 'ver:7,hor:12'
 vim.o.clipboard = 'unnamedplus'
 vim.o.breakindent = true
 vim.o.undofile = true
