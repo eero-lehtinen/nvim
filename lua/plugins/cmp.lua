@@ -317,7 +317,7 @@ return {
   },
   {
     'saghen/blink.cmp',
-    dev = true,
+    -- dev = true,
     lazy = false,
     enabled = true,
     opts = {
