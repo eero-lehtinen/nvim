@@ -4,6 +4,13 @@ return {
   -- enabled = false,
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   config = function()
+    local image_formats = { 'png', 'jpg', 'jpeg', 'gif', 'bmp', 'ico', 'tif', 'tiff', 'svg', 'webp' }
+
+    local image_preview = {}
+    for _, format in ipairs(image_formats) do
+      image_preview[format] = { 'viu', '-b' }
+    end
+
     local fzf_lua = require 'fzf-lua'
     fzf_lua.setup {
       winopts = {
@@ -16,6 +23,11 @@ return {
       lsp = {
         jump_to_single_result = true,
         -- async_or_timeout = true,
+      },
+      previewers = {
+        builtin = {
+          extensions = image_preview,
+        },
       },
     }
 
