@@ -558,44 +558,6 @@ require('lazy').setup({
   },
 
   {
-    'OXY2DEV/markview.nvim',
-    ft = 'markdown',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      'nvim-tree/nvim-web-devicons',
-    },
-    opts = {
-      headings = {
-        heading_1 = {
-          style = 'simple',
-        },
-        heading_2 = {
-          style = 'simple',
-        },
-        heading_3 = {
-          style = 'simple',
-        },
-        heading_4 = {
-          style = 'simple',
-        },
-        heading_5 = {
-          style = 'simple',
-        },
-        heading_6 = {
-          style = 'simple',
-        },
-      },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd('FileType', {
-        pattern = 'markdown',
-        callback = function()
-          vim.keymap.set('n', '<leader>lt', '<cmd>Markview toggle<cr>', { buffer = true, desc = '(MARKDOWN) Toggle markview' })
-        end,
-      })
-    end,
-  },
-  {
     'pteroctopus/faster.nvim',
     opts = {
       behaviours = {
