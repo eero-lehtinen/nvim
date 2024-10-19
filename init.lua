@@ -446,19 +446,6 @@ require('lazy').setup({
     opts = {},
   },
   {
-    'folke/todo-comments.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    opts = {
-      signs = false,
-    },
-    init = function()
-      -- vim.keymap.set('n', '<leader>st', '<cmd>TodoTelescope<cr>', { desc = '[S]earch [T]odo Comments' })
-      vim.keymap.set('n', '<leader>st', function()
-        require('todo-comments.fzf').todo()
-      end, { desc = '[S]earch [T]odo Comments' })
-    end,
-  },
-  {
     'rachartier/tiny-devicons-auto-colors.nvim',
     dependencies = {
       'nvim-tree/nvim-web-devicons',
