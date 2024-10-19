@@ -71,22 +71,6 @@ require('lazy').setup({
   },
 
   {
-    'lukas-reineke/indent-blankline.nvim',
-    enabled = false,
-    config = function()
-      require('ibl').setup {
-        -- indent = { char = '│' },
-        -- viewport_buffer = { min = 200, max = 600 },
-        -- indent = { highlight = 'IndentBlanklineChar' },
-        scope = {
-          enabled = false,
-          -- highlight = 'IndentBlanklineContextChar',
-        },
-      }
-    end,
-  },
-
-  {
     'shellRaining/hlchunk.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
@@ -229,50 +213,6 @@ require('lazy').setup({
     'stevearc/dressing.nvim',
     opts = {},
   },
-  {
-    'folke/noice.nvim',
-    enabled = false,
-    event = 'VeryLazy',
-    dependencies = { 'MunifTanjim/nui.nvim' },
-    opts = {
-      lsp = {
-        -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-        override = {
-          ['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-          ['vim.lsp.util.stylize_markdown'] = true,
-          ['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
-        },
-      },
-      -- you can enable a preset for easier configuration
-      presets = {
-        bottom_search = false, -- use a classic bottom cmdline for search
-        command_palette = false, -- position the cmdline and popupmenu together
-        long_message_to_split = false, -- long messages will be sent to a split
-        inc_rename = true, -- enables an input dialog for inc-rename.nvim
-        lsp_doc_border = false, -- add a border to hover docs and signature help
-      },
-    },
-    init = function()
-      vim.keymap.set('n', '<leader>sn', '<cmd>Noice telescope<cr>', { desc = '[S]earch [N]otifications' })
-    end,
-  },
-  -- {
-  --   'NvChad/nvim-colorizer.lua',
-  --   event = { 'BufReadPost', 'BufNewFile' },
-  --   opts = {
-  --     user_default_options = {
-  --       RRGGBBAA = true,
-  --       names = false,
-  --     },
-  --   },
-  -- },
-  -- {
-  --   'brenoprata10/nvim-highlight-colors',
-  --   opts = {
-  --     enable_named_colors = false,
-  --     enable_tailwind = true,
-  --   },
-  -- },
   {
     'tummetott/unimpaired.nvim',
     lazy = false,
@@ -445,6 +385,7 @@ require('lazy').setup({
     'laytan/cloak.nvim',
     opts = {},
   },
+
   {
     'rachartier/tiny-devicons-auto-colors.nvim',
     dependencies = {
