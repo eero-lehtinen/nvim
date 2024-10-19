@@ -266,13 +266,13 @@ require('lazy').setup({
   --     },
   --   },
   -- },
-  {
-    'brenoprata10/nvim-highlight-colors',
-    opts = {
-      enable_named_colors = false,
-      enable_tailwind = true,
-    },
-  },
+  -- {
+  --   'brenoprata10/nvim-highlight-colors',
+  --   opts = {
+  --     enable_named_colors = false,
+  --     enable_tailwind = true,
+  --   },
+  -- },
   {
     'tummetott/unimpaired.nvim',
     lazy = false,
