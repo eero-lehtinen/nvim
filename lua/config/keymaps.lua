@@ -69,12 +69,15 @@ end, { noremap = true, silent = true })
 
 -- Auto updating messages
 vim.api.nvim_create_user_command('Messages', function()
+  local prev_win = vim.api.nvim_get_current_win()
   local buf = vim.api.nvim_create_buf(false, true)
 
   -- Open the buffer in a new split window
   vim.api.nvim_command 'split'
   local win = vim.api.nvim_get_current_win()
   vim.api.nvim_win_set_buf(win, buf)
+
+  vim.api.nvim_set_current_win(prev_win)
 
   local timer = vim.loop.new_timer()
 
@@ -91,16 +94,15 @@ vim.api.nvim_create_user_command('Messages', function()
     local line_count = vim.api.nvim_buf_line_count(buf)
     local cursor_at_bottom = cursor_pos[1] == line_count
 
-    -- Get the last 10 messages from :messages
     local messages = vim.fn.execute 'messages'
     local lines = vim.split(messages, '\n')
-    if #lines == 1 and lines[1] == '' then
+    table.remove(lines, 1)
+    if #lines == 0 then
       return
     end
     vim.api.nvim_buf_set_lines(buf, -1, -1, false, lines)
     vim.fn.execute 'messages clear'
 
-    -- Keep the cursor at the bottom if it was there
     if cursor_at_bottom then
       local new_line_count = vim.api.nvim_buf_line_count(buf)
       vim.api.nvim_win_set_cursor(win, { new_line_count, 0 })
