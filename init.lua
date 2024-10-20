@@ -346,7 +346,7 @@ require('lazy').setup({
       {
         'echasnovski/mini.splitjoin',
         version = false,
-        opts = { mappings = { toggle = '' } },
+        opts = { mappings = { toggle = '<leader>J' } },
       },
     },
     init = function()
