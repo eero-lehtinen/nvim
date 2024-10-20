@@ -14,13 +14,10 @@ return {
           cterm = 244,
         },
         log_level = 'off',
-        condition = function()
-          return true
-        end,
       }
 
+      local api = require 'supermaven-nvim.api'
       vim.keymap.set('n', '<leader>ta', function()
-        local api = require 'supermaven-nvim.api'
         if api.is_running() then
           vim.notify 'Supermaven disabled'
         else
@@ -29,6 +26,8 @@ return {
 
         api.toggle()
       end, { desc = '[T]oggle [A]I SuperMaven' })
+
+      api.stop()
     end,
   },
   {
