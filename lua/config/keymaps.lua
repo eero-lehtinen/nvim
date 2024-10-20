@@ -35,11 +35,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>E', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
-vim.api.nvim_create_user_command('Messages', ":new | setlocal buftype=nofile bufhidden=delete noswapfile | silent! put = execute('messages')", {
-  nargs = 0,
-  desc = 'Show messages in a new window',
-})
-
 vim.keymap.set('n', '<leader>tc', '<cmd>tabclose<cr>', { desc = 'Tab close' })
 
 -- My tabout
@@ -67,3 +62,49 @@ vim.keymap.set('i', '<TAB>', function()
     tabout()
   end
 end, { noremap = true, silent = true })
+
+-- Auto updating messages
+vim.api.nvim_create_user_command('Messages', function()
+  local buf = vim.api.nvim_create_buf(false, true)
+
+  -- Open the buffer in a new split window
+  vim.api.nvim_command 'split'
+  local win = vim.api.nvim_get_current_win()
+  vim.api.nvim_win_set_buf(win, buf)
+
+  local timer = vim.loop.new_timer()
+
+  -- Function to update the buffer with recent messages
+  local function update_buffer()
+    if not vim.api.nvim_win_is_valid(win) or not vim.api.nvim_buf_is_valid(buf) then
+      timer:stop()
+      return
+    end
+    -- Get the current cursor position
+    local cursor_pos = vim.api.nvim_win_get_cursor(win)
+
+    -- Check if the cursor is at the bottom of the buffer
+    local line_count = vim.api.nvim_buf_line_count(buf)
+    local cursor_at_bottom = cursor_pos[1] == line_count
+
+    -- Get the last 10 messages from :messages
+    local messages = vim.fn.execute 'messages'
+    local lines = vim.split(messages, '\n')
+    if #lines == 1 and lines[1] == '' then
+      return
+    end
+    vim.api.nvim_buf_set_lines(buf, -1, -1, false, lines)
+    vim.fn.execute 'messages clear'
+
+    -- Keep the cursor at the bottom if it was there
+    if cursor_at_bottom then
+      local new_line_count = vim.api.nvim_buf_line_count(buf)
+      vim.api.nvim_win_set_cursor(win, { new_line_count, 0 })
+    end
+  end
+
+  timer:start(0, 100, vim.schedule_wrap(update_buffer))
+end, {
+  nargs = 0,
+  desc = 'Show messages in a new window',
+})
