@@ -264,12 +264,7 @@ require('lazy').setup({
   },
   {
     'tzachar/highlight-undo.nvim',
-    opts = {
-      keymaps = {
-        paste = { disabled = true },
-        Paste = { disabled = true },
-      },
-    },
+    opts = {},
   },
   {
     'RRethy/vim-illuminate',
