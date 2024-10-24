@@ -36,11 +36,10 @@ return {
       local nops = {
         '<leader>r',
         '<leader>c',
-        'gd',
+        -- 'gd',
         'gr',
         'gi',
-        'gD',
-        -- '<leader>D',
+        -- 'gD',
         '<leader>ds',
         '<leader>ws',
         '<leader>wf',
