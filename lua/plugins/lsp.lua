@@ -194,8 +194,9 @@ return {
         -- wgsl_analyzer = {},
       }
 
-      local capabilities = vim.lsp.protocol.make_client_capabilities()
+      -- local capabilities = vim.lsp.protocol.make_client_capabilities()
       -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+      local capabilities = require('blink.cmp').get_lsp_capabilities({}, true)
 
       local mason_lspconfig = require 'mason-lspconfig'
 
