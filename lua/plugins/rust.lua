@@ -111,6 +111,7 @@ return {
                 analyzerTargetDir = true,
               },
               check = {
+                workspace = false,
                 command = 'clippy',
                 extraArgs = { '--no-deps' },
               },
