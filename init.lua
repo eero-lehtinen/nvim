@@ -354,7 +354,7 @@ require('lazy').setup({
         local range = { c[1] - 1, c[2], c[1] - 1, c[2] }
         local buf = vim.api.nvim_get_current_buf()
         local ok, parser = pcall(vim.treesitter.get_parser, buf, vim.treesitter.language.get_lang(vim.bo[buf].ft))
-        if not ok then
+        if not ok or not parser then
           return ''
         end
         local current_tree = parser:language_for_range(range)
