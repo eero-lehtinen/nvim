@@ -1,19 +1,6 @@
 return {
   {
     'ray-x/lsp_signature.nvim',
-    enabled = true,
-    opts = {
-      toggle_key = '<C-k>',
-      doc_lines = 0,
-      floating_window = true,
-      wrap = false,
-      max_width = 120,
-      hint_enable = false,
-      handler_opts = {
-        border = 'none',
-      },
-    },
-    lazy = false,
     init = function()
       vim.keymap.set('n', '<leader>ts', function()
         require('lsp_signature').toggle_float_win()
@@ -104,6 +91,17 @@ return {
             local f = vim.lsp.buf.list_workspace_folders()
             vim.notify('Workspace folders: ' .. vim.inspect(f), 'info')
           end, '[W]orkspace [F]olders')
+
+          require('lsp_signature').on_attach({
+            toggle_key = '<C-k>',
+            doc_lines = 0,
+            hint_enable = false,
+            max_width = 100,
+            max_height = 4,
+            handler_opts = {
+              border = 'none',
+            },
+          }, event.buf)
         end,
       })
 
