@@ -78,7 +78,6 @@ require('lazy').setup({
         indent = {
           enable = true,
           style = {
-            ---@diagnostic disable-next-line: assign-type-mismatch
             vim.api.nvim_get_hl(0, { name = 'IndentBlanklineChar' }),
           },
           chars = { '▎' },
@@ -87,9 +86,7 @@ require('lazy').setup({
         },
         chunk = {
           style = {
-            ---@diagnostic disable-next-line: assign-type-mismatch
             vim.api.nvim_get_hl(0, { name = 'DiagnosticHint' }),
-            ---@diagnostic disable-next-line: assign-type-mismatch
             vim.api.nvim_get_hl(0, { name = 'DiagnosticError' }),
           },
           enable = true,
