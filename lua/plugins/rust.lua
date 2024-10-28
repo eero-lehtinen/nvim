@@ -136,7 +136,7 @@ return {
             vim.cmd.RustLsp 'expandMacro'
           end, '[E]xpand Macro')
 
-          local_nmap('<leader>k', function()
+          local_nmap('<leader>lc', function()
             vim.cmd.RustLsp 'flyCheck'
           end, 'flycheck [k]')
         end,
