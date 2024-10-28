@@ -42,10 +42,10 @@ end
 
 local check_on_save = true
 local no_check_on_save_dirs = {
-  -- 'matopeli$',
+  'matopeli$',
   -- 'matopeli%-main%-thing$',
-  -- 'bevy$',
-  -- 'bevy%-fork$',
+  'bevy$',
+  'bevy%-fork$',
 }
 local pwd = vim.fn.getcwd()
 for _, dir in ipairs(no_check_on_save_dirs) do
