@@ -68,8 +68,8 @@ return {
       }
     end,
   },
-  { 'linrongbin16/gitlinker.nvim', event = 'VeryLazy', opts = {} },
-
+  'nvim-lua/plenary.nvim',
+  { 'linrongbin16/gitlinker.nvim', opts = {} },
   {
     'lewis6991/gitsigns.nvim',
     opts = {
