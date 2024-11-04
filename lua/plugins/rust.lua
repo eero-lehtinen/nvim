@@ -42,7 +42,7 @@ end
 
 local check_on_save = true
 local no_check_on_save_dirs = {
-  'matopeli$',
+  -- 'matopeli$',
   -- 'matopeli%-main%-thing$',
   'bevy$',
   'bevy%-fork$',
