@@ -332,17 +332,20 @@ return {
 
         ['<C-l>'] = { 'snippet_forward' },
       },
-      highlight = {
-        use_nvim_cmp_as_default = true,
-      },
       windows = {
         autocomplete = {
           draw = 'reversed',
         },
         documentation = {
-          auto_show = true, -- for now, because it's really slow
+          auto_show = true,
           auto_show_delay_ms = 200,
         },
+        ghost_text = {
+          enabled = true,
+        },
+      },
+      highlight = {
+        use_nvim_cmp_as_default = true,
       },
     },
   },
