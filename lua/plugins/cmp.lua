@@ -319,6 +319,8 @@ return {
     -- dev = true,
     lazy = false,
     enabled = true,
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
     opts = {
       keymap = {
         ['<C-y>'] = { 'select_and_accept' },
@@ -339,6 +341,7 @@ return {
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 200,
+          scrollbar = false,
         },
         ghost_text = {
           enabled = true,
