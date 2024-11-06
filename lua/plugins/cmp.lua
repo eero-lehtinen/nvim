@@ -344,7 +344,7 @@ return {
           scrollbar = false,
         },
         ghost_text = {
-          enabled = true,
+          enabled = false,
         },
       },
       highlight = {
