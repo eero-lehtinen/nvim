@@ -269,6 +269,7 @@ require('lazy').setup({
     config = function()
       require('illuminate').configure {
         min_count_to_highlight = 2,
+        delay = 70,
       }
     end,
   },
