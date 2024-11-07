@@ -49,6 +49,9 @@ return {
         endwise = {
           enable = true,
         },
+        matchup = {
+          enable = true,
+        },
 
         highlight = { enable = true, additional_vim_regex_highlighting = false, disable = { 'csv' } },
         -- indent = { enable = true }, -- this overrides indent autoselect plugins and is often wrong

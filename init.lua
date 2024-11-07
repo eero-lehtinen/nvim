@@ -326,12 +326,9 @@ require('lazy').setup({
   'jesseleite/nvim-macroni', -- Adds `:YankMacro [register]`
   {
     'andymass/vim-matchup',
-    enabled = false,
+    -- enabled = false,
     init = function()
-      vim.g.matchup_matchparen_enabled = 0 -- Disables annoying highlighting
-      -- Makes matchup not bind z and Z, which conflicts with nvim-surround
-      vim.keymap.set({ 'o', 'n', 'x' }, '<F24>z%', '<plug>(matchup-z%)', { noremap = true, silent = true })
-      vim.keymap.set({ 'o', 'n', 'x' }, '<F24>Z%', '<plug>(matchup-Z%)', { noremap = true, silent = true })
+      vim.g.matchup_surround_enabled = 0
     end,
   },
   {
