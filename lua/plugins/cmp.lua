@@ -316,7 +316,7 @@ return {
   },
   {
     'saghen/blink.cmp',
-    -- dev = true,
+    dev = true,
     lazy = false,
     enabled = true,
     ---@module 'blink.cmp'
@@ -344,7 +344,7 @@ return {
           scrollbar = false,
         },
         ghost_text = {
-          enabled = false,
+          enabled = true,
         },
       },
       highlight = {

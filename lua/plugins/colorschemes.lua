@@ -65,6 +65,10 @@ return {
           MarkviewListItemPlus = { fg = colors.palette.oniViolet },
           MarkviewListItemStar = { fg = colors.palette.oniViolet },
           MarkviewCode = { bg = theme.ui.bg_p1 },
+          RainbowDelimiter1 = { fg = colors.palette.springViolet2 },
+          RainbowDelimiter2 = { fg = colors.palette.oniViolet },
+          RainbowDelimiter3 = { fg = colors.palette.autumnGreen },
+          RainbowDelimiter4 = { fg = colors.palette.sakuraPink },
         }
       end,
     },
