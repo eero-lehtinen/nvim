@@ -8,6 +8,7 @@ return {
           return vim.fn.winwidth(0) > n
         end
       end
+
       require('lualine').setup {
         options = {
           icons_enabled = true,

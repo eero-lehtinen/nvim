@@ -1,9 +1,5 @@
 return {
   {
-    'sainnhe/gruvbox-material',
-    enabled = false,
-  },
-  {
     'rebelot/kanagawa.nvim',
     priority = 1000,
     opts = {
@@ -14,12 +10,12 @@ return {
         palette = {
           -- Rotate all dark colors to be one step darker and
           -- come up with new even dareker sumiInk0
-          sumiInk0 = '#111117',
-          sumiInk1 = '#14141B',
-          sumiInk2 = '#17171E',
-          sumiInk3 = '#1a1a22',
-          sumiInk4 = '#21212B',
-          sumiInk5 = '#2A2A37',
+          -- sumiInk0 = '#111117',
+          -- sumiInk1 = '#14141B',
+          -- sumiInk2 = '#17171E',
+          -- sumiInk3 = '#1a1a22',
+          -- sumiInk4 = '#21212B',
+          -- sumiInk5 = '#2A2A37',
         },
         theme = {
           all = {
@@ -119,30 +115,22 @@ return {
       end,
     },
   },
+  { 'rose-pine/neovim', name = 'rose-pine', enabled = false },
   {
-    'ellisonleao/gruvbox.nvim',
+    'sainnhe/gruvbox-material',
     enabled = false,
-    priority = 1000,
+    init = function()
+      vim.g.gruvbox_material_background = 'hard'
+    end,
   },
   {
-    'dgox16/oldworld.nvim',
+    'slugbyte/lackluster.nvim',
     enabled = false,
     lazy = false,
-    priority = 1000,
-    config = function()
-      local p = require 'oldworld.palette'
-      require('oldworld').setup {
-        highlight_overrides = {
-          HighlightUndo = { bg = '#3F4E7C' },
-          DiagnosticUnderlineError = { sp = p.red, underline = false, undercurl = true },
-          DiagnosticUnderlineWarn = { sp = p.yellow, underline = false, undercurl = true },
-          DiagnosticUnderlineInfo = { sp = p.purple, underline = false, undercurl = true },
-          DiagnosticUnderlineHint = { underline = false },
-          LspReferenceWrite = { fg = p.purple, underline = true },
-          LspReferenceText = { fg = p.purple },
-          LspReferenceRead = { fg = p.purple },
-        },
-      }
-    end,
+  },
+  {
+    'ramojus/mellifluous.nvim',
+    enabled = false,
+    lazy = false,
   },
 }
