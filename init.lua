@@ -330,6 +330,7 @@ require('lazy').setup({
     -- enabled = false,
     init = function()
       vim.g.matchup_surround_enabled = 0
+      vim.g.matchup_matchparen_offscreen = {}
     end,
   },
   {
