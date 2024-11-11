@@ -31,7 +31,7 @@ return {
       },
     }
 
-    vim.cmd [[highlight TermCursor gui=underline]]
+    -- vim.cmd [[highlight TermCursor gui=underline]]
 
     vim.keymap.set('n', '<leader>?', fzf_lua.oldfiles, { desc = '[?] Find recently opened files' })
     vim.keymap.set('n', '<leader><space>', fzf_lua.buffers, { desc = '[ ] Find existing buffers' })
