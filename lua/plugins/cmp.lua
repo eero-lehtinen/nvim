@@ -316,7 +316,7 @@ return {
   },
   {
     'saghen/blink.cmp',
-    dev = true,
+    -- dev = true,
     lazy = false,
     enabled = true,
     ---@module 'blink.cmp'
@@ -336,11 +336,13 @@ return {
       },
       windows = {
         autocomplete = {
-          draw = 'reversed',
+          draw = {
+            columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon', 'kind' } },
+          },
         },
         documentation = {
           auto_show = true,
-          auto_show_delay_ms = 200,
+          auto_show_delay_ms = 300,
           scrollbar = false,
         },
         ghost_text = {
@@ -350,6 +352,7 @@ return {
       highlight = {
         use_nvim_cmp_as_default = true,
       },
+      nerd_font_variant = 'normal',
     },
   },
 }
