@@ -191,12 +191,12 @@ return {
       }
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
-      capabilities = vim.tbl_deep_extend('force', capabilities, require('lsp-file-operations').default_capabilities())
       -- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
       local ok, blink = pcall(require, 'blink.cmp')
       if ok then
         capabilities = blink.get_lsp_capabilities({}, true)
       end
+      capabilities = vim.tbl_deep_extend('force', capabilities, require('lsp-file-operations').default_capabilities())
 
       local mason_lspconfig = require 'mason-lspconfig'
 
