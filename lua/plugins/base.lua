@@ -1,3 +1,22 @@
+-- from https://notebook.kulchenko.com/algorithms/alphanumeric-natural-sorting-for-humans-in-lua
+local function natural_sort(nodes)
+  local function padnum(d)
+    return ('%09d%s'):format(#d, d)
+  end
+  table.sort(nodes, function(a, b)
+    local a_dir = a.type == 'directory'
+    local b_dir = b.type == 'directory'
+
+    if a_dir and not b_dir then
+      return true
+    elseif not a_dir and b_dir then
+      return false
+    end
+
+    return tostring(a.name):gsub('%d+', padnum) < tostring(b.name):gsub('%d+', padnum)
+  end)
+end
+
 return {
 
   -- Detect tabstop and shiftwidth automatically
