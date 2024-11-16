@@ -18,6 +18,7 @@ return {
         preview = {
           horizontal = 'right:50%',
           flip_columns = 130,
+          -- default = 'bat_native', -- could be enabled for performance
         },
       },
       lsp = {
@@ -28,6 +29,9 @@ return {
         builtin = {
           extensions = image_preview,
         },
+      },
+      files = {
+        git_icons = false,
       },
     }
 
