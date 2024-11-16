@@ -56,7 +56,7 @@ return {
             vim.api.nvim_get_hl(0, { name = 'IndentBlanklineChar' }),
           },
           chars = { '▎' },
-          ahead_lines = 100,
+          ahead_lines = 20,
           delay = 10,
         },
         chunk = {
@@ -65,7 +65,6 @@ return {
             vim.api.nvim_get_hl(0, { name = 'DiagnosticError' }),
           },
           enable = true,
-          use_treesitter = true,
           duration = 0,
           delay = 80,
         },
