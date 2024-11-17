@@ -60,11 +60,11 @@ return {
           delay = 10,
         },
         chunk = {
+          enable = false,
           style = {
             vim.api.nvim_get_hl(0, { name = 'DiagnosticHint' }),
             vim.api.nvim_get_hl(0, { name = 'DiagnosticError' }),
           },
-          enable = true,
           duration = 0,
           delay = 80,
         },
