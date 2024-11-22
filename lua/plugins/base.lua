@@ -494,4 +494,6 @@ return {
     },
   },
   'tpope/vim-endwise',
+
+  'ActivityWatch/aw-watcher-vim',
 }
