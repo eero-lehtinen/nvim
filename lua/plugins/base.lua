@@ -467,7 +467,18 @@ return {
     'echasnovski/mini.pairs',
     opts = {
       mappings = {
-        ['|'] = { action = 'closeopen', pair = '||', neigh_pattern = '[^\\].' },
+        ['('] = { action = 'open', pair = '()', neigh_pattern = '[^\\]%W' },
+        ['['] = { action = 'open', pair = '[]', neigh_pattern = '[^\\]%W' },
+        ['{'] = { action = 'open', pair = '{}', neigh_pattern = '[^\\]%W' },
+
+        [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
+        [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
+        ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
+
+        ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^%w\\]%W', register = { cr = false } },
+        ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%w\\]%W', register = { cr = false } },
+        ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^%w\\]%W', register = { cr = false } },
+        ['|'] = { action = 'closeopen', pair = '||', neigh_pattern = '%(%W', register = { cr = false } },
       },
     },
   },
