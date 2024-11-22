@@ -477,7 +477,7 @@ return {
 
         ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^%w\\]%W', register = { cr = false } },
         ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%w\\]%W', register = { cr = false } },
-        ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^%w\\]%W', register = { cr = false } },
+        ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^%w`\\]%W', register = { cr = false } },
         ['|'] = { action = 'closeopen', pair = '||', neigh_pattern = '%(%W', register = { cr = false } },
       },
     },
