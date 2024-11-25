@@ -7,18 +7,18 @@ return {
   {
     'tpope/vim-fugitive',
     init = function()
-      vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
+      -- vim.keymap.set('n', '<leader>G', '<cmd>tab Git<cr>', { desc = '[G]it Fugitive in a tab', silent = true })
+      --
+      -- local function shortcut(s, c)
+      --   vim.api.nvim_create_user_command(s, function()
+      --     print(':' .. c)
+      --     vim.cmd(c)
+      --   end, {})
+      -- end
 
-      local function shortcut(s, c)
-        vim.api.nvim_create_user_command(s, function()
-          print(':' .. c)
-          vim.cmd(c)
-        end, {})
-      end
-
-      shortcut('Gp', 'Git push')
-      shortcut('Gpf', 'Git push --force-with-lease')
-      shortcut('Glog', 'Git log --oneline')
+      -- shortcut('Gp', 'Git push')
+      -- shortcut('Gpf', 'Git push --force-with-lease')
+      -- shortcut('Glog', 'Git log --oneline')
 
       -- vim.api.nvim_create_autocmd('FileType', {
       --   pattern = 'fugitive',
