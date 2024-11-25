@@ -317,6 +317,7 @@ return {
   {
     'saghen/blink.cmp',
     -- dev = true,
+    version = 'v0.*',
     lazy = false,
     enabled = true,
     ---@module 'blink.cmp'
