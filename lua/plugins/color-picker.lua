@@ -25,7 +25,9 @@ return {
         -- },
       }
       -- require('oklch-color-picker.highlight').perf_logging = true
-      vim.keymap.set('n', '<leader>v', '<cmd>ColorPickOklch<cr>')
+      vim.keymap.set('n', '<leader>v', function()
+        require('oklch-color-picker').pick_under_cursor()
+      end)
     end,
   },
   -- {
