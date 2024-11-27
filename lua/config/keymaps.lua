@@ -30,6 +30,10 @@ vim.keymap.set('i', ';', ';<c-g>u')
 vim.keymap.set({ 'n', 'v' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set({ 'n', 'v' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+-- better indenting
+vim.keymap.set('v', '<', '<gv')
+vim.keymap.set('v', '>', '>gv')
+
 vim.keymap.set('n', '[d', function()
   vim.diagnostic.jump { count = -1 }
 end, { desc = 'Go to previous diagnostic message' })
