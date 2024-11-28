@@ -5,24 +5,9 @@ return {
     config = function()
       require('oklch-color-picker').setup {
         patterns = {
-          -- hex = {
-          --   priority = -1,
-          --   '()#%x%x%x+%f[%W]()',
-          -- },
-          -- css = {
-          --   priority = -1,
-          --   -- Commas are not allowed in modern css colors so use [^,] to
-          --   -- differentiate from `numbers_in_brackets`. `-` is the same as `*`,
-          --   -- but matches the shortest possible sequence.
-          --   '()rgb%([^,]-%)()',
-          --   '()oklch%([^,]-%)()',
-          --   '()hsl%([^,]-%)()',
-          -- },
-          -- numbers_in_brackets = false,
+          css_rgb = { '()rgb%([^,]-%)()' },
+          css_hsl = { '()hsl%([^,]-%)()' },
         },
-        -- highlight = {
-        -- edit_delay = 0,
-        -- },
       }
       -- require('oklch-color-picker.highlight').perf_logging = true
       vim.keymap.set('n', '<leader>v', function()
