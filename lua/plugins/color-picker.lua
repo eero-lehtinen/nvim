@@ -24,6 +24,7 @@ return {
   --     ccc.setup {
   --       pickers = {
   --         ccc.picker.hex,
+  --         ccc.picker.hex_short,
   --         ccc.picker.css_rgb,
   --         ccc.picker.css_hsl,
   --         -- ccc.picker.css_hwb,
@@ -44,6 +45,7 @@ return {
   --   opts = {
   --     enable_var_usage = false,
   --     enable_named_colors = false,
+  --     enable_tailwind = true,
   --   },
   -- },
 
@@ -56,7 +58,7 @@ return {
   --       RRGGBB = true, -- #RRGGBB hex codes
   --       names = false, -- "Name" codes like Blue or blue
   --       RRGGBBAA = true, -- #RRGGBBAA hex codes
-  --       AARRGGBB = false, -- 0xAARRGGBB hex codes
+  --       AARRGGBB = true, -- 0xAARRGGBB hex codes
   --       rgb_fn = true, -- CSS rgb() and rgba() functions
   --       hsl_fn = true, -- CSS hsl() and hsla() functions
   --       css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
