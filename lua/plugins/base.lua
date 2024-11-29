@@ -261,15 +261,17 @@ return {
   },
   {
     'MagicDuck/grug-far.nvim',
+    keys = { { '<leader>S', '<cmd>SearchAndReplace<cr>', desc = 'Search and replace (Grug far)' } },
+    cmd = { 'SearchAndReplace', 'FindAndReplace' },
     config = function()
       require('grug-far').setup {}
       vim.api.nvim_create_user_command('SearchAndReplace', 'GrugFar', {
         nargs = 0,
-        desc = 'Poject wide search and replace',
+        desc = 'Search and replace (Grug far)',
       })
       vim.api.nvim_create_user_command('FindAndReplace', 'GrugFar', {
         nargs = 0,
-        desc = 'Poject wide search and replace',
+        desc = 'Search and replace (Grug far)',
       })
     end,
   },
