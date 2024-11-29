@@ -4,15 +4,12 @@ return {
     -- dev = true,
     config = function()
       require('oklch-color-picker').setup {
-        patterns = {
-          css_rgb = { '()rgb%([^,]-%)()' },
-          css_hsl = { '()hsl%([^,]-%)()' },
-        },
+        patterns = {},
       }
       -- require('oklch-color-picker.highlight').perf_logging = true
       vim.keymap.set('n', '<leader>v', function()
         require('oklch-color-picker').pick_under_cursor()
-      end)
+      end, { desc = 'Color pick under cursor' })
     end,
   },
   -- {
