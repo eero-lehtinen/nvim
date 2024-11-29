@@ -486,25 +486,22 @@ return {
   },
 
   {
-    'pteroctopus/faster.nvim',
-    opts = {
-      behaviours = {
-        bigfile = {
-          features_disabled = { 'illuminate', 'matchparen', 'lsp', 'treesitter' },
-        },
-      },
-    },
-  },
-
-  {
     'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
     opts = {
-      -- bigfile = { enabled = true },
+      bigfile = {
+        enabled = true,
+        setup = function(ctx)
+          vim.schedule(function()
+            require('illuminate').pause_buf()
+            vim.bo[ctx.buf].syntax = ctx.ft
+          end)
+        end,
+      },
       -- notifier = { enabled = true },
       -- quickfile = { enabled = true },
-      statuscolumn = { enabled = true },
+      -- statuscolumn = { enabled = true },
       -- words = { enabled = true },
     },
     keys = { {

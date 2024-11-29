@@ -6,7 +6,6 @@ vim.g.maplocalleader = ' '
 
 vim.o.termguicolors = true
 
-
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
