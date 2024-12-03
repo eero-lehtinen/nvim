@@ -324,16 +324,19 @@ return {
     ---@type blink.cmp.Config
     opts = {
       keymap = {
+        ['<C-space'] = {},
+        ['<C-e>'] = { 'hide' },
         ['<C-y>'] = { 'select_and_accept' },
 
         ['<C-p>'] = { 'show', 'select_prev' },
         ['<C-n>'] = { 'show', 'select_next' },
-        ['<C-e>'] = { 'hide' },
 
-        -- ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
-        -- ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+        ['<C-b>'] = {},
+        ['<C-f>'] = {},
 
         ['<C-l>'] = { 'snippet_forward' },
+        ['<Tab>'] = {},
+        ['<S-Tab>'] = {},
       },
       windows = {
         autocomplete = {
