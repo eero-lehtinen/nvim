@@ -39,9 +39,7 @@ return {
         'delve',
         'codelldb',
       },
-      handlers = {
-        codelldb = function() end,
-      },
+      handlers = {},
     }
 
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -53,6 +51,8 @@ return {
     vim.keymap.set('n', '<leader>B', function()
       dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
     end, { desc = 'Debug: Set Breakpoint with condition' })
+    vim.keymap.set('n', '<leader>dq', dap.terminate, { desc = 'Debug: Quit' })
+    vim.keymap.set('n', '<leader>dl', dap.run_last, { desc = 'Debug: Run Last' })
 
     -- For more information, see |:help nvim-dap-ui|
     ---@diagnostic disable: missing-fields
