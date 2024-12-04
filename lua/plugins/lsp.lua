@@ -215,6 +215,10 @@ return {
         ['rust_analyzer'] = function() end,
       }
 
+      require('lspconfig').qmlls.setup {
+        cmd = { 'qmlls6' },
+      }
+
       -- require('lspconfig').glasgow.setup {}
 
       require('mason-tool-installer').setup {
