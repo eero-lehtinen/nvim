@@ -34,19 +34,19 @@ vim.o.virtualedit = 'block'
 
 local is_windows = vim.uv.os_uname().sysname:find 'Windows' ~= nil
 if is_windows then
-  -- local ldata = os.getenv 'LOCALAPPDATA'
-  -- vim.o.shell = ldata .. '/Programs/nu/bin/nu.exe'
+  local ldata = os.getenv 'LOCALAPPDATA'
+  vim.o.shell = ldata .. '/Programs/nu/bin/nu.exe'
 
-  vim.o.shell = 'pwsh'
-  vim.o.shellcmdflag =
-    "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering='plaintext';Remove-Alias -Force -ErrorAction SilentlyContinue tee;"
+  -- vim.o.shell = 'pwsh'
+  -- vim.o.shellcmdflag =
+  --   "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering='plaintext';Remove-Alias -Force -ErrorAction SilentlyContinue tee;"
+  --
+  -- vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+  --
+  -- vim.o.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
 
-  vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
-
-  vim.o.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
-
-  vim.o.shellquote = ''
-  vim.o.shellxquote = ''
+  -- vim.o.shellquote = ''
+  -- vim.o.shellxquote = ''
 end
 
 if vim.g.neovide then
