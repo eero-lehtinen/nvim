@@ -483,12 +483,21 @@ return {
           end)
         end,
       },
+      terminal = { style = 'terminal' },
       -- notifier = { enabled = true },
       -- quickfile = { enabled = true },
       -- statuscolumn = { enabled = true },
       -- words = { enabled = true },
     },
     keys = {
+      {
+        '<C-g>',
+        mode = { 'n', 't' },
+        function()
+          Snacks.terminal.toggle()
+        end,
+        desc = 'Terminal Toggle',
+      },
       {
         '<leader>G',
         function()
