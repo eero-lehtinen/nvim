@@ -32,6 +32,8 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 vim.o.virtualedit = 'block'
 
+vim.cmd 'language en_US'
+
 local get_global = function(key, default)
   if vim.g[key] == nil then
     return default
