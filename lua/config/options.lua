@@ -32,6 +32,47 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 vim.o.virtualedit = 'block'
 
+local is_windows = vim.uv.os_uname().sysname:find 'Windows' ~= nil
+if is_windows then
+  -- local ldata = os.getenv 'LOCALAPPDATA'
+  -- vim.o.shell = ldata .. '/Programs/nu/bin/nu.exe'
+
+  vim.o.shell = 'pwsh'
+  vim.o.shellcmdflag =
+    "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering='plaintext';Remove-Alias -Force -ErrorAction SilentlyContinue tee;"
+
+  vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+
+  vim.o.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
+
+  vim.o.shellquote = ''
+  vim.o.shellxquote = ''
+end
+
+if vim.g.neovide then
+  vim.o.guifont = 'Iosevka_Custom,Symbols_Nerd_Font:h13.6'
+  vim.opt.linespace = 2
+  vim.g.neovide_light_radius = 3
+  vim.g.neovide_position_animation_length = 0
+  vim.g.neovide_scroll_animation_length = 0
+  vim.g.neovide_scroll_animation_far_lines = 0
+  vim.g.neovide_hide_mouse_when_typing = true
+  vim.g.neovide_cursor_animation_length = 0.04
+  vim.g.neovide_cursor_trail_size = 0.7
+  vim.g.neovide_cursor_animate_in_insert_mode = false
+
+  vim.g.neovide_scale_factor = 1.0
+  local change_scale_factor = function(delta)
+    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor * delta
+  end
+  vim.keymap.set('n', '<C-+>', function()
+    change_scale_factor(1.25)
+  end)
+  vim.keymap.set('n', '<C-->', function()
+    change_scale_factor(1 / 1.25)
+  end)
+end
+
 vim.cmd 'language en_US'
 
 local get_global = function(key, default)
