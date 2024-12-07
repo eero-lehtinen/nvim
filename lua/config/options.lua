@@ -50,7 +50,7 @@ if is_windows then
 end
 
 if vim.g.neovide then
-  vim.o.guifont = 'Iosevka_Custom,Symbols_Nerd_Font:h13.6'
+  vim.o.guifont = 'Iosevka_Custom,Symbols_Nerd_Font:h13.0'
   vim.opt.linespace = 2
   vim.g.neovide_light_radius = 3
   vim.g.neovide_position_animation_length = 0
