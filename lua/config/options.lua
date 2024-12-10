@@ -37,6 +37,14 @@ if is_windows then
   local ldata = os.getenv 'LOCALAPPDATA'
   vim.o.shell = ldata .. '/Programs/nu/bin/nu.exe'
 
+  vim.o.shellcmdflag = '--login --stdin --no-newline -c'
+  vim.o.shellredir = 'out+err> %s'
+  vim.o.shellpipe = '| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record'
+  vim.o.shelltemp = false
+  vim.o.shellxescape = ''
+  vim.o.shellxquote = ''
+  vim.o.shellquote = ''
+
   -- vim.o.shell = 'pwsh'
   -- vim.o.shellcmdflag =
   --   "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering='plaintext';Remove-Alias -Force -ErrorAction SilentlyContinue tee;"
