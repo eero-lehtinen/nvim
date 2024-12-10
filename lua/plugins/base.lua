@@ -46,33 +46,6 @@ return {
   },
 
   {
-    'shellRaining/hlchunk.nvim',
-    event = { 'BufReadPre', 'BufNewFile' },
-    config = function()
-      require('hlchunk').setup {
-        indent = {
-          enable = true,
-          style = {
-            vim.api.nvim_get_hl(0, { name = 'IndentBlanklineChar' }),
-          },
-          chars = { '▎' },
-          ahead_lines = 20,
-          delay = 10,
-        },
-        chunk = {
-          enable = false,
-          style = {
-            vim.api.nvim_get_hl(0, { name = 'DiagnosticHint' }),
-            vim.api.nvim_get_hl(0, { name = 'DiagnosticError' }),
-          },
-          duration = 0,
-          delay = 80,
-        },
-      }
-    end,
-  },
-
-  {
     'ggandor/leap.nvim',
     dependencies = {
       'tpope/vim-repeat',
@@ -417,37 +390,6 @@ return {
     },
   },
 
-  {
-    'stevearc/profile.nvim',
-    init = function()
-      local should_profile = os.getenv 'NVIM_PROFILE'
-      if should_profile then
-        require('profile').instrument_autocmds()
-        if should_profile:lower():match '^start' then
-          require('profile').start '*'
-        else
-          require('profile').instrument '*'
-        end
-      end
-
-      local function toggle_profile()
-        local prof = require 'profile'
-        if prof.is_recording() then
-          prof.stop()
-          vim.ui.input({ prompt = 'Save profile to:', completion = 'file', default = 'profile.json' }, function(filename)
-            if filename then
-              prof.export(filename)
-              vim.notify(string.format('Wrote %s', filename))
-            end
-          end)
-        else
-          prof.start '*'
-        end
-      end
-      vim.keymap.set('', '<F9>', toggle_profile)
-    end,
-  },
-
   { 'windwp/nvim-ts-autotag', event = 'VeryLazy', opts = {} },
   {
     'echasnovski/mini.pairs',
@@ -473,36 +415,58 @@ return {
     'folke/snacks.nvim',
     priority = 1000,
     lazy = false,
-    opts = {
-      bigfile = {
-        enabled = true,
-        setup = function(ctx)
-          vim.schedule(function()
-            require('illuminate').pause_buf()
-            vim.bo[ctx.buf].syntax = ctx.ft
-          end)
-        end,
-      },
-      terminal = { style = 'terminal' },
-      lazygit = {
-        win = {
-          keys = {
-            -- Hide lazygit instead of exiting to make opening faster
-            q = {
-              'q',
-              function(self)
-                self:hide()
-              end,
-              mode = 't',
+    config = function()
+      ---@diagnostic disable: missing-fields
+      require('snacks').setup {
+        bigfile = {
+          enabled = true,
+          setup = function(ctx)
+            vim.schedule(function()
+              require('illuminate').pause_buf()
+              vim.bo[ctx.buf].syntax = ctx.ft
+            end)
+          end,
+        },
+        terminal = { style = 'terminal' },
+        lazygit = {
+          win = {
+            keys = {
+              -- Hide lazygit instead of exiting to make opening faster
+              q = {
+                'q',
+                function(self)
+                  self:hide()
+                end,
+                mode = 't',
+              },
             },
           },
         },
-      },
-      -- notifier = { enabled = true },
-      -- quickfile = { enabled = true },
-      -- statuscolumn = { enabled = true },
-      -- words = { enabled = true },
-    },
+        indent = {
+          enabled = true,
+          indent = {
+            char = '▏',
+            hl = 'IndentBlanklineChar',
+          },
+          scope = {
+            animate = {
+              enabled = false,
+            },
+            char = '▏',
+            hl = 'DiagnosticHint',
+          },
+        },
+
+        -- notifier = { enabled = true },
+        -- quickfile = { enabled = true },
+        -- statuscolumn = { enabled = true },
+        -- words = { enabled = true },
+      }
+      ---@diagnostic enable: missing-fields
+
+      Snacks.toggle.profiler():map '<leader>pp'
+      Snacks.toggle.profiler_highlights():map '<leader>ph'
+    end,
     keys = {
       {
         '<C-g>',
@@ -515,6 +479,7 @@ return {
       {
         '<leader>G',
         function()
+          -- Toggle the profiler highlights
           Snacks.lazygit()
         end,
         desc = 'Lazygit',
