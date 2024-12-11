@@ -225,11 +225,17 @@ return {
     event = { 'VeryLazy' },
     build = 'deno task --quiet build:fast',
     config = function()
-      require('peek').setup {
+      local peek = require 'peek'
+      peek.setup {
         app = 'browser',
       }
-      vim.api.nvim_create_user_command('MarkdownOpen', require('peek').open, {})
-      vim.api.nvim_create_user_command('MarkdownClose', require('peek').close, {})
+      vim.api.nvim_create_user_command('MarkdownToggle', function()
+        if peek.is_open() then
+          peek.close()
+        else
+          peek.open()
+        end
+      end, {})
     end,
   },
   {
