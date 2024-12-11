@@ -24,6 +24,10 @@ end
 ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+local function is_windows()
+  return vim.uv.os_uname().sysname:find 'Windows' ~= nil
+end
+
 ---@diagnostic disable: missing-fields
 require('lazy').setup({
   { import = 'plugins' },
@@ -34,7 +38,7 @@ require('lazy').setup({
     notify = false,
   },
   dev = {
-    path = '~/repos',
+    path = is_windows() and 'D:/repos' or '~/repos',
   },
 })
 
