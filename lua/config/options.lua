@@ -32,7 +32,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 vim.o.virtualedit = 'block'
 
-vim.o.fileformats = 'unix'
+vim.o.fileformats = 'unix,dos'
 
 local is_windows = vim.uv.os_uname().sysname:find 'Windows' ~= nil
 if is_windows then
