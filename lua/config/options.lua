@@ -36,6 +36,8 @@ vim.o.fileformats = 'unix,dos'
 
 local is_windows = vim.uv.os_uname().sysname:find 'Windows' ~= nil
 if is_windows then
+  vim.cmd 'language en_US'
+
   local ldata = os.getenv 'LOCALAPPDATA'
   vim.o.shell = ldata .. '/Programs/nu/bin/nu.exe'
 
@@ -82,8 +84,6 @@ if vim.g.neovide then
     change_scale_factor(1 / 1.25)
   end)
 end
-
-vim.cmd 'language en_US'
 
 local get_global = function(key, default)
   if vim.g[key] == nil then
