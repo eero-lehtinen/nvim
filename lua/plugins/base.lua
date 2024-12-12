@@ -454,10 +454,10 @@ return {
             char = '▏',
             hl = 'IndentBlanklineChar',
           },
+          animate = {
+            enabled = false,
+          },
           scope = {
-            animate = {
-              enabled = false,
-            },
             char = '▏',
             hl = 'DiagnosticHint',
           },
