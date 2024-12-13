@@ -2,6 +2,7 @@ return {
   {
     'supermaven-inc/supermaven-nvim',
     event = 'VeryLazy',
+    enabled = false,
     config = function()
       require('supermaven-nvim').setup {
         keymaps = {
@@ -73,19 +74,24 @@ return {
     },
   },
   {
-    'Exafunction/codeium.vim',
-    enabled = false,
-    event = 'BufEnter',
+    'Exafunction/codeium.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+    },
+    enabled = true,
     config = function()
-      vim.g.codeium_disable_bindings = 1
-      vim.keymap.set('i', '<C-u>', vim.fn['codeium#Accept'], { expr = true, silent = true })
-      vim.keymap.set('i', '<C-¨>', function() -- actually <C-]>
-        vim.fn['codeium#CycleCompletions'](1)
-      end, { expr = true, silent = true })
-      vim.keymap.set('i', '<C-å>', function() -- actually <C-[>
-        vim.fn['codeium#CycleCompletions'](-1)
-      end, { expr = true, silent = true })
-      vim.keymap.set('i', '<C-ä>', vim.fn['codeium#Dismiss'], { expr = true, silent = true }) -- below [
+      require('codeium').setup {
+        enable_cmp_source = false,
+        virtual_text = {
+          enabled = true,
+          key_bindings = {
+            accept = '<A-y>',
+            next = '<A-n>',
+            prev = '<A-p>',
+            dismiss = '<A-e>',
+          },
+        },
+      }
     end,
   },
   {
