@@ -1,16 +1,12 @@
 return {
   {
     'eero-lehtinen/oklch-color-picker.nvim',
-    -- dev = true,
-    config = function()
-      require('oklch-color-picker').setup {
-        patterns = {},
-      }
-      -- require('oklch-color-picker.highlight').perf_logging = true
-      vim.keymap.set('n', '<leader>v', function()
-        require('oklch-color-picker').pick_under_cursor()
-      end, { desc = 'Color pick under cursor' })
-    end,
+    event = 'VeryLazy',
+    opts = {},
+    keys = {
+      -- One handed keymap recommended, you will be using the mouse
+      { '<leader>v', '<cmd>ColorPickOklch<cr>', desc = 'Color pick under cursor' },
+    },
   },
   -- {
   --   'uga-rosa/ccc.nvim',
