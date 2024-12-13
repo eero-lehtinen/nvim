@@ -465,9 +465,15 @@ return {
         '<C-g>',
         mode = { 'n', 't' },
         function()
-          Snacks.terminal.toggle()
+          -- if not in fzf-lua
+          if vim.bo.filetype ~= 'fzf' then
+            Snacks.terminal.toggle()
+          else
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-g>', true, true, true), 'n', false)
+          end
         end,
         desc = 'Terminal Toggle',
+        remap = true,
       },
       {
         '<leader>G',
