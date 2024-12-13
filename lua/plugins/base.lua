@@ -434,20 +434,7 @@ return {
           end,
         },
         terminal = { style = 'terminal' },
-        lazygit = {
-          win = {
-            keys = {
-              -- Hide lazygit instead of exiting to make opening faster
-              q = {
-                'q',
-                function(self)
-                  self:hide()
-                end,
-                mode = 't',
-              },
-            },
-          },
-        },
+        lazygit = {},
         indent = {
           enabled = true,
           indent = {
