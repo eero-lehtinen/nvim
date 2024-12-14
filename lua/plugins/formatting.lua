@@ -7,6 +7,8 @@ return {
       rust = {},
       toml = {},
       sql = { 'sqlfmt' },
+      c = {},
+      cpp = {},
     }
 
     local prettierd_filetypes = { 'javascript', 'typescript', 'json', 'html', 'css', 'markdown', 'yaml', 'typescriptreact', 'javascriptreact' }
