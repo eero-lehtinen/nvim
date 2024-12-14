@@ -84,14 +84,25 @@ return {
         enable_cmp_source = false,
         virtual_text = {
           enabled = true,
+          manual = true,
           key_bindings = {
-            accept = '<A-y>',
+            accept = '<C-u>',
             next = '<A-n>',
             prev = '<A-p>',
             dismiss = '<A-e>',
           },
         },
       }
+
+      vim.keymap.set('n', '<leader>ta', function()
+        local virtual_text = require('codeium.config').options.virtual_text
+        virtual_text.manual = not virtual_text.manual
+        if not virtual_text.manual then
+          vim.notify 'Codeium enabled'
+        else
+          vim.notify 'Codeium disabled'
+        end
+      end, { desc = '[T]oggle [A]I Codeium' })
     end,
   },
   {
