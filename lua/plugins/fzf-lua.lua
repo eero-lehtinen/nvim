@@ -63,6 +63,8 @@ return {
     vim.keymap.set('n', '<leader>sq', fzf_lua.quickfix, { desc = '[S]earch [Q]uickfix' })
     vim.keymap.set('n', '<leader>sl', fzf_lua.loclist, { desc = '[S]earch [L]oclist' })
 
+    vim.keymap.set('n', '<leader>gs', fzf_lua.git_status, { desc = 'Search [G]it [S]tatus' })
+
     -- vim.keymap.set('n', '<leader>sn', function()
     --   fzf_lua.files { cwd = vim.fn.stdpath 'config' }
     -- end, { desc = '[S]earch [N]eovim files' })
