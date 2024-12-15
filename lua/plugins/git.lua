@@ -68,7 +68,7 @@ return {
     end,
   },
   'nvim-lua/plenary.nvim',
-  { 'linrongbin16/gitlinker.nvim', opts = {} },
+  { 'linrongbin16/gitlinker.nvim', opts = { mappings = false }, cmd = 'GitLink' },
   {
     'lewis6991/gitsigns.nvim',
     opts = {
