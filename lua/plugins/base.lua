@@ -166,12 +166,12 @@ return {
         lprevious = {
           mapping = '[l',
           description = 'Jump to [count] previous entry in loclist',
-          dot_repeat = true,
+          dot_repeat = false,
         },
         lnext = {
           mapping = ']l',
           description = 'Jump to [count] next entry in loclist',
-          dot_repeat = true,
+          dot_repeat = false,
         },
         lfirst = {
           mapping = '[L',
@@ -186,12 +186,12 @@ return {
         cprevious = {
           mapping = '[q',
           description = 'Jump to [count] previous entry in qflist',
-          dot_repeat = true,
+          dot_repeat = false,
         },
         cnext = {
           mapping = ']q',
           description = 'Jump to [count] next entry in qflist',
-          dot_repeat = true,
+          dot_repeat = false,
         },
         cfirst = {
           mapping = '[Q',
