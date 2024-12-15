@@ -82,6 +82,8 @@ return {
   },
   {
     'nvim-tree/nvim-tree.lua',
+    -- for some reason on windows (and maybe windows too) calls some git function and completely freezes the whole editor
+    enabled = false,
     version = '*',
     lazy = false,
     dependencies = {
@@ -155,6 +157,25 @@ return {
     'stevearc/oil.nvim',
     opts = {},
     dependencies = { 'nvim-tree/nvim-web-devicons' },
+  },
+  {
+    'mikavilpas/yazi.nvim',
+    event = 'VeryLazy',
+    keys = {
+      {
+        '<leader>y',
+        '<cmd>Yazi<cr>',
+        desc = 'Open yazi at the current file',
+      },
+    },
+    ---@type YaziConfig
+    opts = {
+      -- if you want to open yazi instead of netrw, see below for more info
+      open_for_directories = false,
+      keymaps = {
+        show_help = '<f1>',
+      },
+    },
   },
   {
     'stevearc/dressing.nvim',

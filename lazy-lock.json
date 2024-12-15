@@ -65,5 +65,6 @@
   "vim-matchup": { "branch": "master", "commit": "3ed08b05cc31cf4939cc8fd53b67e9b78285a2d1" },
   "vim-repeat": { "branch": "master", "commit": "65846025c15494983dafe5e3b46c8f88ab2e9635" },
   "vim-rhubarb": { "branch": "master", "commit": "ee69335de176d9325267b0fd2597a22901d927b1" },
-  "which-key.nvim": { "branch": "main", "commit": "8ab96b38a2530eacba5be717f52e04601eb59326" }
+  "which-key.nvim": { "branch": "main", "commit": "8ab96b38a2530eacba5be717f52e04601eb59326" },
+  "yazi.nvim": { "branch": "main", "commit": "e7e0a1d8de1466546efc8e5e8fa7b436d3088ba7" }
 }

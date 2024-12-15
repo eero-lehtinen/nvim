@@ -48,6 +48,7 @@ if is_windows then
   vim.o.shellxescape = ''
   vim.o.shellxquote = ''
   vim.o.shellquote = ''
+  vim.o.shellslash = true -- converts backslashes to forward slashes, fixes path strings
 
   -- vim.o.shell = 'pwsh'
   -- vim.o.shellcmdflag =
