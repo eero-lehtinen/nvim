@@ -91,6 +91,9 @@ return {
       disable_netrw = true,
       hijack_netrw = true,
       hijack_cursor = true,
+      git = {
+        enable = false,
+      },
       actions = {
         open_file = {
           quit_on_open = true,
