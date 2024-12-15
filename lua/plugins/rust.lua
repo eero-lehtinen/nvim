@@ -69,6 +69,13 @@ return {
     end,
   },
   {
+    'saecki/crates.nvim',
+    tag = 'stable',
+    config = function()
+      require('crates').setup()
+    end,
+  },
+  {
     'mrcjkb/rustaceanvim',
     dev = false,
     version = '*',
