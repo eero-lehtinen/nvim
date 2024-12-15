@@ -51,6 +51,11 @@ return {
         severity_limit = vim.diagnostic.severity.INFO,
       }
     end, { desc = '[S]earch [D]iagnostics' })
+    vim.keymap.set('n', '<leader>sD', function()
+      fzf_lua.diagnostics_workspace {
+        severity_limit = vim.diagnostic.severity.ERROR,
+      }
+    end, { desc = '[S]earch [D]iagnostics (Errors only)' })
 
     vim.keymap.set('n', '<leader>sk', fzf_lua.keymaps, { desc = '[S]earch [K]eymaps' })
     vim.keymap.set('n', '<leader>sc', fzf_lua.commands, { desc = '[S]earch [C]ommands' })
