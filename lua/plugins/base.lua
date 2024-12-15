@@ -493,6 +493,13 @@ return {
         end,
         desc = 'Scratch buffer',
       },
+      {
+        '<leader>ps',
+        function()
+          Snacks.profiler.pick()
+        end,
+        desc = 'Profiler search',
+      },
     },
   },
 
