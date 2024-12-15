@@ -42,8 +42,18 @@ if vim.fn.has 'nvim-0.11' == 1 then
     vim.diagnostic.jump { count = 1 }
   end, { desc = 'Go to next diagnostic message' })
 else
-  vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-  vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
+  vim.keymap.set('n', '[d', function()
+    vim.diagnostic.goto_prev { severity = {
+      min = vim.diagnostic.severity.INFO,
+      max = vim.diagnostic.severity.ERROR,
+    } }
+  end, { desc = 'Go to previous diagnostic message' })
+  vim.keymap.set('n', ']d', function()
+    vim.diagnostic.goto_next { severity = {
+      min = vim.diagnostic.severity.INFO,
+      max = vim.diagnostic.severity.ERROR,
+    } }
+  end, { desc = 'Go to next diagnostic message' })
 end
 
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
