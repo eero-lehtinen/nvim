@@ -69,7 +69,7 @@ if vim.g.neovide then
   vim.g.neovide_scroll_animation_length = 0
   vim.g.neovide_scroll_animation_far_lines = 0
   vim.g.neovide_hide_mouse_when_typing = true
-  vim.g.neovide_cursor_animation_length = 0.04
+  vim.g.neovide_cursor_animation_length = 0.01
   vim.g.neovide_cursor_trail_size = 0.7
   vim.g.neovide_cursor_animate_in_insert_mode = false
 
@@ -83,6 +83,13 @@ if vim.g.neovide then
   vim.keymap.set('n', '<C-->', function()
     change_scale_factor(1 / 1.25)
   end)
+
+  vim.api.nvim_set_keymap('v', '<sc-c>', '"+y', { noremap = true })
+  vim.api.nvim_set_keymap('n', '<sc-v>', 'l"+P', { noremap = true })
+  vim.api.nvim_set_keymap('v', '<sc-v>', '"+P', { noremap = true })
+  vim.api.nvim_set_keymap('c', '<sc-v>', '<C-o>l<C-o>"+<C-o>P<C-o>l', { noremap = true })
+  vim.api.nvim_set_keymap('i', '<sc-v>', '<ESC>l"+Pli', { noremap = true })
+  vim.api.nvim_set_keymap('t', '<sc-v>', '<C-\\><C-n>"+Pi', { noremap = true })
 end
 
 local get_global = function(key, default)
