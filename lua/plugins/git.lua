@@ -29,8 +29,6 @@ return {
     end,
   },
 
-  'tpope/vim-rhubarb',
-
   {
     'sindrets/diffview.nvim',
     event = 'VeryLazy',
@@ -68,7 +66,6 @@ return {
     end,
   },
   'nvim-lua/plenary.nvim',
-  { 'linrongbin16/gitlinker.nvim', opts = { mappings = false }, cmd = 'GitLink' },
   {
     'lewis6991/gitsigns.nvim',
     opts = {

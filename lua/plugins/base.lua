@@ -473,6 +473,7 @@ return {
             hl = 'DiagnosticHint',
           },
         },
+        gitbrowse = {},
 
         -- notifier = { enabled = true },
         -- quickfile = { enabled = true },
@@ -483,6 +484,10 @@ return {
 
       Snacks.toggle.profiler():map '<leader>pp'
       Snacks.toggle.profiler_highlights():map '<leader>ph'
+
+      vim.api.nvim_create_user_command('GitBrowse', function(cmd)
+        Snacks.gitbrowse { line_start = cmd.line1, line_end = cmd.line2 }
+      end, { range = true })
     end,
     keys = {
       {
