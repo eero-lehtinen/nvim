@@ -34,25 +34,23 @@ vim.keymap.set({ 'n', 'v' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, si
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
+local severity = {
+  min = vim.diagnostic.severity.INFO,
+  max = vim.diagnostic.severity.ERROR,
+}
 if vim.fn.has 'nvim-0.11' == 1 then
   vim.keymap.set('n', '[d', function()
-    vim.diagnostic.jump { count = -1 }
+    vim.diagnostic.jump { count = -1, severity = severity }
   end, { desc = 'Go to previous diagnostic message' })
   vim.keymap.set('n', ']d', function()
-    vim.diagnostic.jump { count = 1 }
+    vim.diagnostic.jump { count = 1, severity = severity }
   end, { desc = 'Go to next diagnostic message' })
 else
   vim.keymap.set('n', '[d', function()
-    vim.diagnostic.goto_prev { severity = {
-      min = vim.diagnostic.severity.INFO,
-      max = vim.diagnostic.severity.ERROR,
-    } }
+    vim.diagnostic.goto_prev { severity = severity }
   end, { desc = 'Go to previous diagnostic message' })
   vim.keymap.set('n', ']d', function()
-    vim.diagnostic.goto_next { severity = {
-      min = vim.diagnostic.severity.INFO,
-      max = vim.diagnostic.severity.ERROR,
-    } }
+    vim.diagnostic.goto_next { severity = severity }
   end, { desc = 'Go to next diagnostic message' })
 end
 
