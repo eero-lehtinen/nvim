@@ -493,22 +493,68 @@ return {
       vim.api.nvim_create_user_command('GitBrowse', function(cmd)
         Snacks.gitbrowse { line_start = cmd.line1, line_end = cmd.line2 }
       end, { range = true })
+
+      local terms = {}
+
+      vim.keymap.set({ 'n', 't' }, '<C-g>', function()
+        if vim.bo.filetype == 'fzf' then
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-g>', true, true, true), 'n', false)
+          return
+        end
+
+        if #terms == 0 then
+          terms = { Snacks.terminal.open() }
+          return
+        end
+
+        if terms[1]:valid() then
+          for _, term in ipairs(terms) do
+            term:hide()
+          end
+        else
+          for _, term in ipairs(terms) do
+            term:show()
+          end
+        end
+      end, { desc = 'Terminal Toggle' })
+
+      vim.keymap.set({ 'n', 't' }, '<C-h>', function()
+        if vim.bo.filetype == 'fzf' then
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-h>', true, true, true), 'n', false)
+          return
+        end
+
+        if #terms == 0 then
+          terms = { Snacks.terminal.open() }
+          return
+        end
+
+        if terms[1]:valid() then
+          for _, term in ipairs(terms) do
+            term:hide()
+          end
+        else
+          for _, term in ipairs(terms) do
+            term:show()
+          end
+        end
+      end, { desc = 'Terminal Toggle' })
+
+      vim.api.nvim_create_user_command('TermSplit', function()
+        table.insert(terms, Snacks.terminal.open())
+      end, {})
+
+      vim.api.nvim_create_user_command('TermClose', function()
+        local bufnr = vim.api.nvim_get_current_buf()
+        for i, term in ipairs(terms) do
+          if term.buf == bufnr then
+            term:hide()
+            table.remove(terms, i)
+          end
+        end
+      end, {})
     end,
     keys = {
-      {
-        '<C-g>',
-        mode = { 'n', 't' },
-        function()
-          -- if not in fzf-lua
-          if vim.bo.filetype ~= 'fzf' then
-            Snacks.terminal.toggle()
-          else
-            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-g>', true, true, true), 'n', false)
-          end
-        end,
-        desc = 'Terminal Toggle',
-        remap = true,
-      },
       {
         '<leader>G',
         function()
