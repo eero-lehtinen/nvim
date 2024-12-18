@@ -496,9 +496,9 @@ return {
 
       local terms = {}
 
-      vim.keymap.set({ 'n', 't' }, '<C-h>', function()
+      vim.keymap.set({ 'n', 't' }, '<C-g>', function()
         if vim.bo.filetype == 'fzf' then
-          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-h>', true, true, true), 'n', false)
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-g>', true, true, true), 'n', false)
           return
         end
 
