@@ -496,28 +496,6 @@ return {
 
       local terms = {}
 
-      vim.keymap.set({ 'n', 't' }, '<C-g>', function()
-        if vim.bo.filetype == 'fzf' then
-          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-g>', true, true, true), 'n', false)
-          return
-        end
-
-        if #terms == 0 then
-          terms = { Snacks.terminal.open() }
-          return
-        end
-
-        if terms[1]:valid() then
-          for _, term in ipairs(terms) do
-            term:hide()
-          end
-        else
-          for _, term in ipairs(terms) do
-            term:show()
-          end
-        end
-      end, { desc = 'Terminal Toggle' })
-
       vim.keymap.set({ 'n', 't' }, '<C-h>', function()
         if vim.bo.filetype == 'fzf' then
           vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-h>', true, true, true), 'n', false)
