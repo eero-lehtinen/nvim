@@ -155,7 +155,12 @@ return {
   },
   {
     'stevearc/oil.nvim',
-    opts = {},
+    opts = {
+      keymaps = {
+        ['<C-h>'] = { 'actions.parent', mode = 'n' },
+        ['<C-l>'] = { 'actions.select', mode = 'n' },
+      },
+    },
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
   {
