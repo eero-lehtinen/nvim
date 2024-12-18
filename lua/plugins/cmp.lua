@@ -348,10 +348,11 @@ return {
         ['<C-p>'] = { 'show', 'select_prev' },
         ['<C-n>'] = { 'show', 'select_next' },
 
-        ['<C-b>'] = {},
-        ['<C-f>'] = {},
+        ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
 
         ['<C-l>'] = { 'snippet_forward' },
+
         ['<Tab>'] = {},
         ['<S-Tab>'] = {},
       },
@@ -365,11 +366,19 @@ return {
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 300,
-          update_delay_ms = 5,
+          update_delay_ms = 10,
         },
         -- ghost_text = {
         --   enabled = false,
         -- },
+      },
+
+      signature = {
+        enabled = false,
+        window = {
+          max_height = 4,
+          border = 'none',
+        },
       },
       appearance = {
         use_nvim_cmp_as_default = true,
