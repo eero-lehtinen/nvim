@@ -30,8 +30,16 @@ return {
           extensions = image_preview,
         },
       },
+      grep = {
+        rg_glob = true,
+      },
       files = {
         git_icons = false,
+      },
+      keymap = {
+        fzf = {
+          ['ctrl-q'] = 'select-all+accept',
+        },
       },
     }
 
