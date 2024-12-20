@@ -1,65 +1,65 @@
 return {
   {
-    'supermaven-inc/supermaven-nvim',
-    event = 'VeryLazy',
+    "supermaven-inc/supermaven-nvim",
+    event = "VeryLazy",
     enabled = false,
     config = function()
-      require('supermaven-nvim').setup {
+      require("supermaven-nvim").setup({
         keymaps = {
-          accept_suggestion = '<C-u>',
-          clear_suggestion = '<C-¨>', -- actually <C-]>
-          accept_word = '<F24>',
+          accept_suggestion = "<C-u>",
+          clear_suggestion = "<C-¨>", -- actually <C-]>
+          accept_word = "<F24>",
         },
         color = {
-          suggestion_color = '#739296',
+          suggestion_color = "#739296",
           cterm = 244,
         },
-        log_level = 'off',
-      }
+        log_level = "off",
+      })
 
-      local api = require 'supermaven-nvim.api'
-      vim.keymap.set('n', '<leader>ta', function()
+      local api = require("supermaven-nvim.api")
+      vim.keymap.set("n", "<leader>ta", function()
         if api.is_running() then
-          vim.notify 'Supermaven disabled'
+          vim.notify("Supermaven disabled")
         else
-          vim.notify 'Supermaven enabled'
+          vim.notify("Supermaven enabled")
         end
 
         api.toggle()
-      end, { desc = '[T]oggle [A]I SuperMaven' })
+      end, { desc = "[T]oggle [A]I SuperMaven" })
 
       api.stop()
     end,
   },
   {
-    'zbirenbaum/copilot.lua',
+    "zbirenbaum/copilot.lua",
     enabled = false,
-    cmd = 'Copilot',
-    event = 'InsertEnter',
+    cmd = "Copilot",
+    event = "InsertEnter",
     opts = {
       panel = {
         enabled = true,
         auto_refresh = true,
         keymap = {
-          jump_prev = '[[',
-          jump_next = ']]',
-          accept = '<CR>',
-          refresh = 'gr',
+          jump_prev = "[[",
+          jump_next = "]]",
+          accept = "<CR>",
+          refresh = "gr",
           open = false,
           -- open = 'C-ö', -- Cöpailot
         },
         layout = {
-          position = 'bottom', -- | top | left | right
+          position = "bottom", -- | top | left | right
           ratio = 0.4,
         },
       },
       suggestion = {
         auto_trigger = true,
         keymap = {
-          next = '<C-¨>', -- actually <C-]>
-          prev = '<C-å>', -- actually <C-[>
-          dismiss = '<C-ä>', -- below [
-          accept = '<C-u>', -- Next to C-y which is normal complete
+          next = "<C-¨>", -- actually <C-]>
+          prev = "<C-å>", -- actually <C-[>
+          dismiss = "<C-ä>", -- below [
+          accept = "<C-u>", -- Next to C-y which is normal complete
 
           -- these work in wezterm, above ones in kitty
           -- next = '<C-]>', -- actually <C-]>
@@ -69,70 +69,70 @@ return {
         },
       },
       filetypes = {
-        ['*'] = true,
+        ["*"] = true,
       },
     },
   },
   {
-    'Exafunction/codeium.nvim',
+    "Exafunction/codeium.nvim",
     requires = {
-      'nvim-lua/plenary.nvim',
+      "nvim-lua/plenary.nvim",
     },
     enabled = true,
     config = function()
-      require('codeium').setup {
+      require("codeium").setup({
         enable_cmp_source = false,
         virtual_text = {
           enabled = true,
           manual = true,
           key_bindings = {
-            accept = '<C-u>',
-            next = '<A-n>',
-            prev = '<A-p>',
-            dismiss = '<A-e>',
+            accept = "<C-u>",
+            next = "<A-n>",
+            prev = "<A-p>",
+            dismiss = "<A-e>",
           },
         },
-      }
+      })
 
-      vim.keymap.set('n', '<leader>ta', function()
-        local virtual_text = require('codeium.config').options.virtual_text
+      vim.keymap.set("n", "<leader>ta", function()
+        local virtual_text = require("codeium.config").options.virtual_text
         virtual_text.manual = not virtual_text.manual
         if not virtual_text.manual then
-          vim.notify 'Codeium enabled'
+          vim.notify("Codeium enabled")
         else
-          vim.notify 'Codeium disabled'
+          vim.notify("Codeium disabled")
         end
-      end, { desc = '[T]oggle [A]I Codeium' })
+      end, { desc = "[T]oggle [A]I Codeium" })
     end,
   },
   {
-    'iguanacucumber/magazine.nvim',
+    "iguanacucumber/magazine.nvim",
     enabled = false,
-    event = 'InsertEnter',
+    event = "InsertEnter",
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
-      { 'L3MON4D3/LuaSnip', build = 'make install_jsregexp' },
-      'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
+      { "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
+      "saadparwaiz1/cmp_luasnip",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-cmdline",
 
-      'hrsh7th/cmp-nvim-lsp',
+      "hrsh7th/cmp-nvim-lsp",
 
-      'onsails/lspkind.nvim',
+      "onsails/lspkind.nvim",
 
       -- (have my own now)
       -- 'rafamadriz/friendly-snippets',
     },
     config = function()
-      local cmp = require 'cmp'
-      local luasnip = require 'luasnip'
-      local lspkind = require 'lspkind'
-      require('luasnip.loaders.from_vscode').lazy_load { paths = { './snippets' } }
-      luasnip.config.setup {}
+      local cmp = require("cmp")
+      local luasnip = require("luasnip")
+      local lspkind = require("lspkind")
+      require("luasnip.loaders.from_vscode").lazy_load({ paths = { "./snippets" } })
+      luasnip.config.setup({})
 
-      local compare = require 'cmp.config.compare'
-      local types = require 'cmp.types'
+      local compare = require("cmp.config.compare")
+      local types = require("cmp.types")
 
       local K = types.lsp.CompletionItemKind
       local kind_order = {
@@ -182,7 +182,7 @@ return {
       end
 
       ---@diagnostic disable: missing-fields
-      cmp.setup {
+      cmp.setup({
         sorting = {
           comparators = {
             compare.offset,
@@ -204,78 +204,78 @@ return {
         },
         preselect = cmp.PreselectMode.None,
         formatting = {
-          format = lspkind.cmp_format {
-            mode = 'symbol_text',
+          format = lspkind.cmp_format({
+            mode = "symbol_text",
             maxwidth = 50,
-            ellipsis_char = '...',
+            ellipsis_char = "...",
             menu = {
-              buffer = '[Buf]',
-              nvim_lsp = '[LSP]',
-              luasnip = '[Snip]',
-              path = '[Path]',
+              buffer = "[Buf]",
+              nvim_lsp = "[LSP]",
+              luasnip = "[Snip]",
+              path = "[Path]",
             },
-          },
+          }),
         },
-        mapping = cmp.mapping.preset.insert {
-          ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
-          ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
-          ['<C-Space>'] = cmp.mapping(function(_) -- C-e works by default to close
+        mapping = cmp.mapping.preset.insert({
+          ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
+          ["<C-Space>"] = cmp.mapping(function(_) -- C-e works by default to close
             if cmp.visible() then
               cmp.abort()
             else
-              cmp.complete {}
+              cmp.complete({})
             end
           end),
-          ['<C-y>'] = cmp.mapping.confirm {
+          ["<C-y>"] = cmp.mapping.confirm({
             select = true,
             behavior = cmp.ConfirmBehavior.Insert,
-          },
-          ['<C-CR>'] = function(fallback)
+          }),
+          ["<C-CR>"] = function(fallback)
             cmp.abort()
             fallback()
           end,
-          ['<C-l>'] = cmp.mapping(function()
+          ["<C-l>"] = cmp.mapping(function()
             if luasnip.locally_jumpable() then
               luasnip.jump()
             end
-          end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
+          end, { "i", "s" }),
+          ["<C-h>"] = cmp.mapping(function()
             if luasnip.locally_jumpable(-1) then
               luasnip.jump(-1)
             end
-          end, { 'i', 's' }),
-        },
+          end, { "i", "s" }),
+        }),
         sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'path' },
-          { name = 'buffer' },
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "path" },
+          { name = "buffer" },
         }, {}),
         experimental = {
-          ghost_text = { hl_group = 'CmpGhostText' },
+          ghost_text = { hl_group = "CmpGhostText" },
         },
-      }
+      })
 
-      cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline {
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline({
           -- <C-z> toggles the completion menu
-          ['<C-y>'] = cmp.mapping.confirm {
+          ["<C-y>"] = cmp.mapping.confirm({
             select = true,
-          },
-        },
+          }),
+        }),
         sources = cmp.config.sources({
-          { name = 'path' },
+          { name = "path" },
         }, {
-          { name = 'cmdline' },
+          { name = "cmdline" },
         }),
       })
 
-      cmp.event:on('menu_opened', function()
+      cmp.event:on("menu_opened", function()
         vim.b.copilot_suggestion_hidden = true
         -- require('copilot.suggestion').dismiss()
       end)
 
-      cmp.event:on('menu_closed', function()
+      cmp.event:on("menu_closed", function()
         vim.b.copilot_suggestion_hidden = false
         -- require('copilot.suggestion').next()
         -- require('copilot.suggestion').prev()
@@ -283,9 +283,9 @@ return {
     end,
   },
   {
-    'ms-jpq/coq_nvim',
+    "ms-jpq/coq_nvim",
     enabled = false,
-    branch = 'coq',
+    branch = "coq",
     init = function()
       vim.g.coq_settings = {
         auto_start = true,
@@ -295,14 +295,14 @@ return {
           },
           preview = {
             border = {
-              { '', 'NormalFloat' },
-              { '', 'NormalFloat' },
-              { '', 'NormalFloat' },
-              { ' ', 'NormalFloat' },
-              { '', 'NormalFloat' },
-              { '', 'NormalFloat' },
-              { '', 'NormalFloat' },
-              { ' ', 'NormalFloat' },
+              { "", "NormalFloat" },
+              { "", "NormalFloat" },
+              { "", "NormalFloat" },
+              { " ", "NormalFloat" },
+              { "", "NormalFloat" },
+              { "", "NormalFloat" },
+              { "", "NormalFloat" },
+              { " ", "NormalFloat" },
             },
             positions = {
               north = 2,
@@ -328,39 +328,39 @@ return {
   },
   {
     enabled = false,
-    'ms-jpq/coq.artifacts',
-    branch = 'artifacts',
+    "ms-jpq/coq.artifacts",
+    branch = "artifacts",
   },
   {
-    'saghen/blink.cmp',
+    "saghen/blink.cmp",
     -- dev = true,
-    version = 'v0.*',
+    version = "v0.*",
     lazy = false,
     enabled = true,
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
       keymap = {
-        ['<C-space'] = {},
-        ['<C-e>'] = { 'hide' },
-        ['<C-y>'] = { 'select_and_accept' },
+        ["<C-space"] = {},
+        ["<C-e>"] = { "hide" },
+        ["<C-y>"] = { "select_and_accept" },
 
-        ['<C-p>'] = { 'show', 'select_prev' },
-        ['<C-n>'] = { 'show', 'select_next' },
+        ["<C-p>"] = { "show", "select_prev" },
+        ["<C-n>"] = { "show", "select_next" },
 
-        ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
-        ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
+        ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+        ["<C-f>"] = { "scroll_documentation_down", "fallback" },
 
-        ['<C-l>'] = { 'snippet_forward' },
+        ["<C-l>"] = { "snippet_forward" },
 
-        ['<Tab>'] = {},
-        ['<S-Tab>'] = {},
+        ["<Tab>"] = {},
+        ["<S-Tab>"] = {},
       },
 
       completion = {
         menu = {
           draw = {
-            columns = { { 'label', 'label_description', gap = 1 }, { 'kind_icon', 'kind' } },
+            columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
           },
         },
         documentation = {
@@ -377,12 +377,12 @@ return {
         enabled = false,
         window = {
           max_height = 4,
-          border = 'none',
+          border = "none",
         },
       },
       appearance = {
         use_nvim_cmp_as_default = true,
-        nerd_font_variant = 'normal',
+        nerd_font_variant = "normal",
       },
     },
   },

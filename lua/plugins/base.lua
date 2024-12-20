@@ -1,11 +1,11 @@
 -- from https://notebook.kulchenko.com/algorithms/alphanumeric-natural-sorting-for-humans-in-lua
 local function natural_sort(nodes)
   local function padnum(d)
-    return ('%09d%s'):format(#d, d)
+    return ("%09d%s"):format(#d, d)
   end
   table.sort(nodes, function(a, b)
-    local a_dir = a.type == 'directory'
-    local b_dir = b.type == 'directory'
+    local a_dir = a.type == "directory"
+    local b_dir = b.type == "directory"
 
     if a_dir and not b_dir then
       return true
@@ -13,81 +13,81 @@ local function natural_sort(nodes)
       return false
     end
 
-    return tostring(a.name):gsub('%d+', padnum) < tostring(b.name):gsub('%d+', padnum)
+    return tostring(a.name):gsub("%d+", padnum) < tostring(b.name):gsub("%d+", padnum)
   end)
 end
 
 return {
 
   -- Detect tabstop and shiftwidth automatically
-  { 'nmac427/guess-indent.nvim', opts = {} },
+  { "nmac427/guess-indent.nvim", opts = {} },
 
   {
-    'folke/which-key.nvim',
-    event = 'VeryLazy',
+    "folke/which-key.nvim",
+    event = "VeryLazy",
     config = function()
-      require('which-key').setup {
+      require("which-key").setup({
         icons = {
           rules = false,
         },
         spec = {
-          { '<leader>d', group = 'debug / document symbols' },
-          { '<leader>h', group = 'hunk (git)' },
-          { '<leader>s', group = 'search' },
-          { '<leader>t', group = 'toggle ' },
-          { '<leader>w', group = 'workspace symbols' },
-          { '<leader>l', group = 'language specific' },
-          { '<leader>q', group = 'qflist/loclist' },
-          { '<leader>g', group = 'git' },
-          { '<leader>m', group = 'surround' },
+          { "<leader>d", group = "debug / document symbols" },
+          { "<leader>h", group = "hunk (git)" },
+          { "<leader>s", group = "search" },
+          { "<leader>t", group = "toggle " },
+          { "<leader>w", group = "workspace symbols" },
+          { "<leader>l", group = "language specific" },
+          { "<leader>q", group = "qflist/loclist" },
+          { "<leader>g", group = "git" },
+          { "<leader>m", group = "surround" },
         },
-      }
+      })
     end,
   },
 
   {
-    'ggandor/leap.nvim',
+    "ggandor/leap.nvim",
     dependencies = {
-      'tpope/vim-repeat',
+      "tpope/vim-repeat",
     },
     config = function()
-      require('leap').add_default_mappings()
+      require("leap").add_default_mappings()
     end,
   },
   {
-    'ggandor/flit.nvim',
+    "ggandor/flit.nvim",
     dependencies = {
-      'ggandor/leap.nvim',
-      'tpope/vim-repeat',
+      "ggandor/leap.nvim",
+      "tpope/vim-repeat",
     },
     opts = {
-      labeled_modes = '',
+      labeled_modes = "",
     },
   },
   {
-    'echasnovski/mini.surround',
-    version = '*',
+    "echasnovski/mini.surround",
+    version = "*",
     opts = {
       mappings = {
-        add = '<leader>ma', -- Add surrounding in Normal and Visual modes
-        delete = '<leader>md', -- Delete surrounding
-        find = '<leader>mf', -- Find surrounding (to the right)
-        find_left = '<leader>mF', -- Find surrounding (to the left)
-        highlight = '<leader>mh', -- Highlight surrounding
-        replace = '<leader>mc', -- Change surrounding
-        update_n_lines = '<leader>mn', -- Update `n_lines`
+        add = "<leader>ma", -- Add surrounding in Normal and Visual modes
+        delete = "<leader>md", -- Delete surrounding
+        find = "<leader>mf", -- Find surrounding (to the right)
+        find_left = "<leader>mF", -- Find surrounding (to the left)
+        highlight = "<leader>mh", -- Highlight surrounding
+        replace = "<leader>mc", -- Change surrounding
+        update_n_lines = "<leader>mn", -- Update `n_lines`
       },
       n_lines = 200,
     },
   },
   {
-    'nvim-tree/nvim-tree.lua',
+    "nvim-tree/nvim-tree.lua",
     -- for some reason on windows (and maybe windows too) calls some git function and completely freezes the whole editor
     enabled = false,
-    version = '*',
+    version = "*",
     lazy = false,
     dependencies = {
-      'nvim-tree/nvim-web-devicons',
+      "nvim-tree/nvim-web-devicons",
     },
     opts = {
       disable_netrw = true,
@@ -114,8 +114,8 @@ return {
           open_win_config = function()
             local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
             return {
-              border = 'rounded',
-              relative = 'editor',
+              border = "rounded",
+              relative = "editor",
               width = 100,
               height = screen_h - 3,
               row = 0,
@@ -137,12 +137,12 @@ return {
         sorter = natural_sort,
       },
       on_attach = function(bufnr)
-        local api = require 'nvim-tree.api'
+        local api = require("nvim-tree.api")
         local function opts(desc)
-          return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
         end
         api.config.mappings.default_on_attach(bufnr)
-        vim.keymap.set('n', '<Esc>', api.tree.close, opts 'Close')
+        vim.keymap.set("n", "<Esc>", api.tree.close, opts("Close"))
       end,
     },
     init = function()
@@ -150,27 +150,27 @@ return {
       vim.g.loaded_netrwPlugin = 1
       vim.g.nvim_tree_disable_netrw = 1
 
-      vim.keymap.set('n', '<leader>T', require('nvim-tree.api').tree.toggle, { desc = 'File [T]ree Toggle' })
+      vim.keymap.set("n", "<leader>T", require("nvim-tree.api").tree.toggle, { desc = "File [T]ree Toggle" })
     end,
   },
   {
-    'stevearc/oil.nvim',
+    "stevearc/oil.nvim",
     opts = {
       keymaps = {
-        ['<C-h>'] = { 'actions.parent', mode = 'n' },
-        ['<C-l>'] = { 'actions.select', mode = 'n' },
+        ["<C-h>"] = { "actions.parent", mode = "n" },
+        ["<C-l>"] = { "actions.select", mode = "n" },
       },
     },
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
-    'mikavilpas/yazi.nvim',
-    event = 'VeryLazy',
+    "mikavilpas/yazi.nvim",
+    event = "VeryLazy",
     keys = {
       {
-        '<leader>y',
-        '<cmd>Yazi<cr>',
-        desc = 'Open yazi at the current file',
+        "<leader>y",
+        "<cmd>Yazi<cr>",
+        desc = "Open yazi at the current file",
       },
     },
     ---@type YaziConfig
@@ -178,87 +178,87 @@ return {
       -- if you want to open yazi instead of netrw, see below for more info
       open_for_directories = false,
       keymaps = {
-        show_help = '<f1>',
+        show_help = "<f1>",
       },
     },
   },
   {
-    'stevearc/dressing.nvim',
+    "stevearc/dressing.nvim",
     opts = {},
   },
   {
-    'tummetott/unimpaired.nvim',
+    "tummetott/unimpaired.nvim",
     lazy = false,
     opts = {
       default_keymaps = false,
       keymaps = {
         lprevious = {
-          mapping = '[l',
-          description = 'Jump to [count] previous entry in loclist',
+          mapping = "[l",
+          description = "Jump to [count] previous entry in loclist",
           dot_repeat = false,
         },
         lnext = {
-          mapping = ']l',
-          description = 'Jump to [count] next entry in loclist',
+          mapping = "]l",
+          description = "Jump to [count] next entry in loclist",
           dot_repeat = false,
         },
         lfirst = {
-          mapping = '[L',
-          description = 'Jump to first entry in loclist',
+          mapping = "[L",
+          description = "Jump to first entry in loclist",
           dot_repeat = false,
         },
         llast = {
-          mapping = ']L',
-          description = 'Jump to last entry in loclist',
+          mapping = "]L",
+          description = "Jump to last entry in loclist",
           dot_repeat = false,
         },
         cprevious = {
-          mapping = '[q',
-          description = 'Jump to [count] previous entry in qflist',
+          mapping = "[q",
+          description = "Jump to [count] previous entry in qflist",
           dot_repeat = false,
         },
         cnext = {
-          mapping = ']q',
-          description = 'Jump to [count] next entry in qflist',
+          mapping = "]q",
+          description = "Jump to [count] next entry in qflist",
           dot_repeat = false,
         },
         cfirst = {
-          mapping = '[Q',
-          description = 'Jump to first entry in qflist',
+          mapping = "[Q",
+          description = "Jump to first entry in qflist",
           dot_repeat = false,
         },
         clast = {
-          mapping = ']Q',
-          description = 'Jump to last entry in qflist',
+          mapping = "]Q",
+          description = "Jump to last entry in qflist",
           dot_repeat = false,
         },
       },
     },
   },
   {
-    'tzachar/highlight-undo.nvim',
+    "tzachar/highlight-undo.nvim",
     opts = {},
   },
   {
-    'RRethy/vim-illuminate',
-    event = 'VeryLazy',
+    "RRethy/vim-illuminate",
+    event = "VeryLazy",
     config = function()
-      require('illuminate').configure {
+      require("illuminate").configure({
         min_count_to_highlight = 2,
         delay = 70,
-      }
+      })
     end,
   },
   {
-    'toppair/peek.nvim',
-    event = { 'VeryLazy' },
-    build = 'deno task --quiet build:fast',
+    "toppair/peek.nvim",
+    event = { "VeryLazy" },
+    build = "deno task --quiet build:fast",
     config = function()
-      local peek = require 'peek'
-      peek.setup {
-        app = 'browser',
-      }
-      vim.api.nvim_create_user_command('MarkdownToggle', function()
+      local peek = require("peek")
+      peek.setup({
+        app = "browser",
+      })
+      vim.api.nvim_create_user_command("MarkdownToggle", function()
         if peek.is_open() then
           peek.close()
         else
@@ -268,33 +268,33 @@ return {
     end,
   },
   {
-    'MagicDuck/grug-far.nvim',
-    keys = { { '<leader>S', '<cmd>SearchAndReplace<cr>', desc = 'Search and replace (Grug far)' } },
-    cmd = { 'SearchAndReplace', 'FindAndReplace' },
+    "MagicDuck/grug-far.nvim",
+    keys = { { "<leader>S", "<cmd>SearchAndReplace<cr>", desc = "Search and replace (Grug far)" } },
+    cmd = { "SearchAndReplace", "FindAndReplace" },
     config = function()
-      require('grug-far').setup {}
-      vim.api.nvim_create_user_command('SearchAndReplace', 'GrugFar', {
+      require("grug-far").setup({})
+      vim.api.nvim_create_user_command("SearchAndReplace", "GrugFar", {
         nargs = 0,
-        desc = 'Search and replace (Grug far)',
+        desc = "Search and replace (Grug far)",
       })
-      vim.api.nvim_create_user_command('FindAndReplace', 'GrugFar', {
+      vim.api.nvim_create_user_command("FindAndReplace", "GrugFar", {
         nargs = 0,
-        desc = 'Search and replace (Grug far)',
+        desc = "Search and replace (Grug far)",
       })
     end,
   },
   {
-    'folke/ts-comments.nvim',
+    "folke/ts-comments.nvim",
     opts = {},
-    event = 'VeryLazy',
+    event = "VeryLazy",
   },
   {
-    'ethanholz/nvim-lastplace',
+    "ethanholz/nvim-lastplace",
     opts = {},
   },
-  'jesseleite/nvim-macroni', -- Adds `:YankMacro [register]`
+  "jesseleite/nvim-macroni", -- Adds `:YankMacro [register]`
   {
-    'andymass/vim-matchup',
+    "andymass/vim-matchup",
     -- enabled = false,
     init = function()
       vim.g.matchup_surround_enabled = 0
@@ -302,14 +302,14 @@ return {
     end,
   },
   {
-    'Wansmer/treesj',
-    event = 'VeryLazy',
+    "Wansmer/treesj",
+    event = "VeryLazy",
     dependencies = {
-      'nvim-treesitter/nvim-treesitter',
+      "nvim-treesitter/nvim-treesitter",
       {
-        'echasnovski/mini.splitjoin',
+        "echasnovski/mini.splitjoin",
         version = false,
-        opts = { mappings = { toggle = '<leader>J' } },
+        opts = { mappings = { toggle = "<leader>J" } },
       },
     },
     init = function()
@@ -319,65 +319,65 @@ return {
         local buf = vim.api.nvim_get_current_buf()
         local ok, parser = pcall(vim.treesitter.get_parser, buf, vim.treesitter.language.get_lang(vim.bo[buf].ft))
         if not ok or not parser then
-          return ''
+          return ""
         end
         local current_tree = parser:language_for_range(range)
         return current_tree:lang()
       end
 
-      vim.keymap.set('n', '<leader>j', function()
-        local tsj_langs = require('treesj.langs')['presets']
+      vim.keymap.set("n", "<leader>j", function()
+        local tsj_langs = require("treesj.langs")["presets"]
         local lang = get_pos_lang()
-        if lang ~= '' and tsj_langs[lang] then
-          require('treesj').toggle()
+        if lang ~= "" and tsj_langs[lang] then
+          require("treesj").toggle()
         else
-          require('mini.splitjoin').toggle()
+          require("mini.splitjoin").toggle()
         end
-      end, { desc = 'Toggle [J]oin Node' })
+      end, { desc = "Toggle [J]oin Node" })
     end,
     config = function()
-      require('treesj').setup { use_default_keymaps = false }
+      require("treesj").setup({ use_default_keymaps = false })
     end,
   },
   {
-    'mbbill/undotree',
+    "mbbill/undotree",
     config = function()
       vim.g.undotree_WindowLayout = 1
       vim.g.undotree_SplitWidth = 48
       vim.g.undotree_DiffpanelHeight = 15
       vim.g.undotree_SetFocusWhenToggle = 1
-      vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = '[U]ndotree', silent = true })
+      vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "[U]ndotree", silent = true })
     end,
   },
   {
-    'laytan/cloak.nvim',
+    "laytan/cloak.nvim",
     opts = {},
   },
 
   {
-    'rachartier/tiny-devicons-auto-colors.nvim',
+    "rachartier/tiny-devicons-auto-colors.nvim",
     dependencies = {
-      'nvim-tree/nvim-web-devicons',
+      "nvim-tree/nvim-web-devicons",
     },
-    event = 'VeryLazy',
+    event = "VeryLazy",
     config = function()
-      if vim.g.colors_name == 'kanagawa' then
-        local colors = require('kanagawa.colors').setup()
-        require('tiny-devicons-auto-colors').setup {
+      if vim.g.colors_name == "kanagawa" then
+        local colors = require("kanagawa.colors").setup()
+        require("tiny-devicons-auto-colors").setup({
           colors = colors.palette,
-        }
-      elseif vim.g.colors_name == 'oldworld' then
-        require('tiny-devicons-auto-colors').setup {
-          colors = require('oldworld').palette,
-        }
+        })
+      elseif vim.g.colors_name == "oldworld" then
+        require("tiny-devicons-auto-colors").setup({
+          colors = require("oldworld").palette,
+        })
       end
     end,
   },
 
-  'mechatroner/rainbow_csv',
+  "mechatroner/rainbow_csv",
 
   {
-    'stevearc/quicker.nvim',
+    "stevearc/quicker.nvim",
     ---@module "quicker"
     ---@type quicker.SetupOptions
     opts = {
@@ -387,26 +387,26 @@ return {
       },
     },
     config = function(_, opts)
-      require('quicker').setup(opts)
-      vim.keymap.set('n', '<leader>qc', function()
-        require('quicker').toggle()
+      require("quicker").setup(opts)
+      vim.keymap.set("n", "<leader>qc", function()
+        require("quicker").toggle()
       end, {
-        desc = 'Toggle quickfix',
+        desc = "Toggle quickfix",
       })
-      vim.keymap.set('n', '<leader>ql', function()
-        require('quicker').toggle { loclist = true }
+      vim.keymap.set("n", "<leader>ql", function()
+        require("quicker").toggle({ loclist = true })
       end, {
-        desc = 'Toggle loclist',
+        desc = "Toggle loclist",
       })
     end,
   },
 
   {
-    'RaafatTurki/hex.nvim',
+    "RaafatTurki/hex.nvim",
     opts = {
       is_file_binary_pre_read = function()
         -- only work on normal buffers
-        if vim.bo.ft ~= '' then
+        if vim.bo.ft ~= "" then
           return false
         end
         -- check -b flag
@@ -414,8 +414,8 @@ return {
           return true
         end
         -- check ext within binary_ext
-        local ext = vim.fn.expand '%:e'
-        local binary_ext = { 'out', 'bin', 'png', 'jpg', 'jpeg', 'exe', 'dll', 'glb' }
+        local ext = vim.fn.expand("%:e")
+        local binary_ext = { "out", "bin", "png", "jpg", "jpeg", "exe", "dll", "glb" }
         if vim.tbl_contains(binary_ext, ext) then
           return true
         end
@@ -425,57 +425,57 @@ return {
     },
   },
 
-  { 'windwp/nvim-ts-autotag', event = 'VeryLazy', opts = {} },
+  { "windwp/nvim-ts-autotag", event = "VeryLazy", opts = {} },
   {
-    'echasnovski/mini.pairs',
+    "echasnovski/mini.pairs",
     opts = {
       mappings = {
-        ['('] = { action = 'open', pair = '()', neigh_pattern = '[^\\]%W' },
-        ['['] = { action = 'open', pair = '[]', neigh_pattern = '[^\\]%W' },
-        ['{'] = { action = 'open', pair = '{}', neigh_pattern = '[^\\]%W' },
+        ["("] = { action = "open", pair = "()", neigh_pattern = "[^\\]%W" },
+        ["["] = { action = "open", pair = "[]", neigh_pattern = "[^\\]%W" },
+        ["{"] = { action = "open", pair = "{}", neigh_pattern = "[^\\]%W" },
 
-        [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
-        [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
-        ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
+        [")"] = { action = "close", pair = "()", neigh_pattern = "[^\\]." },
+        ["]"] = { action = "close", pair = "[]", neigh_pattern = "[^\\]." },
+        ["}"] = { action = "close", pair = "{}", neigh_pattern = "[^\\]." },
 
-        ['"'] = { action = 'closeopen', pair = '""', neigh_pattern = '[^%w\\]%W', register = { cr = false } },
-        ["'"] = { action = 'closeopen', pair = "''", neigh_pattern = '[^%w\\]%W', register = { cr = false } },
-        ['`'] = { action = 'closeopen', pair = '``', neigh_pattern = '[^%w`\\]%W', register = { cr = false } },
-        ['|'] = { action = 'closeopen', pair = '||', neigh_pattern = '%(%W', register = { cr = false } },
+        ['"'] = { action = "closeopen", pair = '""', neigh_pattern = "[^%w\\]%W", register = { cr = false } },
+        ["'"] = { action = "closeopen", pair = "''", neigh_pattern = "[^%w\\]%W", register = { cr = false } },
+        ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^%w`\\]%W", register = { cr = false } },
+        ["|"] = { action = "closeopen", pair = "||", neigh_pattern = "%(%W", register = { cr = false } },
       },
     },
   },
 
   {
-    'folke/snacks.nvim',
+    "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
     config = function()
       ---@diagnostic disable: missing-fields
-      require('snacks').setup {
+      require("snacks").setup({
         bigfile = {
           enabled = true,
           setup = function(ctx)
             vim.schedule(function()
-              require('illuminate').pause_buf()
+              require("illuminate").pause_buf()
               vim.bo[ctx.buf].syntax = ctx.ft
             end)
           end,
         },
-        terminal = { style = 'terminal' },
+        terminal = { style = "terminal" },
         lazygit = {},
         indent = {
           enabled = true,
           indent = {
-            char = '▏',
-            hl = 'IndentBlanklineChar',
+            char = "▏",
+            hl = "IndentBlanklineChar",
           },
           animate = {
             enabled = false,
           },
           scope = {
-            char = '▏',
-            hl = 'DiagnosticHint',
+            char = "▏",
+            hl = "DiagnosticHint",
           },
         },
         gitbrowse = {},
@@ -484,21 +484,21 @@ return {
         -- quickfile = { enabled = true },
         -- statuscolumn = { enabled = true },
         -- words = { enabled = true },
-      }
+      })
       ---@diagnostic enable: missing-fields
 
-      Snacks.toggle.profiler():map '<leader>pp'
-      Snacks.toggle.profiler_highlights():map '<leader>ph'
+      Snacks.toggle.profiler():map("<leader>pp")
+      Snacks.toggle.profiler_highlights():map("<leader>ph")
 
-      vim.api.nvim_create_user_command('GitBrowse', function(cmd)
-        Snacks.gitbrowse { line_start = cmd.line1, line_end = cmd.line2 }
+      vim.api.nvim_create_user_command("GitBrowse", function(cmd)
+        Snacks.gitbrowse({ line_start = cmd.line1, line_end = cmd.line2 })
       end, { range = true })
 
       local terms = {}
 
-      vim.keymap.set({ 'n', 't' }, '<C-g>', function()
-        if vim.bo.filetype == 'fzf' then
-          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-g>', true, true, true), 'n', false)
+      vim.keymap.set({ "n", "t" }, "<C-g>", function()
+        if vim.bo.filetype == "fzf" then
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-g>", true, true, true), "n", false)
           return
         end
 
@@ -516,13 +516,13 @@ return {
             term:show()
           end
         end
-      end, { desc = 'Terminal Toggle' })
+      end, { desc = "Terminal Toggle" })
 
-      vim.api.nvim_create_user_command('TermSplit', function()
+      vim.api.nvim_create_user_command("TermSplit", function()
         table.insert(terms, Snacks.terminal.open())
       end, {})
 
-      vim.api.nvim_create_user_command('TermClose', function()
+      vim.api.nvim_create_user_command("TermClose", function()
         local bufnr = vim.api.nvim_get_current_buf()
         for i, term in ipairs(terms) do
           if term.buf == bufnr then
@@ -534,31 +534,31 @@ return {
     end,
     keys = {
       {
-        '<leader>G',
+        "<leader>G",
         function()
           -- Toggle the profiler highlights
           Snacks.lazygit()
         end,
-        desc = 'Lazygit',
+        desc = "Lazygit",
       },
       {
-        '<leader>.',
+        "<leader>.",
         function()
           Snacks.scratch()
         end,
-        desc = 'Scratch buffer',
+        desc = "Scratch buffer",
       },
       {
-        '<leader>ps',
+        "<leader>ps",
         function()
           Snacks.profiler.pick()
         end,
-        desc = 'Profiler search',
+        desc = "Profiler search",
       },
     },
   },
 
-  'tpope/vim-endwise',
+  "tpope/vim-endwise",
 
-  { 'ActivityWatch/aw-watcher-vim', enabled = false },
+  { "ActivityWatch/aw-watcher-vim", enabled = false },
 }

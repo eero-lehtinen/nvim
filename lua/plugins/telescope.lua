@@ -1,57 +1,57 @@
 return {
-  'nvim-telescope/telescope.nvim',
+  "nvim-telescope/telescope.nvim",
   -- lazy = false,
-  rev = '0.1.6',
+  rev = "0.1.6",
   enabled = false,
   dependencies = {
-    'nvim-lua/plenary.nvim',
+    "nvim-lua/plenary.nvim",
     {
-      'nvim-telescope/telescope-fzf-native.nvim',
-      build = 'make',
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
       cond = function()
-        return vim.fn.executable 'make' == 1
+        return vim.fn.executable("make") == 1
       end,
     },
-    'MunifTanjim/nui.nvim',
+    "MunifTanjim/nui.nvim",
   },
   config = function()
-    local actions = require 'telescope.actions'
-    local telescope = require 'telescope'
+    local actions = require("telescope.actions")
+    local telescope = require("telescope")
 
-    local ignore_filetypes = { 'png', 'jpg', 'jpeg', 'webp', 'xcf', 'ogg', 'mp3', 'ttf' }
+    local ignore_filetypes = { "png", "jpg", "jpeg", "webp", "xcf", "ogg", "mp3", "ttf" }
 
-    local find_command = { 'fd', '--type', 'f', '--follow', '--hidden', '-E', '.git' }
+    local find_command = { "fd", "--type", "f", "--follow", "--hidden", "-E", ".git" }
 
     for _, ext in ipairs(ignore_filetypes) do
-      table.insert(find_command, '-E')
-      table.insert(find_command, '*.' .. ext)
+      table.insert(find_command, "-E")
+      table.insert(find_command, "*." .. ext)
     end
 
-    telescope.setup {
+    telescope.setup({
       defaults = {
-        path_display = { 'truncate' },
+        path_display = { "truncate" },
         layout_config = {
-          prompt_position = 'top',
+          prompt_position = "top",
           horizontal = {
             size = {
-              width = '90%',
-              height = '60%',
+              width = "90%",
+              height = "60%",
             },
           },
           vertical = {
             size = {
-              width = '90%',
-              height = '90%',
+              width = "90%",
+              height = "90%",
             },
           },
         },
-        sorting_strategy = 'ascending',
+        sorting_strategy = "ascending",
         mappings = {
           i = {
-            ['<C-+>'] = actions.which_key,
-            ['<C-u>'] = false,
-            ['<C-d>'] = false,
-            ['<C-h>'] = actions.select_horizontal,
+            ["<C-+>"] = actions.which_key,
+            ["<C-u>"] = false,
+            ["<C-d>"] = false,
+            ["<C-h>"] = actions.select_horizontal,
           },
         },
       },
@@ -62,10 +62,10 @@ return {
         buffers = {
           mappings = {
             i = {
-              ['<C-x>'] = actions.delete_buffer + actions.move_to_top,
+              ["<C-x>"] = actions.delete_buffer + actions.move_to_top,
             },
             n = {
-              ['<C-x>'] = actions.delete_buffer + actions.move_to_top,
+              ["<C-x>"] = actions.delete_buffer + actions.move_to_top,
             },
           },
         },
@@ -73,11 +73,11 @@ return {
       extensions = {
         fzf = {},
       },
-    }
+    })
 
-    pcall(telescope.load_extension, 'fzf')
+    pcall(telescope.load_extension, "fzf")
 
-    local builtin = require 'telescope.builtin'
+    local builtin = require("telescope.builtin")
     --
     -- local function find_all_files()
     --   builtin.find_files {

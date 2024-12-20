@@ -1,7 +1,7 @@
 return {
   {
-    'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       local function win_larger_than(n)
         return function()
@@ -9,43 +9,43 @@ return {
         end
       end
 
-      require('lualine').setup {
+      require("lualine").setup({
         options = {
           icons_enabled = true,
-          theme = 'auto',
-          component_separators = '',
-          section_separators = '',
+          theme = "auto",
+          component_separators = "",
+          section_separators = "",
         },
         sections = {
           lualine_c = {
-            { 'filename', path = 1 },
+            { "filename", path = 1 },
           },
           lualine_x = {
             {
-              'encoding',
+              "encoding",
               cond = win_larger_than(90),
             },
             {
-              'fileformat',
+              "fileformat",
               cond = win_larger_than(90),
             },
-            { 'filetype' },
+            { "filetype" },
             {
-              'filesize',
+              "filesize",
               cond = win_larger_than(110),
             },
           },
         },
         extensions = {
-          'fugitive',
-          'lazy',
-          'mason',
-          'nvim-dap-ui',
-          'nvim-tree',
-          'oil',
-          'quickfix',
+          "fugitive",
+          "lazy",
+          "mason",
+          "nvim-dap-ui",
+          "nvim-tree",
+          "oil",
+          "quickfix",
         },
-      }
+      })
     end,
   },
 }

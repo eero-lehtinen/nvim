@@ -1,6 +1,6 @@
 return {
   {
-    'rebelot/kanagawa.nvim',
+    "rebelot/kanagawa.nvim",
     priority = 1000,
     opts = {
       keywordStyle = { italic = false },
@@ -20,7 +20,7 @@ return {
         theme = {
           all = {
             ui = {
-              bg_gutter = 'none',
+              bg_gutter = "none",
             },
           },
         },
@@ -28,9 +28,9 @@ return {
       overrides = function(colors)
         local theme = colors.theme
         return {
-          ['@keyword.operator'] = { link = 'KeyWord' },
+          ["@keyword.operator"] = { link = "KeyWord" },
           Boolean = { bold = false },
-          ['@lsp.typemod.function.readonly'] = { bold = false },
+          ["@lsp.typemod.function.readonly"] = { bold = false },
           IlluminatedWordText = { bg = theme.ui.bg_p2 },
           IlluminatedWordRead = { bg = theme.ui.bg_p2 },
           IlluminatedWordWrite = { bg = theme.ui.bg_p2 },
@@ -42,16 +42,16 @@ return {
           HLIndent1 = { fg = theme.ui.bg_p2 },
           DiffDelete = { bg = theme.ui.bg },
           Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_m2 },
-          PmenuSel = { fg = 'NONE', bg = theme.ui.bg_p2 },
+          PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
           PmenuSbar = { bg = theme.ui.bg_m2 },
           PmenuThumb = { bg = theme.ui.bg_p2 },
-          CopilotSuggestion = { fg = '#739296' },
-          CodeiumSuggestion = { fg = '#739296' },
+          CopilotSuggestion = { fg = "#739296" },
+          CodeiumSuggestion = { fg = "#739296" },
           CmpGhostText = { fg = theme.syn.comment },
           LspInlayHint = { fg = theme.ui.nontext, bg = theme.ui.bg_m1 },
           CursorLine = { bg = theme.ui.bg_p1 },
           HighlightUndo = { fg = theme.ui.fg, bg = colors.palette.waveBlue2 },
-          MatchWord = { fg = 'NONE' },
+          MatchWord = { fg = "NONE" },
           -- MarkviewHeading1 = { bg = theme.ui.bg_m2 },
           -- MarkviewHeading2 = { bg = theme.ui.bg_m2 },
           -- MarkviewHeading3 = { bg = theme.ui.bg_m2 },
@@ -71,21 +71,21 @@ return {
     },
   },
   {
-    'folke/tokyonight.nvim',
+    "folke/tokyonight.nvim",
     enabled = false,
     lazy = false,
     priority = 1000,
     opts = {
-      style = 'night',
+      style = "night",
     },
   },
   {
-    'catppuccin/nvim',
+    "catppuccin/nvim",
     enabled = false,
-    name = 'catppuccin',
+    name = "catppuccin",
     priority = 1000,
     opts = {
-      flavour = 'mocha',
+      flavour = "mocha",
       color_overrides = {
         -- mocha = {
         --   base = '#232330',
@@ -104,7 +104,7 @@ return {
         which_key = true,
       },
       custom_highlights = function(c)
-        U = require 'catppuccin.utils.colors'
+        U = require("catppuccin.utils.colors")
         return {
           LspInlayHint = { fg = c.overlay1, bg = U.darken(c.surface0, 0.35, c.base) },
           HighlightUndo = { bg = U.darken(c.teal, 0.25, c.base) },
@@ -115,30 +115,30 @@ return {
       end,
     },
   },
-  { 'rose-pine/neovim', name = 'rose-pine', enabled = false },
+  { "rose-pine/neovim", name = "rose-pine", enabled = false },
   {
-    'sainnhe/gruvbox-material',
+    "sainnhe/gruvbox-material",
     enabled = false,
     init = function()
-      vim.g.gruvbox_material_background = 'hard'
+      vim.g.gruvbox_material_background = "hard"
     end,
   },
   {
-    'slugbyte/lackluster.nvim',
+    "slugbyte/lackluster.nvim",
     enabled = false,
     lazy = false,
   },
   {
-    'ramojus/mellifluous.nvim',
+    "ramojus/mellifluous.nvim",
     enabled = false,
     lazy = false,
   },
   {
-    'wtfox/jellybeans.nvim',
+    "wtfox/jellybeans.nvim",
     enabled = false,
     priority = 1000,
     config = function()
-      require('jellybeans').setup()
+      require("jellybeans").setup()
     end,
   },
 }
