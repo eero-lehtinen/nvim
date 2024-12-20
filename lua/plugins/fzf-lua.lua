@@ -13,6 +13,7 @@ return {
 
     local fzf_lua = require 'fzf-lua'
     fzf_lua.setup {
+      fzf_bin = vim.g.is_windows and 'C:\\Users\\eerol\\AppData\\Local\\Microsoft\\WinGet\\Links\\fzf.exe' or 'fzf',
       winopts = {
         width = 0.9,
         preview = {

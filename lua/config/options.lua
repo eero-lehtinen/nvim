@@ -34,8 +34,7 @@ vim.o.virtualedit = 'block'
 
 vim.o.fileformats = 'unix,dos'
 
-local is_windows = vim.uv.os_uname().sysname:find 'Windows' ~= nil
-if is_windows then
+if vim.g.is_windows then
   vim.cmd 'language en_US'
 
   local ldata = os.getenv 'LOCALAPPDATA'

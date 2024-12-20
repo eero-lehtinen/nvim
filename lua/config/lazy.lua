@@ -21,10 +21,6 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-local function is_windows()
-  return vim.uv.os_uname().sysname:find 'Windows' ~= nil
-end
-
 -- Setup lazy.nvim
 require('lazy').setup({
   { import = 'plugins' },
@@ -35,6 +31,6 @@ require('lazy').setup({
     notify = false,
   },
   dev = {
-    path = is_windows() and 'D:/repos' or '~/repos',
+    path = vim.g.is_windows and 'D:/repos' or '~/repos',
   },
 })
