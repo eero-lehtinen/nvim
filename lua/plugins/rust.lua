@@ -88,7 +88,7 @@ return {
             -- border = 'none',
             auto_focus = true,
           },
-          enable_clippy = false,
+          enable_clippy = true,
           -- reload_workspace_from_cargo_toml = false,
         },
         server = {
@@ -117,11 +117,11 @@ return {
               rust = {
                 analyzerTargetDir = true,
               },
-              check = {
-                workspace = false,
-                command = 'clippy',
-                extraArgs = { '--no-deps' },
-              },
+              -- check = {
+              --   workspace = false,
+              --   command = 'clippy',
+              --   extraArgs = { '--no-deps' },
+              -- },
               checkOnSave = check_on_save,
             },
           },
