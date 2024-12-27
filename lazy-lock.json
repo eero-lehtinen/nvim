@@ -1,5 +1,5 @@
 {
-  "blink.cmp": { "branch": "main", "commit": "5f442681df24fe705d1ee7ce5b4d435aa4b4dee4" },
+  "blink.cmp": { "branch": "main", "commit": "434ea2b05c2bae0cff6249893c8324fa3a56d865" },
   "cloak.nvim": { "branch": "main", "commit": "648aca6d33ec011dc3166e7af3b38820d01a71e4" },
   "codeium.nvim": { "branch": "main", "commit": "27d2b1ce8c7ba14dbf6e4504bdea8e5548be5476" },
   "conform.nvim": { "branch": "master", "commit": "9180320205d250429f0f80e073326c674e2a7149" },
@@ -31,7 +31,7 @@
   "neodev.nvim": { "branch": "main", "commit": "46aa467dca16cf3dfe27098042402066d2ae242d" },
   "nvim-dap": { "branch": "master", "commit": "665d3569a86395fe0dab85efbdb26d7d2ee57e49" },
   "nvim-dap-go": { "branch": "main", "commit": "6aa88167ea1224bcef578e8c7160fe8afbb44848" },
-  "nvim-dap-ui": { "branch": "master", "commit": "ffa89839f97bad360e78428d5c740fdad9a0ff02" },
+  "nvim-dap-ui": { "branch": "master", "commit": "055be38c3653923d1d3e0f155a50871545740798" },
   "nvim-dap-virtual-text": { "branch": "master", "commit": "df66808cd78b5a97576bbaeee95ed5ca385a9750" },
   "nvim-lastplace": { "branch": "main", "commit": "0bb6103c506315044872e0f84b1f736c4172bb20" },
   "nvim-lsp-file-operations": { "branch": "master", "commit": "9744b738183a5adca0f916527922078a965515ed" },
@@ -50,7 +50,6 @@
   "quicker.nvim": { "branch": "master", "commit": "87dae0f25733b7bd79b600a70ca38040db68ec0b" },
   "rainbow_csv": { "branch": "master", "commit": "3dbbfd7d17536aebfb80f571255548495574c32b" },
   "rustaceanvim": { "branch": "master", "commit": "6db1fe9e3f005b2e0921c7302d2c195eeb90a451" },
-  "smear-cursor.nvim": { "branch": "main", "commit": "e6de22fc4efbf7b2703317115e9c288d00e02f60" },
   "snacks.nvim": { "branch": "main", "commit": "98df370703b3c47a297988f3e55ce99628639590" },
   "tiny-devicons-auto-colors.nvim": { "branch": "main", "commit": "c8f63933ee013c1e0a26091d58131e060546f01f" },
   "treesj": { "branch": "main", "commit": "94f6df623f2d15630b1b617abff39962024cb501" },

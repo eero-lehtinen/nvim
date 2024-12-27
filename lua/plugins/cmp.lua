@@ -334,14 +334,15 @@ return {
   {
     "saghen/blink.cmp",
     -- dev = true,
-    version = "v0.*",
+    -- version = "v0.*",
     lazy = false,
     enabled = true,
+    build = "cargo build -r",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
       keymap = {
-        ["<C-space"] = {},
+        ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
         ["<C-e>"] = { "hide" },
         ["<C-y>"] = { "select_and_accept" },
 
@@ -359,14 +360,20 @@ return {
 
       completion = {
         menu = {
-          draw = {
-            columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
-          },
+          -- draw = {
+          --   columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
+          -- },
         },
         documentation = {
-          auto_show = true,
+          auto_show = false, -- disable for now because always shows north and obstructs everything
           auto_show_delay_ms = 300,
           update_delay_ms = 10,
+          window = {
+            -- direction_priority = {
+            --   menu_north = { "e", "w", "s" },
+            --   menu_south = { "e", "w", "s" },
+            -- },
+          },
         },
         -- ghost_text = {
         --   enabled = false,
