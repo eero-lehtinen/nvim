@@ -19,6 +19,7 @@ return {
         preview = {
           horizontal = "right:50%",
           flip_columns = 130,
+          delay = 100,
           -- default = 'bat_native', -- could be enabled for performance
         },
       },
