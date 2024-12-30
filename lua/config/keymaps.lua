@@ -138,10 +138,9 @@ local toggle_keymap = function(key, name, option_or_toggle)
   local f = function()
     local result
     if type(option_or_toggle) == "string" then
-      local wins = vim.api.nvim_list_wins()
-      result = not vim.api.nvim_win_get_option(0, option_or_toggle)
-      for _, win in ipairs(wins) do
-        vim.api.nvim_win_set_option(win, option_or_toggle, result)
+      result = not vim.wo[option_or_toggle]
+      for _, win in ipairs(vim.api.nvim_list_wins()) do
+        vim.wo[win][option_or_toggle] = result
       end
       vim.g[option_or_toggle] = result
     else
