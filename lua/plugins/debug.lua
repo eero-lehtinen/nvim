@@ -74,7 +74,7 @@ return {
     --  CPP / C config
     dap.configurations.cpp = {
       {
-        name = "Launch",
+        name = "LLDB: Launch",
         type = "codelldb",
         request = "launch",
         -- Probably should manually override for each project
@@ -82,6 +82,9 @@ return {
           return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
         end,
         cwd = "${workspaceFolder}",
+        stopOnEntry = false,
+        args = {},
+        console = "integratedTerminal",
       },
     }
     dap.configurations.c = dap.configurations.cpp
