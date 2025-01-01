@@ -25,7 +25,9 @@ vim.g.maplocalleader = " "
 require("lazy").setup({
   { import = "plugins" },
   -- { import = 'plugins.color-picker' },
-  -- { import = 'plugins.colorschemes' },
+  -- { import = "plugins.colorschemes" },
+  -- { import = "plugins.fzf-lua" },
+  -- { import = "plugins.cmp" },
 }, {
   change_detection = {
     notify = false,

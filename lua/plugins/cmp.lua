@@ -334,7 +334,7 @@ return {
   {
     "saghen/blink.cmp",
     -- dev = true,
-    version = "v0.*",
+    -- version = "v0.*",
     lazy = false,
     enabled = true,
     -- build = "cargo build -r",
@@ -366,14 +366,15 @@ return {
           -- },
         },
         documentation = {
-          auto_show = false, -- disable for now because always shows north and obstructs everything
+          auto_show = true, -- disable for now because always shows north and obstructs everything
           auto_show_delay_ms = 300,
           update_delay_ms = 10,
           window = {
-            -- direction_priority = {
-            --   menu_north = { "e", "w", "s" },
-            --   menu_south = { "e", "w", "s" },
-            -- },
+            max_width = 60,
+            direction_priority = {
+              menu_north = { "e", "w", "n" },
+              menu_south = { "e", "w", "s" },
+            },
           },
         },
         -- ghost_text = {
@@ -391,6 +392,11 @@ return {
       appearance = {
         use_nvim_cmp_as_default = true,
         nerd_font_variant = "normal",
+      },
+      fuzzy = {
+        prebuilt_binaries = {
+          force_version = "v0.9.0",
+        },
       },
     },
   },
