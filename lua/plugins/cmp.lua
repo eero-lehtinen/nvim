@@ -334,14 +334,15 @@ return {
   {
     "saghen/blink.cmp",
     -- dev = true,
-    -- version = "v0.*",
+    version = "v0.*",
     lazy = false,
     enabled = true,
-    build = "cargo build -r",
+    -- build = "cargo build -r",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
       keymap = {
+        preset = "none",
         ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
         ["<C-e>"] = { "hide" },
         ["<C-y>"] = { "select_and_accept" },
