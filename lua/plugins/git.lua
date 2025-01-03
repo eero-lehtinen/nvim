@@ -33,7 +33,7 @@ return {
     "sindrets/diffview.nvim",
     event = "VeryLazy",
     config = function()
-      vim.cmd("cnoreabbrev D DiffviewOpen")
+      vim.cmd("cnoreabbrev Dv DiffviewOpen")
       vim.cmd("cnoreabbrev Dc DiffviewClose")
       vim.cmd("cnoreabbrev Df DiffviewFileHistory")
 
