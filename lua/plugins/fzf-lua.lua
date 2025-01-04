@@ -1,7 +1,7 @@
 return {
   "ibhagwan/fzf-lua",
   lazy = false,
-  -- enabled = false,
+  enabled = true,
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local image_formats = { "png", "jpg", "jpeg", "gif", "bmp", "ico", "tif", "tiff", "svg", "webp" }
@@ -37,6 +37,7 @@ return {
       },
       files = {
         git_icons = false,
+        file_icons = true,
       },
       keymap = {
         fzf = {
