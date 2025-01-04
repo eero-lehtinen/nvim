@@ -334,7 +334,7 @@ return {
   {
     "saghen/blink.cmp",
     -- dev = true,
-    -- version = "v0.*",
+    version = "v0.*",
     lazy = false,
     enabled = true,
     -- build = "cargo build -r",
@@ -394,9 +394,9 @@ return {
         nerd_font_variant = "normal",
       },
       fuzzy = {
-        prebuilt_binaries = {
-          force_version = "v0.9.0",
-        },
+        -- prebuilt_binaries = {
+        --   force_version = "v0.9.0",
+        -- },
       },
     },
   },
