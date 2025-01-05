@@ -71,11 +71,31 @@ return {
       mappings = {
         add = "<leader>ma", -- Add surrounding in Normal and Visual modes
         delete = "<leader>md", -- Delete surrounding
-        find = "<leader>mf", -- Find surrounding (to the right)
-        find_left = "<leader>mF", -- Find surrounding (to the left)
-        highlight = "<leader>mh", -- Highlight surrounding
+        find = "", -- Find surrounding (to the right)
+        find_left = "", -- Find surrounding (to the left)
+        highlight = "", -- Highlight surrounding
         replace = "<leader>mc", -- Change surrounding
-        update_n_lines = "<leader>mn", -- Update `n_lines`
+        update_n_lines = "", -- Update `n_lines`
+      },
+      n_lines = 200,
+    },
+  },
+  {
+    "echasnovski/mini.ai",
+    version = "*",
+    -- enabled = false,
+    opts = {
+      custom_textobjects = {
+        f = false,
+      },
+      mappings = {
+        around_next = "",
+        inside_next = "",
+        around_last = "",
+        inside_last = "",
+
+        goto_left = "",
+        goto_right = "",
       },
       n_lines = 200,
     },
