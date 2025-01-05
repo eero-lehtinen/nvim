@@ -41,6 +41,7 @@ return {
           { "<leader>g", group = "git" },
           { "<leader>m", group = "surround" },
         },
+        delay = 300,
       })
     end,
   },
@@ -595,4 +596,9 @@ return {
   },
 
   "chaoren/vim-wordmotion",
+
+  {
+    "gregorias/coerce.nvim",
+    config = true,
+  },
 }
