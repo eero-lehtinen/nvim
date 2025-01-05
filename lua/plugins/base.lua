@@ -593,4 +593,6 @@ return {
       legacy_computing_symbols_support = true,
     },
   },
+
+  "chaoren/vim-wordmotion",
 }
