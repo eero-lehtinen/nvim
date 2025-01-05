@@ -31,7 +31,7 @@ vim.o.updatetime = 250
 -- vim.o.timeoutlen = 300
 vim.o.completeopt = "menuone,noselect"
 vim.o.virtualedit = "block"
-vim.o.guicursor = "a:block,n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
+vim.o.guicursor = "n-v-sm:block,c-i-ci-ve:ver25,r-cr-o:hor20"
 
 vim.o.fileformats = "unix,dos"
 
