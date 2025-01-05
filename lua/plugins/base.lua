@@ -41,7 +41,7 @@ return {
           { "<leader>g", group = "git" },
           { "<leader>m", group = "surround" },
         },
-        delay = 300,
+        delay = 200,
       })
     end,
   },
