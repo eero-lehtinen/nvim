@@ -595,7 +595,7 @@ return {
     },
   },
 
-  "chaoren/vim-wordmotion",
+  { "chaoren/vim-wordmotion", enabled = false },
 
   {
     "gregorias/coerce.nvim",
