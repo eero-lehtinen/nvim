@@ -2,7 +2,7 @@ return {
   {
     "supermaven-inc/supermaven-nvim",
     event = "VeryLazy",
-    enabled = false,
+    enabled = true,
     config = function()
       require("supermaven-nvim").setup({
         keymaps = {
@@ -78,7 +78,7 @@ return {
     requires = {
       "nvim-lua/plenary.nvim",
     },
-    enabled = true,
+    enabled = false,
     config = function()
       require("codeium").setup({
         enable_cmp_source = false,
