@@ -599,6 +599,12 @@ return {
 
   {
     "gregorias/coerce.nvim",
-    config = true,
+    config = {
+      default_mode_mask = {
+        normal_mode = true,
+        motion_mode = false,
+        visual_mode = false,
+      },
+    },
   },
 }
