@@ -7,7 +7,7 @@ return {
       end, { desc = "[T]oggle [S]ignature Popup (i_CTRL-k also works)" })
     end,
   },
-  { "smjonas/inc-rename.nvim", opts = {} },
+  { "smjonas/inc-rename.nvim", opts = { save_in_cmdline_history = false } },
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     config = function()
