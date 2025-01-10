@@ -16,23 +16,34 @@ return {
     end,
   },
   {
+    "j-hui/fidget.nvim",
+    event = "VeryLazy",
+    opts = {
+      progress = {
+        lsp = {
+          progress_ringbuf_size = 5000,
+        },
+      },
+    },
+  },
+  {
+    "folke/lazydev.nvim",
+    ft = "lua",
+    opts = {
+      library = {
+        -- See the configuration section for more details
+        -- Load luvit types when the `vim.uv` word is found
+        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+      },
+    },
+  },
+  {
     "neovim/nvim-lspconfig",
     lazy = false,
     dependencies = {
       { "williamboman/mason.nvim", config = true },
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      {
-        "j-hui/fidget.nvim",
-        opts = {
-          progress = {
-            lsp = {
-              progress_ringbuf_size = 5000,
-            },
-          },
-        },
-      },
-      "folke/neodev.nvim",
     },
     config = function()
       -- Make these nop when not in use, otherwise they will do unexpected commands
@@ -116,8 +127,6 @@ return {
           }, event.buf)
         end,
       })
-
-      require("neodev").setup()
 
       local servers = {
         lua_ls = {
