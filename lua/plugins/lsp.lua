@@ -10,6 +10,7 @@ return {
   { "smjonas/inc-rename.nvim", opts = { save_in_cmdline_history = false } },
   {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    lazy = true, -- activated in keymaps file
     config = function()
       require("lsp_lines").setup()
       require("lsp_lines").toggle()
@@ -217,7 +218,6 @@ return {
       if ok then
         capabilities = blink.get_lsp_capabilities({}, true)
       end
-      capabilities = vim.tbl_deep_extend("force", capabilities, require("lsp-file-operations").default_capabilities())
 
       local mason_lspconfig = require("mason-lspconfig")
 
@@ -252,15 +252,6 @@ return {
       })
 
       -- require('coq').lsp_ensure_capabilities(capabilities)
-    end,
-  },
-  {
-    "antosha417/nvim-lsp-file-operations",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
-    config = function()
-      require("lsp-file-operations").setup()
     end,
   },
 }
