@@ -371,26 +371,8 @@ return {
 
   {
     "RaafatTurki/hex.nvim",
-    opts = {
-      is_file_binary_pre_read = function()
-        -- only work on normal buffers
-        if vim.bo.ft ~= "" then
-          return false
-        end
-        -- check -b flag
-        if vim.bo.bin then
-          return true
-        end
-        -- check ext within binary_ext
-        local ext = vim.fn.expand("%:e")
-        local binary_ext = { "out", "bin", "png", "jpg", "jpeg", "exe", "dll", "glb" }
-        if vim.tbl_contains(binary_ext, ext) then
-          return true
-        end
-        -- none of the above
-        return false
-      end,
-    },
+    cmd = { "HexToggle" },
+    opts = {},
   },
 
   { "windwp/nvim-ts-autotag", event = "VeryLazy", opts = {} },
