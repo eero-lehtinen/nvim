@@ -186,3 +186,25 @@ toggle_keymap("k", "[K]loak", function()
   require("cloak").toggle()
   return vim.b.cloak_enabled
 end)
+
+local diagnostic_config = {
+  [true] = {
+    virtual_text = {
+      spacing = 4,
+      source = "if_many",
+      prefix = "●",
+    },
+    severity_sort = true,
+  },
+  [false] = {
+    virtual_text = false,
+    severity_sort = true,
+  },
+}
+vim.diagnostic.config(diagnostic_config[true])
+
+toggle_keymap("d", "[D]iagnostic Lsp lines", function()
+  local enabled = require("lsp_lines").toggle()
+  vim.diagnostic.config(diagnostic_config[not enabled])
+  return enabled
+end)

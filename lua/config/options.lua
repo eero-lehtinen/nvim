@@ -105,12 +105,3 @@ end
 
 vim.o.wrap = get_global("wrap", true)
 vim.o.list = get_global("list", false)
-
-vim.diagnostic.config({
-  virtual_text = {
-    spacing = 4,
-    source = "if_many",
-    prefix = "●",
-  },
-  severity_sort = true,
-})

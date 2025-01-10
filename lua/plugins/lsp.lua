@@ -9,6 +9,13 @@ return {
   },
   { "smjonas/inc-rename.nvim", opts = {} },
   {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+      require("lsp_lines").toggle()
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
     lazy = false,
     dependencies = {
