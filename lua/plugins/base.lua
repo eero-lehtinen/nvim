@@ -204,59 +204,6 @@ return {
     },
   },
   {
-    "stevearc/dressing.nvim",
-    opts = {},
-  },
-  {
-    "tummetott/unimpaired.nvim",
-    lazy = false,
-    opts = {
-      default_keymaps = false,
-      keymaps = {
-        lprevious = {
-          mapping = "[l",
-          description = "Jump to [count] previous entry in loclist",
-          dot_repeat = false,
-        },
-        lnext = {
-          mapping = "]l",
-          description = "Jump to [count] next entry in loclist",
-          dot_repeat = false,
-        },
-        lfirst = {
-          mapping = "[L",
-          description = "Jump to first entry in loclist",
-          dot_repeat = false,
-        },
-        llast = {
-          mapping = "]L",
-          description = "Jump to last entry in loclist",
-          dot_repeat = false,
-        },
-        cprevious = {
-          mapping = "[q",
-          description = "Jump to [count] previous entry in qflist",
-          dot_repeat = false,
-        },
-        cnext = {
-          mapping = "]q",
-          description = "Jump to [count] next entry in qflist",
-          dot_repeat = false,
-        },
-        cfirst = {
-          mapping = "[Q",
-          description = "Jump to first entry in qflist",
-          dot_repeat = false,
-        },
-        clast = {
-          mapping = "]Q",
-          description = "Jump to last entry in qflist",
-          dot_repeat = false,
-        },
-      },
-    },
-  },
-  {
     "tzachar/highlight-undo.nvim",
     opts = {},
   },
@@ -599,7 +546,8 @@ return {
 
   {
     "gregorias/coerce.nvim",
-    config = {
+    keys = { { "cr" } },
+    opts = {
       default_mode_mask = {
         normal_mode = true,
         motion_mode = false,
