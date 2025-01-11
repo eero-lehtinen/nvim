@@ -1,7 +1,7 @@
 return {
   "nvim-telescope/telescope.nvim",
-  -- lazy = false,
-  version = "*",
+  lazy = false,
+  -- version = "*",
   enabled = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
@@ -16,7 +16,7 @@ return {
     local actions = require("telescope.actions")
     local telescope = require("telescope")
 
-    local ignore_filetypes = { "png", "jpg", "jpeg", "webp", "xcf", "ogg", "mp3", "ttf" }
+    local ignore_filetypes = { "png", "jpg", "jpeg", "webp", "xcf", "ogg", "mp3", "ttf", "blend" }
 
     local find_command = { "fd", "--type", "f", "--follow", "--hidden", "-E", ".git" }
 
@@ -25,8 +25,19 @@ return {
       table.insert(find_command, "*." .. ext)
     end
 
+    local layout_strategies = require("telescope.pickers.layout_strategies")
+    layout_strategies.horizontal_fused = function(picker, max_columns, max_lines, layout_config)
+      local layout = layout_strategies.horizontal(picker, max_columns, max_lines, layout_config)
+      layout.results.title = ""
+      layout.results.height = layout.results.height + 1
+      layout.results.line = layout.results.line - 1
+      layout.results.borderchars = { "─", "│", "─", "│", "├", "┤", "╯", "╰" }
+      return layout
+    end
+
     telescope.setup({
       defaults = {
+        layout_strategy = "horizontal_fused",
         path_display = { "truncate" },
         layout_config = {
           prompt_position = "top",
@@ -100,7 +111,7 @@ return {
         severity_limit = vim.diagnostic.severity.INFO,
       })
     end, { desc = "[S]earch [D]iagnostics" })
-    vim.keymap.set("n", "<leader>sd", function()
+    vim.keymap.set("n", "<leader>sD", function()
       builtin.diagnostics({
         severity_limit = vim.diagnostic.severity.ERROR,
       })
