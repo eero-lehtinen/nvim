@@ -61,7 +61,7 @@ return {
       }
       for _, key in ipairs(nops) do
         vim.keymap.set("n", key, function()
-          vim.notify("'" .. key .. "' ignored, no LSP attached", "info")
+          vim.notify("'" .. key .. "' ignored, no LSP attached", vim.log.levels.INFO)
         end, { silent = true, desc = "LSP nop" })
       end
 
@@ -89,20 +89,24 @@ return {
             { buffer = event.buf, desc = "LSP: [C]ode Action" }
           )
 
-          -- local builtin = require 'telescope.builtin'
-          -- nmap('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
-          -- nmap('gr', builtin.lsp_references, '[G]oto [R]eferences')
-          -- nmap('gi', builtin.lsp_implementations, '[G]oto [I]mplementation')
-          -- nmap('gD', builtin.lsp_type_definitions, '[G]oto Type [D]efinition')
-          -- nmap('<leader>ds', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
-          -- nmap('<leader>ws', builtin.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-          local fzf_lua = require("fzf-lua")
-          nmap("gd", fzf_lua.lsp_definitions, "[G]oto [D]efinition")
-          nmap("gr", fzf_lua.lsp_references, "[G]oto [R]eferences")
-          nmap("gi", fzf_lua.lsp_implementations, "[G]oto [I]mplementation")
-          nmap("gD", fzf_lua.lsp_typedefs, "[G]oto Type [D]efinition")
-          nmap("<leader>ds", fzf_lua.lsp_document_symbols, "[D]ocument [S]ymbols")
-          nmap("<leader>ws", fzf_lua.lsp_workspace_symbols, "[W]orkspace [S]ymbols")
+          local telescope_found, telescope = pcall(require, "telescope.builtin")
+          if telescope_found then
+            nmap("gd", telescope.lsp_definitions, "[G]oto [D]efinition")
+            nmap("gr", telescope.lsp_references, "[G]oto [R]eferences")
+            nmap("gi", telescope.lsp_implementations, "[G]oto [I]mplementation")
+            nmap("gD", telescope.lsp_type_definitions, "[G]oto Type [D]efinition")
+            nmap("<leader>ds", telescope.lsp_document_symbols, "[D]ocument [S]ymbols")
+            nmap("<leader>ws", telescope.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+          end
+          local fzf_lua_found, fzf_lua = pcall(require, "fzf-lua")
+          if fzf_lua_found then
+            nmap("gd", fzf_lua.lsp_definitions, "[G]oto [D]efinition")
+            nmap("gr", fzf_lua.lsp_references, "[G]oto [R]eferences")
+            nmap("gi", fzf_lua.lsp_implementations, "[G]oto [I]mplementation")
+            nmap("gD", fzf_lua.lsp_typedefs, "[G]oto Type [D]efinition")
+            nmap("<leader>ds", fzf_lua.lsp_document_symbols, "[D]ocument [S]ymbols")
+            nmap("<leader>ws", fzf_lua.lsp_workspace_symbols, "[W]orkspace [S]ymbols")
+          end
 
           nmap("K", vim.lsp.buf.hover, "Hover Documentation")
           -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
@@ -113,7 +117,7 @@ return {
 
           nmap("<leader>wf", function()
             local f = vim.lsp.buf.list_workspace_folders()
-            vim.notify("Workspace folders: " .. vim.inspect(f), "info")
+            vim.notify("Workspace folders: " .. vim.inspect(f), vim.log.levels.INFO)
           end, "[W]orkspace [F]olders")
 
           require("lsp_signature").on_attach({

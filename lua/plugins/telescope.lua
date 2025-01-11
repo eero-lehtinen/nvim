@@ -1,15 +1,16 @@
 return {
   "nvim-telescope/telescope.nvim",
   -- lazy = false,
-  rev = "0.1.6",
-  enabled = false,
+  version = "*",
+  enabled = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
     {
       "nvim-telescope/telescope-fzf-native.nvim",
-      build = 'cmd.exe /c "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release"',
+      build = vim.g.is_windows
+          and 'cmd.exe /c "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release"'
+        or "make",
     },
-    "MunifTanjim/nui.nvim",
   },
   config = function()
     local actions = require("telescope.actions")
@@ -30,17 +31,14 @@ return {
         layout_config = {
           prompt_position = "top",
           horizontal = {
-            size = {
-              width = "90%",
-              height = "60%",
-            },
+            width = 0.9,
+            height = 0.9,
           },
           vertical = {
-            size = {
-              width = "90%",
-              height = "90%",
-            },
+            width = 0.9,
+            height = 0.9,
           },
+          preview_width = 0.5,
         },
         sorting_strategy = "ascending",
         mappings = {
@@ -102,14 +100,17 @@ return {
         severity_limit = vim.diagnostic.severity.INFO,
       })
     end, { desc = "[S]earch [D]iagnostics" })
+    vim.keymap.set("n", "<leader>sd", function()
+      builtin.diagnostics({
+        severity_limit = vim.diagnostic.severity.ERROR,
+      })
+    end, { desc = "[S]earch [D]iagnostics" })
     vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[S]earch [K]eymaps" })
     vim.keymap.set("n", "<leader>sc", builtin.commands, { desc = "[S]earch [C]ommands" })
     vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[S]earch [R]esume" })
     vim.keymap.set("n", "<leader>sq", builtin.quickfix, { desc = "[S]earch [Q]uickfix" })
     vim.keymap.set("n", "<leader>sl", builtin.loclist, { desc = "[S]earch [L]oclist" })
 
-    vim.keymap.set("n", "<leader>sn", function()
-      builtin.find_files({ cwd = vim.fn.stdpath("config") })
-    end, { desc = "[S]earch [N]eovim files" })
+    vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Search [G]it [S]tatus" })
   end,
 }
