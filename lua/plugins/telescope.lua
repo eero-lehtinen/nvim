@@ -44,12 +44,13 @@ return {
           horizontal = {
             width = 0.9,
             height = 0.9,
+            preview_width = 0.5,
           },
           vertical = {
             width = 0.9,
             height = 0.9,
+            preview_width = 0.5,
           },
-          preview_width = 0.5,
         },
         sorting_strategy = "ascending",
         mappings = {
