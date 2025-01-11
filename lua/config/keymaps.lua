@@ -54,9 +54,34 @@ else
   end, { desc = "Go to next diagnostic message" })
 end
 
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-vim.keymap.set("n", "<leader>E", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+local diagnostic_config = {
+  [true] = {
+    virtual_text = {
+      spacing = 4,
+      source = "if_many",
+      prefix = "●",
+    },
+    severity_sort = true,
+  },
+  [false] = {
+    virtual_text = false,
+    severity_sort = true,
+  },
+}
+vim.diagnostic.config(diagnostic_config[true])
 
+vim.keymap.set("n", "<leader>e", function()
+  local enabled = require("lsp_lines").toggle()
+  vim.diagnostic.config(diagnostic_config[not enabled])
+  if enabled then
+    vim.notify("LSP Lines enabled", vim.log.levels.INFO)
+  else
+    vim.notify("LSP Lines disabled", vim.log.levels.INFO)
+  end
+  return enabled
+end, { desc = "Toggle [E]rror Lines" })
+
+vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Tab close" })
 
 -- My tabout
@@ -185,26 +210,4 @@ end)
 toggle_keymap("k", "[K]loak", function()
   require("cloak").toggle()
   return vim.b.cloak_enabled
-end)
-
-local diagnostic_config = {
-  [true] = {
-    virtual_text = {
-      spacing = 4,
-      source = "if_many",
-      prefix = "●",
-    },
-    severity_sort = true,
-  },
-  [false] = {
-    virtual_text = false,
-    severity_sort = true,
-  },
-}
-vim.diagnostic.config(diagnostic_config[true])
-
-toggle_keymap("d", "[D]iagnostic Lsp lines", function()
-  local enabled = require("lsp_lines").toggle()
-  vim.diagnostic.config(diagnostic_config[not enabled])
-  return enabled
 end)
