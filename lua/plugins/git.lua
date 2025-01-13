@@ -74,6 +74,8 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     opts = {
+      watch_gitdir = { follow_files = false },
+      update_debounce = 200,
       on_attach = function(bufnr)
         local gitsigns = require("gitsigns")
 
