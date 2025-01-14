@@ -70,7 +70,7 @@ local diagnostic_config = {
 }
 vim.diagnostic.config(diagnostic_config[true])
 
-vim.keymap.set("n", "<leader>e", function()
+vim.keymap.set("n", "<leader>E", function()
   local enabled = require("lsp_lines").toggle()
   vim.diagnostic.config(diagnostic_config[not enabled])
   if enabled then
@@ -81,7 +81,7 @@ vim.keymap.set("n", "<leader>e", function()
   return enabled
 end, { desc = "Toggle [E]rror Lines" })
 
-vim.keymap.set("n", "<leader>E", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Tab close" })
 
 -- My tabout
