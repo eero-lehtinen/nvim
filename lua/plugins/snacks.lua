@@ -21,7 +21,7 @@ return {
           style = {
             backdrop = 70,
             wo = {
-              winhighlight = "NormalFloat:Normal",
+              winhighlight = "NormalFloat:SnacksPicker",
             },
           },
         },
