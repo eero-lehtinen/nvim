@@ -396,118 +396,6 @@ return {
     },
   },
 
-  {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    config = function()
-      ---@diagnostic disable: missing-fields
-      require("snacks").setup({
-        bigfile = {
-          enabled = true,
-          setup = function(ctx)
-            vim.schedule(function()
-              require("illuminate").pause_buf()
-              vim.bo[ctx.buf].syntax = ctx.ft
-            end)
-          end,
-        },
-        terminal = { style = "terminal" },
-        lazygit = {},
-        indent = {
-          enabled = true,
-          indent = {
-            char = "▏",
-            hl = "IndentBlanklineChar",
-          },
-          animate = {
-            enabled = false,
-          },
-          scope = {
-            char = "▏",
-            hl = "DiagnosticHint",
-          },
-        },
-        gitbrowse = {},
-
-        -- notifier = { enabled = true },
-        -- quickfile = { enabled = true },
-        -- statuscolumn = { enabled = true },
-        -- words = { enabled = true },
-      })
-      ---@diagnostic enable: missing-fields
-
-      Snacks.toggle.profiler():map("<leader>pp")
-      Snacks.toggle.profiler_highlights():map("<leader>ph")
-
-      vim.api.nvim_create_user_command("GitBrowse", function(cmd)
-        Snacks.gitbrowse({ line_start = cmd.line1, line_end = cmd.line2 })
-      end, { range = true })
-
-      -- local terms = {}
-      --
-      -- vim.keymap.set({ "n", "t" }, "<C-g>", function()
-      --   if vim.bo.filetype == "fzf" then
-      --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-g>", true, true, true), "n", false)
-      --     return
-      --   end
-      --
-      --   if #terms == 0 then
-      --     terms = { Snacks.terminal.open() }
-      --     return
-      --   end
-      --
-      --   if terms[1]:valid() then
-      --     for _, term in ipairs(terms) do
-      --       term:hide()
-      --     end
-      --   else
-      --     for _, term in ipairs(terms) do
-      --       term:show()
-      --     end
-      --   end
-      -- end, { desc = "Terminal Toggle" })
-      --
-      -- vim.api.nvim_create_user_command("TermSplit", function()
-      --   table.insert(terms, Snacks.terminal.open())
-      -- end, {})
-      --
-      -- vim.api.nvim_create_user_command("TermClose", function()
-      --   local bufnr = vim.api.nvim_get_current_buf()
-      --   for i, term in ipairs(terms) do
-      --     if term.buf == bufnr then
-      --       term:hide()
-      --       table.remove(terms, i)
-      --     end
-      --   end
-      -- end, {})
-    end,
-    keys = {
-      {
-        "<leader>G",
-        function()
-          -- Toggle the profiler highlights
-          Snacks.lazygit()
-        end,
-        desc = "Lazygit",
-      },
-      {
-        "<leader>.",
-        function()
-          Snacks.scratch()
-        end,
-        desc = "Scratch buffer",
-      },
-      {
-        "<leader>ps",
-        function()
-          Snacks.profiler.pick()
-        end,
-        desc = "Profiler search",
-      },
-    },
-  },
-
   "tpope/vim-endwise",
 
   { "ActivityWatch/aw-watcher-vim", enabled = false },
@@ -537,8 +425,8 @@ return {
       },
     },
   },
-  {
-    "stevearc/dressing.nvim",
-    opts = {},
-  },
+  -- {
+  --   "stevearc/dressing.nvim",
+  --   opts = {},
+  -- },
 }

@@ -107,6 +107,23 @@ return {
             nmap("<leader>ds", fzf_lua.lsp_document_symbols, "[D]ocument [S]ymbols")
             nmap("<leader>ws", fzf_lua.lsp_workspace_symbols, "[W]orkspace [S]ymbols")
           end
+          if Snacks ~= nil then
+            nmap("gd", function()
+              Snacks.picker.lsp_definitions()
+            end, "[G]oto [D]efinition")
+            nmap("gr", function()
+              Snacks.picker.lsp_references()
+            end, "[G]oto [R]eferences")
+            nmap("gi", function()
+              Snacks.picker.lsp_implementations()
+            end, "[G]oto [I]mplementation")
+            nmap("gD", function()
+              Snacks.picker.lsp_type_definitions()
+            end, "[G]oto Type [D]efinition")
+            nmap("<leader>ds", function()
+              Snacks.picker.lsp_symbols()
+            end, "[D]ocument [S]ymbols")
+          end
 
           nmap("K", vim.lsp.buf.hover, "Hover Documentation")
           -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
