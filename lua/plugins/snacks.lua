@@ -1,9 +1,9 @@
+---@diagnostic disable: missing-fields
 return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
   config = function()
-    ---@diagnostic disable: missing-fields
     require("snacks").setup({
       bigfile = {
         enabled = true,
@@ -49,25 +49,6 @@ return {
             return vim.o.columns >= 120 and "big" or "vertical"
           end,
         },
-        layouts = {
-          big = {
-            layout = {
-              box = "horizontal",
-              width = 0.95,
-              min_width = 120,
-              height = 0.9,
-              {
-                box = "vertical",
-                border = "rounded",
-                title = "{source} {live}",
-                title_pos = "center",
-                { win = "input", height = 1, border = "bottom" },
-                { win = "list", border = "none" },
-              },
-              { win = "preview", border = "rounded", width = 0.5 },
-            },
-          },
-        },
       },
 
       -- notifier = { enabled = true },
@@ -75,7 +56,11 @@ return {
       -- statuscolumn = { enabled = true },
       -- words = { enabled = true },
     })
-    ---@diagnostic enable: missing-fields
+
+    local layouts = require("snacks.picker.config.layouts")
+    layouts.big = vim.tbl_deep_extend("keep", { layout = { height = 0.9, width = 0.95 } }, layouts.default)
+
+    local format = require("snacks.picker.format")
 
     Snacks.toggle.profiler():map("<leader>pp")
     Snacks.toggle.profiler_highlights():map("<leader>ph")
