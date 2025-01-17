@@ -30,14 +30,12 @@ return {
         enabled = true,
         indent = {
           char = "▏",
-          hl = "IndentBlanklineChar",
         },
         animate = {
           enabled = false,
         },
         scope = {
           char = "▏",
-          hl = "DiagnosticHint",
         },
       },
       gitbrowse = {},

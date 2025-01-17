@@ -34,12 +34,6 @@ return {
           IlluminatedWordText = { bg = theme.ui.bg_p2 },
           IlluminatedWordRead = { bg = theme.ui.bg_p2 },
           IlluminatedWordWrite = { bg = theme.ui.bg_p2 },
-          IndentBlanklineChar = { fg = theme.ui.bg_p2 },
-          IndentBlanklineContextChar = { fg = theme.ui.whitespace },
-          IblIndent = { fg = theme.ui.bg_p2 },
-          IblScope = { fg = theme.ui.whitespace },
-          IndentLine = { fg = theme.ui.bg_p2 },
-          HLIndent1 = { fg = theme.ui.bg_p2 },
           DiffDelete = { bg = theme.ui.bg },
           Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_m2 },
           PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
@@ -56,6 +50,8 @@ return {
           SnacksPickerBorder = { bg = theme.ui.bg_m1, fg = colors.palette.sumiInk6 },
           SnacksPickerTitle = { bg = theme.ui.bg_m1, fg = colors.palette.sumiInk6 },
           SnacksPickerDir = { bg = "none", fg = "#5d5d72" },
+          SnacksIndent = { fg = theme.ui.whitespace },
+          SnacksIndentScope = { fg = colors.palette.waveAqua2 },
           -- MarkviewHeading1 = { bg = theme.ui.bg_m2 },
           -- MarkviewHeading2 = { bg = theme.ui.bg_m2 },
           -- MarkviewHeading3 = { bg = theme.ui.bg_m2 },
@@ -139,10 +135,24 @@ return {
   },
   {
     "wtfox/jellybeans.nvim",
-    enabled = false,
-    priority = 1000,
     config = function()
-      require("jellybeans").setup()
+      require("jellybeans").setup({
+        italics = false,
+        plugins = {},
+        on_highlights = function(hl, c)
+          hl.DiagnosticUnderlineError = { sp = c.diag.error, undercurl = true }
+          hl.DiagnosticUnderlineWarn = { sp = c.diag.warning, undercurl = true }
+          hl.DiagnosticUnderlineInfo = { sp = c.diag.info, undercurl = true }
+          hl.DiagnosticUnderlineHint = { sp = c.diag.hint, undercurl = true }
+          hl.Comment.italic = true
+          hl.SnacksIndentScope = { fg = "#91a480" }
+          hl.SnacksIndent = { fg = "#272727" }
+          -- hl.BlinkCmpLabelMatch = "Special"
+        end,
+        on_colors = function(c)
+          c.float_bg = "#2f2f2f"
+        end,
+      })
     end,
   },
 }
