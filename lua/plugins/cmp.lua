@@ -360,6 +360,13 @@ return {
       },
 
       completion = {
+        accept = {
+          auto_brackets = {
+            -- I don't really like it.
+            -- Also it's just unnecessarily laggy, up to 400ms because it uses semantic resolution.
+            enabled = false,
+          },
+        },
         menu = {
           -- draw = {
           --   columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
