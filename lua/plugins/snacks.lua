@@ -95,22 +95,36 @@ return {
     vim.keymap.set("n", "<leader>sg", function()
       Snacks.picker.grep()
     end, { desc = "[S]earch by [G]rep" })
+
+    local severity_info = {
+      min = vim.diagnostic.severity.INFO,
+      max = vim.diagnostic.severity.ERROR,
+    }
+    local severity_error = {
+      min = vim.diagnostic.severity.ERROR,
+      max = vim.diagnostic.severity.ERROR,
+    }
     vim.keymap.set("n", "<leader>sd", function()
       Snacks.picker.diagnostics({
-        severity = {
-          min = vim.diagnostic.severity.INFO,
-          max = vim.diagnostic.severity.ERROR,
-        },
+        severity = severity_info,
       })
     end, { desc = "[S]earch [D]iagnostics" })
     vim.keymap.set("n", "<leader>sD", function()
-      Snacks.picker.diagnostics({
-        severity = {
-          min = vim.diagnostic.severity.ERROR,
-          max = vim.diagnostic.severity.ERROR,
-        },
+      Snacks.picker.diagnostics_buffer({
+        severity = severity_info,
       })
-    end, { desc = "[S]earch [D]iagnostics" })
+    end, { desc = "[S]earch [D]iagnostics (Buffer)" })
+    vim.keymap.set("n", "<leader>se", function()
+      Snacks.picker.diagnostics({
+        severity = severity_error,
+      })
+    end, { desc = "[S]earch [E]rrors" })
+    vim.keymap.set("n", "<leader>sE", function()
+      Snacks.picker.diagnostics_buffer({
+        severity = severity_error,
+      })
+    end, { desc = "[S]earch [E]rrors (Buffer)" })
+
     vim.keymap.set("n", "<leader>sk", function()
       Snacks.picker.keymaps()
     end, { desc = "[S]earch [K]eymaps" })
@@ -129,6 +143,19 @@ return {
     vim.keymap.set("n", "<leader>sz", function()
       Snacks.picker.zoxide()
     end, { desc = "[S]earch [Z]oxide" })
+
+    vim.keymap.set("n", "<leader>G", function()
+      -- Toggle the profiler highlights
+      Snacks.lazygit()
+    end, { desc = "Lazygit" })
+
+    vim.keymap.set("n", "<leader>.", function()
+      Snacks.scratch()
+    end, { desc = "Scratch buffer" })
+
+    vim.keymap.set("n", "<leader>ps", function()
+      Snacks.profiler.pick()
+    end, { desc = "Profiler search" })
 
     -- local terms = {}
     --
@@ -168,28 +195,5 @@ return {
     --   end
     -- end, {})
   end,
-  keys = {
-    {
-      "<leader>G",
-      function()
-        -- Toggle the profiler highlights
-        Snacks.lazygit()
-      end,
-      desc = "Lazygit",
-    },
-    {
-      "<leader>.",
-      function()
-        Snacks.scratch()
-      end,
-      desc = "Scratch buffer",
-    },
-    {
-      "<leader>ps",
-      function()
-        Snacks.profiler.pick()
-      end,
-      desc = "Profiler search",
-    },
-  },
+  keys = {},
 }
