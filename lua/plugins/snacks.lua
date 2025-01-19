@@ -57,8 +57,7 @@ return {
 
     local layouts = require("snacks.picker.config.layouts")
     layouts.big = vim.tbl_deep_extend("keep", { layout = { height = 0.9, width = 0.95 } }, layouts.default)
-
-    local format = require("snacks.picker.format")
+    layouts.big.layout[2].width = 0.45
 
     Snacks.toggle.profiler():map("<leader>pp")
     Snacks.toggle.profiler_highlights():map("<leader>ph")
