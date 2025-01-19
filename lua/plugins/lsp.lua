@@ -86,7 +86,7 @@ return {
             { "n", "v" },
             "<leader>c",
             vim.lsp.buf.code_action,
-            { buffer = event.buf, desc = "LSP: [C]ode Action" }
+            { buffer = event.buf, desc = "LSP: [C]ode Action", nowait = true }
           )
 
           local telescope_found, telescope = pcall(require, "telescope.builtin")
