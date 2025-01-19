@@ -50,7 +50,7 @@ return {
           SnacksPickerBorder = { bg = theme.ui.bg_m1, fg = colors.palette.sumiInk6 },
           SnacksPickerTitle = { bg = theme.ui.bg_m1, fg = colors.palette.sumiInk6 },
           SnacksPickerDir = { bg = "none", fg = "#5d5d72" },
-          SnacksIndent = { fg = theme.ui.whitespace },
+          SnacksIndent = { fg = theme.ui.bg_p2 },
           SnacksIndentScope = { fg = colors.palette.waveAqua2 },
           -- MarkviewHeading1 = { bg = theme.ui.bg_m2 },
           -- MarkviewHeading2 = { bg = theme.ui.bg_m2 },
