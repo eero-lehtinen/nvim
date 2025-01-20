@@ -135,6 +135,7 @@ return {
   },
   {
     "wtfox/jellybeans.nvim",
+    enabled = false,
     config = function()
       require("jellybeans").setup({
         italics = false,

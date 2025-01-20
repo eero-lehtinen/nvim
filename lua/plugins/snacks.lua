@@ -3,6 +3,7 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
+  version = "*",
   config = function()
     require("snacks").setup({
       bigfile = {
@@ -194,5 +195,4 @@ return {
     --   end
     -- end, {})
   end,
-  keys = {},
 }
