@@ -3,7 +3,7 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  version = "*",
+  -- version = "*",
   config = function()
     require("snacks").setup({
       bigfile = {
@@ -47,6 +47,11 @@ return {
           preset = function()
             return vim.o.columns >= 120 and "big" or "vertical"
           end,
+        },
+        formatters = {
+          file = {
+            truncate = 60,
+          },
         },
       },
 
