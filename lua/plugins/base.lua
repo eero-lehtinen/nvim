@@ -322,6 +322,7 @@ return {
     opts = {},
   },
 
+  { "nvim-tree/nvim-web-devicons", commit = "aafa5c187a" },
   {
     "rachartier/tiny-devicons-auto-colors.nvim",
     dependencies = {
