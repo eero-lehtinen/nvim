@@ -9,12 +9,13 @@ return {
       sql = { "sqlfmt" },
       c = {},
       cpp = {},
+      svelte = {},
     }
 
     local prettierd_filetypes =
       { "javascript", "typescript", "json", "html", "css", "markdown", "yaml", "typescriptreact", "javascriptreact" }
     for _, ft in ipairs(prettierd_filetypes) do
-      formatters_by_ft[ft] = { "prettierd" }
+      formatters_by_ft[ft] = { "prettierd", "prettier" }
     end
 
     require("conform").setup({
