@@ -168,7 +168,8 @@ return {
 
         pyright = {},
 
-        ts_ls = {},
+        -- ts_ls = {},
+        vtsls = {},
         -- eslint = {},
         svelte = {},
         tailwindcss = {},
@@ -255,6 +256,8 @@ return {
           })
         end,
         ["rust_analyzer"] = function() end,
+        ["ts_ls"] = function() end,
+        ["tsserver"] = function() end,
       })
 
       require("lspconfig").qmlls.setup({
