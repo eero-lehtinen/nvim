@@ -9,14 +9,6 @@ return {
   },
   { "smjonas/inc-rename.nvim", opts = { save_in_cmdline_history = false } },
   {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    lazy = true, -- activated in keymaps file
-    config = function()
-      require("lsp_lines").setup()
-      require("lsp_lines").toggle()
-    end,
-  },
-  {
     "j-hui/fidget.nvim",
     event = "VeryLazy",
     opts = {

@@ -55,30 +55,32 @@ else
 end
 
 local diagnostic_config = {
-  [true] = {
+  [false] = {
     virtual_text = {
       spacing = 4,
       source = "if_many",
       prefix = "●",
     },
+    virtual_lines = false,
     severity_sort = true,
   },
-  [false] = {
+  [true] = {
     virtual_text = false,
+    virtual_lines = true,
     severity_sort = true,
   },
 }
-vim.diagnostic.config(diagnostic_config[true])
+vim.g.diagnostic_lines = false
+vim.diagnostic.config(diagnostic_config[vim.g.diagnostic_lines])
 
 vim.keymap.set("n", "<leader>E", function()
-  local enabled = require("lsp_lines").toggle()
-  vim.diagnostic.config(diagnostic_config[not enabled])
-  if enabled then
-    vim.notify("LSP Lines enabled", vim.log.levels.INFO)
+  vim.g.diagnostic_lines = not vim.g.diagnostic_lines
+  vim.diagnostic.config(diagnostic_config[vim.g.diagnostic_lines])
+  if vim.g.diagnostic_lines then
+    vim.notify("Diagnostic lines enabled", vim.log.levels.INFO)
   else
-    vim.notify("LSP Lines disabled", vim.log.levels.INFO)
+    vim.notify("Diagnostic lines disabled", vim.log.levels.INFO)
   end
-  return enabled
 end, { desc = "Toggle [E]rror Lines" })
 
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
