@@ -259,6 +259,9 @@ return {
         capabilities = blink.get_lsp_capabilities({}, true)
       end
 
+      -- Fixes svelte+ts file watching issues (at least on Linux)
+      capabilities.workspace.didChangeWatchedFiles = false
+
       local mason_lspconfig = require("mason-lspconfig")
 
       mason_lspconfig.setup({
