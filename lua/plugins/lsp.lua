@@ -259,9 +259,6 @@ return {
         capabilities = blink.get_lsp_capabilities({}, true)
       end
 
-      -- Fixes svelte+ts file watching issues (at least on Linux)
-      capabilities.workspace.didChangeWatchedFiles = false
-
       local mason_lspconfig = require("mason-lspconfig")
 
       mason_lspconfig.setup({
@@ -274,6 +271,15 @@ return {
             capabilities = capabilities,
             settings = servers[server_name],
             filetypes = (servers[server_name] or {}).filetypes,
+          })
+        end,
+        ["svelte"] = function()
+          -- Fixes svelte+ts file watching issues (at least on Linux)
+          local c = vim.deepcopy(capabilities)
+          c.workspace.didChangeWatchedFiles = false
+          require("lspconfig").svelte.setup({
+            capabilities = c,
+            settings = servers["svelte"],
           })
         end,
         ["rust_analyzer"] = function() end,
