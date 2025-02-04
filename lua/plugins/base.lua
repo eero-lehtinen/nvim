@@ -75,10 +75,10 @@ return {
         find = "", -- Find surrounding (to the right)
         find_left = "", -- Find surrounding (to the left)
         highlight = "", -- Highlight surrounding
-        replace = "<leader>mc", -- Change surrounding
+        replace = "<leader>mr", -- Change surrounding
         update_n_lines = "", -- Update `n_lines`
       },
-      n_lines = 200,
+      n_lines = 300,
     },
   },
   {
