@@ -32,6 +32,7 @@ vim.o.updatetime = 250
 vim.o.completeopt = "menuone,noselect"
 vim.o.virtualedit = "block"
 vim.o.guicursor = "n-v-sm:block,c-i-ci-ve:ver25,r-cr-o:hor20"
+vim.opt.diffopt = "filler,internal,closeoff,algorithm:histogram,context:5,linematch:60"
 
 vim.o.fileformats = "unix,dos"
 
