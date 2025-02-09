@@ -309,16 +309,6 @@ return {
     end,
   },
   {
-    "mbbill/undotree",
-    config = function()
-      vim.g.undotree_WindowLayout = 1
-      vim.g.undotree_SplitWidth = 48
-      vim.g.undotree_DiffpanelHeight = 15
-      vim.g.undotree_SetFocusWhenToggle = 1
-      vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle, { desc = "[U]ndotree", silent = true })
-    end,
-  },
-  {
     "laytan/cloak.nvim",
     opts = {},
   },
