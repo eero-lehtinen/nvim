@@ -3,6 +3,7 @@ return {
     "eero-lehtinen/oklch-color-picker.nvim",
     -- dev = true,
     event = "VeryLazy",
+    version = "*",
     keys = {
       -- One handed keymap recommended, you will be using the mouse
       { "<leader>v", "<cmd>ColorPickOklch<cr>", desc = "Color pick under cursor" },
