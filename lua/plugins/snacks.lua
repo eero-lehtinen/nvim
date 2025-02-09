@@ -54,6 +54,9 @@ return {
           },
         },
       },
+      explorer = {
+        replace_netrw = true,
+      },
 
       -- notifier = { enabled = true },
       -- quickfile = { enabled = true },
@@ -64,6 +67,7 @@ return {
     local layouts = require("snacks.picker.config.layouts")
     layouts.big = vim.tbl_deep_extend("keep", { layout = { height = 0.9, width = 0.95 } }, layouts.default)
     layouts.big.layout[2].width = 0.45
+    layouts.sidebar.layout.width = 60
 
     Snacks.toggle.profiler():map("<leader>pp")
     Snacks.toggle.profiler_highlights():map("<leader>ph")
@@ -151,6 +155,9 @@ return {
     vim.keymap.set("n", "<leader>sz", function()
       Snacks.picker.zoxide()
     end, { desc = "[S]earch [Z]oxide" })
+    vim.keymap.set("n", "<leader>st", function()
+      Snacks.picker.explorer()
+    end, { desc = "[S]earch File[T]ree (Explorer)" })
 
     vim.keymap.set("n", "<leader>G", function()
       -- Toggle the profiler highlights
@@ -161,9 +168,9 @@ return {
       Snacks.scratch()
     end, { desc = "Scratch buffer" })
 
-    vim.keymap.set("n", "<leader>ps", function()
+    vim.keymap.set("n", "<leader>sp", function()
       Snacks.profiler.pick()
-    end, { desc = "Profiler search" })
+    end, { desc = "[S]earch [P]rofiler" })
 
     -- local terms = {}
     --

@@ -102,79 +102,6 @@ return {
     },
   },
   {
-    "nvim-tree/nvim-tree.lua",
-    -- for some reason on windows (and maybe windows too) calls some git function and completely freezes the whole editor
-    enabled = false,
-    version = "*",
-    lazy = false,
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {
-      disable_netrw = true,
-      hijack_netrw = true,
-      hijack_cursor = true,
-      git = {
-        enable = false,
-      },
-      actions = {
-        open_file = {
-          quit_on_open = true,
-          window_picker = {
-            enable = false,
-          },
-        },
-      },
-      filters = {
-        git_ignored = false,
-      },
-      view = {
-        -- width = 70,
-        float = {
-          enable = true,
-          open_win_config = function()
-            local screen_h = vim.opt.lines:get() - vim.opt.cmdheight:get()
-            return {
-              border = "rounded",
-              relative = "editor",
-              width = 100,
-              height = screen_h - 3,
-              row = 0,
-              col = 1,
-            }
-          end,
-        },
-      },
-      live_filter = {
-        always_show_folders = false,
-      },
-      diagnostics = {
-        enable = true,
-      },
-      update_focused_file = {
-        enable = true,
-      },
-      sort = {
-        sorter = natural_sort,
-      },
-      on_attach = function(bufnr)
-        local api = require("nvim-tree.api")
-        local function opts(desc)
-          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
-        end
-        api.config.mappings.default_on_attach(bufnr)
-        vim.keymap.set("n", "<Esc>", api.tree.close, opts("Close"))
-      end,
-    },
-    init = function()
-      vim.g.loaded_netrw = 1
-      vim.g.loaded_netrwPlugin = 1
-      vim.g.nvim_tree_disable_netrw = 1
-
-      vim.keymap.set("n", "<leader>T", require("nvim-tree.api").tree.toggle, { desc = "File [T]ree Toggle" })
-    end,
-  },
-  {
     "stevearc/oil.nvim",
     opts = {
       keymaps = {
@@ -183,25 +110,6 @@ return {
       },
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
-  {
-    "mikavilpas/yazi.nvim",
-    event = "VeryLazy",
-    keys = {
-      {
-        "<leader>y",
-        "<cmd>Yazi<cr>",
-        desc = "Open yazi at the current file",
-      },
-    },
-    ---@type YaziConfig
-    opts = {
-      -- if you want to open yazi instead of netrw, see below for more info
-      open_for_directories = false,
-      keymaps = {
-        show_help = "<f1>",
-      },
-    },
   },
   {
     "tzachar/highlight-undo.nvim",
