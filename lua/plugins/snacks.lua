@@ -95,6 +95,9 @@ return {
     vim.keymap.set("n", "<leader>sa", function()
       Snacks.picker.files({ follow = true, hidden = true, ignored = true })
     end, { desc = "[S]earch [A]ll Files (Including gitignored)" })
+    vim.keymap.set("n", "<leader>st", function()
+      Snacks.picker.explorer({ follow = true, hidden = true, ignored = true, auto_close = true })
+    end, { desc = "[S]earch File[T]ree (Explorer)" })
     vim.keymap.set("n", "<leader>sh", function()
       Snacks.picker.help()
     end, { desc = "[S]earch [H]elp" })
@@ -155,9 +158,6 @@ return {
     vim.keymap.set("n", "<leader>sz", function()
       Snacks.picker.zoxide()
     end, { desc = "[S]earch [Z]oxide" })
-    vim.keymap.set("n", "<leader>st", function()
-      Snacks.picker.explorer()
-    end, { desc = "[S]earch File[T]ree (Explorer)" })
 
     vim.keymap.set("n", "<leader>G", function()
       -- Toggle the profiler highlights
