@@ -56,14 +56,8 @@ end
 
 local diagnostic_config = {
   [true] = {
-    virtual_text = {
-      spacing = 4,
-      source = "if_many",
-      prefix = "●",
-    },
-    virtual_lines = {
-      current_line = true,
-    },
+    virtual_text = false,
+    virtual_lines = true,
     severity_sort = true,
   },
   [false] = {
@@ -76,7 +70,7 @@ local diagnostic_config = {
     severity_sort = true,
   },
 }
-vim.g.diagnostic_lines = true
+vim.g.diagnostic_lines = false
 vim.diagnostic.config(diagnostic_config[vim.g.diagnostic_lines])
 
 vim.keymap.set("n", "<leader>E", function()
