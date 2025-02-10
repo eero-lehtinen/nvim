@@ -69,9 +69,6 @@ return {
     layouts.big.layout[2].width = 0.45
     layouts.sidebar.layout.width = 60
 
-    Snacks.toggle.profiler():map("<leader>pp")
-    Snacks.toggle.profiler_highlights():map("<leader>ph")
-
     vim.api.nvim_create_user_command("GitBrowse", function(cmd)
       Snacks.gitbrowse({ line_start = cmd.line1, line_end = cmd.line2 })
     end, { range = true })
@@ -168,8 +165,11 @@ return {
       Snacks.scratch()
     end, { desc = "Scratch buffer" })
 
+    Snacks.toggle.profiler():map("<leader>pp")
+    Snacks.toggle.profiler_highlights():map("<leader>ph")
+
     vim.keymap.set("n", "<leader>sp", function()
-      Snacks.profiler.pick()
+      Snacks.profiler.scratch()
     end, { desc = "[S]earch [P]rofiler" })
 
     -- local terms = {}
