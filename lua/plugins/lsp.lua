@@ -39,6 +39,19 @@ return {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     config = function()
+      -- Delete default keymaps
+      local def = {
+        "grn",
+        "gra",
+        "grr",
+        "gri",
+        "gO",
+      }
+      for _, key in ipairs(def) do
+        vim.keymap.del("n", key)
+      end
+      vim.keymap.del("v", "gra")
+
       -- Make these nop when not in use, otherwise they will do unexpected commands
       local nops = {
         "<leader>r",
@@ -78,7 +91,7 @@ return {
             { "n", "v" },
             "<leader>c",
             vim.lsp.buf.code_action,
-            { buffer = event.buf, desc = "LSP: [C]ode Action", nowait = true }
+            { buffer = event.buf, desc = "LSP: [C]ode Action" }
           )
 
           local telescope_found, telescope = pcall(require, "telescope.builtin")
@@ -118,7 +131,6 @@ return {
           end
 
           nmap("K", vim.lsp.buf.hover, "Hover Documentation")
-          -- nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
           -- Lesser used LSP functionality
 
