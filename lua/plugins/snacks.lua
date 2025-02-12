@@ -9,9 +9,15 @@ return {
       bigfile = {
         enabled = true,
         setup = function(ctx)
+          if vim.fn.exists(":NoMatchParen") ~= 0 then
+            vim.cmd([[NoMatchParen]])
+          end
+          vim.cmd([[setlocal nowrap]])
           vim.schedule(function()
             require("illuminate").pause_buf()
-            vim.bo[ctx.buf].syntax = ctx.ft
+            if vim.api.nvim_buf_is_valid(ctx.buf) then
+              vim.bo[ctx.buf].syntax = ctx.ft
+            end
           end)
         end,
       },
