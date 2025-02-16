@@ -73,15 +73,17 @@ local diagnostic_config = {
 vim.g.diagnostic_lines = false
 vim.diagnostic.config(diagnostic_config[vim.g.diagnostic_lines])
 
-vim.keymap.set("n", "<leader>E", function()
-  vim.g.diagnostic_lines = not vim.g.diagnostic_lines
-  vim.diagnostic.config(diagnostic_config[vim.g.diagnostic_lines])
-  if vim.g.diagnostic_lines then
-    vim.notify("Diagnostic lines enabled", vim.log.levels.INFO)
-  else
-    vim.notify("Diagnostic lines disabled", vim.log.levels.INFO)
-  end
-end, { desc = "Toggle [E]rror Lines" })
+if vim.fn.has("nvim-0.11") == 1 then
+  vim.keymap.set("n", "<leader>E", function()
+    vim.g.diagnostic_lines = not vim.g.diagnostic_lines
+    vim.diagnostic.config(diagnostic_config[vim.g.diagnostic_lines])
+    if vim.g.diagnostic_lines then
+      vim.notify("Diagnostic lines enabled", vim.log.levels.INFO)
+    else
+      vim.notify("Diagnostic lines disabled", vim.log.levels.INFO)
+    end
+  end, { desc = "Toggle [E]rror Lines" })
+end
 
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Tab close" })
@@ -175,9 +177,9 @@ local toggle_keymap = function(key, name, option_or_toggle)
     end
 
     if result then
-      vim.notify("Enabled " .. no_bracket_name, "info", { title = "Option" })
+      vim.notify("Enabled " .. no_bracket_name, vim.log.levels.INFO, { title = "Option" })
     else
-      vim.notify("Disabled " .. no_bracket_name, "info", { title = "Option" })
+      vim.notify("Disabled " .. no_bracket_name, vim.log.levels.INFO, { title = "Option" })
     end
   end
   vim.keymap.set("n", "<leader>t" .. key, f, { desc = "[T]oggle " .. name })
@@ -186,13 +188,11 @@ end
 -- toggling
 toggle_keymap("w", "[W]rap", "wrap")
 toggle_keymap("l", "[L]ist (Whitespace Characters)", "list")
-if vim.fn.has("nvim-0.10") == 1 then
-  toggle_keymap("h", "Inlay [H]ints", function()
-    local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
-    vim.lsp.inlay_hint.enable(not enabled, { bufnr = nil })
-    return not enabled
-  end)
-end
+toggle_keymap("h", "Inlay [H]ints", function()
+  local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+  vim.lsp.inlay_hint.enable(not enabled, { bufnr = nil })
+  return not enabled
+end)
 
 toggle_keymap("p", "Co[P]ilot", function()
   require("copilot.suggestion").toggle_auto_trigger()

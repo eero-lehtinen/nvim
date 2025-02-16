@@ -48,9 +48,9 @@ return {
         "gO",
       }
       for _, key in ipairs(def) do
-        vim.keymap.del("n", key)
+        pcall(vim.keymap.del, "n", key)
       end
-      vim.keymap.del("v", "gra")
+      pcall(vim.keymap.del, "v", "gra")
 
       -- Make these nop when not in use, otherwise they will do unexpected commands
       local nops = {

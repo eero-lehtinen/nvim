@@ -8,9 +8,7 @@ vim.o.listchars = "tab:» ,extends:›,precedes:‹,space:·,trail:~,nbsp:·,eol
 vim.o.cursorline = true
 vim.o.cursorlineopt = "line,number"
 vim.o.undolevels = 10000
-if vim.fn.has("nvim-0.10") == 1 then
-  vim.o.smoothscroll = true
-end
+vim.o.smoothscroll = true
 vim.opt.fillchars:append({ diff = "╱" })
 vim.o.showmode = false
 vim.o.splitright = true
