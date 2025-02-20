@@ -3,7 +3,8 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  version = "*",
+  -- version = "*",
+  -- dev = true,
   config = function()
     require("snacks").setup({
       bigfile = {
@@ -122,21 +123,25 @@ return {
     vim.keymap.set("n", "<leader>sd", function()
       Snacks.picker.diagnostics({
         severity = severity_info,
+        filter = { cwd = false },
       })
     end, { desc = "[S]earch [D]iagnostics" })
     vim.keymap.set("n", "<leader>sD", function()
       Snacks.picker.diagnostics_buffer({
         severity = severity_info,
+        filter = { cwd = false },
       })
     end, { desc = "[S]earch [D]iagnostics (Buffer)" })
     vim.keymap.set("n", "<leader>se", function()
       Snacks.picker.diagnostics({
         severity = severity_error,
+        filter = { cwd = false },
       })
     end, { desc = "[S]earch [E]rrors" })
     vim.keymap.set("n", "<leader>sE", function()
       Snacks.picker.diagnostics_buffer({
         severity = severity_error,
+        filter = { cwd = false },
       })
     end, { desc = "[S]earch [E]rrors (Buffer)" })
 
