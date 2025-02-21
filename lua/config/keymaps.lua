@@ -126,7 +126,7 @@ vim.api.nvim_create_user_command("Messages", function()
 
   vim.api.nvim_set_current_win(prev_win)
 
-  local timer = vim.loop.new_timer()
+  local timer = vim.uv.new_timer()
 
   -- Function to update the buffer with recent messages
   local function update_buffer()
