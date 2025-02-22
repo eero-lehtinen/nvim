@@ -16,7 +16,7 @@ vim.o.splitbelow = true
 -- vim.o.inccommand = 'split'
 vim.o.hlsearch = false
 
-vim.o.number = true
+vim.o.number = false
 vim.o.mouse = "a"
 vim.o.mousescroll = "ver:7,hor:12"
 vim.o.clipboard = "unnamedplus"
