@@ -187,6 +187,7 @@ end
 
 -- toggling
 toggle_keymap("w", "[W]rap", "wrap")
+toggle_keymap("n", "[N]number", "number")
 toggle_keymap("l", "[L]ist (Whitespace Characters)", "list")
 toggle_keymap("h", "Inlay [H]ints", function()
   local enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
