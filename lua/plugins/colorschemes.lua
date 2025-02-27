@@ -39,6 +39,8 @@ return {
           PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
           PmenuSbar = { bg = theme.ui.bg_m2 },
           PmenuThumb = { bg = theme.ui.bg_p2 },
+          PmenuKind = { bg = "NONE" },
+          PmenuExtra = { bg = "NONE" },
           CopilotSuggestion = { fg = "#739296" },
           CodeiumSuggestion = { fg = "#739296" },
           CmpGhostText = { fg = theme.syn.comment },
