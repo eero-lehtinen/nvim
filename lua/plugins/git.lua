@@ -67,9 +67,6 @@ return {
             { "n", "K", actions.select_prev_entry, { desc = "Open the diff for the previous file" } },
           },
         },
-
-
-
       })
     end,
   },

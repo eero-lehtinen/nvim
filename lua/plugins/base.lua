@@ -1,22 +1,3 @@
--- from https://notebook.kulchenko.com/algorithms/alphanumeric-natural-sorting-for-humans-in-lua
-local function natural_sort(nodes)
-  local function padnum(d)
-    return ("%09d%s"):format(#d, d)
-  end
-  table.sort(nodes, function(a, b)
-    local a_dir = a.type == "directory"
-    local b_dir = b.type == "directory"
-
-    if a_dir and not b_dir then
-      return true
-    elseif not a_dir and b_dir then
-      return false
-    end
-
-    return tostring(a.name):gsub("%d+", padnum) < tostring(b.name):gsub("%d+", padnum)
-  end)
-end
-
 return {
 
   -- Detect tabstop and shiftwidth automatically
@@ -104,6 +85,7 @@ return {
   {
     "stevearc/oil.nvim",
     opts = {
+      default_file_explorer = false,
       keymaps = {
         ["<C-h>"] = { "actions.parent", mode = "n" },
         ["<C-l>"] = { "actions.select", mode = "n" },
@@ -220,7 +202,7 @@ return {
     opts = {},
   },
 
-  { "nvim-tree/nvim-web-devicons", commit = "aafa5c187a" },
+  { "nvim-tree/nvim-web-devicons" },
   {
     "rachartier/tiny-devicons-auto-colors.nvim",
     dependencies = {
@@ -300,23 +282,9 @@ return {
   { "ActivityWatch/aw-watcher-vim", enabled = false },
 
   {
-    "sphamba/smear-cursor.nvim",
-    enabled = false,
-    opts = {
-      stiffness = 0.8, -- 0.6      [0, 1]
-      trailing_stiffness = 0.5, -- 0.3      [0, 1]
-      distance_stop_animating = 0.5, -- 0.1      > 0
-      hide_target_hack = false, -- true     boolean
-      legacy_computing_symbols_support = true,
-    },
-  },
-
-  { "chaoren/vim-wordmotion", enabled = false },
-
-  {
     "gregorias/coerce.nvim",
-    event = "VeryLazy",
-    -- keys = { { "<leader>C" } },
+    -- event = "VeryLazy",
+    keys = { { "<leader>C" } },
     opts = {
       default_mode_keymap_prefixes = {
         normal_mode = "<leader>C",
@@ -329,8 +297,4 @@ return {
       },
     },
   },
-  -- {
-  --   "stevearc/dressing.nvim",
-  --   opts = {},
-  -- },
 }
