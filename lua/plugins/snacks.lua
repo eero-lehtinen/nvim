@@ -167,8 +167,10 @@ return {
       Snacks.picker.zoxide()
     end, { desc = "[S]earch [Z]oxide" })
 
+    vim.keymap.set("n", "<leader>gg", function()
+      Snacks.lazygit()
+    end, { desc = "Lazygit" })
     vim.keymap.set("n", "<leader>G", function()
-      -- Toggle the profiler highlights
       Snacks.lazygit()
     end, { desc = "Lazygit" })
 
