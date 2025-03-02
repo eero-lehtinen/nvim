@@ -46,6 +46,11 @@ return {
               "filesize",
               cond = win_larger_than(110),
             },
+            {
+              function()
+                return os.date("%R")
+              end,
+            },
           },
         },
         extensions = {
