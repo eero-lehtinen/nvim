@@ -9,7 +9,12 @@ return {
       { "<leader>v", "<cmd>ColorPickOklch<cr>", desc = "Color pick under cursor" },
     },
     config = function()
-      require("oklch-color-picker").setup()
+      require("oklch-color-picker").setup({
+        highlight = {
+          bold = true,
+        },
+        -- log_level = vim.log.levels.DEBUG,
+      })
       -- require('oklch-color-picker.highlight').perf_logging = true
     end,
   },
