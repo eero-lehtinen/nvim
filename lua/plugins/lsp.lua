@@ -1,6 +1,7 @@
 return {
   {
     "ray-x/lsp_signature.nvim",
+    enabled = false,
     init = function()
       vim.keymap.set("n", "<leader>ts", function()
         require("lsp_signature").toggle_float_win()
@@ -141,16 +142,16 @@ return {
             vim.notify("Workspace folders: " .. vim.inspect(f), vim.log.levels.INFO)
           end, "[W]orkspace [F]olders")
 
-          require("lsp_signature").on_attach({
-            toggle_key = "<C-k>",
-            doc_lines = 0,
-            hint_enable = false,
-            max_width = 100,
-            max_height = 4,
-            handler_opts = {
-              border = "none",
-            },
-          }, event.buf)
+          -- require("lsp_signature").on_attach({
+          --   toggle_key = "<C-k>",
+          --   doc_lines = 0,
+          --   hint_enable = false,
+          --   max_width = 100,
+          --   max_height = 4,
+          --   handler_opts = {
+          --     border = "none",
+          --   },
+          -- }, event.buf)
         end,
       })
 

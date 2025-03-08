@@ -121,8 +121,8 @@ return {
         ["<C-e>"] = { "hide" },
         ["<C-y>"] = { "select_and_accept" },
 
-        ["<C-p>"] = { "show", "select_prev" },
-        ["<C-n>"] = { "show", "select_next" },
+        ["<C-p>"] = { "show", "select_prev", "fallback_to_mappings" },
+        ["<C-n>"] = { "show", "select_next", "fallback_to_mappings" },
 
         ["<C-b>"] = { "scroll_documentation_up", "fallback" },
         ["<C-f>"] = { "scroll_documentation_down", "fallback" },
@@ -131,6 +131,8 @@ return {
 
         ["<Tab>"] = {},
         ["<S-Tab>"] = {},
+
+        ["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
       },
 
       completion = {
@@ -169,10 +171,11 @@ return {
       },
 
       signature = {
-        enabled = false,
+        enabled = true,
         window = {
           max_height = 4,
           border = "none",
+          show_documentation = false,
         },
       },
       appearance = {
