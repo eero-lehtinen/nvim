@@ -34,10 +34,15 @@ vim.keymap.set({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, si
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
-vim.keymap.set("n", "]q", "<cmd>cnext<cr>", {})
-vim.keymap.set("n", "[q", "<cmd>cprev<cr>", {})
-vim.keymap.set("n", "]l", "<cmd>lnext<cr>", {})
-vim.keymap.set("n", "[l", "<cmd>lprev<cr>", {})
+vim.keymap.set("n", "gh", "^")
+vim.keymap.set("n", "gl", "$")
+
+if vim.fn.has("nvim-0.11") == 0 then
+  vim.keymap.set("n", "]q", "<cmd>cnext<cr>", {})
+  vim.keymap.set("n", "[q", "<cmd>cprev<cr>", {})
+  vim.keymap.set("n", "]l", "<cmd>lnext<cr>", {})
+  vim.keymap.set("n", "[l", "<cmd>lprev<cr>", {})
+end
 
 local severity = {
   min = vim.diagnostic.severity.INFO,
