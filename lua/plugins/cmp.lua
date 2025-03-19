@@ -151,7 +151,7 @@ return {
         documentation = {
           auto_show = true, -- disable for now because always shows north and obstructs everything
           auto_show_delay_ms = 300,
-          update_delay_ms = 10,
+          -- update_delay_ms = 10,
           window = {
             max_width = 60,
             direction_priority = {
