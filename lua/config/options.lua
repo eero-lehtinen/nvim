@@ -34,6 +34,10 @@ vim.opt.diffopt = "filler,internal,closeoff,algorithm:histogram,context:5,linema
 
 vim.o.fileformats = "unix,dos"
 
+vim.o.spell = true
+vim.o.spelllang = "en"
+vim.o.spelloptions = "camel"
+
 if vim.g.is_windows then
   vim.cmd("language en_US")
 
