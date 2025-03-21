@@ -2,7 +2,7 @@ return {
   {
     "supermaven-inc/supermaven-nvim",
     event = "VeryLazy",
-    enabled = true,
+    enabled = false,
     config = function()
       require("supermaven-nvim").setup({
         keymaps = {
@@ -33,45 +33,57 @@ return {
   },
   {
     "zbirenbaum/copilot.lua",
-    enabled = false,
-    cmd = "Copilot",
-    event = "InsertEnter",
-    opts = {
-      panel = {
-        enabled = true,
-        auto_refresh = true,
-        keymap = {
-          jump_prev = "[[",
-          jump_next = "]]",
-          accept = "<CR>",
-          refresh = "gr",
-          open = false,
-          -- open = 'C-ö', -- Cöpailot
+    enabled = true,
+    init = function()
+      require("copilot").setup({
+        panel = {
+          enabled = true,
+          auto_refresh = true,
+          keymap = {
+            jump_prev = "[[",
+            jump_next = "]]",
+            accept = "<CR>",
+            refresh = "gr",
+            open = false,
+          },
+          layout = {
+            position = "bottom", -- | top | left | right
+            ratio = 0.4,
+          },
         },
-        layout = {
-          position = "bottom", -- | top | left | right
-          ratio = 0.4,
-        },
-      },
-      suggestion = {
-        auto_trigger = true,
-        keymap = {
-          next = "<C-¨>", -- actually <C-]>
-          prev = "<C-å>", -- actually <C-[>
-          dismiss = "<C-ä>", -- below [
-          accept = "<C-u>", -- Next to C-y which is normal complete
+        suggestion = {
+          auto_trigger = true,
+          keymap = {
+            -- next = "<C-¨>", -- actually <C-]>
+            -- prev = "<C-å>", -- actually <C-[>
+            -- dismiss = "<C-ä>", -- below [
+            -- accept = "<C-a>",
+            -- accept = "<C-u>", -- Next to C-y which is normal complete
 
-          -- these work in wezterm, above ones in kitty
-          -- next = '<C-]>', -- actually <C-]>
-          -- prev = '<C-[>', -- actually <C-[>
-          -- dismiss = [[<C-'>]], -- below [, actually ä
-          -- accept = '<C-;>', -- accept C[ö]pailot, actually ö
+            next = "<M-n>",
+            prev = "<M-p>",
+            accept = "<M-l>",
+            dismiss = "<M-e>",
+          },
         },
-      },
-      filetypes = {
-        ["*"] = true,
-      },
-    },
+        filetypes = {
+          ["*"] = true,
+        },
+      })
+
+      -- require("copilot.command").disable()
+      local enabled = true
+
+      vim.keymap.set("n", "<leader>ta", function()
+        require("copilot.command").toggle()
+        enabled = not enabled
+        if enabled then
+          vim.notify("Copilot enabled")
+        else
+          vim.notify("Copilot disabled")
+        end
+      end, { desc = "[T]oggle [A]I Copilot" })
+    end,
   },
   {
     "Exafunction/codeium.nvim",
@@ -86,10 +98,10 @@ return {
           enabled = true,
           manual = true,
           key_bindings = {
-            accept = "<C-u>",
-            next = "<A-n>",
-            prev = "<A-p>",
-            dismiss = "<A-e>",
+            accept = "<M-l>",
+            next = "<M-n>",
+            prev = "<M-p>",
+            dismiss = "<M-e>",
           },
         },
       })
