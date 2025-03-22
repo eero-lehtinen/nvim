@@ -62,7 +62,7 @@ return {
 
             next = "<M-n>",
             prev = "<M-p>",
-            accept = "<M-l>",
+            accept = "<C-u>",
             dismiss = "<M-e>",
           },
         },
@@ -112,7 +112,7 @@ return {
           enabled = true,
           manual = true,
           key_bindings = {
-            accept = "<M-l>",
+            accept = "<C-u>",
             next = "<M-n>",
             prev = "<M-p>",
             dismiss = "<M-e>",

@@ -3,7 +3,7 @@ return {
   "folke/snacks.nvim",
   priority = 1000,
   lazy = false,
-  -- version = "*",
+  version = "*",
   -- dev = true,
   config = function()
     require("snacks").setup({
