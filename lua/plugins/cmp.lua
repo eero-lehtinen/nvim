@@ -88,6 +88,7 @@ return {
         pattern = "BlinkCmpMenuOpen",
         callback = function()
           vim.b.copilot_suggestion_hidden = true
+          require("copilot.suggestion").dismiss()
         end,
       })
 
