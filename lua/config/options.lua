@@ -34,7 +34,7 @@ vim.opt.diffopt = "filler,internal,closeoff,algorithm:histogram,context:5,linema
 
 vim.o.fileformats = "unix,dos"
 
-vim.o.spell = true
+vim.o.spell = false
 vim.o.spelllang = "en"
 vim.o.spelloptions = "camel"
 vim.o.spellcapcheck = ""
