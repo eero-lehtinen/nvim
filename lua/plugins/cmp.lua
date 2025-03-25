@@ -135,7 +135,7 @@ return {
   {
     "saghen/blink.cmp",
     -- dev = true,
-    version = "v0.*",
+    version = "*",
     lazy = false,
     enabled = true,
     -- build = "cargo build -r",
