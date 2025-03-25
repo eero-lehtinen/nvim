@@ -37,6 +37,7 @@ vim.o.fileformats = "unix,dos"
 vim.o.spell = true
 vim.o.spelllang = "en"
 vim.o.spelloptions = "camel"
+vim.o.spellcapcheck = ""
 
 if vim.g.is_windows then
   vim.cmd("language en_US")
