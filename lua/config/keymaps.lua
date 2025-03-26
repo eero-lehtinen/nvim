@@ -37,32 +37,17 @@ vim.keymap.set("v", ">", ">gv")
 vim.keymap.set("n", "gh", "^")
 vim.keymap.set("n", "gl", "$")
 
-if vim.fn.has("nvim-0.11") == 0 then
-  vim.keymap.set("n", "]q", "<cmd>cnext<cr>", {})
-  vim.keymap.set("n", "[q", "<cmd>cprev<cr>", {})
-  vim.keymap.set("n", "]l", "<cmd>lnext<cr>", {})
-  vim.keymap.set("n", "[l", "<cmd>lprev<cr>", {})
-end
-
 local severity = {
   min = vim.diagnostic.severity.INFO,
   max = vim.diagnostic.severity.ERROR,
 }
-if vim.fn.has("nvim-0.11") == 1 then
-  vim.keymap.set("n", "[d", function()
-    vim.diagnostic.jump({ count = -1, severity = severity })
-  end, { desc = "Go to previous diagnostic message" })
-  vim.keymap.set("n", "]d", function()
-    vim.diagnostic.jump({ count = 1, severity = severity })
-  end, { desc = "Go to next diagnostic message" })
-else
-  vim.keymap.set("n", "[d", function()
-    vim.diagnostic.goto_prev({ severity = severity })
-  end, { desc = "Go to previous diagnostic message" })
-  vim.keymap.set("n", "]d", function()
-    vim.diagnostic.goto_next({ severity = severity })
-  end, { desc = "Go to next diagnostic message" })
-end
+
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.jump({ count = -1, severity = severity })
+end, { desc = "Go to previous diagnostic message" })
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.jump({ count = 1, severity = severity })
+end, { desc = "Go to next diagnostic message" })
 
 local diagnostic_config = {
   [true] = {
@@ -83,17 +68,15 @@ local diagnostic_config = {
 vim.g.diagnostic_lines = false
 vim.diagnostic.config(diagnostic_config[vim.g.diagnostic_lines])
 
-if vim.fn.has("nvim-0.11") == 1 then
-  vim.keymap.set("n", "<leader>E", function()
-    vim.g.diagnostic_lines = not vim.g.diagnostic_lines
-    vim.diagnostic.config(diagnostic_config[vim.g.diagnostic_lines])
-    if vim.g.diagnostic_lines then
-      vim.notify("Diagnostic lines enabled", vim.log.levels.INFO)
-    else
-      vim.notify("Diagnostic lines disabled", vim.log.levels.INFO)
-    end
-  end, { desc = "Toggle [E]rror Lines" })
-end
+vim.keymap.set("n", "<leader>E", function()
+  vim.g.diagnostic_lines = not vim.g.diagnostic_lines
+  vim.diagnostic.config(diagnostic_config[vim.g.diagnostic_lines])
+  if vim.g.diagnostic_lines then
+    vim.notify("Diagnostic lines enabled", vim.log.levels.INFO)
+  else
+    vim.notify("Diagnostic lines disabled", vim.log.levels.INFO)
+  end
+end, { desc = "Toggle [E]rror Lines" })
 
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "Tab close" })
