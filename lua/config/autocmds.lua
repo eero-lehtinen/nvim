@@ -47,6 +47,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   callback = function()
     vim.opt.formatoptions:remove("o")
+    vim.cmd("set signcolumn=yes")
   end,
 })
 
