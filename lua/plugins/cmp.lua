@@ -70,6 +70,9 @@ return {
           ["*"] = true,
         },
         copilot_model = "gpt-4o-copilot",
+        server = {
+          type = "binary",
+        },
       })
 
       -- require("copilot.command").disable()
