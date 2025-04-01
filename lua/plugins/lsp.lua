@@ -22,6 +22,7 @@ return {
   },
   {
     "folke/lazydev.nvim",
+    lazy = false,
     ft = "lua",
     opts = {
       library = {
