@@ -263,7 +263,7 @@ return {
           },
         },
 
-        -- wgsl_analyzer = {},
+        wgsl_analyzer = {},
       }
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
