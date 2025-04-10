@@ -39,7 +39,7 @@ return {
         },
         copilot_model = "gpt-4o-copilot",
         server = {
-          type = "binary",
+          -- type = "binary",
         },
       })
 
