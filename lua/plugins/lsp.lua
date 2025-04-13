@@ -37,7 +37,6 @@ return {
     lazy = false,
     dependencies = {
       { "williamboman/mason.nvim", config = true },
-      "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     config = function()
@@ -272,38 +271,23 @@ return {
       if ok then
         capabilities = blink.get_lsp_capabilities({}, true)
       end
+      vim.lsp.enable(vim.tbl_keys(servers))
 
-      local mason_lspconfig = require("mason-lspconfig")
-
-      mason_lspconfig.setup({
-        ensure_installed = vim.tbl_keys(servers),
-        automatic_installation = false,
+      vim.lsp.config("*", {
+        capabilities = capabilities,
       })
 
-      mason_lspconfig.setup_handlers({
-        function(server_name)
-          require("lspconfig")[server_name].setup({
-            capabilities = capabilities,
-            settings = servers[server_name],
-            filetypes = (servers[server_name] or {}).filetypes,
+      for name, settings in pairs(servers) do
+        if next(settings) then
+          vim.lsp.config(name, {
+            settings = settings,
           })
-        end,
-        ["svelte"] = function()
-          -- Fixes svelte+ts file watching issues (at least on Linux)
-          local c = vim.deepcopy(capabilities)
-          c.workspace.didChangeWatchedFiles = false
-          require("lspconfig").svelte.setup({
-            capabilities = c,
-            settings = servers["svelte"],
-          })
-        end,
-        ["rust_analyzer"] = function() end,
-        ["ts_ls"] = function() end,
-      })
+        end
+      end
 
-      require("lspconfig").qmlls.setup({
-        cmd = { "qmlls6" },
-      })
+      -- require("lspconfig").qmlls.setup({
+      --   cmd = { "qmlls6" },
+      -- })
 
       -- require('lspconfig').glasgow.setup {}
 
