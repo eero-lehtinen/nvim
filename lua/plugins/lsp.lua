@@ -274,6 +274,10 @@ return {
         capabilities = capabilities,
       })
 
+      ---@diagnostic disable-next-line: assign-type-mismatch
+      capabilities.workspace.didChangeWatchedFiles = false
+      vim.lsp.config("svelte", { capabilities = capabilities })
+
       for name, settings in pairs(servers) do
         if next(settings) then
           vim.lsp.config(name, {
