@@ -11,6 +11,14 @@ return {
         opts = {
           max_lines = 5,
           multiline_threshold = 1,
+          on_attach = function(bufnr)
+            local path = vim.api.nvim_buf_get_name(bufnr)
+            local stat, err = vim.uv.fs_stat(path)
+            if not err and stat and stat.size > 100 * 1024 then -- 100kB
+              return false
+            end
+            return true
+          end,
         },
       },
     },
