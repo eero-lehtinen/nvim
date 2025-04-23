@@ -32,6 +32,26 @@ return {
       },
     },
   },
+  "nvim-lua/plenary.nvim",
+  {
+    "rachartier/tiny-code-action.nvim",
+    event = "LspAttach",
+    config = function()
+      require("tiny-code-action").setup({
+        picker = {
+          "snacks",
+          opts = {
+            layout = {
+              preset = "ivy",
+            },
+          },
+        },
+      })
+      vim.keymap.set("n", "<leader>c", function()
+        require("tiny-code-action").code_action({})
+      end, { desc = "LSP: [C]ode Action", noremap = true, silent = true })
+    end,
+  },
   {
     "neovim/nvim-lspconfig",
     lazy = false,
@@ -88,12 +108,7 @@ return {
           end
 
           nmap("<leader>r", ":IncRename ", "[R]ename")
-          vim.keymap.set(
-            { "n", "v" },
-            "<leader>c",
-            vim.lsp.buf.code_action,
-            { buffer = event.buf, desc = "LSP: [C]ode Action" }
-          )
+          vim.keymap.set("v", "<leader>c", vim.lsp.buf.code_action, { buffer = event.buf, desc = "LSP: [C]ode Action" })
 
           local telescope_found, telescope = pcall(require, "telescope.builtin")
           if telescope_found then
