@@ -36,8 +36,10 @@ return {
   {
     "rachartier/tiny-code-action.nvim",
     event = "LspAttach",
+    enabled = false,
     config = function()
       require("tiny-code-action").setup({
+        backend = "difftastic",
         picker = {
           "snacks",
           opts = {
@@ -51,6 +53,17 @@ return {
         require("tiny-code-action").code_action({})
       end, { desc = "LSP: [C]ode Action", noremap = true, silent = true })
     end,
+  },
+  {
+    "Chaitanyabsprip/fastaction.nvim",
+    ---@type FastActionConfig
+    opts = {
+      dismiss_keys = { "<Esc>", "q", "j", "k", "<c-c>" },
+      brackets = { "[", "]" },
+      popup = {
+        title = false,
+      },
+    },
   },
   {
     "neovim/nvim-lspconfig",
@@ -109,6 +122,13 @@ return {
 
           nmap("<leader>r", ":IncRename ", "[R]ename")
           vim.keymap.set("v", "<leader>c", vim.lsp.buf.code_action, { buffer = event.buf, desc = "LSP: [C]ode Action" })
+
+          local fastaction_found, fastaction = pcall(require, "fastaction")
+          if fastaction_found then
+            vim.keymap.set({ "n", "x" }, "<leader>c", function()
+              fastaction.code_action()
+            end)
+          end
 
           local telescope_found, telescope = pcall(require, "telescope.builtin")
           if telescope_found then
