@@ -298,9 +298,9 @@ return {
         capabilities = capabilities,
       })
 
-      ---@diagnostic disable-next-line: assign-type-mismatch
-      capabilities.workspace.didChangeWatchedFiles = false
-      vim.lsp.config("svelte", { capabilities = capabilities })
+      vim.lsp.config("svelte", {
+        capabilities = vim.tbl_deep_extend("force", { workspace = { didChangeWwatchedFiles = false } }, capabilities),
+      })
 
       for name, settings in pairs(servers) do
         if next(settings) then
