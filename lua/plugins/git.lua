@@ -73,42 +73,38 @@ return {
   "nvim-lua/plenary.nvim",
   {
     "lewis6991/gitsigns.nvim",
-    opts = {
-      watch_gitdir = { follow_files = false },
-      update_debounce = 200,
-      on_attach = function(bufnr)
-        local gitsigns = require("gitsigns")
+    commit = "9cd665f46ab7af2e49d140d328b8e72ea1cf511b",
+    config = function()
+      require("gitsigns").setup({
+        watch_gitdir = { follow_files = false },
+        update_debounce = 200,
+      })
 
-        local function map(mode, l, r, opts)
-          opts = opts or {}
-          opts.buffer = bufnr
-          vim.keymap.set(mode, l, r, opts)
+      local gitsigns = require("gitsigns")
+
+      vim.keymap.set("n", "]c", function()
+        if vim.wo.diff then
+          vim.cmd.normal({ "]c", bang = true })
+        else
+          gitsigns.nav_hunk("next")
         end
+      end, { desc = "Jump to next hunk" })
 
-        map("n", "]c", function()
-          if vim.wo.diff then
-            vim.cmd.normal({ "]c", bang = true })
-          else
-            gitsigns.nav_hunk("next")
-          end
-        end, { desc = "Jump to next hunk" })
+      vim.keymap.set("n", "[c", function()
+        if vim.wo.diff then
+          vim.cmd.normal({ "[c", bang = true })
+        else
+          gitsigns.nav_hunk("prev")
+        end
+      end, { desc = "Jump to previous hunk" })
 
-        map("n", "[c", function()
-          if vim.wo.diff then
-            vim.cmd.normal({ "[c", bang = true })
-          else
-            gitsigns.nav_hunk("prev")
-          end
-        end, { desc = "Jump to previous hunk" })
-
-        map("n", "<leader>gp", gitsigns.preview_hunk, { desc = "[G]it [P]review Hunk" })
-        map("n", "<leader>gr", gitsigns.reset_hunk, { desc = "[G]it [R]eset Hunk" })
-        map("n", "<leader>gb", gitsigns.blame, { desc = "[G]it [B]lame" })
-        map("n", "<leader>gl", function()
-          gitsigns.blame_line({ full = true })
-        end, { desc = "[G]it Blame [L]ine" })
-      end,
-    },
+      vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { desc = "[G]it [P]review Hunk" })
+      vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk, { desc = "[G]it [R]eset Hunk" })
+      vim.keymap.set("n", "<leader>gb", gitsigns.blame, { desc = "[G]it [B]lame" })
+      vim.keymap.set("n", "<leader>gl", function()
+        gitsigns.blame_line({ full = true })
+      end, { desc = "[G]it Blame [L]ine" })
+    end,
   },
 
   {
