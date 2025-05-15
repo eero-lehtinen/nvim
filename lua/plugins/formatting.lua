@@ -10,6 +10,7 @@ return {
       c = {},
       cpp = {},
       svelte = {},
+      prisma = {},
     }
 
     local prettierd_filetypes =
