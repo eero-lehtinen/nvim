@@ -69,7 +69,7 @@ return {
         enabled = false,
       },
 
-      -- notifier = { enabled = true },
+      notifier = { enabled = true },
       -- quickfile = { enabled = true },
       -- statuscolumn = { enabled = true },
       -- words = { enabled = true },
@@ -166,6 +166,9 @@ return {
     vim.keymap.set("n", "<leader>sz", function()
       Snacks.picker.zoxide()
     end, { desc = "[S]earch [Z]oxide" })
+    vim.keymap.set("n", "<leader>sn", function()
+      Snacks.picker.zoxide()
+    end, { desc = "[S]earch [N]otifications" })
 
     vim.keymap.set("n", "<leader>gg", function()
       Snacks.lazygit()
