@@ -126,7 +126,10 @@ return {
           local fastaction_found, fastaction = pcall(require, "fastaction")
           if fastaction_found then
             vim.keymap.set({ "n", "x" }, "<leader>c", function()
-              fastaction.code_action()
+              local success = pcall(fastaction.code_action)
+              if not success then
+                vim.lsp.buf.code_action()
+              end
             end)
           end
 
@@ -300,9 +303,9 @@ return {
         capabilities = capabilities,
       })
 
-      vim.lsp.config("svelte", {
-        capabilities = vim.tbl_deep_extend("force", { workspace = { didChangeWwatchedFiles = false } }, capabilities),
-      })
+      -- vim.lsp.config("svelte", {
+      --   capabilities = vim.tbl_deep_extend("force", { workspace = { didChangeWwatchedFiles = false } }, capabilities),
+      -- })
 
       for name, settings in pairs(servers) do
         if next(settings) then
