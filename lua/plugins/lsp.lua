@@ -121,17 +121,22 @@ return {
           end
 
           nmap("<leader>r", ":IncRename ", "[R]ename")
-          vim.keymap.set("v", "<leader>c", vim.lsp.buf.code_action, { buffer = event.buf, desc = "LSP: [C]ode Action" })
+          vim.keymap.set(
+            { "n", "x", "v" },
+            "<leader>c",
+            vim.lsp.buf.code_action,
+            { buffer = event.buf, desc = "LSP: [C]ode Action" }
+          )
 
-          local fastaction_found, fastaction = pcall(require, "fastaction")
-          if fastaction_found then
-            vim.keymap.set({ "n", "x" }, "<leader>c", function()
-              local success = pcall(fastaction.code_action)
-              if not success then
-                vim.lsp.buf.code_action()
-              end
-            end)
-          end
+          -- local fastaction_found, fastaction = pcall(require, "fastaction")
+          -- if fastaction_found then
+          --   vim.keymap.set({ "n", "x" }, "<leader>c", function()
+          --     local success = pcall(fastaction.code_action)
+          --     if not success then
+          --       vim.lsp.buf.code_action()
+          --     end
+          --   end)
+          -- end
 
           local telescope_found, telescope = pcall(require, "telescope.builtin")
           if telescope_found then
