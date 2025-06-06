@@ -308,9 +308,9 @@ return {
         capabilities = capabilities,
       })
 
-      -- vim.lsp.config("svelte", {
-      --   capabilities = vim.tbl_deep_extend("force", { workspace = { didChangeWwatchedFiles = false } }, capabilities),
-      -- })
+      vim.lsp.config("svelte", {
+        capabilities = vim.tbl_deep_extend("force", { workspace = { didChangeWwatchedFiles = false } }, capabilities),
+      })
 
       for name, settings in pairs(servers) do
         if next(settings) then
