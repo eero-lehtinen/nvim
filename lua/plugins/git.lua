@@ -1,4 +1,6 @@
 return {
+  -- TODO: add vgit.nvim
+
   -- Git related plugins
   -- Undocumented nice keymaps:
   -- a: toggle stage
