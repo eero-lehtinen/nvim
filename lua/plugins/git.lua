@@ -1,6 +1,4 @@
 return {
-  -- TODO: add vgit.nvim
-
   -- Git related plugins
   -- Undocumented nice keymaps:
   -- a: toggle stage
@@ -73,39 +71,40 @@ return {
     end,
   },
   "nvim-lua/plenary.nvim",
+
   {
     "lewis6991/gitsigns.nvim",
-    commit = "9cd665f46ab7af2e49d140d328b8e72ea1cf511b",
+    enabled = false,
     config = function()
       require("gitsigns").setup({
         watch_gitdir = { follow_files = false },
         update_debounce = 200,
       })
 
-      local gitsigns = require("gitsigns")
+      -- local gitsigns = require("gitsigns")
 
-      vim.keymap.set("n", "]c", function()
-        if vim.wo.diff then
-          vim.cmd.normal({ "]c", bang = true })
-        else
-          gitsigns.nav_hunk("next")
-        end
-      end, { desc = "Jump to next hunk" })
-
-      vim.keymap.set("n", "[c", function()
-        if vim.wo.diff then
-          vim.cmd.normal({ "[c", bang = true })
-        else
-          gitsigns.nav_hunk("prev")
-        end
-      end, { desc = "Jump to previous hunk" })
-
-      vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { desc = "[G]it [P]review Hunk" })
-      vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk, { desc = "[G]it [R]eset Hunk" })
-      vim.keymap.set("n", "<leader>gb", gitsigns.blame, { desc = "[G]it [B]lame" })
-      vim.keymap.set("n", "<leader>gl", function()
-        gitsigns.blame_line({ full = true })
-      end, { desc = "[G]it Blame [L]ine" })
+      -- vim.keymap.set("n", "]c", function()
+      --   if vim.wo.diff then
+      --     vim.cmd.normal({ "]c", bang = true })
+      --   else
+      --     gitsigns.nav_hunk("next")
+      --   end
+      -- end, { desc = "Jump to next hunk" })
+      --
+      -- vim.keymap.set("n", "[c", function()
+      --   if vim.wo.diff then
+      --     vim.cmd.normal({ "[c", bang = true })
+      --   else
+      --     gitsigns.nav_hunk("prev")
+      --   end
+      -- end, { desc = "Jump to previous hunk" })
+      --
+      -- vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { desc = "[G]it [P]review Hunk" })
+      -- vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk, { desc = "[G]it [R]eset Hunk" })
+      -- vim.keymap.set("n", "<leader>gb", gitsigns.blame, { desc = "[G]it [B]lame" })
+      -- vim.keymap.set("n", "<leader>gl", function()
+      --   gitsigns.blame_line({ full = true })
+      -- end, { desc = "[G]it Blame [L]ine" })
     end,
   },
 
@@ -117,5 +116,49 @@ return {
       "nvim-lua/plenary.nvim",
     },
     config = true,
+  },
+
+  {
+    "tanvirtin/vgit.nvim",
+    enabled = true,
+    requires = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
+    -- Lazy loading on 'VimEnter' event is necessary.
+    event = "VimEnter",
+    config = function()
+      require("vgit").setup({
+        settings = {
+          live_blame = { enabled = false },
+          live_gutter = { enabled = true },
+        },
+      })
+
+      local vgit = require("vgit")
+
+      vim.keymap.set("n", "]c", function()
+        if vim.wo.diff then
+          vim.cmd.normal({ "]c", bang = true })
+        else
+          vgit.hunk_down()
+        end
+      end, { desc = "Jump to next hunk" })
+      vim.keymap.set("n", "[c", function()
+        if vim.wo.diff then
+          vim.cmd.normal({ "[c", bang = true })
+        else
+          vgit.hunk_up()
+        end
+      end, { desc = "Jump to previous hunk" })
+
+      vim.keymap.set("n", "<C-j>", vgit.hunk_down, { desc = "Jump to next hunk" })
+      vim.keymap.set("n", "<C-k>", vgit.hunk_up, { desc = "Jump to previous hunk" })
+      vim.keymap.set("n", "<leader>gs", vgit.buffer_hunk_stage, { desc = "[G]it [S]tage Hunk" })
+      vim.keymap.set("n", "<leader>gr", vgit.buffer_hunk_reset, { desc = "[G]it [R]eset Hunk" })
+      vim.keymap.set("n", "<leader>gp", vgit.buffer_hunk_preview, { desc = "[G]it [P]review Hunk" })
+      vim.keymap.set("n", "<leader>gb", vgit.buffer_blame_preview, { desc = "[G]it [B]lame" })
+      vim.keymap.set("n", "<leader>gf", vgit.buffer_diff_preview, { desc = "[G]it [F]ile Diff Preview" })
+      vim.keymap.set("n", "<leader>gh", vgit.buffer_history_preview, { desc = "[G]it [H]istory Preview" })
+      vim.keymap.set("n", "<leader>gd", vgit.project_diff_preview, { desc = "[G]it [D]iff Preview" })
+      vim.keymap.set("n", "<leader>gx", vgit.toggle_diff_preference, { desc = "[G]it [L]ogs Preview" })
+    end,
   },
 }

@@ -34,7 +34,7 @@ return {
           IlluminatedWordText = { bg = theme.ui.bg_p2 },
           IlluminatedWordRead = { bg = theme.ui.bg_p2 },
           IlluminatedWordWrite = { bg = theme.ui.bg_p2 },
-          DiffDelete = { bg = theme.ui.bg },
+          DiffDelete = { bg = theme.diff.delete, fg = "NONE" },
           Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_m2 },
           PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
           PmenuSbar = { bg = theme.ui.bg_m2 },
