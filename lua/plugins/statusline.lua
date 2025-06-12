@@ -10,12 +10,12 @@ return {
       end
 
       local function diff_source()
-        local status = vim.b.gitsigns_status_dict or vim.b.vgit_status
-        if status then
+        local gitsigns = vim.b.gitsigns_status_dict
+        if gitsigns then
           return {
-            added = status.added,
-            modified = status.changed,
-            removed = status.removed,
+            added = gitsigns.added,
+            modified = gitsigns.changed,
+            removed = gitsigns.removed,
           }
         end
       end
