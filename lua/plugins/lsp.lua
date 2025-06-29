@@ -67,7 +67,7 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     dependencies = {
-      { "williamboman/mason.nvim", config = true },
+      { "mason-org/mason.nvim", config = true },
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     config = function()
