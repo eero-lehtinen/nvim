@@ -103,9 +103,9 @@ return {
     vim.keymap.set("n", "<leader>sa", function()
       Snacks.picker.files({ follow = true, hidden = true, ignored = true })
     end, { desc = "[S]earch [A]ll Files (Including gitignored)" })
-    vim.keymap.set("n", "<leader>st", function()
-      Snacks.picker.explorer({ follow = true, hidden = true, ignored = true, auto_close = true })
-    end, { desc = "[S]earch File[T]ree (Explorer)" })
+    -- vim.keymap.set("n", "<leader>st", function()
+    --   Snacks.picker.explorer({ follow = true, hidden = true, ignored = true, auto_close = true })
+    -- end, { desc = "[S]earch File[T]ree (Explorer)" })
     vim.keymap.set("n", "<leader>sh", function()
       Snacks.picker.help()
     end, { desc = "[S]earch [H]elp" })
@@ -190,12 +190,7 @@ return {
 
     -- local terms = {}
     --
-    -- vim.keymap.set({ "n", "t" }, "<C-g>", function()
-    --   if vim.bo.filetype == "fzf" then
-    --     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-g>", true, true, true), "n", false)
-    --     return
-    --   end
-    --
+    -- vim.keymap.set({ "n", "t" }, "<A-f>", function()
     --   if #terms == 0 then
     --     terms = { Snacks.terminal.open() }
     --     return
@@ -212,18 +207,8 @@ return {
     --   end
     -- end, { desc = "Terminal Toggle" })
     --
-    -- vim.api.nvim_create_user_command("TermSplit", function()
+    -- vim.keymap.set("n", "<leader>st", function()
     --   table.insert(terms, Snacks.terminal.open())
-    -- end, {})
-    --
-    -- vim.api.nvim_create_user_command("TermClose", function()
-    --   local bufnr = vim.api.nvim_get_current_buf()
-    --   for i, term in ipairs(terms) do
-    --     if term.buf == bufnr then
-    --       term:hide()
-    --       table.remove(terms, i)
-    --     end
-    --   end
-    -- end, {})
+    -- end, { desc = "Terminal Open" })
   end,
 }
