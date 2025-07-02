@@ -8,8 +8,20 @@ vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>update<cr><esc>", { desc =
 vim.keymap.set("i", "<C-i>", "<esc>i", { desc = "Control as esc + i" })
 vim.keymap.set({ "n" }, "<c-.>", "<Nop>", { silent = true })
 vim.keymap.set({ "i", "c" }, "<C-BS>", "<C-w>", { desc = "Ctrl Backspace" })
--- vim.keymap.set({ 'i', 'c' }, '<C-h>', '<C-w>', { desc = 'Ctrl Backspace' }) -- needed on some terminals, not kitty
+-- vim.keymap.set({ "i", "c" }, "<C-h>", "<C-w>", { desc = "Ctrl Backspace" }) -- needed on some terminals, not kitty
 vim.keymap.set({ "n", "v" }, "q:", "<Nop>", { silent = true })
+
+-- Better window navigation
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to bottom window" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to top window" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+
+-- The same thing in terminals
+-- vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "Go to left window in terminal" }) interferes with ctr-backspace
+-- vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Go to bottom window in terminal" })
+-- vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Go to top window in terminal" })
+-- vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Go to right window in terminal" })
 
 vim.keymap.set("n", "i", function()
   if #vim.fn.getline(".") == 0 then
