@@ -13,6 +13,7 @@ return {
       require("oklch-color-picker").setup({
         highlight = {
           bold = true,
+          ignore_ft = { "" },
         },
         -- log_level = vim.log.levels.DEBUG,
       })
