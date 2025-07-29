@@ -13,7 +13,7 @@ return {
       require("oklch-color-picker").setup({
         highlight = {
           bold = true,
-          ignore_ft = { "" },
+          ignore_ft = { "", "blink-cmp-menu" },
         },
         -- log_level = vim.log.levels.DEBUG,
       })
