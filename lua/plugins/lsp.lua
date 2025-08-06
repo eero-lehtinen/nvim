@@ -36,7 +36,7 @@ return {
   {
     "rachartier/tiny-code-action.nvim",
     event = "LspAttach",
-    enabled = true,
+    enabled = false,
     config = function()
       require("tiny-code-action").setup({
         -- backend = "difftastic",
@@ -119,12 +119,12 @@ return {
           end
 
           nmap("<leader>r", ":IncRename ", "[R]ename")
-          -- vim.keymap.set(
-          --   { "n", "x", "v" },
-          --   "<leader>c",
-          --   vim.lsp.buf.code_action,
-          --   { buffer = event.buf, desc = "LSP: [C]ode Action" }
-          -- )
+          vim.keymap.set(
+            { "n", "x", "v" },
+            "<leader>c",
+            vim.lsp.buf.code_action,
+            { buffer = event.buf, desc = "LSP: [C]ode Action" }
+          )
 
           -- local fastaction_found, fastaction = pcall(require, "fastaction")
           -- if fastaction_found then
