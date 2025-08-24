@@ -101,11 +101,6 @@ return {
                   snippets = "none",
                 },
               },
-              typing = {
-                autoClosingAngleBrackets = {
-                  enable = true,
-                },
-              },
               diagnostics = {
                 experimental = {
                   enable = true,
