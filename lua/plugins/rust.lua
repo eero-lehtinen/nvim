@@ -114,9 +114,7 @@ return {
               cargo = {
                 target = rust_lsp_target(),
                 features = features,
-              },
-              rust = {
-                analyzerTargetDir = true,
+                targetDir = true,
               },
               -- check = {
               --   workspace = false,
