@@ -290,8 +290,8 @@ return {
       close = { enable = false },
       config_internal_pairs = {
         { "'", "'", nft = { "tex", "rust" } },
-        { "|", "|", ft = { "rust" } },
       },
+      { "|", "|", ft = { "rust" } },
     },
   },
 
