@@ -263,6 +263,7 @@ return {
   { "windwp/nvim-ts-autotag", event = "VeryLazy", opts = {} },
   {
     "echasnovski/mini.pairs",
+    enabled = false,
     opts = {
       mappings = {
         ["("] = { action = "open", pair = "()", neigh_pattern = "[^\\]%W" },
@@ -277,6 +278,19 @@ return {
         ["'"] = { action = "closeopen", pair = "''", neigh_pattern = "[^%w\\]%W", register = { cr = false } },
         ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^%w`\\]%W", register = { cr = false } },
         ["|"] = { action = "closeopen", pair = "||", neigh_pattern = "%(%W", register = { cr = false } },
+      },
+    },
+  },
+  {
+    "altermo/ultimate-autopair.nvim",
+    event = { "InsertEnter", "CmdlineEnter" },
+    branch = "v0.6",
+    opts = {
+      fastwarp = { enable = false },
+      close = { enable = false },
+      config_internal_pairs = {
+        { "'", "'", nft = { "tex", "rust" } },
+        { "|", "|", ft = { "rust" } },
       },
     },
   },
