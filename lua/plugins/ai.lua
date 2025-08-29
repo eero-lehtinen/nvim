@@ -37,7 +37,7 @@ return {
         filetypes = {
           ["*"] = true,
         },
-        copilot_model = "gpt-4o-copilot",
+        -- copilot_model = "gpt-4o-copilot", -- just use the default model
         server = {
           -- type = "binary",
         },
