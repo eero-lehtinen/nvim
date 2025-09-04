@@ -14,8 +14,9 @@ return {
         pattern = { "*" },
         callback = function(ev)
           if not pcall(vim.treesitter.start) then
-            require("nvim-treesitter").install({ vim.bo[ev.buf].filetype }):wait(60000)
-            pcall(vim.treesitter.start, ev.buf)
+            require("nvim-treesitter").install({ vim.bo[ev.buf].filetype }):await(function()
+              pcall(vim.treesitter.start, ev.buf)
+            end)
           end
         end,
       })
