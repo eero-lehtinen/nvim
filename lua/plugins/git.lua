@@ -75,7 +75,6 @@ return {
   "nvim-lua/plenary.nvim",
   {
     "lewis6991/gitsigns.nvim",
-    commit = "9cd665f46ab7af2e49d140d328b8e72ea1cf511b",
     config = function()
       require("gitsigns").setup({
         watch_gitdir = { follow_files = false },

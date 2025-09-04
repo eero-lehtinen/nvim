@@ -162,7 +162,6 @@ return {
   {
     "Wansmer/treesj",
     dependencies = {
-      "nvim-treesitter/nvim-treesitter",
       {
         "echasnovski/mini.splitjoin",
         version = false,

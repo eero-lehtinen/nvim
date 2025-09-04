@@ -1,13 +1,4 @@
 return {
-  {
-    "ray-x/lsp_signature.nvim",
-    enabled = false,
-    init = function()
-      vim.keymap.set("n", "<leader>ts", function()
-        require("lsp_signature").toggle_float_win()
-      end, { desc = "[T]oggle [S]ignature Popup (i_CTRL-k also works)" })
-    end,
-  },
   { "smjonas/inc-rename.nvim", opts = { save_in_cmdline_history = false } },
   {
     "j-hui/fidget.nvim",
@@ -20,49 +11,7 @@ return {
       },
     },
   },
-  {
-    "folke/lazydev.nvim",
-    lazy = false,
-    ft = "lua",
-    opts = {
-      library = {
-        -- See the configuration section for more details
-        -- Load luvit types when the `vim.uv` word is found
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-      },
-    },
-  },
   "nvim-lua/plenary.nvim",
-  {
-    "rachartier/tiny-code-action.nvim",
-    event = "LspAttach",
-    enabled = false,
-    config = function()
-      require("tiny-code-action").setup({
-        -- backend = "difftastic",
-        picker = {
-          "buffer",
-          opts = {
-            hotkeys = true,
-          },
-        },
-      })
-      vim.keymap.set({ "n", "x", "v" }, "<leader>c", function()
-        require("tiny-code-action").code_action({})
-      end, { desc = "LSP: [C]ode Action", noremap = true, silent = true })
-    end,
-  },
-  {
-    "Chaitanyabsprip/fastaction.nvim",
-    ---@type FastActionConfig
-    opts = {
-      dismiss_keys = { "<Esc>", "q", "j", "k", "<c-c>" },
-      brackets = { "[", "]" },
-      popup = {
-        title = false,
-      },
-    },
-  },
   {
     "neovim/nvim-lspconfig",
     lazy = false,
@@ -326,6 +275,7 @@ return {
 
       require("mason-tool-installer").setup({
         ensure_installed = {
+          "lua-language-server",
           "stylua",
           "prettierd",
           "isort",
