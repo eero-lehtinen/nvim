@@ -131,6 +131,17 @@ return {
             local f = vim.lsp.buf.list_workspace_folders()
             vim.notify("Workspace folders: " .. vim.inspect(f), vim.log.levels.INFO)
           end, "[W]orkspace [F]olders")
+
+          if client.name == "svelte" then
+            vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+              pattern = { "*.js", "*.ts" },
+              callback = function(ctx)
+                client:notify("$/onDidChangeTsOrJsFile", {
+                  uri = ctx.match,
+                })
+              end,
+            })
+          end
         end,
       })
 
@@ -151,17 +162,6 @@ return {
 
         -- ts_ls = {},
         vtsls = {
-          -- complete_function_calls = true,
-          vtsls = {
-            enableMoveToFileCodeAction = true,
-            autoUseWorkspaceTsdk = true,
-            experimental = {
-              maxInlayHintLength = 30,
-              completion = {
-                enableServerSideFuzzyMatch = true,
-              },
-            },
-          },
           typescript = {
             updateImportsOnFileMove = { enabled = "always" },
             suggest = {
@@ -280,6 +280,8 @@ return {
           "prettierd",
           "isort",
           "taplo",
+          "svelte-language-server",
+          "vtsls",
         },
       })
 
