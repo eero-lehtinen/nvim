@@ -249,7 +249,10 @@ return {
       if ok then
         capabilities = blink.get_lsp_capabilities({}, true)
       end
-      vim.lsp.enable(vim.tbl_keys(servers))
+
+      if vim.env.NO_LSP == nil then
+        vim.lsp.enable(vim.tbl_keys(servers))
+      end
 
       vim.lsp.config("*", {
         capabilities = capabilities,
