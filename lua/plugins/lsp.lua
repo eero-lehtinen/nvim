@@ -285,6 +285,12 @@ return {
           "taplo",
           "svelte-language-server",
           "vtsls",
+          "css-lsp",
+          "emmet-language-server",
+          "prisma-language-server",
+          "pyright",
+          "tailwindcss-language-server",
+          "html-lsp",
         },
       })
 
