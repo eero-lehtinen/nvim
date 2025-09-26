@@ -295,25 +295,9 @@ return {
   },
 
   "tpope/vim-endwise",
+  "tpope/vim-abolish",
 
   { "ActivityWatch/aw-watcher-vim", enabled = false },
-
-  {
-    "gregorias/coerce.nvim",
-    -- event = "VeryLazy",
-    keys = { { "<leader>C" } },
-    opts = {
-      default_mode_keymap_prefixes = {
-        normal_mode = "<leader>C",
-        visual_mode = "<leader>C",
-      },
-      default_mode_mask = {
-        normal_mode = true,
-        motion_mode = false,
-        visual_mode = true,
-      },
-    },
-  },
 
   {
     "mikavilpas/yazi.nvim",
