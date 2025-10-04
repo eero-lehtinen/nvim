@@ -41,8 +41,8 @@ vim.o.spellcapcheck = ""
 if vim.g.is_windows then
   vim.cmd("language en_US")
 
-  local ldata = os.getenv("LOCALAPPDATA")
-  vim.o.shell = ldata .. "/Programs/nu/bin/nu.exe"
+  local ldata = os.getenv("userprofile")
+  vim.o.shell = ldata .. "/scoop/shims/nu.exe"
 
   vim.o.shellcmdflag = "--login --stdin --no-newline -c"
   vim.o.shellredir = "out+err> %s"
