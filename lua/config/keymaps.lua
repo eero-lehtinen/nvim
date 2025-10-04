@@ -17,6 +17,8 @@ vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to bottom window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to top window" })
 vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
+vim.keymap.set("t", "<esc>", "<C-\\><C-n>", { desc = "Escape terminal mode" })
+
 -- The same thing in terminals
 -- vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "Go to left window in terminal" }) interferes with ctr-backspace
 -- vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Go to bottom window in terminal" })
