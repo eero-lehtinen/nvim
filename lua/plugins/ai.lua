@@ -74,20 +74,16 @@ return {
   {
     "folke/sidekick.nvim",
     event = "VeryLazy",
-    opts = {},
-    keys = {
-      {
-        "<Tab>",
-        function()
-          -- if there is a next edit, jump to it, otherwise apply it if any
-          if not require("sidekick").nes_jump_or_apply() then
-            return -- "<Tab>" -- fallback
-          end
-        end,
-        expr = true,
-        desc = "Goto/Apply Next Edit Suggestion",
-      },
-    },
+    config = function()
+      require("sidekick").setup({})
+      vim.keymap.set("n", "<Tab>", function()
+        print("AAAAA")
+        if not require("sidekick").nes_jump_or_apply() then
+          return -- "<Tab>" -- fallback
+        end
+      end, { expr = true, desc = "Goto/Apply Next Edit Suggestion" })
+      vim.keymap.set("n", "<C-i>", "<C-i>")
+    end,
   },
   {
     "Exafunction/codeium.nvim",
