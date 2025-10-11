@@ -82,6 +82,11 @@ return {
           return -- "<Tab>" -- fallback
         end
       end, { expr = true, desc = "Goto/Apply Next Edit Suggestion" })
+      vim.keymap.set("n", "<C-Tab>", function()
+        if not require("sidekick").clear() then
+          return -- "<S-Tab>" -- fallback
+        end
+      end, { expr = true, desc = "Close Next Edit Suggestion" })
       vim.keymap.set("n", "<C-i>", "<C-i>")
     end,
   },
