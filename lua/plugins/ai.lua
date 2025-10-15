@@ -77,7 +77,6 @@ return {
     config = function()
       require("sidekick").setup({})
       vim.keymap.set("n", "<Tab>", function()
-        print("AAAAA")
         if not require("sidekick").nes_jump_or_apply() then
           return -- "<Tab>" -- fallback
         end
