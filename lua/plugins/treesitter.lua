@@ -10,6 +10,15 @@ return {
     },
     build = ":TSUpdate",
     config = function()
+      local default_parsers = {
+        "javascript",
+        "typescript",
+        "html",
+        "css",
+        "scss",
+      }
+      require("nvim-treesitter").install(default_parsers)
+
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "*" },
         callback = function(ev)
