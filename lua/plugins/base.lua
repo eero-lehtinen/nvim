@@ -70,7 +70,9 @@ return {
     -- enabled = false,
     opts = {
       custom_textobjects = {
+        t = false,
         f = false,
+        a = false,
       },
       mappings = {
         around_next = "",
