@@ -64,10 +64,7 @@ return {
       explorer = {
         replace_netrw = true,
       },
-      image = {
-        formats = {},
-        enabled = false,
-      },
+      image = {},
 
       -- notifier = { enabled = true },
       -- quickfile = { enabled = true },
