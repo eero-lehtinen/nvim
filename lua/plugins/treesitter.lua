@@ -16,8 +16,32 @@ return {
         "html",
         "css",
         "scss",
+        "markdown",
+        "markdown_inline",
       }
       require("nvim-treesitter").install(default_parsers)
+
+      local function get_pos_lang()
+        local c = vim.api.nvim_win_get_cursor(0)
+        local range = { c[1] - 1, c[2], c[1] - 1, c[2] }
+        local buf = vim.api.nvim_get_current_buf()
+        local ok, parser = pcall(vim.treesitter.get_parser, buf, vim.treesitter.language.get_lang(vim.bo[buf].ft))
+        if not ok or not parser then
+          return ""
+        end
+        local current_tree = parser:language_for_range(range)
+        return current_tree:lang()
+      end
+
+      vim.api.nvim_create_user_command("TSInstallUnderCursor", function()
+        local lang = get_pos_lang()
+        if lang == "" then
+          print("Could not determine language under cursor.")
+          return
+        end
+        require("nvim-treesitter").install({ lang })
+        print("Installed tree-sitter parser for language: " .. lang)
+      end, { desc = "Install tree-sitter parser for language under cursor" })
 
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "*" },
