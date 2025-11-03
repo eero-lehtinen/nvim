@@ -5,21 +5,10 @@ return {
     init = function()
       require("copilot").setup({
         panel = {
-          enabled = true,
-          auto_refresh = true,
-          keymap = {
-            jump_prev = "[[",
-            jump_next = "]]",
-            accept = "<CR>",
-            refresh = "gr",
-            open = false,
-          },
-          layout = {
-            position = "bottom", -- | top | left | right
-            ratio = 0.4,
-          },
+          enabled = false,
         },
         suggestion = {
+          enabled = true,
           auto_trigger = true,
           keymap = {
             -- next = "<C-¨>", -- actually <C-]>
@@ -30,7 +19,7 @@ return {
 
             next = "<M-n>",
             prev = "<M-p>",
-            accept = "<C-u>",
+            accept = "<F24>",
             dismiss = "<M-e>",
           },
         },
@@ -55,6 +44,12 @@ return {
           vim.notify("Copilot disabled")
         end
       end, { desc = "[T]oggle [A]I Copilot" })
+
+      vim.keymap.set("i", "<C-u>", function()
+        if require("copilot.suggestion").has_next() then
+          require("copilot.suggestion").accept()
+        end
+      end, { desc = "Accept Copilot Suggestion" })
 
       vim.api.nvim_create_autocmd("User", {
         pattern = "BlinkCmpMenuOpen",
