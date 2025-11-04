@@ -68,7 +68,6 @@ return {
   },
   {
     "folke/sidekick.nvim",
-    enabled = false,
     event = "VeryLazy",
     config = function()
       require("sidekick").setup({})
