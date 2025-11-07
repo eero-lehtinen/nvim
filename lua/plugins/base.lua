@@ -369,4 +369,12 @@ return {
       legacy_computing_symbols_support_vertical_bars = true,
     },
   },
+
+  {
+    "saghen/blink.indent",
+    enabled = false,
+    --- @module 'blink.indent'
+    --- @type blink.indent.Config
+    -- opts = {},
+  },
 }
