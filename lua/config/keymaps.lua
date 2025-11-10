@@ -9,7 +9,7 @@ vim.keymap.set("i", "<C-i>", "<esc>i", { desc = "Control as esc + i" })
 vim.keymap.set({ "n" }, "<c-.>", "<Nop>", { silent = true })
 vim.keymap.set({ "i", "c" }, "<C-BS>", "<C-w>", { desc = "Ctrl Backspace" })
 -- vim.keymap.set({ "i", "c" }, "<C-h>", "<C-w>", { desc = "Ctrl Backspace" }) -- needed on some terminals, not kitty
-vim.keymap.set({ "n", "v" }, "q:", "<Nop>", { silent = true })
+-- vim.keymap.set({ "n", "v" }, "q:", "<Nop>", { silent = true })
 
 -- Better window navigation
 vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })

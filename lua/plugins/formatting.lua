@@ -14,7 +14,7 @@ return {
     }
 
     local prettierd_filetypes =
-    { "javascript", "typescript", "json", "html", "css", "markdown", "yaml", "typescriptreact", "javascriptreact" }
+      { "javascript", "typescript", "json", "html", "css", "markdown", "yaml", "typescriptreact", "javascriptreact" }
     for _, ft in ipairs(prettierd_filetypes) do
       formatters_by_ft[ft] = { "prettierd" }
     end

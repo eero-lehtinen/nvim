@@ -377,4 +377,32 @@ return {
     --- @type blink.indent.Config
     -- opts = {},
   },
+
+  {
+    "A7Lavinraj/fyler.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require("fyler").setup({
+        integrations = {
+          icon = "nvim_web_devicons",
+        },
+        views = {
+          finder = {
+            default_explorer = true,
+            delete_to_trash = true,
+
+            icon = {
+              directory_collapsed = "",
+              directory_empty = "",
+              directory_expanded = "",
+            },
+          },
+        },
+      })
+
+      vim.keymap.set("n", "<leader>f", function()
+        require("fyler").toggle({ kind = "split_left_most" })
+      end, { desc = "Toggle [F]yler" })
+    end,
+  },
 }
