@@ -62,7 +62,7 @@ return {
         },
       },
       explorer = {
-        replace_netrw = true,
+        replace_netrw = false,
       },
       image = {},
 
