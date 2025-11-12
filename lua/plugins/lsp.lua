@@ -18,6 +18,19 @@ return {
     dependencies = {
       { "mason-org/mason.nvim", config = true },
       "WhoIsSethDaniel/mason-tool-installer.nvim",
+      {
+        "rachartier/tiny-code-action.nvim",
+        event = "LspAttach",
+        opts = {
+          -- backend = "delta",
+          picker = {
+            "snacks",
+            opts = {
+              layout = "dropdown",
+            },
+          },
+        },
+      },
     },
     config = function()
       -- Delete default keymaps
@@ -68,10 +81,16 @@ return {
           end
 
           nmap("<leader>r", ":IncRename ", "[R]ename")
+
+          local tca_found, tca = pcall(require, "tiny-code-action")
+          local code_action = vim.lsp.buf.code_action
+          if tca_found then
+            code_action = tca.code_action
+          end
           vim.keymap.set(
             { "n", "x", "v" },
             "<leader>c",
-            vim.lsp.buf.code_action,
+            code_action,
             { buffer = event.buf, desc = "LSP: [C]ode Action" }
           )
 
