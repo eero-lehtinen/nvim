@@ -405,4 +405,6 @@ return {
       end, { desc = "Toggle [F]yler" })
     end,
   },
+
+  { "kwkarlwang/bufresize.nvim", opts = {} },
 }
