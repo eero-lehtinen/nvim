@@ -38,17 +38,6 @@ return {
     end,
   },
   {
-    "ggandor/flit.nvim",
-    enabled = false,
-    dependencies = {
-      "ggandor/leap.nvim",
-      "tpope/vim-repeat",
-    },
-    opts = {
-      labeled_modes = "",
-    },
-  },
-  {
     "echasnovski/mini.surround",
     version = "*",
     opts = {
@@ -283,20 +272,6 @@ return {
       },
     },
   },
-  {
-    "altermo/ultimate-autopair.nvim",
-    enabled = false,
-    event = { "InsertEnter", "CmdlineEnter" },
-    branch = "v0.6",
-    opts = {
-      fastwarp = { enable = false },
-      close = { enable = false },
-      config_internal_pairs = {
-        { "'", "'", nft = { "tex", "rust" } },
-      },
-      { "|", "|", ft = { "rust" } },
-    },
-  },
 
   "tpope/vim-endwise",
   "tpope/vim-abolish",
@@ -321,61 +296,6 @@ return {
         show_help = "<f1>",
       },
     },
-  },
-
-  {
-    "monaqa/dial.nvim",
-    config = function()
-      vim.keymap.set("n", "<C-a>", function()
-        require("dial.map").manipulate("increment", "normal")
-      end)
-      vim.keymap.set("n", "<C-x>", function()
-        require("dial.map").manipulate("decrement", "normal")
-      end)
-      vim.keymap.set("n", "g<C-a>", function()
-        require("dial.map").manipulate("increment", "gnormal")
-      end)
-      vim.keymap.set("n", "g<C-x>", function()
-        require("dial.map").manipulate("decrement", "gnormal")
-      end)
-      vim.keymap.set("x", "<C-a>", function()
-        require("dial.map").manipulate("increment", "visual")
-      end)
-      vim.keymap.set("x", "<C-x>", function()
-        require("dial.map").manipulate("decrement", "visual")
-      end)
-      vim.keymap.set("x", "g<C-a>", function()
-        require("dial.map").manipulate("increment", "gvisual")
-      end)
-      vim.keymap.set("x", "g<C-x>", function()
-        require("dial.map").manipulate("decrement", "gvisual")
-      end)
-    end,
-  },
-
-  {
-    "sphamba/smear-cursor.nvim",
-    enabled = false,
-    opts = {
-      stiffness = 0.8, -- 0.6      [0, 1]
-      trailing_stiffness = 0.55, -- 0.45     [0, 1]
-      stiffness_insert_mode = 0.7, -- 0.5      [0, 1]
-      trailing_stiffness_insert_mode = 0.7, -- 0.5      [0, 1]
-      damping = 0.95, -- 0.85     [0, 1]
-      damping_insert_mode = 0.95, -- 0.9      [0, 1]
-      distance_stop_animating = 0.5, -- 0.1      > 0
-      time_interval = 4,
-      legacy_computing_symbols_support = true,
-      legacy_computing_symbols_support_vertical_bars = true,
-    },
-  },
-
-  {
-    "saghen/blink.indent",
-    enabled = false,
-    --- @module 'blink.indent'
-    --- @type blink.indent.Config
-    -- opts = {},
   },
 
   {

@@ -58,7 +58,9 @@ end
 return {
   {
     "vxpm/ferris.nvim",
+    ft = { "rust" },
     config = function()
+      require("ferris").setup()
       vim.api.nvim_create_autocmd("FileType", {
         pattern = "rust",
         callback = function()
