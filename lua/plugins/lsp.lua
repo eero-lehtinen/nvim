@@ -260,6 +260,8 @@ return {
         wgsl_analyzer = {},
 
         prismals = {},
+
+        clangd = {},
       }
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
