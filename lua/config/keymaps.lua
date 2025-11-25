@@ -222,3 +222,13 @@ toggle_keymap("k", "[K]loak", function()
   require("cloak").toggle()
   return vim.b.cloak_enabled
 end)
+
+vim.api.nvim_create_user_command("TrimTrailing", function()
+  local view = vim.fn.winsaveview()
+  vim.cmd([[keeppatterns %s/\s\+$//e]])
+  vim.fn.winrestview(view)
+  vim.notify("Trimmed trailing whitespace", vim.log.levels.INFO, { title = "TrimTrailing" })
+end, {
+  nargs = 0,
+  desc = "Trim trailing whitespace in the current buffer",
+})
