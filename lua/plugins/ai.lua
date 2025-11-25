@@ -69,6 +69,7 @@ return {
   {
     "folke/sidekick.nvim",
     event = "VeryLazy",
+    enabled = false,
     config = function()
       require("sidekick").setup({})
       vim.keymap.set("n", "<Tab>", function()
