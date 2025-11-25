@@ -77,6 +77,7 @@ return {
   },
   {
     "stevearc/oil.nvim",
+    cmd = { "Oil" },
     opts = {
       default_file_explorer = false,
       keymaps = {
@@ -102,8 +103,8 @@ return {
   },
   {
     "toppair/peek.nvim",
-    event = { "VeryLazy" },
     build = "deno task --quiet build:fast",
+    cmd = { "MarkdownToggle" },
     config = function()
       local peek = require("peek")
       peek.setup({
@@ -301,6 +302,16 @@ return {
   {
     "A7Lavinraj/fyler.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    cmd = { "Fyler" },
+    keys = {
+      {
+        "<leader>f",
+        function()
+          require("fyler").toggle({ kind = "split_left_most" })
+        end,
+        desc = "Toggle [F]yler",
+      },
+    },
     config = function()
       require("fyler").setup({
         integrations = {
@@ -319,10 +330,6 @@ return {
           },
         },
       })
-
-      vim.keymap.set("n", "<leader>f", function()
-        require("fyler").toggle({ kind = "split_left_most" })
-      end, { desc = "Toggle [F]yler" })
     end,
   },
 
