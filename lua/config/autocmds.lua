@@ -62,3 +62,14 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
   pattern = { "/", "\\?" },
   command = "set nohlsearch",
 })
+
+-- Setup eel syntax
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.eel",
+  callback = function()
+    vim.schedule(function()
+      vim.bo.syntax = "rust"
+      vim.bo.commentstring = "# %s"
+    end)
+  end,
+})
