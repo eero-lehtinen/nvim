@@ -68,7 +68,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*.eel",
   callback = function()
     vim.schedule(function()
-      vim.bo.syntax = "rust"
+      vim.bo.syntax = "python"
       vim.bo.commentstring = "# %s"
     end)
   end,
