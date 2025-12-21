@@ -11,6 +11,7 @@ return {
       cpp = {},
       svelte = {},
       prisma = {},
+      gdscript = { "gdscript-formatter" },
     }
 
     local prettierd_filetypes =
@@ -38,6 +39,14 @@ return {
 
         return { timeout_ms = 1000, lsp_format = "never" }
       end,
+      formatters = {
+        ["gdscript-formatter"] = {
+          command = "gdscript-formatter",
+          args = { "$FILENAME" },
+          stdin = false,
+          cwd = require("conform.util").root_file({ "project.godot", ".git" }),
+        },
+      },
     })
 
     vim.keymap.set("n", "<leader>tf", function()
