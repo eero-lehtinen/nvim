@@ -305,7 +305,11 @@ return {
         cmd = cmd,
         root_dir = vim.fs.dirname(vim.fs.find({ "project.godot", ".git" }, { upward = true })[1]),
         on_attach = function(client, bufnr)
-          vim.api.nvim_command("serverstart('" .. pipe .. "')")
+          local list = vim.fn.serverlist()
+          local started = vim.tbl_contains(list, pipe)
+          if not started then
+            vim.fn.serverstart(pipe)
+          end
         end,
       })
       if vim.env.NO_LSP == nil then
