@@ -295,7 +295,7 @@ return {
       -- Apply settings to editor:
       -- Use External Editor: On
       -- Exec Path: nvim
-      -- Exec Flags: --server "\\\\.\\pipe\\godot.pipe" --remote-send "<C-\><C-N>:n {file}<CR>:call cursor({line},{col})<CR>"
+      -- Exec Flags: --server "\\\\.\\pipe\\godot.pipe" --remote-send "<C-\><C-N>:n {file}<CR>"
       local port = os.getenv("GDScript_Port") or "6005"
       local cmd = { "ncat", "127.0.0.1", port }
       local pipe = [[\\.\pipe\godot.pipe]]
