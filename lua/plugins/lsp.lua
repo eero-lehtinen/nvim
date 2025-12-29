@@ -296,19 +296,17 @@ return {
       -- Use External Editor: On
       -- Exec Path: nvim
       -- Exec Flags: --server "\\\\.\\pipe\\godot.pipe" --remote-send "<C-\><C-N>:n {file}<CR>"
-      local port = os.getenv("GDScript_Port") or "6005"
-      local cmd = { "ncat", "127.0.0.1", port }
-      local pipe = [[\\.\pipe\godot.pipe]]
+      local gdport = os.getenv("GDScript_Port") or "6005"
+      local gdpipe = [[\\.\pipe\godot.pipe]]
       vim.lsp.config("gdscript", {
-        filetype = { "gdscript" },
-        name = "Godot",
-        cmd = cmd,
-        root_dir = vim.fs.dirname(vim.fs.find({ "project.godot", ".git" }, { upward = true })[1]),
-        on_attach = function(client, bufnr)
+        cmd = vim.lsp.rpc.connect("127.0.0.1", tonumber(gdport)),
+        filetypes = { "gd", "gdscript", "gdscript3" },
+        root_markers = { "project.godot", ".git" },
+        on_attach = function(_, _)
           local list = vim.fn.serverlist()
-          local started = vim.tbl_contains(list, pipe)
+          local started = vim.tbl_contains(list, gdpipe)
           if not started then
-            vim.fn.serverstart(pipe)
+            vim.fn.serverstart(gdpipe)
           end
         end,
       })
