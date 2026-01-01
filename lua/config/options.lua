@@ -41,29 +41,29 @@ vim.o.spellcapcheck = ""
 if vim.g.is_windows then
   vim.cmd("language en_US")
 
-  local ldata = os.getenv("userprofile")
-  vim.o.shell = ldata .. "/scoop/shims/nu.exe"
+  -- local ldata = os.getenv("userprofile")
+  -- vim.o.shell = ldata .. "/scoop/shims/nu.exe"
+  --
+  -- vim.o.shellcmdflag = "--login --stdin --no-newline -c"
+  -- vim.o.shellredir = "out+err> %s"
+  -- vim.o.shellpipe =
+  --   "| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record"
+  -- vim.o.shelltemp = false
+  -- vim.o.shellxescape = ""
+  -- vim.o.shellxquote = ""
+  -- vim.o.shellquote = ""
+  -- vim.o.shellslash = true -- converts backslashes to forward slashes, fixes path strings
 
-  vim.o.shellcmdflag = "--login --stdin --no-newline -c"
-  vim.o.shellredir = "out+err> %s"
-  vim.o.shellpipe =
-    "| complete | update stderr { ansi strip } | tee { get stderr | save --force --raw %s } | into record"
-  vim.o.shelltemp = false
-  vim.o.shellxescape = ""
-  vim.o.shellxquote = ""
+  vim.o.shell = "pwsh"
+  vim.o.shellcmdflag =
+    "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering='plaintext';Remove-Alias -Force -ErrorAction SilentlyContinue tee;"
+
+  vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
+
+  vim.o.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
+
   vim.o.shellquote = ""
-  vim.o.shellslash = true -- converts backslashes to forward slashes, fixes path strings
-
-  -- vim.o.shell = 'pwsh'
-  -- vim.o.shellcmdflag =
-  --   "-NoLogo -NonInteractive -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.UTF8Encoding]::new();$PSDefaultParameterValues['Out-File:Encoding']='utf8';$PSStyle.OutputRendering='plaintext';Remove-Alias -Force -ErrorAction SilentlyContinue tee;"
-  --
-  -- vim.o.shellredir = '2>&1 | %%{ "$_" } | Out-File %s; exit $LastExitCode'
-  --
-  -- vim.o.shellpipe = '2>&1 | %%{ "$_" } | tee %s; exit $LastExitCode'
-
-  -- vim.o.shellquote = ''
-  -- vim.o.shellxquote = ''
+  vim.o.shellxquote = ""
 end
 
 if vim.g.neovide then
