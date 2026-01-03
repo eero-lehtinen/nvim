@@ -38,7 +38,7 @@ return {
     end,
   },
   {
-    "echasnovski/mini.surround",
+    "nvim-mini/mini.surround",
     version = "*",
     opts = {
       mappings = {
@@ -54,7 +54,7 @@ return {
     },
   },
   {
-    "echasnovski/mini.ai",
+    "nvim-mini/mini.ai",
     version = "*",
     -- enabled = false,
     opts = {
@@ -157,7 +157,7 @@ return {
     "Wansmer/treesj",
     dependencies = {
       {
-        "echasnovski/mini.splitjoin",
+        "nvim-mini/mini.splitjoin",
         version = false,
         opts = { mappings = { toggle = "<leader>J" } },
         keys = { { "<leader>J", desc = "Toggle [J]oin Mini" } },
@@ -255,7 +255,7 @@ return {
 
   { "windwp/nvim-ts-autotag", event = "VeryLazy", opts = {} },
   {
-    "echasnovski/mini.pairs",
+    "nvim-mini/mini.pairs",
     opts = {
       mappings = {
         ["("] = { action = "open", pair = "()", neigh_pattern = "[^\\]%W" },
