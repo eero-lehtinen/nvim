@@ -43,13 +43,18 @@ return {
         print("Installed tree-sitter parser for language: " .. lang)
       end, { desc = "Install tree-sitter parser for language under cursor" })
 
+      local available = require("nvim-treesitter").get_available()
+
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "*" },
         callback = function(ev)
           if not pcall(vim.treesitter.start) then
-            require("nvim-treesitter").install({ vim.bo[ev.buf].filetype }):await(function()
-              pcall(vim.treesitter.start, ev.buf)
-            end)
+            local ft = vim.bo[ev.buf].filetype
+            if vim.list_contains(available, ft) then
+              require("nvim-treesitter").install({ ft }):await(function()
+                pcall(vim.treesitter.start, ev.buf)
+              end)
+            end
           end
         end,
       })
