@@ -73,3 +73,13 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     end)
   end,
 })
+
+-- setup gdshader
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.gdshader",
+  callback = function()
+    vim.schedule(function()
+      vim.bo.commentstring = "// %s"
+    end)
+  end,
+})
