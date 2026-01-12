@@ -337,4 +337,12 @@ return {
   },
 
   { "kwkarlwang/bufresize.nvim", opts = {} },
+
+  {
+    "ntpeters/vim-better-whitespace",
+    init = function()
+      vim.g.better_whitespace_enabled = 1
+      vim.cmd([[highlight ExtraWhitespace guibg=#993c31]])
+    end,
+  },
 }
