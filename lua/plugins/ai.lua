@@ -69,21 +69,88 @@ return {
   {
     "folke/sidekick.nvim",
     event = "VeryLazy",
-    enabled = false,
-    config = function()
-      require("sidekick").setup({})
-      vim.keymap.set("n", "<Tab>", function()
-        if not require("sidekick").nes_jump_or_apply() then
-          return -- "<Tab>" -- fallback
-        end
-      end, { expr = true, desc = "Goto/Apply Next Edit Suggestion" })
-      vim.keymap.set("n", "<C-Tab>", function()
-        if not require("sidekick").clear() then
-          return -- "<S-Tab>" -- fallback
-        end
-      end, { expr = true, desc = "Close Next Edit Suggestion" })
-      vim.keymap.set("n", "<C-i>", "<C-i>")
-    end,
+    keys = {
+      {
+        "<leader>at",
+        function()
+          require("sidekick.cli").send({ msg = "{this}" })
+        end,
+        mode = { "x", "n" },
+        desc = "Send This",
+      },
+      {
+        "<leader>af",
+        function()
+          require("sidekick.cli").send({ msg = "{file}" })
+        end,
+        desc = "Send File",
+      },
+      {
+        "<leader>av",
+        function()
+          require("sidekick.cli").send({ msg = "{selection}" })
+        end,
+        mode = { "x" },
+        desc = "Send Visual Selection",
+      },
+      {
+        "<leader>ap",
+        function()
+          require("sidekick.cli").prompt()
+        end,
+        mode = { "n", "x" },
+        desc = "Sidekick Select Prompt",
+      },
+      {
+        "<Tab>",
+        function()
+          if not require("sidekick").nes_jump_or_apply() then
+            return -- "<Tab>" -- fallback
+          end
+        end,
+        mode = { "n" },
+        expr = true,
+        desc = "Goto/Apply Next Edit Suggestion",
+      },
+      {
+        "<C-Tab>",
+        function()
+          if not require("sidekick").clear() then
+            return -- "<S-Tab>" -- fallback
+          end
+        end,
+        mode = { "n" },
+        expr = true,
+        desc = "Close Next Edit Suggestion",
+      },
+      {
+        "<C-i>",
+        "<C-i>",
+        mode = { "n" },
+      },
+      {
+        "<c-.>",
+        function()
+          require("sidekick.cli").toggle({ name = "opencode" })
+        end,
+        mode = { "n", "t", "i", "x" },
+        desc = "Sidekick Toggle",
+      },
+    },
+    -- enabled = false,
+    opts = {
+      cli = {
+        win = {
+          keys = {
+            prompt = { "<A-p>", "prompt" },
+            -- keep Escape inside the terminal; prevents leaving to Normal mode
+            esc = { "<Esc>", "<Esc>", mode = "t", desc = "Sidekick CLI Escape" },
+            -- dedicated exit to Normal mode from Sidekick terminal
+            stopinsert = { "<C-q>", "stopinsert", mode = "t", desc = "Sidekick CLI stopinsert" },
+          },
+        },
+      },
+    },
   },
   {
     "Exafunction/codeium.nvim",
