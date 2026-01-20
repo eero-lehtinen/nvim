@@ -72,6 +72,15 @@ return {
       })
     end,
   },
+  {
+    "esmuellert/codediff.nvim",
+    dependencies = { "MunifTanjim/nui.nvim" },
+    cmd = "CodeDiff",
+    init = function()
+      vim.cmd("cnoreabbrev D CodeDiff")
+    end,
+  },
+
   "nvim-lua/plenary.nvim",
   {
     "lewis6991/gitsigns.nvim",
