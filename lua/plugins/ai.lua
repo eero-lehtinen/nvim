@@ -108,7 +108,7 @@ return {
             return -- "<Tab>" -- fallback
           end
         end,
-        mode = { "n" },
+        mode = { "i" },
         expr = true,
         desc = "Goto/Apply Next Edit Suggestion",
       },
@@ -119,7 +119,7 @@ return {
             return -- "<S-Tab>" -- fallback
           end
         end,
-        mode = { "n" },
+        mode = { "i" },
         expr = true,
         desc = "Close Next Edit Suggestion",
       },

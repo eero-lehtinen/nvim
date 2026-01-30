@@ -5,7 +5,7 @@ vim.keymap.set("x", "Q", ":norm @q<CR>", { desc = 'Run macro named "q" in select
 
 vim.keymap.set({ "i", "x", "n", "s" }, "<C-s>", "<cmd>update<cr><esc>", { desc = "Save file" })
 
-vim.keymap.set("i", "<C-i>", "<esc>i", { desc = "Control as esc + i" })
+-- vim.keymap.set("i", "<C-i>", "<esc>i", { desc = "Control as esc + i" })
 vim.keymap.set({ "n" }, "<c-.>", "<Nop>", { silent = true })
 vim.keymap.set({ "i", "c" }, "<C-BS>", "<C-w>", { desc = "Ctrl Backspace" })
 -- vim.keymap.set({ "i", "c" }, "<C-h>", "<C-w>", { desc = "Ctrl Backspace" }) -- needed on some terminals, not kitty
