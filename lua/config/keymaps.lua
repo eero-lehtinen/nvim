@@ -232,3 +232,19 @@ end, {
   nargs = 0,
   desc = "Trim trailing whitespace in the current buffer",
 })
+
+vim.api.nvim_create_user_command("CopyPath", function(opts)
+  local path
+  if opts.bang then
+    path = vim.fn.expand("%:p")
+  else
+    path = vim.fn.expand("%:.")
+  end
+  path = path:gsub("\\", "/")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied: " .. path, vim.log.levels.INFO, { title = "CopyPath" })
+end, {
+  bang = true,
+  nargs = 0,
+  desc = "Copy file path to clipboard (relative to cwd, or absolute with !)",
+})
