@@ -147,7 +147,7 @@ return {
   "jesseleite/nvim-macroni", -- Adds `:YankMacro [register]`
   {
     "andymass/vim-matchup",
-    enabled = true,
+    enabled = false, -- This is incredibly laggy on large files because of treesitter queries
     init = function()
       vim.g.matchup_surround_enabled = 0
       vim.g.matchup_matchparen_offscreen = {}
