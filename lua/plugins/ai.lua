@@ -105,7 +105,7 @@ return {
         "<Tab>",
         function()
           if not require("sidekick").nes_jump_or_apply() then
-            return -- "<Tab>" -- fallback
+            return "<Tab>" -- fallback
           end
         end,
         mode = { "i" },
