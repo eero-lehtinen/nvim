@@ -248,3 +248,9 @@ end, {
   nargs = 0,
   desc = "Copy file path to clipboard (relative to cwd, or absolute with !)",
 })
+
+-- Needed to make vim distinguish between <tab> and <c-i>
+vim.keymap.set("n", "<Tab>", function()
+  print("<Tab> was pressed")
+end, { desc = "Test keymap" })
+vim.keymap.set("n", "<C-i>", "<C-i>", { desc = "Jump forward in jumplist" })

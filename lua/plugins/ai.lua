@@ -123,11 +123,6 @@ return {
         expr = true,
         desc = "Close Next Edit Suggestion",
       },
-      -- {
-      --   "<C-i>",
-      --   "<C-i>",
-      --   mode = { "n" },
-      -- },
       {
         "<c-.>",
         function()
