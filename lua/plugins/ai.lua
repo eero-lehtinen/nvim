@@ -105,10 +105,10 @@ return {
         "<Tab>",
         function()
           if not require("sidekick").nes_jump_or_apply() then
-            return "<Tab>" -- fallback
+            return -- "<Tab>" -- fallback
           end
         end,
-        mode = { "i" },
+        mode = { "n" },
         expr = true,
         desc = "Goto/Apply Next Edit Suggestion",
       },
@@ -119,15 +119,15 @@ return {
             return -- "<S-Tab>" -- fallback
           end
         end,
-        mode = { "i" },
+        mode = { "n" },
         expr = true,
         desc = "Close Next Edit Suggestion",
       },
-      {
-        "<C-i>",
-        "<C-i>",
-        mode = { "n" },
-      },
+      -- {
+      --   "<C-i>",
+      --   "<C-i>",
+      --   mode = { "n" },
+      -- },
       {
         "<c-.>",
         function()
