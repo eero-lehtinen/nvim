@@ -180,22 +180,23 @@ return {
         pyright = {},
 
         -- ts_ls = {},
-        vtsls = {
-          typescript = {
-            updateImportsOnFileMove = { enabled = "always" },
-            suggest = {
-              -- completeFunctionCalls = true,
-            },
-            inlayHints = {
-              enumMemberValues = { enabled = true },
-              functionLikeReturnTypes = { enabled = true },
-              parameterNames = { enabled = "literals" },
-              parameterTypes = { enabled = true },
-              propertyDeclarationTypes = { enabled = true },
-              variableTypes = { enabled = false },
-            },
-          },
-        },
+        -- vtsls = {
+        --   typescript = {
+        --     updateImportsOnFileMove = { enabled = "always" },
+        --     suggest = {
+        --       -- completeFunctionCalls = true,
+        --     },
+        --     inlayHints = {
+        --       enumMemberValues = { enabled = true },
+        --       functionLikeReturnTypes = { enabled = true },
+        --       parameterNames = { enabled = "literals" },
+        --       parameterTypes = { enabled = true },
+        --       propertyDeclarationTypes = { enabled = true },
+        --       variableTypes = { enabled = false },
+        --     },
+        --   },
+        -- },
+        tsgo = {},
         -- eslint = {},
         svelte = {},
         tailwindcss = {},
@@ -261,7 +262,7 @@ return {
 
         prismals = {},
 
-        clangd = {},
+        -- clangd = {},
       }
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -328,7 +329,7 @@ return {
           "isort",
           "taplo",
           "svelte-language-server",
-          "vtsls",
+          "tsgo",
           "css-lsp",
           "emmet-language-server",
           "prisma-language-server",
