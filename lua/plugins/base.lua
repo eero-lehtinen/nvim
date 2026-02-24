@@ -144,7 +144,7 @@ return {
     "ethanholz/nvim-lastplace",
     opts = {},
   },
-  "jesseleite/nvim-macroni", -- Adds `:YankMacro [register]`
+  "jesseleite/macroni.nvim", -- Adds `:YankMacro [register]`
   {
     "andymass/vim-matchup",
     enabled = false, -- This is incredibly laggy on large files because of treesitter queries
