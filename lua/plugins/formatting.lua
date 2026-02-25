@@ -17,7 +17,7 @@ return {
     local prettierd_filetypes =
       { "javascript", "typescript", "json", "html", "css", "markdown", "yaml", "typescriptreact", "javascriptreact" }
     for _, ft in ipairs(prettierd_filetypes) do
-      formatters_by_ft[ft] = { "prettierd" }
+      formatters_by_ft[ft] = { "prettierd", "biome" }
     end
 
     require("conform").setup({
@@ -45,6 +45,12 @@ return {
           args = { "$FILENAME" },
           stdin = false,
           cwd = require("conform.util").root_file({ "project.godot", ".git" }),
+        },
+        prettierrd = {
+          require_cwd = true,
+        },
+        biome = {
+          require_cwd = true,
         },
       },
     })
