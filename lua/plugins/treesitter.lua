@@ -50,10 +50,13 @@ return {
         callback = function(ev)
           if not pcall(vim.treesitter.start) then
             local ft = vim.bo[ev.buf].filetype
-            if vim.list_contains(available, ft) then
-              require("nvim-treesitter").install({ ft }):await(function()
-                pcall(vim.treesitter.start, ev.buf)
-              end)
+            local ext = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(ev.buf), ":e")
+            for _, x in ipairs({ ft, ext }) do
+              if vim.list_contains(available, x) then
+                require("nvim-treesitter").install({ x }):await(function()
+                  pcall(vim.treesitter.start, ev.buf)
+                end)
+              end
             end
           end
         end,
