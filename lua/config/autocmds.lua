@@ -1,6 +1,11 @@
 vim.api.nvim_create_autocmd({ "BufLeave" }, {
   pattern = { "*" },
-  command = "silent! update",
+  callback = function()
+    if vim.bo.buftype == "quickfix" then
+      return
+    end
+    vim.cmd("silent! update")
+  end,
   desc = "Autosave on switching suffers",
 })
 
