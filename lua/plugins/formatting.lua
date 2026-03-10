@@ -17,7 +17,7 @@ return {
     local prettierd_filetypes =
       { "javascript", "typescript", "json", "html", "css", "markdown", "yaml", "typescriptreact", "javascriptreact" }
     for _, ft in ipairs(prettierd_filetypes) do
-      formatters_by_ft[ft] = { "prettierd", "biome" }
+      formatters_by_ft[ft] = { "biome", "prettierd", stop_after_first = true }
     end
 
     require("conform").setup({
