@@ -249,6 +249,13 @@ end, {
   desc = "Copy file path to clipboard (relative to cwd, or absolute with !)",
 })
 
+vim.api.nvim_create_user_command("LspInfo", function()
+  vim.cmd("checkhealth vim.lsp")
+end, {
+  nargs = 0,
+  desc = "Show LSP healthcheck",
+})
+
 -- Needed to make vim distinguish between <tab> and <c-i>
 vim.keymap.set("n", "<Tab>", function()
   print("<Tab> was pressed")
