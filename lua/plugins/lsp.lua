@@ -177,7 +177,9 @@ return {
 
         -- rust_analyzer = {},
 
-        pyright = {},
+        -- pyright = {},
+        -- ty = {},
+        pyrefly = {},
 
         -- ts_ls = {},
         -- vtsls = {
@@ -333,7 +335,8 @@ return {
           "css-lsp",
           "emmet-language-server",
           "prisma-language-server",
-          "pyright",
+          "pyrefly",
+          "black",
           "tailwindcss-language-server",
           "html-lsp",
         },
