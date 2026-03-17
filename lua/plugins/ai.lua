@@ -126,7 +126,7 @@ return {
       {
         "<c-.>",
         function()
-          require("sidekick.cli").toggle({ name = "opencode" })
+          require("sidekick.cli").toggle()
         end,
         mode = { "n", "t", "i", "x" },
         desc = "Sidekick Toggle",
@@ -135,6 +135,9 @@ return {
     -- enabled = false,
     opts = {
       cli = {
+        tools = {
+          claude_yolo = { cmd = { "claude", "--dangerously-skip-permissions" } },
+        },
         win = {
           keys = {
             prompt = { "<A-p>", "prompt" },
