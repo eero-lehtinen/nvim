@@ -144,13 +144,16 @@ return {
         function()
           local mode = vim.fn.mode()
           if mode == "v" or mode == "V" or mode == "\22" then
-            vim.cmd("ClaudeCodeSend")
+            local start_line = vim.fn.line("v")
+            local end_line = vim.fn.line(".")
+            if start_line > end_line then
+              start_line, end_line = end_line, start_line
+            end
+            vim.cmd("ClaudeCodeAdd % " .. start_line .. " " .. end_line)
           else
-            vim.cmd("normal! V")
-            vim.cmd("ClaudeCodeSend")
+            local line = vim.fn.line(".")
+            vim.cmd("ClaudeCodeAdd % " .. line .. " " .. line)
           end
-          -- ClaudeCodeSend defers the actual send via vim.schedule,
-          -- so we must delay focus to avoid changing the current buffer too early
           vim.schedule(claude_focus_terminal)
         end,
         mode = { "n", "v" },
