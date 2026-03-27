@@ -1,19 +1,15 @@
 -- Global function for Claude Code hooks to sync edited files with Neovim
-function _G.claude_sync_file(absolute_path)
+function _G.claude_sync_file(input_path)
   vim.schedule(function()
     vim.api.nvim_command("checktime")
 
-    absolute_path = absolute_path:gsub("\r", "")
-    local cwd = vim.fn.getcwd():gsub("\\", "/")
-    local normalized = vim.fn.fnamemodify(absolute_path, ":p"):gsub("\\", "/")
+    local cwd = vim.fs.normalize(vim.fn.getcwd())
+    local path = vim.fs.normalize(vim.fn.fnamemodify(input_path:gsub("\r", ""), ":p"))
 
-    local in_cwd = vim.startswith(normalized, cwd)
+    local in_cwd = vim.startswith(path, cwd)
 
-    local path
     if in_cwd then
-      path = vim.fn.fnamemodify(absolute_path, ":.")
-    else
-      path = normalized
+      path = path:sub(#cwd + 2)
     end
 
     local bufnr = vim.fn.bufadd(path)
