@@ -1,3 +1,27 @@
+-- Global function for Claude Code hooks to sync edited files with Neovim
+function _G.claude_sync_file(absolute_path)
+  vim.schedule(function()
+    vim.api.nvim_command("checktime")
+
+    absolute_path = absolute_path:gsub("\r", "")
+    local cwd = vim.fn.getcwd():gsub("\\", "/")
+    local normalized = vim.fn.fnamemodify(absolute_path, ":p"):gsub("\\", "/")
+
+    if not vim.startswith(normalized, cwd) then
+      return
+    end
+
+    local relative = vim.fn.fnamemodify(absolute_path, ":.")
+    local bufnr = vim.fn.bufadd(relative)
+    vim.bo[bufnr].buflisted = true
+    if not vim.api.nvim_buf_is_loaded(bufnr) then
+      vim.fn.bufload(bufnr)
+    end
+  end)
+
+  return ""
+end
+
 return {
   {
     "zbirenbaum/copilot.lua",
@@ -71,7 +95,6 @@ return {
     dependencies = { "folke/snacks.nvim" },
     event = "VeryLazy",
     opts = {
-      focuse_after_send = true,
       terminal = {
         split_width_percentage = 0.5,
         provider = "snacks",

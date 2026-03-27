@@ -35,9 +35,9 @@ return {
     "sindrets/diffview.nvim",
     event = "VeryLazy",
     config = function()
-      vim.cmd("cnoreabbrev Dv DiffviewOpen")
-      vim.cmd("cnoreabbrev Dc DiffviewClose")
-      vim.cmd("cnoreabbrev Df DiffviewFileHistory")
+      vim.api.nvim_create_user_command("Dv", "DiffviewOpen", {})
+      vim.api.nvim_create_user_command("Dc", "DiffviewClose", {})
+      vim.api.nvim_create_user_command("Df", "DiffviewFileHistory", {})
 
       local actions = require("diffview.actions")
 
@@ -77,7 +77,7 @@ return {
     dependencies = { "MunifTanjim/nui.nvim" },
     cmd = "CodeDiff",
     init = function()
-      vim.cmd("cnoreabbrev D CodeDiff")
+      vim.api.nvim_create_user_command("D", "CodeDiff", {})
     end,
   },
 
