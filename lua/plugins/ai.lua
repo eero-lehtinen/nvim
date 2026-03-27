@@ -22,6 +22,18 @@ function _G.claude_sync_file(absolute_path)
   return ""
 end
 
+local function claude_focus_terminal()
+  local snacks = require("snacks")
+  for _, term in pairs(snacks.terminal.list()) do
+    if type(term.cmd) == "string" and term.cmd:find("claude") then
+      term:show()
+      term:focus()
+      vim.cmd("startinsert")
+      return
+    end
+  end
+end
+
 return {
   {
     "zbirenbaum/copilot.lua",
@@ -119,7 +131,14 @@ return {
         desc = "Toggle Claude",
       },
       { "<leader>ac", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
-      { "<leader>af", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current file" },
+      {
+        "<leader>af",
+        function()
+          vim.cmd("ClaudeCodeAdd %")
+          vim.schedule(claude_focus_terminal)
+        end,
+        desc = "Add current file",
+      },
       {
         "<leader>at",
         function()
@@ -130,6 +149,9 @@ return {
             vim.cmd("normal! V")
             vim.cmd("ClaudeCodeSend")
           end
+          -- ClaudeCodeSend defers the actual send via vim.schedule,
+          -- so we must delay focus to avoid changing the current buffer too early
+          vim.schedule(claude_focus_terminal)
         end,
         mode = { "n", "v" },
         desc = "Send to Claude",
