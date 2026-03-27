@@ -19,11 +19,25 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
 
 vim.keymap.set("t", "<esc>", "<C-\\><C-n>", { desc = "Escape terminal mode" })
 
--- The same thing in terminals
-vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "Go to left window in terminal" })
-vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Go to bottom window in terminal" })
-vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Go to top window in terminal" })
-vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Go to right window in terminal" })
+-- Terminal keymaps (skip lazygit so it gets all keys unmodified)
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+    vim.schedule(function()
+      if not vim.api.nvim_buf_is_valid(buf) then
+        return
+      end
+      local name = vim.api.nvim_buf_get_name(buf)
+      if name:find("lazygit") then
+        return
+      end
+      vim.keymap.set("t", "<C-h>", "<C-\\><C-N><C-w>h", { buffer = buf, desc = "Go to left window" })
+      vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", { buffer = buf, desc = "Go to bottom window" })
+      vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", { buffer = buf, desc = "Go to top window" })
+      vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", { buffer = buf, desc = "Go to right window" })
+    end)
+  end,
+})
 
 vim.keymap.set("n", "i", function()
   if #vim.fn.getline(".") == 0 then
