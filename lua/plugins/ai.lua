@@ -7,15 +7,23 @@ function _G.claude_sync_file(absolute_path)
     local cwd = vim.fn.getcwd():gsub("\\", "/")
     local normalized = vim.fn.fnamemodify(absolute_path, ":p"):gsub("\\", "/")
 
-    if not vim.startswith(normalized, cwd) then
-      return
+    local in_cwd = vim.startswith(normalized, cwd)
+
+    local path
+    if in_cwd then
+      path = vim.fn.fnamemodify(absolute_path, ":.")
+    else
+      path = normalized
     end
 
-    local relative = vim.fn.fnamemodify(absolute_path, ":.")
-    local bufnr = vim.fn.bufadd(relative)
+    local bufnr = vim.fn.bufadd(path)
     vim.bo[bufnr].buflisted = true
     if not vim.api.nvim_buf_is_loaded(bufnr) then
       vim.fn.bufload(bufnr)
+    end
+
+    if in_cwd then
+      require("conform").format({ bufnr = bufnr, async = true })
     end
   end)
 
