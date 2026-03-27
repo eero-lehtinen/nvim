@@ -67,40 +67,89 @@ return {
     end,
   },
   {
-    "folke/sidekick.nvim",
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
     event = "VeryLazy",
+    opts = {
+      focuse_after_send = true,
+      terminal = {
+        split_width_percentage = 0.5,
+        provider = "snacks",
+        snacks_win_opts = {
+          keys = {
+            claude_hide = {
+              "<c-.>",
+              function(self)
+                self:hide()
+              end,
+              mode = "t",
+              desc = "Toggle Claude",
+            },
+          },
+        },
+      },
+    },
     keys = {
+      {
+        "<c-.>",
+        "<cmd>ClaudeCode<cr>",
+        desc = "Toggle Claude",
+      },
+      { "<leader>ac", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+      { "<leader>af", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current file" },
       {
         "<leader>at",
         function()
-          require("sidekick.cli").send({ msg = "{this}" })
+          local mode = vim.fn.mode()
+          if mode == "v" or mode == "V" or mode == "\22" then
+            vim.cmd("ClaudeCodeSend")
+          else
+            vim.cmd("normal! V")
+            vim.cmd("ClaudeCodeSend")
+          end
         end,
-        mode = { "x", "n" },
-        desc = "Send This",
+        mode = { "n", "v" },
+        desc = "Send to Claude",
       },
-      {
-        "<leader>af",
-        function()
-          require("sidekick.cli").send({ msg = "{file}" })
-        end,
-        desc = "Send File",
-      },
-      {
-        "<leader>av",
-        function()
-          require("sidekick.cli").send({ msg = "{selection}" })
-        end,
-        mode = { "x" },
-        desc = "Send Visual Selection",
-      },
-      {
-        "<leader>ap",
-        function()
-          require("sidekick.cli").prompt()
-        end,
-        mode = { "n", "x" },
-        desc = "Sidekick Select Prompt",
-      },
+      { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+      { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+    },
+  },
+  {
+    "folke/sidekick.nvim",
+    event = "VeryLazy",
+    keys = {
+      -- {
+      --   "<leader>at",
+      --   function()
+      --     require("sidekick.cli").send({ msg = "{this}" })
+      --   end,
+      --   mode = { "x", "n" },
+      --   desc = "Send This",
+      -- },
+      -- {
+      --   "<leader>af",
+      --   function()
+      --     require("sidekick.cli").send({ msg = "{file}" })
+      --   end,
+      --   desc = "Send File",
+      -- },
+      -- {
+      --   "<leader>av",
+      --   function()
+      --     require("sidekick.cli").send({ msg = "{selection}" })
+      --   end,
+      --   mode = { "x" },
+      --   desc = "Send Visual Selection",
+      -- },
+      -- {
+      --   "<leader>ap",
+      --   function()
+      --     require("sidekick.cli").prompt()
+      --   end,
+      --   mode = { "n", "x" },
+      --   desc = "Sidekick Select Prompt",
+      -- },
       {
         "<Tab>",
         function()
@@ -123,14 +172,14 @@ return {
         expr = true,
         desc = "Close Next Edit Suggestion",
       },
-      {
-        "<c-.>",
-        function()
-          require("sidekick.cli").toggle()
-        end,
-        mode = { "n", "t", "i", "x" },
-        desc = "Sidekick Toggle",
-      },
+      -- {
+      --   "<c-.>",
+      --   function()
+      --     require("sidekick.cli").toggle()
+      --   end,
+      --   mode = { "n", "t", "i", "x" },
+      --   desc = "Sidekick Toggle",
+      -- },
     },
     -- enabled = false,
     opts = {
