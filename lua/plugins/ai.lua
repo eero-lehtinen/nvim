@@ -1,8 +1,6 @@
 -- Global function for Claude Code hooks to sync edited files with Neovim
 function _G.claude_sync_file(input_path)
   vim.schedule(function()
-    vim.api.nvim_command("checktime")
-
     local cwd = vim.fs.normalize(vim.fn.getcwd())
     local path = vim.fs.normalize(vim.fn.fnamemodify(input_path:gsub("\r", ""), ":p"))
 
@@ -18,8 +16,18 @@ function _G.claude_sync_file(input_path)
       vim.fn.bufload(bufnr)
     end
 
+    vim.cmd("checktime " .. bufnr)
+
     if in_cwd then
-      require("conform").format({ bufnr = bufnr, async = true })
+      require("conform").format({
+        bufnr = bufnr,
+        async = true,
+        callback = function(_err, did_edit)
+          if did_edit then
+            vim.cmd("silent! write " .. bufnr)
+          end
+        end,
+      })
     end
   end)
 
