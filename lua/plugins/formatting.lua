@@ -4,40 +4,41 @@ return {
     local formatters_by_ft = {
       lua = { "stylua" },
       python = { "isort", "black" }, --yapf
-      rust = {},
-      toml = {},
       sql = { "sqlfmt" },
-      c = {},
-      cpp = {},
-      svelte = {},
-      prisma = {},
       gdscript = { "gdscript-formatter" },
+      rust = { lsp_format = "prefer" },
+      toml = { lsp_format = "prefer" },
+      c = { lsp_format = "prefer" },
+      cpp = { lsp_format = "prefer" },
+      svelte = { lsp_format = "prefer" },
+      prisma = { lsp_format = "prefer" },
     }
 
     local prettierd_filetypes =
       { "javascript", "typescript", "json", "html", "css", "markdown", "yaml", "typescriptreact", "javascriptreact" }
     for _, ft in ipairs(prettierd_filetypes) do
-      formatters_by_ft[ft] = { "prettierd", { "biome", "biome-organize-imports" }, stop_after_first = true }
+      ---@diagnostic disable-next-line: assign-type-mismatch
+      formatters_by_ft[ft] = function(bufnr)
+        if require("conform").get_formatter_info("prettierd", bufnr).available then
+          return { "prettierd" }
+        else
+          return { "biome", "biome-organize-imports" }
+        end
+      end
     end
 
     require("conform").setup({
       formatters_by_ft = formatters_by_ft,
+      default_format_opts = {
+        lsp_format = "never",
+      },
       format_on_save = function(bufnr)
         -- Disable with a global or buffer-local variable
         if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
           return nil
         end
 
-        local fmtrs = formatters_by_ft[vim.bo[bufnr].filetype]
-        if not fmtrs then
-          return nil
-        end
-
-        if #fmtrs == 0 then
-          return { timeout_ms = 1000, lsp_format = "prefer" }
-        end
-
-        return { timeout_ms = 1000, lsp_format = "never" }
+        return {}
       end,
       formatters = {
         ["gdscript-formatter"] = {
@@ -46,7 +47,7 @@ return {
           stdin = false,
           cwd = require("conform.util").root_file({ "project.godot", ".git" }),
         },
-        prettierrd = {
+        prettierd = {
           require_cwd = true,
         },
         -- biome = {
