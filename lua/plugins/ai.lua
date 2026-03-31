@@ -16,7 +16,9 @@ function _G.claude_sync_file(input_path)
       vim.fn.bufload(bufnr)
     end
 
-    vim.cmd("checktime " .. bufnr)
+    vim.api.nvim_buf_call(bufnr, function()
+      vim.cmd.edit()
+    end)
 
     if in_cwd then
       require("conform").format({
