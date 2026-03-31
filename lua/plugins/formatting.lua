@@ -17,7 +17,7 @@ return {
     local prettierd_filetypes =
       { "javascript", "typescript", "json", "html", "css", "markdown", "yaml", "typescriptreact", "javascriptreact" }
     for _, ft in ipairs(prettierd_filetypes) do
-      formatters_by_ft[ft] = { "biome", "prettierd", stop_after_first = true }
+      formatters_by_ft[ft] = { "prettierd", { "biome", "biome-organize-imports" }, stop_after_first = true }
     end
 
     require("conform").setup({
@@ -49,9 +49,12 @@ return {
         prettierrd = {
           require_cwd = true,
         },
-        biome = {
-          require_cwd = true,
-        },
+        -- biome = {
+        --   require_cwd = true,
+        -- },
+        -- ["biome-organize-imports"] = {
+        --   require_cwd = true,
+        -- },
       },
     })
 
