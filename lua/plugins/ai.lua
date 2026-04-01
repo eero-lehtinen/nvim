@@ -17,7 +17,7 @@ function _G.claude_sync_file(input_path)
     end
 
     vim.api.nvim_buf_call(bufnr, function()
-      vim.cmd.edit()
+      vim.cmd("edit!")
     end)
 
     if in_cwd then
