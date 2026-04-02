@@ -119,6 +119,7 @@ return {
   {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
+    enabled = false,
     event = "VeryLazy",
     opts = {
       terminal = {
@@ -181,37 +182,45 @@ return {
     "folke/sidekick.nvim",
     event = "VeryLazy",
     keys = {
-      -- {
-      --   "<leader>at",
-      --   function()
-      --     require("sidekick.cli").send({ msg = "{this}" })
-      --   end,
-      --   mode = { "x", "n" },
-      --   desc = "Send This",
-      -- },
-      -- {
-      --   "<leader>af",
-      --   function()
-      --     require("sidekick.cli").send({ msg = "{file}" })
-      --   end,
-      --   desc = "Send File",
-      -- },
-      -- {
-      --   "<leader>av",
-      --   function()
-      --     require("sidekick.cli").send({ msg = "{selection}" })
-      --   end,
-      --   mode = { "x" },
-      --   desc = "Send Visual Selection",
-      -- },
-      -- {
-      --   "<leader>ap",
-      --   function()
-      --     require("sidekick.cli").prompt()
-      --   end,
-      --   mode = { "n", "x" },
-      --   desc = "Sidekick Select Prompt",
-      -- },
+      {
+        "<c-.>",
+        function()
+          require("sidekick.cli").toggle()
+        end,
+        mode = { "n", "t", "i", "x" },
+        desc = "Sidekick Toggle",
+      },
+      {
+        "<leader>at",
+        function()
+          require("sidekick.cli").send({ msg = "{this}" })
+        end,
+        mode = { "x", "n" },
+        desc = "Send This",
+      },
+      {
+        "<leader>af",
+        function()
+          require("sidekick.cli").send({ msg = "{file}" })
+        end,
+        desc = "Send File",
+      },
+      {
+        "<leader>av",
+        function()
+          require("sidekick.cli").send({ msg = "{selection}" })
+        end,
+        mode = { "x" },
+        desc = "Send Visual Selection",
+      },
+      {
+        "<leader>ap",
+        function()
+          require("sidekick.cli").prompt()
+        end,
+        mode = { "n", "x" },
+        desc = "Sidekick Select Prompt",
+      },
       {
         "<Tab>",
         function()
@@ -234,14 +243,6 @@ return {
         expr = true,
         desc = "Close Next Edit Suggestion",
       },
-      -- {
-      --   "<c-.>",
-      --   function()
-      --     require("sidekick.cli").toggle()
-      --   end,
-      --   mode = { "n", "t", "i", "x" },
-      --   desc = "Sidekick Toggle",
-      -- },
     },
     -- enabled = false,
     opts = {
