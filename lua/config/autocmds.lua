@@ -88,3 +88,32 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     end)
   end,
 })
+
+-- Auto-follow terminal output if cursor was at the bottom
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+    local bufname = vim.api.nvim_buf_get_name(buf)
+    if not bufname:match("claude") then
+      return
+    end
+    vim.api.nvim_buf_attach(buf, false, {
+      on_lines = function(_, _, _, _, _, new_lastline)
+        vim.schedule(function()
+          if not vim.api.nvim_buf_is_valid(buf) then
+            return
+          end
+          for _, win in ipairs(vim.api.nvim_list_wins()) do
+            if vim.api.nvim_win_get_buf(win) == buf then
+              local cursor = vim.api.nvim_win_get_cursor(win)[1]
+              if cursor >= new_lastline - 1 then
+                local line_count = vim.api.nvim_buf_line_count(buf)
+                pcall(vim.api.nvim_win_set_cursor, win, { line_count, 0 })
+              end
+            end
+          end
+        end)
+      end,
+    })
+  end,
+})
