@@ -311,15 +311,5 @@ end, {
 })
 
 -- Needed to make vim distinguish between <tab> and <c-i>
-vim.keymap.set("n", "<Tab>", function()
-  print("<Tab> was pressed")
-end, { desc = "Test keymap" })
+vim.keymap.set("n", "<Tab>", function() end, { desc = "Tab" })
 vim.keymap.set("n", "<C-i>", "<C-i>", { desc = "Jump forward in jumplist" })
-
--- Undotree
-vim.cmd("packadd nvim.undotree")
-vim.keymap.set("n", "<leader>u", function()
-  require("undotree").open({ command = "70vnew" })
-end, { desc = "Open [U]ndotree" })
-
-vim.cmd("packadd nvim.difftool")
