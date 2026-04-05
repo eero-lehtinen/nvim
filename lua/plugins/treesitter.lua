@@ -110,12 +110,4 @@ return {
       end,
     },
   },
-
-  {
-    "daliusd/incr.nvim",
-    opts = {
-      incr_key = "<S-cr>", -- increment selection key
-      decr_key = "<S-bs>", -- decrement selection key
-    },
-  },
 }

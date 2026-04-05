@@ -62,6 +62,12 @@ vim.keymap.set({ "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, si
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
+-- Incremental treesitter node selection (built-in 0.12 textobjects)
+vim.keymap.set("x", "<S-CR>", "an", { remap = true, desc = "Increment selection (around node)" })
+vim.keymap.set("n", "<S-CR>", "van", { remap = true, desc = "Increment selection (around node)" })
+vim.keymap.set("x", "<S-BS>", "in", { remap = true, desc = "Decrement selection (inner node)" })
+vim.keymap.set("n", "<S-BS>", "vin", { remap = true, desc = "Decrement selection (inner node)" })
+
 vim.keymap.set("n", "gh", "^")
 vim.keymap.set("n", "gl", "$")
 
