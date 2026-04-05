@@ -6,13 +6,19 @@ return {
       python = { "ruff_organize_imports", "ruff_format" },
       sql = { "sqlfmt" },
       gdscript = { "gdscript-formatter" },
-      rust = { lsp_format = "prefer" },
-      toml = { lsp_format = "prefer" },
-      c = { lsp_format = "prefer" },
-      cpp = { lsp_format = "prefer" },
-      svelte = { lsp_format = "prefer" },
-      prisma = { lsp_format = "prefer" },
+      rust = "lsp",
+      toml = "lsp",
+      c = "lsp",
+      cpp = "lsp",
+      svelte = "lsp",
+      prisma = "lsp",
     }
+
+    for ft, v in pairs(formatters_by_ft) do
+      if v == "lsp" then
+        formatters_by_ft[ft] = { lsp_format = "prefer" }
+      end
+    end
 
     local prettierd_filetypes =
       { "javascript", "typescript", "json", "html", "css", "markdown", "yaml", "typescriptreact", "javascriptreact" }
