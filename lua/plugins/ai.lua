@@ -16,9 +16,21 @@ function _G.claude_sync_file(input_path)
       vim.fn.bufload(bufnr)
     end
 
+    -- Suppress async FileChangedShell warning from file watcher
+    vim.bo[bufnr].modified = false
+    local au_id = vim.api.nvim_create_autocmd("FileChangedShell", {
+      buffer = bufnr,
+      once = true,
+      callback = function()
+        vim.v.fcs_choice = "reload"
+      end,
+    })
+
     vim.api.nvim_buf_call(bufnr, function()
       vim.cmd("edit!")
     end)
+
+    pcall(vim.api.nvim_del_autocmd, au_id)
 
     if in_cwd then
       require("conform").format({
