@@ -3,7 +3,7 @@ return {
   config = function()
     local formatters_by_ft = {
       lua = { "stylua" },
-      python = { "isort", "black" }, --yapf
+      python = { "ruff_organize_imports", "ruff_format" },
       sql = { "sqlfmt" },
       gdscript = { "gdscript-formatter" },
       rust = { lsp_format = "prefer" },
