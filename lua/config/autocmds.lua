@@ -1,12 +1,25 @@
 vim.api.nvim_create_autocmd({ "BufLeave" }, {
   pattern = { "*" },
   callback = function()
-    if vim.bo.buftype == "quickfix" then
+    local bufnr = vim.api.nvim_get_current_buf()
+    local name = vim.api.nvim_buf_get_name(bufnr)
+    if vim.bo[bufnr].buftype ~= "" or name == "" then
       return
     end
-    vim.cmd("silent! update")
+    vim.uv.fs_stat(name, function(err, stat)
+      if err or not stat then
+        return
+      end
+      vim.schedule(function()
+        if vim.api.nvim_buf_is_valid(bufnr) then
+          vim.api.nvim_buf_call(bufnr, function()
+            vim.cmd("silent! update")
+          end)
+        end
+      end)
+    end)
   end,
-  desc = "Autosave on switching suffers",
+  desc = "Autosave on switching buffers",
 })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
