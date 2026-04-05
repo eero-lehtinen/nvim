@@ -110,3 +110,5 @@ end
 
 vim.o.wrap = get_global("wrap", true)
 vim.o.list = get_global("list", false)
+
+require("vim._core.ui2").enable({})
