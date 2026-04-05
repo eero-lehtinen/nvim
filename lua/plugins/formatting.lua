@@ -22,7 +22,7 @@ return {
         if require("conform").get_formatter_info("prettierd", bufnr).available then
           return { "prettierd" }
         else
-          return { "biome", "biome-organize-imports" }
+          return { "biome-organize-imports", "biome" }
         end
       end
     end
