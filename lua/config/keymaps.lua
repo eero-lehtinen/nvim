@@ -276,40 +276,6 @@ end, {
   desc = "Show LSP healthcheck",
 })
 
-vim.api.nvim_create_user_command("LspRestart", function(opts)
-  local clients = vim.lsp.get_clients()
-  if #clients == 0 then
-    vim.notify("No active LSP clients", vim.log.levels.WARN)
-    return
-  end
-  if opts.args ~= "" then
-    clients = vim.tbl_filter(function(c)
-      return c.name == opts.args
-    end, clients)
-    if #clients == 0 then
-      vim.notify("No active client named: " .. opts.args, vim.log.levels.WARN)
-      return
-    end
-  end
-  local names = {}
-  for _, client in ipairs(clients) do
-    table.insert(names, client.name)
-    client:stop()
-  end
-  vim.defer_fn(function()
-    vim.cmd("edit")
-    vim.notify("Restarted: " .. table.concat(names, ", "), vim.log.levels.INFO)
-  end, 500)
-end, {
-  nargs = "?",
-  desc = "Restart LSP clients (optionally specify a client name)",
-  complete = function()
-    return vim.tbl_map(function(c)
-      return c.name
-    end, vim.lsp.get_clients())
-  end,
-})
-
 -- Needed to make vim distinguish between <tab> and <c-i>
 vim.keymap.set("n", "<Tab>", function() end, { desc = "Tab" })
 vim.keymap.set("n", "<C-i>", "<C-i>", { desc = "Jump forward in jumplist" })
