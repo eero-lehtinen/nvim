@@ -144,7 +144,10 @@ return {
 
           -- Lesser used LSP functionality
 
-          vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+          vim.lsp.inlay_hint.enable(true, { bufnr = event.buf, client_id = client.id })
+          vim.lsp.on_type_formatting.enable(true, { bufnr = event.buf, client_id = client.id })
+          -- vim.lsp.codelens.enable(true, { bufnr = event.buf, client_id = client.id })
+          -- vim.lsp.linked_editing_range.enable(true, { bufnr = event.buf, client_id = client.id })
 
           nmap("<leader>wf", function()
             local f = vim.lsp.buf.list_workspace_folders()
