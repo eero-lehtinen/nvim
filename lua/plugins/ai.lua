@@ -1,3 +1,11 @@
+local function mtime_eq(path, mtime)
+  local stat = vim.uv.fs_stat(path)
+  if not stat then
+    return false
+  end
+  return stat.mtime.sec == mtime.sec and stat.mtime.nsec == mtime.nsec
+end
+
 -- Global function for Claude Code hooks to sync edited files with Neovim
 function _G.claude_sync_file(input_path)
   vim.schedule(function()
@@ -16,32 +24,26 @@ function _G.claude_sync_file(input_path)
       vim.fn.bufload(bufnr)
     end
 
-    -- Suppress async FileChangedShell warning from file watcher
     vim.bo[bufnr].modified = false
-    local au_id = vim.api.nvim_create_autocmd("FileChangedShell", {
-      buffer = bufnr,
-      once = true,
-      callback = function()
-        vim.v.fcs_choice = "reload"
-      end,
-    })
-
     vim.api.nvim_buf_call(bufnr, function()
-      vim.cmd("edit!")
+      vim.cmd("silent! edit!")
     end)
 
-    pcall(vim.api.nvim_del_autocmd, au_id)
-
     if in_cwd then
+      local mtime = vim.uv.fs_stat(path).mtime
       require("conform").format({
         bufnr = bufnr,
         async = true,
-        callback = function(_err, did_edit)
-          if did_edit then
-            vim.cmd("silent! write " .. bufnr)
+      }, function(_err, did_edit)
+        if did_edit then
+          -- If the file was not changed during formatting, we can write it.
+          if mtime_eq(path, mtime) then
+            vim.api.nvim_buf_call(bufnr, function()
+              vim.cmd("silent! write!")
+            end)
           end
-        end,
-      })
+        end
+      end)
     end
   end)
 
