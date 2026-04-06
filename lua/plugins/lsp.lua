@@ -145,7 +145,9 @@ return {
           -- Lesser used LSP functionality
 
           vim.lsp.inlay_hint.enable(true, { bufnr = event.buf, client_id = client.id })
-          vim.lsp.on_type_formatting.enable(true, { bufnr = event.buf, client_id = client.id })
+          if client.name ~= "lua_ls" then
+            vim.lsp.on_type_formatting.enable(true, { bufnr = event.buf, client_id = client.id })
+          end
           -- vim.lsp.codelens.enable(true, { bufnr = event.buf, client_id = client.id })
           -- vim.lsp.linked_editing_range.enable(true, { bufnr = event.buf, client_id = client.id })
 
