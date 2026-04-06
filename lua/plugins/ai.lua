@@ -30,7 +30,11 @@ function _G.claude_sync_file(input_path)
     end)
 
     if in_cwd then
-      local mtime = vim.uv.fs_stat(path).mtime
+      local stat = vim.uv.fs_stat(path)
+      if not stat then
+        return
+      end
+      local mtime = stat.mtime
       require("conform").format({
         bufnr = bufnr,
         async = true,
