@@ -339,7 +339,6 @@ return {
           "tsgo",
           "css-lsp",
           "emmet-language-server",
-          "prisma-language-server",
           "pyrefly",
           "black",
           "tailwindcss-language-server",
