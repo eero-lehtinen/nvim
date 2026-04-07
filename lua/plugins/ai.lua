@@ -211,7 +211,7 @@ return {
       {
         "<leader>at",
         function()
-          require("sidekick.cli").send({ msg = "{this}" })
+          require("sidekick.cli").send({ msg = "{line}" })
         end,
         mode = { "x", "n" },
         desc = "Send This",
