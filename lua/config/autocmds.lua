@@ -102,7 +102,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
--- Auto-follow terminal output if cursor was at the bottom
+-- Auto-follow terminal output if scrolled to the bottom
 vim.api.nvim_create_autocmd("TermOpen", {
   callback = function()
     local buf = vim.api.nvim_get_current_buf()
@@ -110,21 +110,27 @@ vim.api.nvim_create_autocmd("TermOpen", {
     if not bufname:match("claude") then
       return
     end
+
+    local prev_line_count = vim.api.nvim_buf_line_count(buf)
+
     vim.api.nvim_buf_attach(buf, false, {
-      on_lines = function(_, _, _, _, _, new_lastline)
+      on_lines = function()
         vim.schedule(function()
           if not vim.api.nvim_buf_is_valid(buf) then
             return
           end
+          local cur_win = vim.api.nvim_get_current_win()
           for _, win in ipairs(vim.api.nvim_list_wins()) do
-            if vim.api.nvim_win_get_buf(win) == buf then
-              local cursor = vim.api.nvim_win_get_cursor(win)[1]
-              if cursor >= new_lastline - 1 then
-                local line_count = vim.api.nvim_buf_line_count(buf)
-                pcall(vim.api.nvim_win_set_cursor, win, { line_count, 0 })
+            if vim.api.nvim_win_get_buf(win) == buf and win ~= cur_win then
+              local botline = vim.fn.getwininfo(win)[1].botline
+              if prev_line_count <= botline then
+                vim.api.nvim_win_call(win, function()
+                  vim.cmd("norm! G")
+                end)
               end
             end
           end
+          prev_line_count = vim.api.nvim_buf_line_count(buf)
         end)
       end,
     })
