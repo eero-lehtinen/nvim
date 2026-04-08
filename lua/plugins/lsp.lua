@@ -269,7 +269,7 @@ return {
 
         prismals = {},
 
-        -- clangd = {},
+        clangd = {},
       }
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
