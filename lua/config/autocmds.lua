@@ -124,9 +124,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
             if vim.api.nvim_win_get_buf(win) == buf and win ~= cur_win then
               local botline = vim.fn.getwininfo(win)[1].botline
               if prev_line_count <= botline then
-                vim.api.nvim_win_call(win, function()
-                  vim.cmd("norm! G")
-                end)
+                local last_line = vim.api.nvim_buf_line_count(buf)
+                vim.api.nvim_win_set_cursor(win, { last_line, 0 })
               end
             end
           end
