@@ -339,6 +339,24 @@ return {
   { "kwkarlwang/bufresize.nvim", opts = {} },
 
   {
+    "saghen/blink.indent",
+    enabled = false,
+    --- @module 'blink.indent'
+    --- @type blink.indent.Config
+    opts = {
+      static = {
+        char = "▏",
+        highlights = { "BlinkIndent" },
+        whitespace_char = " ",
+      },
+      scope = {
+        char = "▏",
+        highlights = { "BlinkIndentScope" },
+      },
+    },
+  },
+
+  {
     "ntpeters/vim-better-whitespace",
     init = function()
       vim.g.better_whitespace_enabled = 1
