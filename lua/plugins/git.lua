@@ -108,7 +108,7 @@ return {
         end
       end, { desc = "Jump to previous hunk" })
 
-      vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { desc = "[G]it [P]review Hunk" })
+      -- vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { desc = "[G]it [P]review Hunk" })
       vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk, { desc = "[G]it [R]eset Hunk" })
       vim.keymap.set("n", "<leader>gb", gitsigns.blame, { desc = "[G]it [B]lame" })
       vim.keymap.set("n", "<leader>gl", function()
