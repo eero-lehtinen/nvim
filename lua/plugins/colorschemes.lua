@@ -56,6 +56,7 @@ return {
           SnacksIndentScope = { fg = colors.palette.waveAqua2 },
           BlinkIndent = { fg = theme.ui.bg_p2 },
           BlinkIndentScope = { fg = colors.palette.waveAqua2 },
+          SnacksDashboardHeader = { fg = colors.palette.springGreen },
           ["@lsp.type.escapeSequence"] = { link = "@string.escape" },
           ["@lsp.type.formatSpecifier"] = { link = "@punctuation.special" },
           ["@lsp.type.variable"] = { link = "@variable" },

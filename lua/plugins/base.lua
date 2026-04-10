@@ -89,7 +89,10 @@ return {
   },
   {
     "tzachar/highlight-undo.nvim",
-    opts = {},
+    event = "BufReadPost",
+    opts = {
+      ignored_filetypes = { "snacks_dashboard" },
+    },
   },
   {
     "RRethy/vim-illuminate",
@@ -339,28 +342,15 @@ return {
   { "kwkarlwang/bufresize.nvim", opts = {} },
 
   {
-    "saghen/blink.indent",
-    enabled = false,
-    --- @module 'blink.indent'
-    --- @type blink.indent.Config
-    opts = {
-      static = {
-        char = "▏",
-        highlights = { "BlinkIndent" },
-        whitespace_char = " ",
-      },
-      scope = {
-        char = "▏",
-        highlights = { "BlinkIndentScope" },
-      },
-    },
-  },
-
-  {
-    "ntpeters/vim-better-whitespace",
-    init = function()
-      vim.g.better_whitespace_enabled = 1
-      vim.cmd([[highlight ExtraWhitespace guibg=#993c31]])
+    "nvim-mini/mini.trailspace",
+    version = "*",
+    event = "VeryLazy",
+    config = function()
+      vim.api.nvim_set_hl(0, "MiniTrailspace", { bg = "#993c31" })
+      require("mini.trailspace").setup()
+      vim.api.nvim_create_user_command("StripWhitespace", function()
+        MiniTrailspace.trim()
+      end, { desc = "Strip trailing whitespace" })
     end,
   },
 }
