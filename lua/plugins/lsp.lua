@@ -94,6 +94,16 @@ return {
             { buffer = event.buf, desc = "LSP: [C]ode Action" }
           )
 
+          vim.api.nvim_create_user_command("LspFixAll", function()
+            vim.lsp.buf.code_action({
+              apply = true,
+              context = {
+                diagnostics = {},
+                only = { "source.fixAll" },
+              },
+            })
+          end, { desc = "LSP: Apply all fixable code actions" })
+
           -- local fastaction_found, fastaction = pcall(require, "fastaction")
           -- if fastaction_found then
           --   vim.keymap.set({ "n", "x" }, "<leader>c", function()
