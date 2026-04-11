@@ -6,6 +6,10 @@ local function mtime_eq(path, mtime)
   return stat.mtime.sec == mtime.sec and stat.mtime.nsec == mtime.nsec
 end
 
+local format_timers = {}
+
+local CLAUDE_FORMAT_DELAY_MS = 2500
+
 -- Global function for Claude Code hooks to sync edited files with Neovim
 function _G.claude_sync_file(input_path)
   vim.schedule(function()
@@ -35,19 +39,27 @@ function _G.claude_sync_file(input_path)
         return
       end
       local mtime = stat.mtime
-      require("conform").format({
-        bufnr = bufnr,
-        async = true,
-      }, function(_err, did_edit)
-        if did_edit then
-          -- If the file was not changed during formatting, we can write it.
-          if mtime_eq(path, mtime) then
-            vim.api.nvim_buf_call(bufnr, function()
-              vim.cmd("silent! write!")
-            end)
+
+      if format_timers[path] then
+        format_timers[path]:stop()
+        format_timers[path]:close()
+      end
+      format_timers[path] = vim.defer_fn(function()
+        format_timers[path] = nil
+        require("conform").format({
+          bufnr = bufnr,
+          async = true,
+        }, function(_err, did_edit)
+          if did_edit then
+            -- If the file was not changed during formatting, we can write it.
+            if mtime_eq(path, mtime) then
+              vim.api.nvim_buf_call(bufnr, function()
+                vim.cmd("silent! write!")
+              end)
+            end
           end
-        end
-      end)
+        end)
+      end, CLAUDE_FORMAT_DELAY_MS)
     end
   end)
 
