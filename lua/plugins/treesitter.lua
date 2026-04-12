@@ -77,8 +77,6 @@ return {
         ["ia"] = "@parameter.inner",
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
         ["ai"] = "@conditional.outer", -- [a]round [i]f
         ["ii"] = "@conditional.inner",
         ["al"] = "@loop.outer",
@@ -91,6 +89,21 @@ return {
         vim.keymap.set({ "o", "x" }, k, function()
           select.select_textobject(v, "textobjects")
         end, { desc = "Select textobject: " .. v })
+      end
+
+      local move_keymaps = {
+        ["f"] = "@function.outer",
+        ["i"] = "@conditional.outer",
+        ["l"] = "@loop.outer",
+      }
+
+      for k, v in pairs(move_keymaps) do
+        vim.keymap.set("n", "]" .. k, function()
+          require("nvim-treesitter.textobjects.move").goto_next_start(v, "textobjects")
+        end, { desc = "Go to next start of: " .. v })
+        vim.keymap.set("n", "[" .. k, function()
+          require("nvim-treesitter.textobjects.move").goto_previous_start(v, "textobjects")
+        end, { desc = "Go to previous start of: " .. v })
       end
     end,
   },

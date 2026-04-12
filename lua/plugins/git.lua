@@ -114,6 +114,9 @@ return {
       vim.keymap.set("n", "<leader>gl", function()
         gitsigns.blame_line({ full = true })
       end, { desc = "[G]it Blame [L]ine" })
+      vim.keymap.set({ "o", "x" }, "ic", "<Cmd>Gitsigns select_hunk<CR>", { desc = "Select hunk" })
+      vim.keymap.set({ "o", "x" }, "ac", "<Cmd>Gitsigns select_hunk<CR>", { desc = "Select hunk" })
+      vim.keymap.set({ "o", "x" }, "c", "<Cmd>Gitsigns select_hunk<CR>", { desc = "Select hunk" })
     end,
   },
 

@@ -54,28 +54,6 @@ return {
     },
   },
   {
-    "nvim-mini/mini.ai",
-    version = "*",
-    -- enabled = false,
-    opts = {
-      custom_textobjects = {
-        t = false,
-        f = false,
-        a = false,
-      },
-      mappings = {
-        around_next = "",
-        inside_next = "",
-        around_last = "",
-        inside_last = "",
-
-        goto_left = "",
-        goto_right = "",
-      },
-      n_lines = 200,
-    },
-  },
-  {
     "stevearc/oil.nvim",
     cmd = { "Oil" },
     opts = {
