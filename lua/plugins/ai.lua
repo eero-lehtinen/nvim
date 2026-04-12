@@ -1,17 +1,25 @@
-local function mtime_eq(path, mtime)
+local pending_format = {}
+
+local function format_file(path, bufnr)
   local stat = vim.uv.fs_stat(path)
   if not stat then
-    return false
+    return
   end
-  return stat.mtime.sec == mtime.sec and stat.mtime.nsec == mtime.nsec
+
+  require("conform").format({
+    bufnr = bufnr,
+    async = true,
+  }, function(err, did_edit)
+    if not err and did_edit then
+      vim.api.nvim_buf_call(bufnr, function()
+        vim.cmd("silent! write!")
+      end)
+    end
+  end)
 end
 
-local format_timers = {}
-
-local CLAUDE_FORMAT_DELAY_MS = 2500
-
--- Global function for Claude Code hooks to sync edited files with Neovim
-function _G.claude_sync_file(input_path)
+-- Called by AI coding agents after editing a file. Syncs the buffer and queues formatting.
+function _G.agent_post_edit(input_path)
   vim.schedule(function()
     local cwd = vim.fs.normalize(vim.fn.getcwd())
     local path = vim.fs.normalize(vim.fn.fnamemodify(input_path:gsub("\r", ""), ":p"))
@@ -24,43 +32,27 @@ function _G.claude_sync_file(input_path)
 
     local bufnr = vim.fn.bufadd(path)
     vim.bo[bufnr].buflisted = true
-    if not vim.api.nvim_buf_is_loaded(bufnr) then
-      vim.fn.bufload(bufnr)
-    end
+    vim.fn.bufload(bufnr)
 
-    vim.bo[bufnr].modified = false
     vim.api.nvim_buf_call(bufnr, function()
       vim.cmd("silent! edit!")
     end)
 
     if in_cwd then
-      local stat = vim.uv.fs_stat(path)
-      if not stat then
-        return
-      end
-      local mtime = stat.mtime
-
-      if format_timers[path] then
-        format_timers[path]:stop()
-        format_timers[path]:close()
-      end
-      format_timers[path] = vim.defer_fn(function()
-        format_timers[path] = nil
-        require("conform").format({
-          bufnr = bufnr,
-          async = true,
-        }, function(_err, did_edit)
-          if did_edit then
-            -- If the file was not changed during formatting, we can write it.
-            if mtime_eq(path, mtime) then
-              vim.api.nvim_buf_call(bufnr, function()
-                vim.cmd("silent! write!")
-              end)
-            end
-          end
-        end)
-      end, CLAUDE_FORMAT_DELAY_MS)
+      pending_format[path] = bufnr
     end
+  end)
+
+  return ""
+end
+
+-- Called when an AI agent finishes its turn. Formats all pending files.
+function _G.agent_stop()
+  vim.schedule(function()
+    for path, bufnr in pairs(pending_format) do
+      format_file(path, bufnr)
+    end
+    pending_format = {}
   end)
 
   return ""
