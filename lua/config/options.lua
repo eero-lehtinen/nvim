@@ -15,8 +15,8 @@ vim.o.splitright = true
 vim.o.splitbelow = true
 -- vim.o.inccommand = 'split'
 vim.o.hlsearch = false
-vim.o.indentexpr = ""
-vim.o.smartindent = true
+-- vim.o.indentexpr = ""
+-- vim.o.smartindent = true
 
 vim.o.number = false
 vim.o.mouse = "a"
