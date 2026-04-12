@@ -90,7 +90,7 @@ local function try_merge_buffer(path, bufnr)
   local hunks = vim.text.diff(
     table.concat(current_lines, "\n") .. "\n",
     table.concat(merged, "\n") .. "\n",
-    { result_type = "indices" }
+    { result_type = "indices", algorithm = "histogram" }
   )
   -- Apply in reverse so earlier line numbers stay valid
   for i = #hunks, 1, -1 do
