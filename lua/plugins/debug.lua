@@ -9,21 +9,17 @@
 return {
   "mfussenegger/nvim-dap",
   dependencies = {
-    -- Creates a beautiful debugger UI
-    "rcarriga/nvim-dap-ui",
+    -- "rcarriga/nvim-dap-ui",
+    {
+      "igorlfs/nvim-dap-view",
+      version = "1.*",
+    },
 
     "nvim-neotest/nvim-nio",
 
     -- Installs the debug adapters for you
     "mason-org/mason.nvim",
     "jay-babu/mason-nvim-dap.nvim",
-
-    {
-      "theHamsta/nvim-dap-virtual-text",
-      opts = {
-        virt_text_pos = "eol",
-      },
-    },
 
     -- Add your own debuggers here
     "leoluz/nvim-dap-go",
@@ -88,22 +84,14 @@ return {
     {
       "<leader>dt",
       function()
-        require("dapui").toggle()
+        require("dap-view").toggle()
       end,
       desc = "Debug: Toggle",
-    },
-    {
-      "<leader>de",
-      function()
-        require("dapui").eval()
-      end,
-      mode = { "n", "v" },
-      desc = "Debug: Eval (View data of the selected variable)",
     },
   },
   config = function()
     local dap = require("dap")
-    local dapui = require("dapui")
+    local dap_view = require("dap-view")
 
     require("mason-nvim-dap").setup({
       automatic_installation = false,
@@ -114,13 +102,20 @@ return {
       handlers = {},
     })
 
-    -- For more information, see |:help nvim-dap-ui|
-    ---@diagnostic disable: missing-fields
-    dapui.setup({})
+    dap_view.setup({
+      windows = {
+        size = 0.5,
+        position = "right",
+        terminal = {
+          size = 0.25,
+          position = "below",
+        },
+      },
+    })
 
-    dap.listeners.after.event_initialized["dapui_config"] = dapui.open
-    dap.listeners.before.event_terminated["dapui_config"] = dapui.close
-    dap.listeners.before.event_exited["dapui_config"] = dapui.close
+    dap.listeners.after.event_initialized["dapui_config"] = dap_view.open
+    dap.listeners.before.event_terminated["dapui_config"] = dap_view.close
+    dap.listeners.before.event_exited["dapui_config"] = dap_view.close
 
     --  CPP / C config
     dap.configurations.cpp = {
