@@ -17,7 +17,6 @@ vim.o.splitbelow = true
 vim.o.hlsearch = false
 -- vim.o.indentexpr = ""
 -- vim.o.smartindent = true
-
 vim.o.number = false
 vim.o.mouse = "a"
 vim.o.mousescroll = "ver:7,hor:12"
@@ -32,6 +31,7 @@ vim.o.completeopt = "menuone,noselect"
 vim.o.virtualedit = "block"
 vim.o.guicursor = "n-v-sm:block,c-i-ci-ve:ver25,r-cr-o:hor20"
 vim.o.diffopt = vim.o.diffopt .. ",algorithm:histogram"
+vim.o.modeline = false
 
 vim.o.fileformats = "unix,dos"
 
