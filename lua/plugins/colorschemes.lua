@@ -41,13 +41,10 @@ return {
           PmenuThumb = { bg = theme.ui.bg_p2 },
           PmenuKind = { bg = "NONE" },
           PmenuExtra = { bg = "NONE" },
-          CopilotSuggestion = { fg = "#739296" },
-          CodeiumSuggestion = { fg = "#739296" },
           CmpGhostText = { fg = theme.syn.comment },
           LspInlayHint = { fg = theme.ui.nontext, bg = theme.ui.bg_m1 },
           CursorLine = { bg = theme.ui.bg_p1 },
           HighlightUndo = { fg = theme.ui.fg, bg = colors.palette.waveBlue2 },
-          MatchWord = { fg = "NONE" },
           SnacksPicker = { bg = theme.ui.bg_m1 },
           SnacksPickerBorder = { bg = theme.ui.bg_m1, fg = colors.palette.sumiInk6 },
           SnacksPickerTitle = { bg = theme.ui.bg_m1, fg = colors.palette.sumiInk6 },
@@ -78,6 +75,45 @@ return {
       end,
     },
   },
+
+  { "xeind/nightingale.nvim", enabled = true, lazy = false, priority = 1000 },
+  { "kepano/flexoki-neovim", name = "flexoki", enabled = true, lazy = false, priority = 1000 },
+  { "dgox16/oldworld.nvim", enabled = true, lazy = false, priority = 1000 },
+  {
+    "ficcdaf/ashen.nvim",
+    enabled = true,
+    lazy = false,
+    priority = 1000,
+    opts = {
+      hl = {
+        force_override = {
+          Pmenu = { "g_2", "g_9" },
+          PmenuSel = { "NONE", "g_8" },
+          MatchParen = { "orange_golden", "g_8" },
+          ["@diff.add"] = { "green_light" },
+        },
+        merge_override = {
+          SnacksIndent = { "g_9" },
+          LspInlayHint = { "g_7", "#0a0a0a" },
+          ["@punctuation.bracket"] = { "g_5" },
+          SnacksPickerMatch = { "green_light" },
+          BlinkCmpLabelMatch = { "green_light" },
+          DiffChange = { nil, "g_9" },
+          DiffDelete = { nil, "g_9" },
+          DiffText = { nil, "g_9" },
+          DiffAdd = { nil, "g_9" },
+        },
+        link = {
+          ["@constructor"] = "@punctuation.bracket",
+          ["@type"] = "Type",
+          ["@number.float.rust"] = "@number",
+          test = "String",
+        },
+      },
+    },
+  },
+  { "zitrocode/carvion.nvim", enabled = true, lazy = false, priority = 1000 },
+
   {
     "folke/tokyonight.nvim",
     enabled = false,
@@ -164,6 +200,11 @@ return {
       })
     end,
   },
+
+  { "mellow-theme/mellow.nvim", enabled = false, lazy = false, priority = 1000 },
+  { "kvrohit/rasmus.nvim", enabled = false, lazy = false, priority = 1000 },
+  { "Ferouk/bearded-nvim", enabled = false, lazy = false, priority = 1000 },
+  { "vague-theme/vague.nvim", enabled = false, lazy = false, priority = 1000 },
 
   {
     "serhez/teide.nvim",

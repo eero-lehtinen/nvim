@@ -260,6 +260,15 @@ return {
           vim.b.copilot_suggestion_hidden = false
         end,
       })
+
+      local function set_copilot_hl()
+        vim.api.nvim_set_hl(0, "CopilotSuggestion", { fg = "#739296" })
+      end
+      set_copilot_hl()
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        group = vim.api.nvim_create_augroup("CopilotHighlight", { clear = true }),
+        callback = set_copilot_hl,
+      })
     end,
   },
   {

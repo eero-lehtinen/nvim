@@ -135,3 +135,12 @@ vim.api.nvim_create_autocmd("TermOpen", {
     })
   end,
 })
+
+local function set_global_hl()
+  vim.api.nvim_set_hl(0, "MatchWord", { fg = "NONE" })
+end
+set_global_hl()
+vim.api.nvim_create_autocmd("ColorScheme", {
+  group = vim.api.nvim_create_augroup("GlobalHighlights", { clear = true }),
+  callback = set_global_hl,
+})

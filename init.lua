@@ -22,4 +22,5 @@ require("config.packages")
 require("config.keymaps")
 require("config.autocmds")
 
-vim.cmd.colorscheme("kanagawa")
+vim.opt.background = "dark"
+vim.cmd.colorscheme("ashen")

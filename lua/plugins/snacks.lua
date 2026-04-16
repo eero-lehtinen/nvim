@@ -193,6 +193,28 @@ return {
     vim.keymap.set("n", "<leader>sc", function()
       Snacks.picker.commands()
     end, { desc = "[S]earch [C]ommands" })
+    vim.keymap.set("n", "<leader>sC", function()
+      Snacks.picker.colorschemes({
+        layout = "bottom",
+        -- finder = function()
+        --   local items = {}
+        --   local rtp = vim.o.runtimepath
+        --   if package.loaded.lazy then
+        --     rtp = rtp .. "," .. table.concat(require("lazy.core.util").get_unloaded_rtp(""), ",")
+        --   end
+        --   local vimruntime = vim.fn.expand("$VIMRUNTIME"):gsub("\\", "/")
+        --   for _, file in ipairs(vim.fn.globpath(rtp, "colors/*", false, true)) do
+        --     local ext = vim.fn.fnamemodify(file, ":e")
+        --     local name = vim.fn.fnamemodify(file, ":t:r")
+        --     local is_builtin = file:gsub("\\", "/"):find(vimruntime, 1, true) ~= nil
+        --     if (ext == "vim" or ext == "lua") and (not is_builtin or name == "default") then
+        --       items[#items + 1] = { text = name, file = file }
+        --     end
+        --   end
+        --   return items
+        -- end,
+      })
+    end, { desc = "[S]earch [C]olorschemes" })
     vim.keymap.set("n", "<leader>sr", function()
       Snacks.picker.resume()
     end, { desc = "[S]earch [R]esume" })
