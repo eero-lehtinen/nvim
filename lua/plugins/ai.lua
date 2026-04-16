@@ -391,12 +391,17 @@ return {
       },
     },
     -- enabled = false,
+    ---@type sidekick.Config
     opts = {
       cli = {
         tools = {
           claude_yolo = { cmd = { "claude", "--dangerously-skip-permissions" } },
         },
         win = {
+          split = {
+            width = 90,
+            height = 20,
+          },
           keys = {
             prompt = { "<A-p>", "prompt" },
             -- keep Escape inside the terminal; prevents leaving to Normal mode
