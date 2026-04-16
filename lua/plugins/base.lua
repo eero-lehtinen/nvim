@@ -270,6 +270,7 @@ return {
         desc = "Open yazi at the current file",
       },
     },
+    ---@module "yazi.types"
     ---@type YaziConfig
     opts = {
       -- if you want to open yazi instead of netrw, see below for more info
@@ -302,6 +303,7 @@ return {
           icon = "nvim_web_devicons",
         },
         views = {
+          ---@diagnostic disable-next-line: missing-fields
           finder = {
             default_explorer = true,
             delete_to_trash = true,

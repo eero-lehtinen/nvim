@@ -153,7 +153,11 @@ vim.api.nvim_create_user_command("Messages", function()
 
   vim.api.nvim_set_current_win(prev_win)
 
-  local timer = vim.uv.new_timer()
+  local timer, err = vim.uv.new_timer()
+  if not timer then
+    vim.notify("Failed to create timer for Messages: " .. err, vim.log.levels.ERROR)
+    return
+  end
 
   -- Function to update the buffer with recent messages
   local function update_buffer()
@@ -196,6 +200,7 @@ local toggle_keymap = function(key, name, option_or_toggle)
     if type(option_or_toggle) == "string" then
       result = not vim.wo[option_or_toggle]
       for _, win in ipairs(vim.api.nvim_list_wins()) do
+        ---@diagnostic disable-next-line: assign-type-mismatch
         vim.wo[win][option_or_toggle] = result
       end
       vim.g[option_or_toggle] = result

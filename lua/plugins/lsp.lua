@@ -170,6 +170,7 @@ return {
             vim.api.nvim_create_autocmd({ "BufWritePre" }, {
               pattern = { "*.js", "*.ts" },
               callback = function(ctx)
+                ---@diagnostic disable-next-line: param-type-mismatch
                 client:notify("$/onDidChangeTsOrJsFile", {
                   uri = ctx.match,
                 })
