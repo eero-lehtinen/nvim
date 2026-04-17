@@ -47,7 +47,6 @@
   "nvim-treesitter": { "branch": "main", "commit": "4916d6592ede8c07973490d9322f187e07dfefac" },
   "nvim-treesitter-context": { "branch": "master", "commit": "b0c45cefe2c8f7b55fc46f34e563bc428ef99636" },
   "nvim-treesitter-textobjects": { "branch": "main", "commit": "851e865342e5a4cb1ae23d31caf6e991e1c99f1e" },
-  "nvim-ts-autotag": { "branch": "main", "commit": "88c1453db4ba7dd24131086fe51fdf74e587d275" },
   "nvim-web-devicons": { "branch": "master", "commit": "c72328a5494b4502947a022fe69c0c47e53b6aa6" },
   "oil.nvim": { "branch": "master", "commit": "0fcc83805ad11cf714a949c98c605ed717e0b83e" },
   "oklch-color-picker.nvim": { "branch": "master", "commit": "3f343962643f63d75ae3bcf65669df2930e94411" },
@@ -57,7 +56,7 @@
   "quicker.nvim": { "branch": "master", "commit": "063cc44da1eef8681bbd653b29d3bc961780886a" },
   "rainbow_csv": { "branch": "master", "commit": "3dbbfd7d17536aebfb80f571255548495574c32b" },
   "rasmus.nvim": { "branch": "main", "commit": "49f7ee7bf3eb00db52c77f84b15bc69f318bafc1" },
-  "rustaceanvim": { "branch": "main", "commit": "2497c7b2a61d4eb5dad716371a64ea82fb068bee" },
+  "rustaceanvim": { "branch": "master", "commit": "2497c7b2a61d4eb5dad716371a64ea82fb068bee" },
   "sidekick.nvim": { "branch": "main", "commit": "17447a05f9385e5f8372b61530f6f9329cb82421" },
   "snacks.nvim": { "branch": "main", "commit": "e6fd58c82f2f3fcddd3fe81703d47d6d48fc7b9f" },
   "teide.nvim": { "branch": "main", "commit": "95041d1d78e786bd88be64bca3e1771f7b6236df" },
@@ -73,5 +72,5 @@
   "vim-matchup": { "branch": "master", "commit": "0fb1e6b7cea34e931a2af50b8ad565c5c4fd8f4d" },
   "vim-repeat": { "branch": "master", "commit": "65846025c15494983dafe5e3b46c8f88ab2e9635" },
   "which-key.nvim": { "branch": "main", "commit": "3aab2147e74890957785941f0c1ad87d0a44c15a" },
-  "yazi.nvim": { "branch": "main", "commit": "39a5b880ab5158d8cf83c723e86687d0d0f6bd2d" }
+  "yazi.nvim": { "branch": "main", "commit": "41b5594323e074cb45ba134eb08c07b3cfe06f16" }
 }

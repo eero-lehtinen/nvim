@@ -234,7 +234,6 @@ return {
     opts = {},
   },
 
-  { "windwp/nvim-ts-autotag", event = "VeryLazy", opts = {} },
   {
     "nvim-mini/mini.pairs",
     opts = {
