@@ -179,10 +179,11 @@ return {
   },
   {
     "wtfox/jellybeans.nvim",
-    enabled = false,
+    enabled = true,
     config = function()
       require("jellybeans").setup({
         italics = false,
+        flat_ui = false,
         plugins = {},
         on_highlights = function(hl, c)
           hl.DiagnosticUnderlineError = { sp = c.diag.error, undercurl = true }
@@ -192,7 +193,7 @@ return {
           hl.Comment.italic = true
           hl.SnacksIndentScope = { fg = "#91a480" }
           hl.SnacksIndent = { fg = "#272727" }
-          -- hl.BlinkCmpLabelMatch = "Special"
+          hl.BlinkCmpMenu = { bg = c.grey_three }
         end,
         on_colors = function(c)
           c.float_bg = "#2f2f2f"
