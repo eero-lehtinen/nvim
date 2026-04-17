@@ -23,4 +23,4 @@ require("config.keymaps")
 require("config.autocmds")
 
 vim.opt.background = "dark"
-vim.cmd.colorscheme("ashen")
+vim.cmd.colorscheme("jellybeans")
