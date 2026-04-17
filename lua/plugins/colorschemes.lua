@@ -84,6 +84,8 @@ return {
     enabled = true,
     lazy = false,
     priority = 1000,
+    ---@module 'ashen.state'
+    ---@type Options
     opts = {
       hl = {
         force_override = {
@@ -102,12 +104,16 @@ return {
           DiffDelete = { nil, "g_9" },
           DiffText = { nil, "g_9" },
           DiffAdd = { nil, "g_9" },
+          NormalFloat = { nil, "g_10" },
+          FloatBorder = { "g_7", "g_10" },
+          SnacksPicker = { nil, "g_12" },
+          SnacksPickerBorder = { "g_7", "g_12" },
+          CursorLine = { nil, "g_10" },
         },
         link = {
           ["@constructor"] = "@punctuation.bracket",
           ["@type"] = "Type",
           ["@number.float.rust"] = "@number",
-          test = "String",
         },
       },
     },
