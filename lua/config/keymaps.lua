@@ -264,6 +264,21 @@ end, {
   desc = "Copy file path to clipboard (relative to cwd, or absolute with !)",
 })
 
+vim.api.nvim_create_user_command("Open", function()
+  local path = vim.fn.expand("%:p")
+  if path == "" then
+    vim.notify("No file to open", vim.log.levels.WARN, { title = "Open" })
+    return
+  end
+  local _, err = vim.ui.open(path)
+  if err then
+    vim.notify(err, vim.log.levels.ERROR, { title = "Open" })
+  end
+end, {
+  nargs = 0,
+  desc = "Open current file with system default application",
+})
+
 vim.api.nvim_create_user_command("LspInfo", function()
   vim.cmd("checkhealth vim.lsp")
 end, {
