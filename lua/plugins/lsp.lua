@@ -281,6 +281,10 @@ return {
         prismals = {},
 
         clangd = {},
+
+        gh_actions_ls = {},
+
+        yamlls = {},
       }
 
       local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -344,16 +348,17 @@ return {
           "lua-language-server",
           "stylua",
           "prettierd",
-          "isort",
           "taplo",
           "svelte-language-server",
           "tsgo",
           "css-lsp",
           "emmet-language-server",
           "pyrefly",
-          "black",
+          "ruff",
           "tailwindcss-language-server",
           "html-lsp",
+          "gh-actions-language-server",
+          "yaml-language-server",
         },
       })
 
