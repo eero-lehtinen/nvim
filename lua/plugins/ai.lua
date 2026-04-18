@@ -403,6 +403,7 @@ return {
     ---@type sidekick.Config
     opts = {
       cli = {
+        watch = false,
         tools = {
           claude_yolo = { cmd = { "claude", "--dangerously-skip-permissions" } },
         },
