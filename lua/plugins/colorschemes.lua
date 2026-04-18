@@ -199,7 +199,11 @@ return {
           hl.Comment.italic = true
           hl.SnacksIndentScope = { fg = "#91a480" }
           hl.SnacksIndent = { fg = "#272727" }
-          hl.BlinkCmpMenu = { bg = c.grey_three }
+          hl.BlinkCmpMenu = { bg = "#0e0e0e" }
+          hl.BlinkCmpLabel = { fg = c.foreground }
+          hl.PmenuSel.bg = "#3b3b3b"
+          hl.PmenuSel.fg = nil
+          hl.NormalFloat = { bg = "#0e0e0e" }
         end,
         on_colors = function(c)
           c.float_bg = "#2f2f2f"
