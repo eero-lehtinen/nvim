@@ -99,10 +99,10 @@ return {
 
       for k, v in pairs(move_keymaps) do
         vim.keymap.set("n", "]" .. k, function()
-          require("nvim-treesitter.textobjects.move").goto_next_start(v, "textobjects")
+          require("nvim-treesitter-textobjects.move").goto_next_start(v, "textobjects")
         end, { desc = "Go to next start of: " .. v })
         vim.keymap.set("n", "[" .. k, function()
-          require("nvim-treesitter.textobjects.move").goto_previous_start(v, "textobjects")
+          require("nvim-treesitter-textobjects.move").goto_previous_start(v, "textobjects")
         end, { desc = "Go to previous start of: " .. v })
       end
     end,
