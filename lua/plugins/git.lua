@@ -78,6 +78,18 @@ return {
     cmd = "CodeDiff",
     init = function()
       vim.api.nvim_create_user_command("D", "CodeDiff", {})
+      vim.keymap.set("n", "<leader>gd", "<cmd>CodeDiff<CR>", { desc = "Git diff" })
+      vim.keymap.set("n", "<leader>gD", function()
+        local result = vim
+          .system({ "git", "symbolic-ref", "--short", "refs/remotes/origin/HEAD" }, { text = true })
+          :wait()
+        if result.code ~= 0 then
+          vim.notify("Could not determine default branch: " .. (result.stderr or ""), vim.log.levels.ERROR)
+          return
+        end
+        local default_branch = vim.trim(result.stdout):gsub("^origin/", "")
+        vim.cmd("CodeDiff " .. default_branch)
+      end, { desc = "Git diff branch to default branch" })
     end,
   },
 
