@@ -33,6 +33,7 @@ vim.o.guicursor = "n-v-sm:block,c-i-ci-ve:ver25,r-cr-o:hor20"
 vim.o.diffopt = vim.o.diffopt .. ",algorithm:histogram"
 vim.o.modeline = false
 vim.o.winborder = "none"
+vim.o.signcolumn = "yes"
 
 vim.o.fileformats = "unix,dos"
 
