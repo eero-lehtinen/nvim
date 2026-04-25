@@ -1,4 +1,5 @@
 local pending_format = {}
+local pending_save = {}
 local pre_edit_bases = {} -- keyed by bufnr
 
 local group = vim.api.nvim_create_augroup("AgentPostEdit", { clear = true })
@@ -136,7 +137,7 @@ function _G.agent_post_edit(input_path)
     vim.bo[bufnr].buflisted = true
     vim.fn.bufload(bufnr)
 
-    if not (in_cwd and vim.bo[bufnr].modified and try_merge_buffer(path, bufnr)) then
+    if (not vim.bo[bufnr].modified) or (not try_merge_buffer(path, bufnr)) then
       vim.bo[bufnr].modified = false
       vim.api.nvim_buf_call(bufnr, function()
         vim.cmd("silent! edit!")
@@ -145,6 +146,8 @@ function _G.agent_post_edit(input_path)
 
     if in_cwd then
       pending_format[path] = bufnr
+    else
+      pending_save[path] = bufnr
     end
   end)
 
@@ -160,8 +163,9 @@ local function format_file(path, bufnr)
   require("conform").format({
     bufnr = bufnr,
     async = true,
-  }, function(err, did_edit)
-    if not err and did_edit then
+  }, function(_, _)
+    -- Current buf gets saved by us
+    if bufnr ~= vim.api.nvim_get_current_buf() then
       vim.api.nvim_buf_call(bufnr, function()
         vim.cmd("silent! write!")
       end)
@@ -175,7 +179,16 @@ function _G.agent_stop()
     for path, bufnr in pairs(pending_format) do
       format_file(path, bufnr)
     end
+    for _, bufnr in pairs(pending_save) do
+      -- Current buf gets saved by us
+      if bufnr ~= vim.api.nvim_get_current_buf() then
+        vim.api.nvim_buf_call(bufnr, function()
+          vim.cmd("silent! write!")
+        end)
+      end
+    end
     pending_format = {}
+    pending_save = {}
   end)
 
   return ""
