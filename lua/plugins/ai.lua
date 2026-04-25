@@ -1,7 +1,11 @@
+---@type table<string, integer> path -> bufnr
 local pending_format = {}
+---@type table<string, integer> path -> bufnr
 local pending_save = {}
-local pre_edit_bases = {} -- keyed by bufnr
+---@type table<integer, string> bufnr -> pre-edit file content
+local pre_edit_bases = {}
 
+---@type integer
 local group = vim.api.nvim_create_augroup("AgentPostEdit", { clear = true })
 vim.api.nvim_create_autocmd("FileChangedShell", {
   group = group,
@@ -12,6 +16,9 @@ vim.api.nvim_create_autocmd("FileChangedShell", {
   end,
 })
 
+---@param input_path string
+---@return string path  Path relative to cwd if inside cwd, otherwise absolute
+---@return boolean in_cwd
 local function normalize_path(input_path)
   local cwd = vim.fs.normalize(vim.fn.getcwd())
   local path = vim.fs.normalize(vim.fn.fnamemodify(input_path:gsub("\r", ""), ":p"))
@@ -22,6 +29,9 @@ local function normalize_path(input_path)
   return path, in_cwd
 end
 
+---@param content string
+---@return string? path  Tempfile path on success, nil on error
+---@return string? err
 local function write_temp(content)
   local f = vim.fn.tempname()
   local fd, err = vim.uv.fs_open(f, "w", 438)
@@ -39,6 +49,9 @@ end
 
 -- 3-way merge: buffer (ours) + disk (theirs) with pre-edit snapshot as base.
 -- On conflict, keeps the agent's (disk) version.
+---@param path string
+---@param bufnr integer
+---@return boolean success
 local function try_merge_buffer(path, bufnr)
   -- Use pre-edit snapshot as base, fall back to git HEAD
   local base = pre_edit_bases[bufnr]
@@ -49,6 +62,9 @@ local function try_merge_buffer(path, bufnr)
       return false
     end
     base = result.stdout
+  end
+  if not base then
+    return false
   end
 
   local eol = vim.bo[bufnr].fileformat == "dos" and "\r\n" or vim.bo[bufnr].fileformat == "mac" and "\r" or "\n"
@@ -111,7 +127,30 @@ local function try_merge_buffer(path, bufnr)
   return true
 end
 
+---@param path string
+---@param bufnr integer
+local function format_file(path, bufnr)
+  local stat = vim.uv.fs_stat(path)
+  if not stat then
+    return
+  end
+
+  require("conform").format({
+    bufnr = bufnr,
+    async = true,
+  }, function(_, _)
+    -- Current buf gets saved by us
+    if bufnr ~= vim.api.nvim_get_current_buf() then
+      vim.api.nvim_buf_call(bufnr, function()
+        vim.cmd("silent! write!")
+      end)
+    end
+  end)
+end
+
 -- Called before an AI agent edits a file. Saves the pre-edit state as merge base.
+---@param input_path string
+---@return string
 function _G.agent_pre_edit(input_path)
   local path = normalize_path(input_path)
   local stat = vim.uv.fs_stat(path)
@@ -129,6 +168,8 @@ function _G.agent_pre_edit(input_path)
 end
 
 -- Called by AI coding agents after editing a file. Syncs the buffer and queues formatting.
+---@param input_path string
+---@return string
 function _G.agent_post_edit(input_path)
   vim.schedule(function()
     local path, in_cwd = normalize_path(input_path)
@@ -154,26 +195,8 @@ function _G.agent_post_edit(input_path)
   return ""
 end
 
-local function format_file(path, bufnr)
-  local stat = vim.uv.fs_stat(path)
-  if not stat then
-    return
-  end
-
-  require("conform").format({
-    bufnr = bufnr,
-    async = true,
-  }, function(_, _)
-    -- Current buf gets saved by us
-    if bufnr ~= vim.api.nvim_get_current_buf() then
-      vim.api.nvim_buf_call(bufnr, function()
-        vim.cmd("silent! write!")
-      end)
-    end
-  end)
-end
-
 -- Called when an AI agent finishes its turn. Formats all pending files.
+---@return string
 function _G.agent_stop()
   vim.schedule(function()
     for path, bufnr in pairs(pending_format) do
