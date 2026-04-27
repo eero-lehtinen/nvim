@@ -212,6 +212,8 @@ return {
     end,
   },
 
+  { "metalelf0/kintsugi-nvim", enabled = true, lazy = false, priority = 1000 },
+
   { "mellow-theme/mellow.nvim", enabled = false, lazy = false, priority = 1000 },
   { "kvrohit/rasmus.nvim", enabled = false, lazy = false, priority = 1000 },
   { "Ferouk/bearded-nvim", enabled = false, lazy = false, priority = 1000 },
