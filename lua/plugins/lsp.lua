@@ -361,6 +361,7 @@ return {
           "html-lsp",
           "gh-actions-language-server",
           "yaml-language-server",
+          "tree-sitter-cli",
         },
       })
 
