@@ -200,23 +200,23 @@ return {
         pyrefly = {},
 
         -- ts_ls = {},
-        -- vtsls = {
-        --   typescript = {
-        --     updateImportsOnFileMove = { enabled = "always" },
-        --     suggest = {
-        --       -- completeFunctionCalls = true,
-        --     },
-        --     inlayHints = {
-        --       enumMemberValues = { enabled = true },
-        --       functionLikeReturnTypes = { enabled = true },
-        --       parameterNames = { enabled = "literals" },
-        --       parameterTypes = { enabled = true },
-        --       propertyDeclarationTypes = { enabled = true },
-        --       variableTypes = { enabled = false },
-        --     },
-        --   },
-        -- },
-        tsgo = {},
+        vtsls = {
+          typescript = {
+            updateImportsOnFileMove = { enabled = "always" },
+            suggest = {
+              -- completeFunctionCalls = true,
+            },
+            inlayHints = {
+              enumMemberValues = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              parameterNames = { enabled = "literals" },
+              parameterTypes = { enabled = true },
+              propertyDeclarationTypes = { enabled = true },
+              variableTypes = { enabled = false },
+            },
+          },
+        },
+        -- tsgo = {},
         -- eslint = {},
         svelte = {},
         tailwindcss = {},
@@ -353,6 +353,7 @@ return {
           "taplo",
           "svelte-language-server",
           "tsgo",
+          "vtsls",
           "css-lsp",
           "emmet-language-server",
           "pyrefly",
