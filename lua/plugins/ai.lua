@@ -444,6 +444,9 @@ return {
           claude_yolo = { cmd = { "claude", "--dangerously-skip-permissions" } },
         },
         win = {
+          wo = {
+            scrollbind = false,
+          },
           split = {
             width = 90,
             height = 20,
