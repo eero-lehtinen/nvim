@@ -203,12 +203,9 @@ function _G.agent_stop()
       format_file(path, bufnr)
     end
     for _, bufnr in pairs(pending_save) do
-      -- Current buf gets saved by us
-      if bufnr ~= vim.api.nvim_get_current_buf() then
-        vim.api.nvim_buf_call(bufnr, function()
-          vim.cmd("silent! write!")
-        end)
-      end
+      vim.api.nvim_buf_call(bufnr, function()
+        vim.cmd("silent! write!")
+      end)
     end
     pending_format = {}
     pending_save = {}
