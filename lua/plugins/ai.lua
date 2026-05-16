@@ -230,7 +230,7 @@ end
 return {
   {
     "zbirenbaum/copilot.lua",
-    enabled = true,
+    enabled = false,
     init = function()
       require("copilot").setup({
         panel = {
@@ -435,6 +435,9 @@ return {
     -- enabled = false,
     ---@type sidekick.Config
     opts = {
+      nes = {
+        enabled = false,
+      },
       cli = {
         watch = false,
         tools = {
