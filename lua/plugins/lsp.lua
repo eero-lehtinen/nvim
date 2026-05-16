@@ -364,6 +364,7 @@ return {
           "yaml-language-server",
           "tree-sitter-cli",
         },
+        auto_update = true,
       })
 
       -- require('coq').lsp_ensure_capabilities(capabilities)
