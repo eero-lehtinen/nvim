@@ -28,7 +28,8 @@ return {
         if require("conform").get_formatter_info("prettierd", bufnr).available then
           return { "prettierd" }
         else
-          return { "biome-organize-imports", "biome" }
+          return { "biome-check" } -- Biome just formats, this auto fixes more stuff
+          -- return { "biome-organize-imports", "biome" }
         end
       end
     end
