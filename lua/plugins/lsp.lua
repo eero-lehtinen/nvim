@@ -16,8 +16,6 @@ return {
     "neovim/nvim-lspconfig",
     lazy = false,
     dependencies = {
-      { "mason-org/mason.nvim", config = true },
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
       {
         "rachartier/tiny-code-action.nvim",
         event = "LspAttach",
@@ -182,6 +180,7 @@ return {
         end,
       })
 
+      -- Sync with mason.lua auto installer settings
       local servers = {
         lua_ls = {
           Lua = {
@@ -344,28 +343,6 @@ return {
       -- })
 
       -- require('lspconfig').glasgow.setup {}
-
-      require("mason-tool-installer").setup({
-        ensure_installed = {
-          "lua-language-server",
-          "stylua",
-          "prettierd",
-          "taplo",
-          "svelte-language-server",
-          "tsgo",
-          "vtsls",
-          "css-lsp",
-          "emmet-language-server",
-          "pyrefly",
-          "ruff",
-          "tailwindcss-language-server",
-          "html-lsp",
-          "gh-actions-language-server",
-          "yaml-language-server",
-          "tree-sitter-cli",
-        },
-        auto_update = true,
-      })
 
       -- require('coq').lsp_ensure_capabilities(capabilities)
     end,
