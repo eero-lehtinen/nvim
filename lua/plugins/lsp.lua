@@ -195,8 +195,8 @@ return {
         -- rust_analyzer = {},
 
         -- pyright = {},
-        -- ty = {},
-        pyrefly = {},
+        -- pyrefly = {},
+        ty = {},
 
         -- ts_ls = {},
         vtsls = {
