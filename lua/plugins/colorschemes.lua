@@ -204,6 +204,10 @@ return {
           hl.PmenuSel.bg = "#3b3b3b"
           hl.PmenuSel.fg = nil
           hl.NormalFloat = { bg = "#0e0e0e" }
+          local illum = c.scorpion
+          hl.IlluminatedWordText = { sp = illum, underline = true }
+          hl.IlluminatedWordRead = { sp = illum, underline = true }
+          hl.IlluminatedWordWrite = { sp = illum, underline = true }
         end,
         on_colors = function(c)
           c.float_bg = "#2f2f2f"
