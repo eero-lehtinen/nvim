@@ -440,6 +440,7 @@ return {
         tools = {
           antigravity = { cmd = { "agy" } },
           claude_yolo = { cmd = { "claude", "--dangerously-skip-permissions" } },
+          omp = { cmd = { "omp" } },
         },
         win = {
           wo = {
