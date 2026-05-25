@@ -12,6 +12,7 @@ return {
     },
   },
   "nvim-lua/plenary.nvim",
+  { "dmmulroy/ts-error-translator.nvim", opts = {} },
   {
     "neovim/nvim-lspconfig",
     lazy = false,
