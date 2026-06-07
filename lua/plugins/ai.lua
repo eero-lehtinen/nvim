@@ -176,54 +176,64 @@ local function notify_lsp_file_changed(path, change_type)
 end
 
 -- Called before an AI agent edits a file. Saves the pre-edit state as merge base.
----@param input_path string
+---@param input_paths string|string[]
 ---@return string
-function _G.agent_pre_edit(input_path)
-  local path = normalize_path(input_path)
-  local stat = vim.uv.fs_stat(path)
-  if not stat then
-    pre_edit_missing[path] = true
-    return ""
+function _G.agent_pre_edit(input_paths)
+  if type(input_paths) == "string" then
+    input_paths = { input_paths }
   end
-  local fd = vim.uv.fs_open(path, "r", 438)
-  if not fd then
-    return ""
+  for _, input_path in ipairs(input_paths) do
+    local path = normalize_path(input_path)
+    local stat = vim.uv.fs_stat(path)
+    if not stat then
+      pre_edit_missing[path] = true
+    else
+      local fd = vim.uv.fs_open(path, "r", 438)
+      if fd then
+        local bufnr = vim.fn.bufadd(path)
+        vim.bo[bufnr].buflisted = true
+        pre_edit_bases[bufnr] = vim.uv.fs_read(fd, stat.size)
+        vim.uv.fs_close(fd)
+      end
+    end
   end
-  local bufnr = vim.fn.bufadd(path)
-  vim.bo[bufnr].buflisted = true
-  pre_edit_bases[bufnr] = vim.uv.fs_read(fd, stat.size)
-  vim.uv.fs_close(fd)
   return ""
 end
 
 -- Called by AI coding agents after editing a file. Syncs the buffer and queues formatting.
----@param input_path string
+---@param input_paths string|string[]
 ---@return string
-function _G.agent_post_edit(input_path)
-  vim.schedule(function()
-    local path, in_cwd = normalize_path(input_path)
-    local change_type = pre_edit_missing[path] and 1 or 2
-    pre_edit_missing[path] = nil
+function _G.agent_post_edit(input_paths)
+  if type(input_paths) == "string" then
+    input_paths = { input_paths }
+  end
 
-    local bufnr = vim.fn.bufadd(path)
-    vim.bo[bufnr].buflisted = true
-    vim.fn.bufload(bufnr)
+  for _, input_path in ipairs(input_paths) do
+    vim.schedule(function()
+      local path, in_cwd = normalize_path(input_path)
+      local change_type = pre_edit_missing[path] and 1 or 2
+      pre_edit_missing[path] = nil
 
-    if (not vim.bo[bufnr].modified) or (not try_merge_buffer(path, bufnr)) then
-      vim.bo[bufnr].modified = false
-      vim.api.nvim_buf_call(bufnr, function()
-        vim.cmd("silent! edit!")
-      end)
-    end
+      local bufnr = vim.fn.bufadd(path)
+      vim.bo[bufnr].buflisted = true
+      vim.fn.bufload(bufnr)
 
-    notify_lsp_file_changed(path, change_type)
+      if (not vim.bo[bufnr].modified) or (not try_merge_buffer(path, bufnr)) then
+        vim.bo[bufnr].modified = false
+        vim.api.nvim_buf_call(bufnr, function()
+          vim.cmd("silent! edit!")
+        end)
+      end
 
-    if in_cwd then
-      pending_format[path] = bufnr
-    else
-      pending_save[path] = bufnr
-    end
-  end)
+      notify_lsp_file_changed(path, change_type)
+
+      if in_cwd then
+        pending_format[path] = bufnr
+      else
+        pending_save[path] = bufnr
+      end
+    end)
+  end
 
   return ""
 end
