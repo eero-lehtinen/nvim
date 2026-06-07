@@ -6,7 +6,7 @@ return {
       python = { "ruff_organize_imports", "ruff_format" },
       sql = { "sqlfmt" },
       gdscript = { "gdscript-formatter" },
-      rust = "lsp",
+      rust = { "rustfmt" },
       toml = "lsp",
       c = "lsp",
       cpp = "lsp",
