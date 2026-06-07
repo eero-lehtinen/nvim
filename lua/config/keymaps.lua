@@ -264,6 +264,23 @@ end, {
   desc = "Copy file path to clipboard (relative to cwd, or absolute with !)",
 })
 
+vim.api.nvim_create_user_command("Root", function()
+  local file = vim.api.nvim_buf_get_name(0)
+  if file == "" then
+    vim.notify("No file to switch cwd from", vim.log.levels.WARN, { title = "Root" })
+    return
+  end
+
+  local dir = vim.fs.dirname(file)
+  local root = vim.fs.root(dir, ".git") or dir
+
+  vim.cmd.cd(vim.fn.fnameescape(root))
+  vim.notify("cwd: " .. root, vim.log.levels.INFO, { title = "Root" })
+end, {
+  nargs = 0,
+  desc = "Switch cwd to current file's git root or parent directory",
+})
+
 vim.api.nvim_create_user_command("Open", function()
   local path = vim.fn.expand("%:p")
   if path == "" then
