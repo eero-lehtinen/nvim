@@ -4,6 +4,8 @@ local pending_format = {}
 local pending_save = {}
 ---@type table<integer, string> bufnr -> pre-edit file content
 local pre_edit_bases = {}
+---@type table<string, boolean> path -> existed before agent edit
+local pre_edit_missing = {}
 
 ---@type integer
 local group = vim.api.nvim_create_augroup("AgentPostEdit", { clear = true })
@@ -148,6 +150,31 @@ local function format_file(path, bufnr)
   end)
 end
 
+---@param path string
+---@param change_type integer 1 = created, 2 = changed, 3 = deleted
+local function notify_lsp_file_changed(path, change_type)
+  local abs = vim.fs.normalize(vim.fn.fnamemodify(path, ":p"))
+  local uri = vim.uri_from_fname(abs)
+
+  for _, client in ipairs(vim.lsp.get_clients()) do
+    if client:supports_method("workspace/didChangeWatchedFiles") then
+      local root = client.config.root_dir or client.root_dir
+      root = root and vim.fs.normalize(root)
+
+      if not root or vim.startswith(abs, root) then
+        client:notify("workspace/didChangeWatchedFiles", {
+          changes = {
+            {
+              uri = uri,
+              type = change_type,
+            },
+          },
+        })
+      end
+    end
+  end
+end
+
 -- Called before an AI agent edits a file. Saves the pre-edit state as merge base.
 ---@param input_path string
 ---@return string
@@ -155,6 +182,7 @@ function _G.agent_pre_edit(input_path)
   local path = normalize_path(input_path)
   local stat = vim.uv.fs_stat(path)
   if not stat then
+    pre_edit_missing[path] = true
     return ""
   end
   local fd = vim.uv.fs_open(path, "r", 438)
@@ -162,6 +190,7 @@ function _G.agent_pre_edit(input_path)
     return ""
   end
   local bufnr = vim.fn.bufadd(path)
+  vim.bo[bufnr].buflisted = true
   pre_edit_bases[bufnr] = vim.uv.fs_read(fd, stat.size)
   vim.uv.fs_close(fd)
   return ""
@@ -173,6 +202,8 @@ end
 function _G.agent_post_edit(input_path)
   vim.schedule(function()
     local path, in_cwd = normalize_path(input_path)
+    local change_type = pre_edit_missing[path] and 1 or 2
+    pre_edit_missing[path] = nil
 
     local bufnr = vim.fn.bufadd(path)
     vim.bo[bufnr].buflisted = true
@@ -184,6 +215,8 @@ function _G.agent_post_edit(input_path)
         vim.cmd("silent! edit!")
       end)
     end
+
+    notify_lsp_file_changed(path, change_type)
 
     if in_cwd then
       pending_format[path] = bufnr
