@@ -12,6 +12,7 @@ return {
       cpp = "lsp",
       svelte = "lsp",
       prisma = "lsp",
+      go = "lsp",
     }
 
     for ft, v in pairs(formatters_by_ft) do
