@@ -131,9 +131,11 @@ end
 
 ---@param path string
 ---@param bufnr integer
-local function format_file(path, bufnr)
+---@param on_done fun()  Invoked once formatting and the follow-up write finish
+local function format_file(path, bufnr, on_done)
   local stat = vim.uv.fs_stat(path)
   if not stat then
+    on_done()
     return
   end
 
@@ -147,6 +149,7 @@ local function format_file(path, bufnr)
         vim.cmd("silent! write!")
       end)
     end
+    on_done()
   end)
 end
 
@@ -208,8 +211,9 @@ function _G.agent_post_edit(input_paths)
     input_paths = { input_paths }
   end
 
-  for _, input_path in ipairs(input_paths) do
-    vim.schedule(function()
+  local done = false
+  vim.schedule(function()
+    for _, input_path in ipairs(input_paths) do
       local path, in_cwd = normalize_path(input_path)
       local change_type = pre_edit_missing[path] and 1 or 2
       pre_edit_missing[path] = nil
@@ -232,9 +236,13 @@ function _G.agent_post_edit(input_paths)
       else
         pending_save[path] = bufnr
       end
-    end)
-  end
+    end
+    done = true
+  end)
 
+  vim.wait(4000, function()
+    return done
+  end, 5)
   return ""
 end
 
@@ -243,17 +251,21 @@ end
 function _G.agent_stop()
   vim.schedule(function()
     for path, bufnr in pairs(pending_format) do
-      format_file(path, bufnr)
+      format_file(path, bufnr, function()
+        pending_format[path] = nil
+      end)
     end
-    for _, bufnr in pairs(pending_save) do
+    for path, bufnr in pairs(pending_save) do
       vim.api.nvim_buf_call(bufnr, function()
         vim.cmd("silent! write!")
       end)
+      pending_save[path] = nil
     end
-    pending_format = {}
-    pending_save = {}
   end)
 
+  vim.wait(9000, function()
+    return next(pending_format) == nil and next(pending_save) == nil
+  end, 10)
   return ""
 end
 
