@@ -246,7 +246,7 @@ return {
     end, { desc = "GitHub Issues" })
     vim.keymap.set("n", "<leader>gp", function()
       Snacks.picker.gh_pr()
-    end, { desc = "GitHub Pull Requests" })
+    end, { desc = "GitHub [P]ull Requests" })
 
     vim.keymap.set("n", "<leader>.", function()
       Snacks.scratch()

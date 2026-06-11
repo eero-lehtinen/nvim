@@ -93,6 +93,17 @@ return {
     end,
   },
 
+  {
+    "https://github.com/barrettruth/diffs.nvim",
+    init = function()
+      vim.g.diffs = {
+        integrations = {
+          gitsigns = true,
+        },
+      }
+    end,
+  },
+
   "nvim-lua/plenary.nvim",
   {
     "lewis6991/gitsigns.nvim",
