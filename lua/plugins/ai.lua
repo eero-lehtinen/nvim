@@ -493,7 +493,7 @@ return {
       cli = {
         watch = false,
         tools = {
-          antigravity = { cmd = { "agy" } },
+          agy = { cmd = { "agy" } },
           claude_yolo = { cmd = { "claude", "--dangerously-skip-permissions" } },
           omp = { cmd = { "omp" } },
         },
