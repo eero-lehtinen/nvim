@@ -133,8 +133,7 @@ end
 ---@param bufnr integer
 ---@param on_done fun()  Invoked once formatting and the follow-up write finish
 local function format_file(path, bufnr, on_done)
-  local stat = vim.uv.fs_stat(path)
-  if not stat then
+  if not vim.uv.fs_stat(path) then
     on_done()
     return
   end
@@ -256,9 +255,11 @@ function _G.agent_stop()
       end)
     end
     for path, bufnr in pairs(pending_save) do
-      vim.api.nvim_buf_call(bufnr, function()
-        vim.cmd("silent! write!")
-      end)
+      if vim.uv.fs_stat(path) then
+        vim.api.nvim_buf_call(bufnr, function()
+          vim.cmd("silent! write!")
+        end)
+      end
       pending_save[path] = nil
     end
   end)
