@@ -222,7 +222,7 @@ function _G.agent_post_edit(input_paths)
       vim.bo[bufnr].buflisted = true
       vim.fn.bufload(bufnr)
 
-      if (not vim.bo[bufnr].modified) or (not try_merge_buffer(path, bufnr)) then
+      if not try_merge_buffer(path, bufnr) then
         vim.bo[bufnr].modified = false
         vim.api.nvim_buf_call(bufnr, function()
           vim.cmd("silent! edit!")
