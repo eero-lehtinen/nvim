@@ -120,6 +120,7 @@ local function try_merge_buffer(path, bufnr)
 
   -- Update mtime to make checktime believe that we are up to date with the file
   vim.b[bufnr].orig_mtime = vim.uv.fs_stat(path).mtime.sec
+  vim.bo[bufnr].modified = false
 
   if view then
     vim.fn.winrestview(view)
@@ -221,7 +222,7 @@ function _G.agent_post_edit(input_paths)
       vim.bo[bufnr].buflisted = true
       vim.fn.bufload(bufnr)
 
-      if (not vim.bo[bufnr].modified) or (not try_merge_buffer(path, bufnr)) then
+      if not try_merge_buffer(path, bufnr) then
         vim.bo[bufnr].modified = false
         vim.api.nvim_buf_call(bufnr, function()
           vim.cmd("silent! edit!")
