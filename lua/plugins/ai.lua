@@ -6,6 +6,42 @@ local pending_save = {}
 local pre_edit_bases = {}
 ---@type table<string, boolean> path -> existed before agent edit
 local pre_edit_missing = {}
+---@type table<integer, string> bufnr -> content at the last buffer/disk sync
+-- The true common ancestor for the next 3-way merge. A 3-way merge is only
+-- correct when its base is the version `ours` (buffer) and `theirs` (disk) last
+-- agreed on; reading disk at pre-edit time is wrong once the buffer has drifted.
+local synced_content = {}
+
+-- Don't snapshot bases for large files; the table is held in memory for the
+-- whole session and big/binary buffers aren't worth merging line-wise anyway.
+local MAX_SYNC_BYTES = 1024 * 1024
+
+-- Whether a buffer is worth tracking a merge base for: a real, loaded, normal
+-- text file under the size cap. Excludes special buffers (terminals, help,
+-- nofile), binary buffers, and anything large.
+---@param bufnr integer
+---@return boolean
+local function trackable(bufnr)
+  if not vim.api.nvim_buf_is_loaded(bufnr) then
+    return false
+  end
+  if vim.bo[bufnr].buftype ~= "" or vim.bo[bufnr].binary then
+    return false
+  end
+  -- Byte size = offset just past the last line (cheap; no string built).
+  local size = vim.api.nvim_buf_get_offset(bufnr, vim.api.nvim_buf_line_count(bufnr))
+  return size >= 0 and size <= MAX_SYNC_BYTES
+end
+
+-- Reconstruct the buffer's on-disk byte form, so it is comparable to a base
+-- captured the same way (matters for CRLF/`fileformat`).
+---@param bufnr integer
+---@return string
+local function buffer_text(bufnr)
+  local ff = vim.bo[bufnr].fileformat
+  local eol = ff == "dos" and "\r\n" or ff == "mac" and "\r" or "\n"
+  return table.concat(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false), eol) .. eol
+end
 
 ---@type integer
 local group = vim.api.nvim_create_augroup("AgentPostEdit", { clear = true })
@@ -15,6 +51,21 @@ vim.api.nvim_create_autocmd("FileChangedShell", {
     if pre_edit_bases[ev.buf] ~= nil then
       vim.v.fcs_choice = ""
     end
+  end,
+})
+-- After a load or save, buffer == disk: record that as the merge ancestor
+-- (only for normal text files under the size cap).
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePost" }, {
+  group = group,
+  callback = function(ev)
+    synced_content[ev.buf] = trackable(ev.buf) and buffer_text(ev.buf) or nil
+  end,
+})
+vim.api.nvim_create_autocmd("BufDelete", {
+  group = group,
+  callback = function(ev)
+    synced_content[ev.buf] = nil
+    pre_edit_bases[ev.buf] = nil
   end,
 })
 
@@ -49,14 +100,17 @@ local function write_temp(content)
   return f
 end
 
--- 3-way merge: buffer (ours) + disk (theirs) with pre-edit snapshot as base.
--- On conflict, keeps the agent's (disk) version.
+-- 3-way merge: buffer (ours) + disk (theirs) over the last buffer/disk sync as
+-- base. A clean merge is applied; a conflicting one keeps the agent's (disk)
+-- version and warns, rather than silently interleaving both sides.
 ---@param path string
 ---@param bufnr integer
 ---@return boolean success
 local function try_merge_buffer(path, bufnr)
-  -- Use pre-edit snapshot as base, fall back to git HEAD
-  local base = pre_edit_bases[bufnr]
+  -- Prefer the tracked common ancestor; fall back to the pre-edit disk
+  -- snapshot, then git HEAD. The tracked base is the only one that stays
+  -- correct after the buffer has diverged from disk.
+  local base = synced_content[bufnr] or pre_edit_bases[bufnr]
   pre_edit_bases[bufnr] = nil
   if not base then
     local result = vim.system({ "git", "show", "HEAD:" .. path }):wait()
@@ -69,11 +123,7 @@ local function try_merge_buffer(path, bufnr)
     return false
   end
 
-  local eol = vim.bo[bufnr].fileformat == "dos" and "\r\n" or vim.bo[bufnr].fileformat == "mac" and "\r" or "\n"
-
-  local ours_lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
-
-  local ours_f, ours_err = write_temp(table.concat(ours_lines, eol) .. eol)
+  local ours_f, ours_err = write_temp(buffer_text(bufnr))
   if not ours_f then
     vim.notify("agent merge: " .. ours_err, vim.log.levels.WARN)
     return false
@@ -90,11 +140,15 @@ local function try_merge_buffer(path, bufnr)
     view = vim.fn.winsaveview()
   end
 
-  -- Merge: ours (user edits) + base (pre-edit snapshot) + theirs (disk/agent)
-  local merge_result = vim.system({ "git", "merge-file", "--theirs", ours_f, base_f, path }):wait()
+  -- Merge ours (buffer/user edits) + base (last sync) + theirs (disk/agent).
+  -- No --ours/--theirs: the exit code is the conflict count, so we can tell a
+  -- clean merge from one git could only resolve by guessing.
+  local merge_result =
+    vim.system({ "git", "merge-file", "--diff-algorithm=histogram", ours_f, base_f, path }):wait()
+  vim.uv.fs_unlink(base_f)
+
   if merge_result.code < 0 then
     vim.uv.fs_unlink(ours_f)
-    vim.uv.fs_unlink(base_f)
     vim.notify("agent merge: git merge-file failed", vim.log.levels.WARN)
     if view then
       vim.fn.winrestview(view)
@@ -102,21 +156,45 @@ local function try_merge_buffer(path, bufnr)
     return false
   end
 
-  local merged = vim.fn.readfile(ours_f)
+  local merged
+  if merge_result.code > 0 then
+    -- Concurrent user edits could not be auto-merged. Don't push conflict
+    -- markers into a buffer that's about to be formatted and saved; take the
+    -- agent's version and surface it loudly so the user can recover via undo.
+    merged = vim.fn.readfile(path)
+    vim.notify(
+      ("agent merge: conflicting edits in %s — kept the agent's version; your buffer changes are in undo history"):format(
+        path
+      ),
+      vim.log.levels.WARN
+    )
+  else
+    merged = vim.fn.readfile(ours_f)
+  end
+  vim.uv.fs_unlink(ours_f)
 
-  -- Only update lines that differ
+  -- Apply only the lines that differ, to preserve marks/extmarks/folds.
   local current_lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
   local hunks = vim.text.diff(
     table.concat(current_lines, "\n") .. "\n",
     table.concat(merged, "\n") .. "\n",
     { result_type = "indices", algorithm = "histogram" }
   )
-  -- Apply in reverse so earlier line numbers stay valid
+  -- Apply in reverse so earlier line numbers stay valid.
   for i = #hunks, 1, -1 do
     ---@diagnostic disable-next-line: need-check-nil
     local sa, ca, sb, cb = hunks[i][1], hunks[i][2], hunks[i][3], hunks[i][4]
-    vim.api.nvim_buf_set_lines(bufnr, sa - 1, sa - 1 + ca, false, vim.list_slice(merged, sb, sb + cb - 1))
+    -- For an insertion (ca == 0), start_a is the line to insert *after*, so the
+    -- 0-based row is `sa`; for a replace/delete it is `sa - 1`. Using `sa - 1`
+    -- for both places insertions one line too early (and a top insert, sa == 0,
+    -- at the buffer end via row -1) — the source of the scrambled merges.
+    local start = ca == 0 and sa or sa - 1
+    vim.api.nvim_buf_set_lines(bufnr, start, start + ca, false, vim.list_slice(merged, sb, sb + cb - 1))
   end
+
+  -- The buffer now holds the merged content; it becomes the ancestor for the
+  -- next merge (and matches disk once the pending write/format runs).
+  synced_content[bufnr] = trackable(bufnr) and buffer_text(bufnr) or nil
 
   -- Update mtime to make checktime believe that we are up to date with the file
   vim.b[bufnr].orig_mtime = vim.uv.fs_stat(path).mtime.sec
@@ -125,8 +203,6 @@ local function try_merge_buffer(path, bufnr)
   if view then
     vim.fn.winrestview(view)
   end
-  vim.uv.fs_unlink(ours_f)
-  vim.uv.fs_unlink(base_f)
   return true
 end
 
@@ -222,7 +298,7 @@ function _G.agent_post_edit(input_paths)
       vim.bo[bufnr].buflisted = true
       vim.fn.bufload(bufnr)
 
-      if not try_merge_buffer(path, bufnr) then
+      if not vim.bo[bufnr].modified or not try_merge_buffer(path, bufnr) then
         vim.bo[bufnr].modified = false
         vim.api.nvim_buf_call(bufnr, function()
           vim.cmd("silent! edit!")
