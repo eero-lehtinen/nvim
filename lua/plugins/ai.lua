@@ -500,6 +500,18 @@ return {
           omp = { cmd = { "omp" } },
         },
         win = {
+          -- Toggling hides by closing the window, which loses any manual
+          -- resize. Remember the live width so reopening restores it.
+          config = function(term)
+            vim.api.nvim_create_autocmd("WinResized", {
+              group = term.group,
+              callback = function()
+                if term.win and vim.api.nvim_win_is_valid(term.win) then
+                  term.opts.split.width = vim.api.nvim_win_get_width(term.win)
+                end
+              end,
+            })
+          end,
           wo = {
             scrollbind = false,
           },
