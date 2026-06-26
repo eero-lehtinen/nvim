@@ -143,8 +143,7 @@ local function try_merge_buffer(path, bufnr)
   -- Merge ours (buffer/user edits) + base (last sync) + theirs (disk/agent).
   -- No --ours/--theirs: the exit code is the conflict count, so we can tell a
   -- clean merge from one git could only resolve by guessing.
-  local merge_result =
-    vim.system({ "git", "merge-file", "--diff-algorithm=histogram", ours_f, base_f, path }):wait()
+  local merge_result = vim.system({ "git", "merge-file", "--diff-algorithm=histogram", ours_f, base_f, path }):wait()
   vim.uv.fs_unlink(base_f)
 
   if merge_result.code < 0 then
@@ -219,12 +218,11 @@ local function format_file(path, bufnr, on_done)
     bufnr = bufnr,
     async = true,
   }, function(_, _)
-    -- Current buf gets saved by us
-    if bufnr ~= vim.api.nvim_get_current_buf() then
-      vim.api.nvim_buf_call(bufnr, function()
-        vim.cmd("silent! write!")
-      end)
-    end
+    -- if bufnr ~= vim.api.nvim_get_current_buf() then
+    vim.api.nvim_buf_call(bufnr, function()
+      vim.cmd("silent! write!")
+    end)
+    -- end
     on_done()
   end)
 end
