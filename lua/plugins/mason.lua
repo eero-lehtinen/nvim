@@ -26,7 +26,7 @@ return {
       },
       auto_update = true,
       start_delay = 3000,
-      debounce_hours = 10,
+      debounce_hours = 1,
     },
   },
 }
