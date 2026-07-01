@@ -296,6 +296,29 @@ return {
         capabilities = blink.get_lsp_capabilities({}, true)
       end
 
+      -- Neovim disables didChangeWatchedFiles.dynamicRegistration on Linux (see
+      -- protocol.lua), so servers like vtsls never learn about on-disk changes to
+      -- files that aren't open as documents (e.g. a JSON imported with
+      -- resolveJsonModule). Opt back in, but on Linux only when `inotifywait` is
+      -- present: without it Neovim's watcher degrades to a polling tree-walk.
+      local enable_watch = true
+      if vim.fn.has("linux") == 1 and vim.fn.executable("inotifywait") == 0 then
+        enable_watch = false
+        vim.schedule(function()
+          vim.notify(
+            "inotify-tools not installed; LSP file watching disabled to avoid polling. Install it to enable.",
+            vim.log.levels.WARN
+          )
+        end)
+      end
+
+      capabilities.workspace = capabilities.workspace or {}
+      capabilities.workspace.didChangeWatchedFiles = vim.tbl_deep_extend(
+        "force",
+        capabilities.workspace.didChangeWatchedFiles or {},
+        { dynamicRegistration = enable_watch }
+      )
+
       if vim.env.NO_LSP == nil then
         vim.lsp.enable(vim.tbl_keys(servers))
       end
@@ -304,9 +327,11 @@ return {
         capabilities = capabilities,
       })
 
-      vim.lsp.config("svelte", {
-        capabilities = vim.tbl_deep_extend("force", { workspace = { didChangeWwatchedFiles = false } }, capabilities),
-      })
+      -- vim.lsp.config("svelte", {
+      --   capabilities = vim.tbl_deep_extend("force", capabilities, {
+      --     workspace = { didChangeWatchedFiles = { dynamicRegistration = false } },
+      --   }),
+      -- })
 
       for name, settings in pairs(servers) do
         if next(settings) then
