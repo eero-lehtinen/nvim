@@ -570,6 +570,7 @@ return {
         watch = false,
         tools = {
           agy = { cmd = { "agy" } },
+          codex_yolo = { cmd = { "codex", "--yolo" } },
           claude_yolo = { cmd = { "claude", "--dangerously-skip-permissions" } },
           omp = { cmd = { "omp" } },
         },
