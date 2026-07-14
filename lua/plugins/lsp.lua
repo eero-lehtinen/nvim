@@ -14,6 +14,21 @@ return {
   "nvim-lua/plenary.nvim",
   { "dmmulroy/ts-error-translator.nvim", opts = {} },
   {
+    "seblyng/roslyn.nvim",
+    ---@module 'roslyn.config'
+    ---@type RoslynNvimConfig
+    opts = {
+      -- your configuration comes here; leave empty for default settings
+    },
+    init = function()
+      local dotnet_root = "D:\\.local\\share\\mise\\dotnet-root"
+      if vim.uv.fs_stat(dotnet_root) then
+        vim.env.DOTNET_ROOT = dotnet_root
+        vim.env.DOTNET_ROOT_X64 = dotnet_root
+      end
+    end,
+  },
+  {
     "neovim/nvim-lspconfig",
     lazy = false,
     dependencies = {
