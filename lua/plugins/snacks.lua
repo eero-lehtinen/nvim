@@ -109,7 +109,10 @@ return {
       explorer = {
         replace_netrw = false,
       },
-      image = {},
+      image = {
+        -- Disable on windows
+        formats = vim.g.is_windows and {} or nil,
+      },
 
       -- notifier = { enabled = true },
       -- quickfile = { enabled = true },
