@@ -136,6 +136,19 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end,
 })
 
+vim.api.nvim_create_autocmd("TermOpen", {
+  callback = function(args)
+    local bufname = vim.api.nvim_buf_get_name(args.buf)
+    local command = bufname:match("//%d+:(.+)$")
+    local executable = command and vim.fs.basename(command):match("^([^%s]+)")
+    if executable and executable:lower():match("^codex%.?[%w]*$") then
+      vim.keymap.set("t", "<S-CR>", function()
+        vim.api.nvim_chan_send(vim.b[args.buf].terminal_job_id, "\27\r")
+      end, { buffer = args.buf, desc = "Insert newline" })
+    end
+  end,
+})
+
 local function set_global_hl()
   vim.api.nvim_set_hl(0, "MatchWord", { fg = "NONE" })
 end
