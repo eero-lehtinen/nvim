@@ -303,6 +303,13 @@ end, {
   desc = "Show LSP healthcheck",
 })
 
+vim.api.nvim_create_user_command("LspLog", function()
+  vim.cmd.edit(vim.fn.fnameescape(vim.lsp.log.get_filename()))
+end, {
+  nargs = 0,
+  desc = "Open LSP log file",
+})
+
 -- Needed to make vim distinguish between <tab> and <c-i>
 vim.keymap.set("n", "<Tab>", function() end, { desc = "Tab" })
 vim.keymap.set("n", "<C-i>", "<C-i>", { desc = "Jump forward in jumplist" })
