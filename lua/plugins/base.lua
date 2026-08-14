@@ -318,7 +318,9 @@ return {
     end,
   },
 
-  { "kwkarlwang/bufresize.nvim", opts = {} },
+  -- Fork: upstream is unmaintained and has no way to exclude tabs whose layout
+  -- another plugin owns (codediff).
+  { "eero-lehtinen/bufresize.nvim", opts = {} },
 
   {
     "nvim-mini/mini.trailspace",
