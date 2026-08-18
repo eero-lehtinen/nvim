@@ -35,6 +35,10 @@ vim.api.nvim_create_autocmd("TermOpen", {
       vim.keymap.set("t", "<C-j>", "<C-\\><C-N><C-w>j", { buffer = buf, desc = "Go to bottom window" })
       vim.keymap.set("t", "<C-k>", "<C-\\><C-N><C-w>k", { buffer = buf, desc = "Go to top window" })
       vim.keymap.set("t", "<C-l>", "<C-\\><C-N><C-w>l", { buffer = buf, desc = "Go to right window" })
+      -- Shadows sidekick's "Send File", which is meaningless in a terminal.
+      vim.keymap.set("n", "<leader>af", function()
+        require("config.term-file").open()
+      end, { buffer = buf, desc = "Open file reference in editor window" })
     end)
   end,
 })
