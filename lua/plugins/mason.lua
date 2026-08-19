@@ -11,7 +11,8 @@ return {
         "prettierd",
         "taplo",
         "svelte-language-server",
-        "tsgo", -- Crashes (maybe not anymore)
+        "tsc",
+        -- "tsgo", -- Crashes (maybe not anymore)
         -- "vtsls",
         "css-lsp",
         "emmet-language-server",
