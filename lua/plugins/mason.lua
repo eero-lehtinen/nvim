@@ -8,7 +8,8 @@ return {
       ensure_installed = {
         "lua-language-server",
         "stylua",
-        "prettierd",
+        "biome",
+        -- "prettierd",
         "taplo",
         "svelte-language-server",
         "tsc",
