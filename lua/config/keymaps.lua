@@ -268,6 +268,15 @@ end, {
   desc = "Copy file path to clipboard (relative to cwd, or absolute with !)",
 })
 
+vim.api.nvim_create_user_command("CopyCwd", function()
+  local cwd = vim.fn.getcwd()
+  vim.fn.setreg("+", cwd)
+  vim.notify("Copied: " .. cwd, vim.log.levels.INFO, { title = "CopyCwd" })
+end, {
+  nargs = 0,
+  desc = "Copy current working directory to clipboard",
+})
+
 vim.api.nvim_create_user_command("Root", function()
   local file = vim.api.nvim_buf_get_name(0)
   if file == "" then
