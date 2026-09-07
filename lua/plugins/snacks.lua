@@ -129,6 +129,10 @@ return {
       Snacks.gitbrowse({ line_start = cmd.line1, line_end = cmd.line2 })
     end, { range = true })
 
+    vim.api.nvim_create_user_command("Worktree", function()
+      require("config.worktrees").pick()
+    end, { desc = "Switch cwd to a git worktree" })
+
     vim.keymap.set("n", "<leader>?", function()
       Snacks.picker.recent()
     end, { desc = "[?] Find recently opened files" })
@@ -155,8 +159,8 @@ return {
       Snacks.picker.help()
     end, { desc = "[S]earch [H]elp" })
     vim.keymap.set("n", "<leader>sw", function()
-      Snacks.picker.grep_word()
-    end, { desc = "[S]earch current [W]ord" })
+      require("config.worktrees").pick()
+    end, { desc = "[S]earch Git [W]orktrees" })
     vim.keymap.set("n", "<leader>sg", function()
       Snacks.picker.grep()
     end, { desc = "[S]earch by [G]rep" })
