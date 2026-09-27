@@ -209,6 +209,8 @@ return {
           hl.IlluminatedWordRead = { sp = illum, underline = true }
           hl.IlluminatedWordWrite = { sp = illum, underline = true }
           hl.WinSeparator = { fg = "#7c7c7c" }
+          hl["@markup.raw.markdown_inline"].bg = "#272727"
+          hl["RenderMarkdownCodeInline"].bg = "#272727"
         end,
         on_colors = function(c)
           c.float_bg = "#2f2f2f"

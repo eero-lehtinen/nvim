@@ -101,6 +101,30 @@ return {
     end,
   },
   {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+    event = "VeryLazy",
+    keys = {
+      {
+        "<leader>tm",
+        function()
+          require("render-markdown").buf_toggle()
+        end,
+        ft = "markdown",
+        desc = "[T]oggle [M]arkdown render",
+      },
+    },
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {
+      code = {
+        width = "block",
+        left_pad = 2,
+        right_pad = 4,
+      },
+    },
+  },
+  {
     "MagicDuck/grug-far.nvim",
     keys = { { "<leader>S", "<cmd>SearchAndReplace<cr>", desc = "Search and replace (Grug far)" } },
     cmd = { "SearchAndReplace", "FindAndReplace" },
