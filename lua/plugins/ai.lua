@@ -567,7 +567,7 @@ return {
     ---@type sidekick.Config
     opts = {
       cli = {
-        watch = false,
+        watch = true,
         tools = {
           agy = { cmd = { "agy" } },
           codex_yolo = { cmd = { "codex", "--yolo" } },
