@@ -568,6 +568,28 @@ return {
     opts = {
       cli = {
         watch = true,
+        -- Claude Code inlines the whole file for `@path` mentions. Send plain
+        -- paths so the agent reads only what it needs.
+        context = (function()
+          local function loc_without_at(kind)
+            return function(ctx)
+              local Loc = require("sidekick.cli.context.location")
+              if not Loc.is_file(ctx.buf) then
+                return false
+              end
+              local ret = Loc.get(ctx, { kind = kind })
+              if ret[1] and ret[1][1] and ret[1][1][1] == "@" then
+                table.remove(ret[1], 1)
+              end
+              return ret
+            end
+          end
+          return {
+            file = loc_without_at("file"),
+            line = loc_without_at("line"),
+            position = loc_without_at("position"),
+          }
+        end)(),
         tools = {
           agy = { cmd = { "agy" } },
           codex_yolo = { cmd = { "codex", "--yolo" } },
