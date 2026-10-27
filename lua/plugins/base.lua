@@ -101,6 +101,10 @@ return {
     end,
   },
   {
+    "jghauser/follow-md-links.nvim",
+    ft = "markdown",
+  },
+  {
     "MeanderingProgrammer/render-markdown.nvim",
     dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
     event = "VeryLazy",
