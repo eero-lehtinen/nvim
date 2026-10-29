@@ -25,14 +25,17 @@ end
 
 local function picker_items(worktrees)
   local items = {}
-  for _, worktree in ipairs(worktrees) do
+  for index, worktree in ipairs(worktrees) do
     if not worktree.prunable then
+      -- Git lists the main worktree first, even when called from a linked worktree.
+      local main = index == 1 and not worktree.bare
       local branch = worktree.branch and worktree.branch:gsub("^refs/heads/", "")
         or (worktree.detached and "detached")
         or "bare"
       items[#items + 1] = {
-        text = branch .. " " .. worktree.path,
+        text = branch .. (main and " (main)" or "") .. " " .. worktree.path,
         branch = branch,
+        main = main,
         path = worktree.path,
       }
     end
@@ -142,6 +145,7 @@ function M.pick()
             return {
               { item.current and "● " or "  ", item.current and "DiagnosticOk" or "Normal" },
               { item.branch, "SnacksPickerLabel" },
+              { item.main and "  (main)" or "", "Comment" },
               { item.current and "  (current)" or "", "Comment" },
               { "  " },
               { item.path, "SnacksPickerDirectory" },
