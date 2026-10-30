@@ -85,16 +85,7 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
   command = "set nohlsearch",
 })
 
--- Setup eel syntax
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = "*.eel",
-  callback = function()
-    vim.schedule(function()
-      vim.bo.syntax = "python"
-      vim.bo.commentstring = "# %s"
-    end)
-  end,
-})
+vim.filetype.add({ extension = { eel = "eerolang" } })
 
 -- setup gdshader
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {

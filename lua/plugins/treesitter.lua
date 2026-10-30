@@ -10,6 +10,21 @@ return {
     },
     build = ":TSUpdate",
     config = function()
+      -- Must be registered before `install` so "all" includes it.
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "TSUpdate",
+        callback = function()
+          require("nvim-treesitter.parsers").eerolang = {
+            install_info = {
+              url = "https://github.com/eero-lehtinen/eerolang",
+              branch = "master",
+              location = "tree-sitter-eerolang",
+              queries = "tree-sitter-eerolang/queries",
+            },
+          }
+        end,
+      })
+
       require("nvim-treesitter").install({ "all" })
 
       -- local function get_pos_lang()
