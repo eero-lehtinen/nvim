@@ -145,8 +145,7 @@ function M.pick()
             return {
               { item.current and "● " or "  ", item.current and "DiagnosticOk" or "Normal" },
               { item.branch, "SnacksPickerLabel" },
-              { item.main and "  (main)" or "", "Comment" },
-              { item.current and "  (current)" or "", "Comment" },
+              { item.main and " (main)" or "", "Comment" },
               { "  " },
               { item.path, "SnacksPickerDirectory" },
             }
