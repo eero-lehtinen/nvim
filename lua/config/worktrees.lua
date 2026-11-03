@@ -1,5 +1,7 @@
 local M = {}
 
+---@param output string NUL-delimited output from git worktree list --porcelain -z.
+---@return { path: string, branch?: string, bare?: true, detached?: true, prunable?: string|true }[]
 local function parse_worktrees(output)
   local worktrees = {}
   local worktree
@@ -23,6 +25,8 @@ local function parse_worktrees(output)
   return worktrees
 end
 
+---@param worktrees { path: string, branch?: string, bare?: true, detached?: true, prunable?: string|true }[]
+---@return { text: string, branch: string, main: boolean, path: string, current?: boolean }[]
 local function picker_items(worktrees)
   local items = {}
   for index, worktree in ipairs(worktrees) do
@@ -43,6 +47,9 @@ local function picker_items(worktrees)
   return items
 end
 
+---@param path string
+---@param root string
+---@return string? relative Empty when path equals root; nil when outside root.
 local function path_relative_to(path, root)
   path = vim.fs.normalize(path)
   root = vim.fs.normalize(root)
@@ -61,6 +68,8 @@ local function path_relative_to(path, root)
   return path:sub(#prefix + 1)
 end
 
+---@param worktrees { path: string }[]
+---@return string?
 local function current_worktree_path(worktrees)
   local cwd = vim.fs.normalize(vim.fn.getcwd())
   local current
@@ -74,6 +83,10 @@ local function current_worktree_path(worktrees)
   return current
 end
 
+---@param source_root string?
+---@param target_root string
+---@return integer retargeted
+---@return integer skipped
 local function retarget_buffers(source_root, target_root)
   if not source_root or vim.fs.normalize(source_root) == vim.fs.normalize(target_root) then
     return 0, 0
@@ -113,10 +126,12 @@ local function retarget_buffers(source_root, target_root)
   return retargeted, skipped
 end
 
+---@return nil
 function M.pick()
   vim.system(
     { "git", "-C", vim.fn.getcwd(), "worktree", "list", "--porcelain", "-z" },
     { text = true },
+    ---@param result vim.SystemCompleted
     function(result)
       vim.schedule(function()
         if result.code ~= 0 then
@@ -141,6 +156,8 @@ function M.pick()
         Snacks.picker.pick({
           title = "Git Worktrees",
           items = items,
+          ---@param item { branch: string, main: boolean, current?: boolean, path: string }
+          ---@return snacks.picker.Highlight[]
           format = function(item)
             return {
               { item.current and "● " or "  ", item.current and "DiagnosticOk" or "Normal" },
@@ -150,6 +167,8 @@ function M.pick()
               { item.path, "SnacksPickerDirectory" },
             }
           end,
+          ---@param picker snacks.Picker
+          ---@param item { path: string }?
           confirm = function(picker, item)
             if not item then
               return
