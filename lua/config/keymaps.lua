@@ -1,4 +1,5 @@
 vim.keymap.set({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+vim.keymap.set({ "n", "v", "i" }, "<C-LeftMouse>", "<Nop>", { desc = "Disable mouse multicursors" })
 
 vim.keymap.set("n", "Q", "@qj", { desc = 'Run macro named "q"' })
 vim.keymap.set("x", "Q", ":norm @q<CR>", { desc = 'Run macro named "q" in selected lines' })
