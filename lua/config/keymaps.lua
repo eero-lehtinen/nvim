@@ -295,6 +295,27 @@ end, {
   desc = "Switch cwd to current file's git root or parent directory",
 })
 
+vim.api.nvim_create_user_command("AiDocs", function(opts)
+  local cwd = vim.fn.getcwd()
+  local root = vim.fs.root(cwd, ".git") or cwd
+  local docs = vim.fn.expand("~/Documents/ai-doc")
+  local project_docs = vim.fs.joinpath(docs, vim.fs.basename(root))
+  local path = vim.fn.isdirectory(project_docs) == 1 and project_docs or docs
+
+  if opts.bang then
+    local _, err = vim.ui.open(path)
+    if err then
+      vim.notify(err, vim.log.levels.ERROR, { title = "AiDocs" })
+    end
+  else
+    require("yazi").yazi(nil, path)
+  end
+end, {
+  bang = true,
+  nargs = 0,
+  desc = "Open project ai-doc directory or the ai-doc root (system explorer with !)",
+})
+
 vim.api.nvim_create_user_command("Open", function()
   local path = vim.fn.expand("%:p")
   if path == "" then
