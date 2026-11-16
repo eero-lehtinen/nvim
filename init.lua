@@ -21,6 +21,9 @@ require("config.packages")
 
 require("config.keymaps")
 require("config.autocmds")
+if vim.g.is_windows then
+  require("config.dictation-paste").setup()
+end
 
 vim.opt.background = "dark"
 vim.cmd.colorscheme("jellybeans")
